@@ -4,6 +4,14 @@ import { FadeIn } from "@/components/fade-in";
 
 export const metadata: Metadata = {
   title: "About",
+  description:
+    "Lead Software Engineer based in Pune, India. Building renewable energy SaaS at Renewalytics and shipping indie products on the side.",
+  openGraph: {
+    title: "About | Aditya",
+    description:
+      "Lead Software Engineer based in Pune, India. Building renewable energy SaaS at Renewalytics and shipping indie products on the side.",
+    url: "https://aditya.dev/about",
+  },
 };
 
 export default function AboutPage() {

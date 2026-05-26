@@ -3,6 +3,14 @@ import { FadeIn } from "@/components/fade-in";
 
 export const metadata: Metadata = {
   title: "Uses",
+  description:
+    "The tools, software, and hardware I use to build and ship products.",
+  openGraph: {
+    title: "Uses | Aditya",
+    description:
+      "The tools, software, and hardware I use to build and ship products.",
+    url: "https://aditya.dev/uses",
+  },
 };
 
 interface UseItem {

@@ -8,6 +8,12 @@ export const metadata: Metadata = {
   title: "Blog",
   description:
     "Thoughts on indie hacking, technical SEO, building with AI, and renewable energy tech.",
+  openGraph: {
+    title: "Blog | Aditya",
+    description:
+      "Thoughts on indie hacking, technical SEO, building with AI, and renewable energy tech.",
+    url: "https://aditya.dev/blog",
+  },
 };
 
 export default function BlogPage() {

@@ -3,7 +3,12 @@ import { FadeIn } from "@/components/fade-in";
 
 export const metadata: Metadata = {
   title: "Now",
-  description: "What I'm working on right now",
+  description: "What I'm working on right now.",
+  openGraph: {
+    title: "Now | Aditya",
+    description: "What I'm working on right now.",
+    url: "https://aditya.dev/now",
+  },
 };
 
 export default function NowPage() {

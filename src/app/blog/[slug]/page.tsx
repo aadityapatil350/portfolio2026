@@ -32,11 +32,20 @@ export async function generateMetadata({
       type: "article",
       publishedTime: post.publishedAt,
       url: `${siteConfig.url}/blog/${slug}`,
+      images: [
+        {
+          url: `/og?title=${encodeURIComponent(post.title)}&description=${encodeURIComponent(post.description || "")}&type=blog`,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title: post.title,
       description: post.description,
+      images: [`/og?title=${encodeURIComponent(post.title)}&description=${encodeURIComponent(post.description || "")}&type=blog`],
     },
   };
 }
@@ -170,19 +179,21 @@ export default async function BlogPostPage({
               <p className="mt-1 text-sm text-muted-foreground">
                 Subscribe to get notified when I write something new.
               </p>
-              <div className="mt-4 flex gap-2">
-                <input
-                  type="email"
-                  placeholder="you@example.com"
-                  className="flex-1 rounded-md border border-border bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring"
-                  readOnly
-                />
-                <button
-                  type="button"
-                  className="rounded-md bg-foreground px-4 py-2 text-sm font-medium text-background transition-colors hover:bg-foreground/80"
+              <div className="mt-4 flex flex-col sm:flex-row gap-2">
+                <a
+                  href="https://buttondown.email"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center rounded-md bg-foreground px-4 py-2 text-sm font-medium text-background transition-colors hover:bg-foreground/80"
                 >
-                  Subscribe
-                </button>
+                  Subscribe via email
+                </a>
+                <a
+                  href="/rss.xml"
+                  className="inline-flex items-center justify-center rounded-md border border-border px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground hover:border-foreground/20"
+                >
+                  RSS feed
+                </a>
               </div>
             </div>
           </div>

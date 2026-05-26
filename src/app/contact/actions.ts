@@ -1,6 +1,7 @@
 "use server";
 
 import { z } from "zod";
+import { headers } from "next/headers";
 
 const contactSchema = z.object({
   name: z.string().min(1, "Name is required").max(100),
@@ -11,6 +12,8 @@ const contactSchema = z.object({
 });
 
 // Simple in-memory rate limiter: max 3 submissions per hour per IP
+// Note: in a serverless environment (Vercel), this resets on cold starts.
+// For production, consider Upstash Redis or a database-backed solution.
 const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
 const RATE_LIMIT_MAX = 3;
 const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000; // 1 hour
@@ -30,6 +33,15 @@ function isRateLimited(ip: string): boolean {
 
   entry.count += 1;
   return false;
+}
+
+async function getClientIp(): Promise<string> {
+  const headersList = await headers();
+  const forwarded = headersList.get("x-forwarded-for");
+  if (forwarded) {
+    return forwarded.split(",")[0].trim();
+  }
+  return headersList.get("x-real-ip") || "unknown";
 }
 
 export type ContactFormState = {
@@ -63,8 +75,8 @@ export async function submitContactForm(
     };
   }
 
-  // Rate limit check
-  const ip = "unknown"; // In production, use headers() to get the real IP
+  // Rate limit check using client IP
+  const ip = await getClientIp();
   if (isRateLimited(ip)) {
     return {
       success: false,
@@ -72,14 +84,43 @@ export async function submitContactForm(
     };
   }
 
-  // For now, just log and return success
-  // Resend integration can be added later by setting RESEND_API_KEY
+  // Attempt to send via Resend if API key is configured
+  if (process.env.RESEND_API_KEY) {
+    try {
+      const { Resend } = await import("resend");
+      const resend = new Resend(process.env.RESEND_API_KEY);
+      const toEmail = process.env.CONTACT_EMAIL || "hello@aditya.dev";
+
+      await resend.emails.send({
+        from: "Portfolio Contact <onboarding@resend.dev>",
+        to: [toEmail],
+        subject: `[Portfolio] New message from ${raw.name}`,
+        text: [
+          `Name: ${raw.name}`,
+          `Email: ${raw.email}`,
+          `Project Type: ${raw.projectType}`,
+          ``,
+          `Message:`,
+          raw.message,
+        ].join("\n"),
+        replyTo: raw.email,
+      });
+
+      return { success: true, message: "Message sent! I'll get back to you soon." };
+    } catch {
+      console.error("Failed to send email via Resend");
+      // Fall through to log-based fallback
+    }
+  }
+
+  // Fallback: log the submission (no email sent)
   console.log("Contact form submission:", {
     name: raw.name,
     email: raw.email,
     projectType: raw.projectType,
     message: raw.message,
+    ip,
   });
 
-  return { success: true, message: "Message sent!" };
+  return { success: true, message: "Message sent! I'll get back to you soon." };
 }

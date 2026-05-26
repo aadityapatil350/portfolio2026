@@ -86,5 +86,12 @@ export function getAllSlugs(directory: "blog" | "work"): string[] {
   return fs
     .readdirSync(dir)
     .filter((f) => f.endsWith(".mdx"))
-    .map((f) => f.replace(/\.mdx$/, ""));
+    .map((f) => {
+      const filePath = path.join(dir, f);
+      const raw = fs.readFileSync(filePath, "utf-8");
+      const { data } = matter(raw);
+      if (data.draft) return null;
+      return f.replace(/\.mdx$/, "");
+    })
+    .filter(Boolean) as string[];
 }

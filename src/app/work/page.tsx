@@ -10,6 +10,11 @@ import type { ProjectStatus } from "@/data/site-config";
 export const metadata: Metadata = {
   title: "Work",
   description: "Selected case studies and projects I've shipped.",
+  openGraph: {
+    title: "Work | Aditya",
+    description: "Selected case studies and projects I've shipped.",
+    url: "https://aditya.dev/work",
+  },
 };
 
 const thumbnailColors: Record<string, string> = {

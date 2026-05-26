@@ -46,6 +46,14 @@ export const metadata: Metadata = {
     title: "Aditya — Lead Software Engineer | Indie Hacker",
     description:
       "Lead Software Engineer building renewable energy SaaS at Renewalytics. Indie hacker shipping SEO directories and AI tools for India.",
+    images: [
+      {
+        url: "/og?title=Aditya&description=Lead%20Software%20Engineer%20%7C%20Indie%20Hacker",
+        width: 1200,
+        height: 630,
+        alt: "Aditya — Lead Software Engineer | Indie Hacker",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -53,6 +61,7 @@ export const metadata: Metadata = {
     description:
       "Lead Software Engineer building renewable energy SaaS at Renewalytics. Indie hacker shipping SEO directories and AI tools for India.",
     creator: "@aditya",
+    images: ["/og?title=Aditya&description=Lead%20Software%20Engineer%20%7C%20Indie%20Hacker"],
   },
   robots: {
     index: true,

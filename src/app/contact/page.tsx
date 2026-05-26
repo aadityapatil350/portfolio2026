@@ -4,6 +4,14 @@ import { ContactForm } from "./contact-form";
 
 export const metadata: Metadata = {
   title: "Contact",
+  description:
+    "Have a project in mind? Get in touch — I'm open to freelance contracts and full-time roles in climate tech.",
+  openGraph: {
+    title: "Contact | Aditya",
+    description:
+      "Have a project in mind? Get in touch — I'm open to freelance contracts and full-time roles in climate tech.",
+    url: "https://aditya.dev/contact",
+  },
 };
 
 export default function ContactPage() {
