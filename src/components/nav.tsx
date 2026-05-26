@@ -15,6 +15,7 @@ const navLinks = [
   { href: "/blog", label: "Blog" },
   { href: "/now", label: "Now" },
   { href: "/uses", label: "Uses" },
+  { href: "/resume", label: "Resume" },
 ];
 
 export function Nav() {

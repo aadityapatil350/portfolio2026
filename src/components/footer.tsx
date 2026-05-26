@@ -9,10 +9,10 @@ export function Footer() {
       <div className="content-width flex flex-col items-center justify-between gap-4 px-4 py-8 sm:flex-row sm:px-6">
         <div className="flex items-center gap-4">
           <span className="font-mono text-sm text-muted-foreground">
-            &copy; {currentYear} Aditya
+            &copy; {currentYear} Aditya Patil
           </span>
           <Link
-            href="https://github.com"
+            href="https://github.com/aadityapatil350"
             target="_blank"
             rel="noopener noreferrer"
             className="text-muted-foreground transition-colors hover:text-foreground"
@@ -21,7 +21,7 @@ export function Footer() {
             <Github className="h-4 w-4" />
           </Link>
           <Link
-            href="https://x.com"
+            href="https://x.com/adityapatil350"
             target="_blank"
             rel="noopener noreferrer"
             className="text-muted-foreground transition-colors hover:text-foreground"

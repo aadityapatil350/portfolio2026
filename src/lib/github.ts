@@ -30,7 +30,7 @@ export const languageColors: Record<string, string> = {
 
 // Fetch repos from GitHub API with ISR caching
 export async function getGitHubRepos(): Promise<GitHubRepo[]> {
-  const username = process.env.GITHUB_USERNAME || "aditya";
+  const username = process.env.GITHUB_USERNAME || "aadityapatil350";
 
   try {
     const res = await fetch(

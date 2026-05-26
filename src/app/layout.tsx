@@ -18,50 +18,56 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://aditya.dev"),
+  metadataBase: new URL("https://adityapatil.dev"),
   title: {
-    default: "Aditya — Lead Software Engineer | Indie Hacker",
-    template: "%s | Aditya",
+    default: "Aditya Patil — Lead Software Engineer | Systems Builder",
+    template: "%s | Aditya Patil",
   },
   description:
-    "Lead Software Engineer building renewable energy SaaS at Renewalytics. Indie hacker shipping SEO directories and AI tools for India. Based in Pune.",
+    "Self-taught Lead Software Engineer building operational systems, automation platforms, and AI-powered workflows at Renewalytics. 3400+ MW renewable capacity served. Based in Pune, India.",
   keywords: [
-    "Aditya",
+    "Aditya Patil",
     "Lead Software Engineer",
+    "Systems Engineer",
     "Renewalytics",
-    "renewable energy SaaS",
-    "indie hacker",
+    "operational platforms",
+    "automation",
+    "realtime monitoring",
+    "AI workflows",
+    "renewable energy",
+    "SCADA",
     "Next.js developer",
     "TypeScript",
     "Pune",
     "climate tech",
+    "backend engineer",
   ],
-  authors: [{ name: "Aditya", url: "https://aditya.dev" }],
-  creator: "Aditya",
+  authors: [{ name: "Aditya Patil", url: "https://adityapatil.dev" }],
+  creator: "Aditya Patil",
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://aditya.dev",
-    siteName: "Aditya",
-    title: "Aditya — Lead Software Engineer | Indie Hacker",
+    url: "https://adityapatil.dev",
+    siteName: "Aditya Patil",
+    title: "Aditya Patil — Lead Software Engineer | Systems Builder",
     description:
-      "Lead Software Engineer building renewable energy SaaS at Renewalytics. Indie hacker shipping SEO directories and AI tools for India.",
+      "Building operational systems, automation platforms & AI-powered workflows. 3400+ MW renewable capacity served.",
     images: [
       {
-        url: "/og?title=Aditya&description=Lead%20Software%20Engineer%20%7C%20Indie%20Hacker",
+        url: "/og?title=Aditya%20Patil&description=Systems%20Engineer%20%7C%20Building%20operational%20platforms",
         width: 1200,
         height: 630,
-        alt: "Aditya — Lead Software Engineer | Indie Hacker",
+        alt: "Aditya Patil — Systems Engineer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Aditya — Lead Software Engineer | Indie Hacker",
+    title: "Aditya Patil — Lead Software Engineer | Systems Builder",
     description:
-      "Lead Software Engineer building renewable energy SaaS at Renewalytics. Indie hacker shipping SEO directories and AI tools for India.",
-    creator: "@aditya",
-    images: ["/og?title=Aditya&description=Lead%20Software%20Engineer%20%7C%20Indie%20Hacker"],
+      "Building operational systems, automation platforms & AI-powered workflows.",
+    creator: "@adityapatil350",
+    images: ["/og?title=Aditya%20Patil&description=Systems%20Engineer"],
   },
   robots: {
     index: true,
@@ -79,8 +85,8 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
-  name: "Aditya",
-  url: "https://aditya.dev",
+  name: "Aditya Patil",
+  url: "https://adityapatil.dev",
   jobTitle: "Lead Software Engineer",
   worksFor: {
     "@type": "Organization",
@@ -91,7 +97,22 @@ const jsonLd = {
     addressLocality: "Pune",
     addressCountry: "IN",
   },
-  sameAs: ["https://github.com/aditya", "https://x.com/aditya"],
+  sameAs: [
+    "https://github.com/aadityapatil350",
+    "https://x.com/adityapatil350",
+  ],
+  knowsAbout: [
+    "operational systems",
+    "automation platforms",
+    "realtime monitoring",
+    "SCADA integrations",
+    "renewable energy",
+    "AI workflows",
+    "Next.js",
+    "TypeScript",
+    "PostgreSQL",
+    "Docker",
+  ],
 };
 
 export default function RootLayout({
@@ -106,7 +127,12 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <link rel="alternate" type="application/rss+xml" title="Aditya's Blog" href="/rss.xml" />
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="Aditya Patil's Blog"
+          href="/rss.xml"
+        />
       </head>
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased bg-background text-foreground`}

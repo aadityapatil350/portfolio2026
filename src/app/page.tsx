@@ -1,31 +1,39 @@
 import Link from "next/link";
 import { Metadata } from "next";
-import { MapPin, Code2, Search, Zap, ArrowRight } from "lucide-react";
 import { HomeContent } from "@/components/home-content";
-import { siteConfig, caseStudies, stats } from "@/data/site-config";
+import { siteConfig, caseStudies, stats, services } from "@/data/site-config";
 import { getPosts } from "@/lib/mdx";
 import type { Post } from "@/lib/mdx";
 
 export const metadata: Metadata = {
-  title: "Aditya — Lead Software Engineer | Indie Hacker",
+  title: "Aditya Patil — Lead Software Engineer | Systems Builder",
   description:
-    "Lead Software Engineer building renewable energy SaaS at Renewalytics. Indie hacker shipping SEO directories and AI tools for India. Based in Pune.",
+    "Self-taught Lead Software Engineer building operational systems, automation platforms, and AI-powered workflows at Renewalytics. Based in Pune, India.",
   openGraph: {
-    title: "Aditya — Lead Software Engineer | Indie Hacker",
+    title: "Aditya Patil — Lead Software Engineer | Systems Builder",
     description:
-      "Lead Software Engineer building renewable energy SaaS at Renewalytics. Indie hacker shipping SEO directories and AI tools for India.",
-    url: "https://aditya.dev",
+      "Building operational systems, automation platforms & AI-powered workflows. 3400+ MW renewable capacity served. Pune, India.",
+    url: "https://adityapatil.dev",
     type: "website",
+    images: [
+      {
+        url: "/og?title=Aditya%20Patil&description=Systems%20Engineer%20%7C%20Building%20operational%20platforms",
+        width: 1200,
+        height: 630,
+        alt: "Aditya Patil — Systems Engineer",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Aditya Patil — Lead Software Engineer | Systems Builder",
+    description:
+      "Building operational systems, automation platforms & AI-powered workflows.",
+    creator: "@adityapatil350",
   },
 };
 
-function getLatestBlogPosts(): Array<{
-  title: string;
-  date: string;
-  tags: string[];
-  slug: string;
-  description?: string;
-}> {
+function getLatestBlogPosts() {
   const posts = getPosts("blog");
   return posts.slice(0, 3).map((p: Post) => ({
     title: p.title,
@@ -44,12 +52,16 @@ export default function Home() {
 
   return (
     <HomeContent
+      name={siteConfig.name}
       tagline={siteConfig.tagline}
+      subtagline={siteConfig.subtagline}
       location={siteConfig.location}
       available={siteConfig.available}
       caseStudies={caseStudies}
+      services={services}
       blogPosts={blogPosts}
       stats={stats}
+      resumeUrl={siteConfig.resumeUrl}
     />
   );
 }

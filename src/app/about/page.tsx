@@ -1,176 +1,396 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { FadeIn } from "@/components/fade-in";
+import {
+  FadeIn,
+  BlurIn,
+  StaggerContainer,
+  StaggerItem,
+} from "@/components/animations";
 
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Lead Software Engineer based in Pune, India. Building renewable energy SaaS at Renewalytics and shipping indie products on the side.",
+    "Self-taught Lead Software Engineer building operational systems, automation platforms, and AI-powered workflows. Based in Pune, India.",
   openGraph: {
-    title: "About | Aditya",
+    title: "About | Aditya Patil",
     description:
-      "Lead Software Engineer based in Pune, India. Building renewable energy SaaS at Renewalytics and shipping indie products on the side.",
-    url: "https://aditya.dev/about",
+      "Self-taught Lead Software Engineer building operational systems, automation platforms, and AI-powered workflows. Based in Pune, India.",
+    url: "https://adityapatil.dev/about",
   },
 };
 
 export default function AboutPage() {
   return (
     <div className="content-width px-4 sm:px-6">
+      {/* ── Intro ── */}
       <section className="py-16 sm:py-24">
         <div className="max-w-2xl">
-          <FadeIn>
-            <h1 className="text-3xl sm:text-4xl font-bold tracking-tight">
+          <BlurIn>
+            <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
               About
+            </span>
+          </BlurIn>
+          <FadeIn delay={0.1}>
+            <h1 className="mt-4 text-3xl sm:text-4xl font-bold tracking-tight">
+              I build systems that run operations.
             </h1>
+          </FadeIn>
+          <FadeIn delay={0.2}>
             <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-              I&apos;m Aditya, a Lead Software Engineer based in Pune, India. I
-              build SaaS products for renewable energy at Renewalytics and ship
-              indie projects on the side.
+              I&apos;m Aditya — a self-taught Lead Software Engineer based in
+              Pune, India. I architect full-stack platforms, realtime monitoring
+              systems, and automated reporting pipelines for the renewable energy
+              industry. No CS degree, no bootcamp — just YouTube, side projects,
+              and shipping real software.
             </p>
           </FadeIn>
         </div>
       </section>
 
+      {/* ── Self-Taught Story ── */}
       <section className="py-12 border-t border-border">
         <div className="max-w-2xl">
-          <FadeIn>
-            <h2 className="text-2xl font-semibold tracking-tight">My Story</h2>
+          <BlurIn>
+            <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+              Origin Story
+            </span>
+          </BlurIn>
+          <FadeIn delay={0.1}>
+            <h2 className="mt-4 text-2xl font-semibold tracking-tight">
+              The non-traditional path
+            </h2>
+          </FadeIn>
 
+          <FadeIn delay={0.2}>
             <div className="mt-6 space-y-6 leading-relaxed text-muted-foreground">
               <p>
-                I got into software engineering the way a lot of people in India
-                do — through college, but with a twist. While most of my
-                classmates were prepping for campus placements at services
-                companies, I was spending my nights building side projects and
-                contributing to open source. I taught myself TypeScript and
-                React, built a couple of small apps that no one used, and
-                eventually landed my first real engineering role. It wasn&apos;t
-                glamorous, but those early years of shipping code — even the bad
-                kind — taught me how to think like a builder.
+                I don&apos;t have a computer science degree. My formal education
+                is in Mechanical Engineering (Diploma, 2020) and I&apos;m
+                currently in my final semester of PGDM in IT Management at MIT
+                School of Management. Everything I know about software —
+                TypeScript, React, Node.js, system design — I taught myself.
               </p>
-
               <p>
-                After a couple of years working on web apps and APIs, I stumbled
-                into climate tech almost by accident. I joined Renewalytics as a
-                full-stack developer and got pulled into the world of solar
-                irradiance data, weather models, and energy production
-                forecasting. It was a steep learning curve — I had to wrap my
-                head around meteorological APIs, time-series databases, and the
-                nuances of India&apos;s power markets. But something clicked.
-                Building software that helps renewable energy plants run more
-                efficiently felt meaningful in a way that ad-tech or e-commerce
-                never had. I grew into the tech lead role and now lead the
-                engineering team, architecting systems that handle real-time
-                forecasting for MW-scale solar plants.
+                It started with YouTube tutorials and Stack Overflow threads.
+                I&apos;d spend nights building small side projects — CRUD apps,
+                API wrappers, anything that let me write code and see it work.
+                Then I landed an internship at Climate Connect Digital, where I
+                learned React and Node.js on the job. Within months I was a Full
+                Stack Engineer, and within two years I was a Software Engineer
+                leading projects.
               </p>
-
               <p>
-                The indie hacking bug bit me in 2024. I realized I had the
-                skills to build products end-to-end — from database design to
-                frontend polish to SEO — and I wanted to prove I could ship
-                something that generated real traffic and revenue on my own. I
-                started with GoSolarIndex.in, a directory of solar installers
-                across India, which grew from zero to thousands of indexed pages
-                in days. Then came MSMEVault.in, an MSME government schemes
-                directory. Now I&apos;m building Social Copilot, an AI-powered
-                video SaaS. The indie path is slower and less predictable than a
-                salary, but the freedom to choose what to build — and own the
-                full stack from idea to deployment — is worth it.
+                In June 2024, I joined Renewalytics as Lead Software Engineer.
+                Here I found my edge — building operational software that
+                renewable energy plants actually depend on. The stakes are real:
+                3,400+ MW of capacity, government portal integrations, realtime
+                telemetry, automated reporting for 35+ plants. No tutorials
+                prepare you for this — only shipping does.
               </p>
             </div>
           </FadeIn>
         </div>
       </section>
 
+      {/* ── Experience Timeline ── */}
       <section className="py-12 border-t border-border">
         <div className="max-w-2xl">
-          <FadeIn>
-            <h2 className="text-2xl font-semibold tracking-tight">
-              What I&apos;m Doing Now
+          <BlurIn>
+            <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+              Experience
+            </span>
+          </BlurIn>
+          <FadeIn delay={0.1}>
+            <h2 className="mt-4 text-2xl font-semibold tracking-tight">
+              Where I&apos;ve worked
             </h2>
+          </FadeIn>
 
-            <ul className="mt-6 space-y-4 leading-relaxed text-muted-foreground">
-              <li className="flex gap-3">
-                <span className="mt-1.5 block h-1.5 w-1.5 shrink-0 rounded-full bg-accent-blue" />
-                <div>
-                  <span className="font-medium text-foreground">
-                    Lead Software Engineer at Renewalytics
-                  </span>{" "}
-                  — building production forecasting and energy trading software
-                  for renewable energy plants.
+          <StaggerContainer className="mt-8 space-y-8" staggerDelay={0.12}>
+            {/* Renewalytics */}
+            <StaggerItem>
+              <div className="relative pl-6 border-l-2 border-foreground/15">
+                <span className="absolute -left-[7px] top-1.5 block h-3 w-3 rounded-full border-2 border-foreground bg-background" />
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+                  <h3 className="font-semibold text-foreground">
+                    Lead Software Engineer
+                  </h3>
+                  <span className="font-mono text-xs text-muted-foreground">
+                    Jun 2024 – Present
+                  </span>
                 </div>
-              </li>
-              <li className="flex gap-3">
-                <span className="mt-1.5 block h-1.5 w-1.5 shrink-0 rounded-full bg-accent-teal" />
-                <div>
-                  <span className="font-medium text-foreground">
-                    Indie hacker
-                  </span>{" "}
-                  — shipping GoSolarIndex.in (solar installer directory),
-                  MSMEVault.in (MSME schemes directory), and working on Social
-                  Copilot (AI video SaaS).
+                <p className="text-sm text-muted-foreground mt-0.5">
+                  Renewalytics
+                </p>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                  Full-stack development, backend architecture, Docker
+                  infrastructure, realtime monitoring systems, SCADA integrations,
+                  reporting automation. Owning technical architecture for a
+                  platform serving 3,400+ MW of renewable energy capacity.
+                </p>
+              </div>
+            </StaggerItem>
+
+            {/* CCD — Software Engineer */}
+            <StaggerItem>
+              <div className="relative pl-6 border-l-2 border-foreground/15">
+                <span className="absolute -left-[7px] top-1.5 block h-3 w-3 rounded-full border-2 border-muted-foreground bg-background" />
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+                  <h3 className="font-semibold text-foreground">
+                    Software Engineer
+                  </h3>
+                  <span className="font-mono text-xs text-muted-foreground">
+                    Jul 2022 – Jan 2024
+                  </span>
                 </div>
-              </li>
-              <li className="flex gap-3">
-                <span className="mt-1.5 block h-1.5 w-1.5 shrink-0 rounded-full bg-foreground" />
-                <div>
-                  <span className="font-medium text-foreground">Writing</span>{" "}
-                  about indie hacking, technical SEO, and building with AI.
+                <p className="text-sm text-muted-foreground mt-0.5">
+                  Climate Connect Digital
+                </p>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                  Full-stack development, API integrations, frontend systems.
+                  Led feature development and maintained production applications.
+                </p>
+              </div>
+            </StaggerItem>
+
+            {/* CCD — Full Stack Engineer */}
+            <StaggerItem>
+              <div className="relative pl-6 border-l-2 border-foreground/15">
+                <span className="absolute -left-[7px] top-1.5 block h-3 w-3 rounded-full border-2 border-muted-foreground bg-background" />
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+                  <h3 className="font-semibold text-foreground">
+                    Full Stack Engineer
+                  </h3>
+                  <span className="font-mono text-xs text-muted-foreground">
+                    Nov 2021 – Jul 2022
+                  </span>
                 </div>
-              </li>
+                <p className="text-sm text-muted-foreground mt-0.5">
+                  Climate Connect Digital
+                </p>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                  React, Node.js, database architecture. Built and shipped
+                  multiple features end-to-end.
+                </p>
+              </div>
+            </StaggerItem>
+
+            {/* CCD — Intern */}
+            <StaggerItem>
+              <div className="relative pl-6 border-l-2 border-foreground/15">
+                <span className="absolute -left-[7px] top-1.5 block h-3 w-3 rounded-full border-2 border-muted-foreground/50 bg-background" />
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+                  <h3 className="font-semibold text-foreground">
+                    Engineer Intern
+                  </h3>
+                  <span className="font-mono text-xs text-muted-foreground">
+                    Jun 2021 – Nov 2021
+                  </span>
+                </div>
+                <p className="text-sm text-muted-foreground mt-0.5">
+                  Climate Connect Digital
+                </p>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                  Onboarding, learning React and Node.js on the job. First real
+                  exposure to production software development.
+                </p>
+              </div>
+            </StaggerItem>
+          </StaggerContainer>
+        </div>
+      </section>
+
+      {/* ── Education ── */}
+      <section className="py-12 border-t border-border">
+        <div className="max-w-2xl">
+          <BlurIn>
+            <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+              Education
+            </span>
+          </BlurIn>
+          <FadeIn delay={0.1}>
+            <h2 className="mt-4 text-2xl font-semibold tracking-tight">
+              Formal background
+            </h2>
+          </FadeIn>
+
+          <StaggerContainer className="mt-8 space-y-6" staggerDelay={0.1}>
+            <StaggerItem>
+              <div className="relative pl-6 border-l-2 border-foreground/15">
+                <span className="absolute -left-[7px] top-1.5 block h-3 w-3 rounded-full border-2 border-muted-foreground bg-background" />
+                <h3 className="font-semibold text-foreground">
+                  PGDM — IT Management
+                </h3>
+                <p className="text-sm text-muted-foreground mt-0.5">
+                  MIT School of Management — Final Semester
+                </p>
+              </div>
+            </StaggerItem>
+            <StaggerItem>
+              <div className="relative pl-6 border-l-2 border-foreground/15">
+                <span className="absolute -left-[7px] top-1.5 block h-3 w-3 rounded-full border-2 border-muted-foreground bg-background" />
+                <h3 className="font-semibold text-foreground">
+                  Diploma in Mechanical Engineering
+                </h3>
+                <p className="text-sm text-muted-foreground mt-0.5">2020</p>
+              </div>
+            </StaggerItem>
+          </StaggerContainer>
+        </div>
+      </section>
+
+      {/* ── Current Focus ── */}
+      <section className="py-12 border-t border-border">
+        <div className="max-w-2xl">
+          <BlurIn>
+            <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+              Focus
+            </span>
+          </BlurIn>
+          <FadeIn delay={0.1}>
+            <h2 className="mt-4 text-2xl font-semibold tracking-tight">
+              What I&apos;m working on now
+            </h2>
+          </FadeIn>
+
+          <FadeIn delay={0.2}>
+            <div className="mt-6 space-y-4 leading-relaxed text-muted-foreground">
+              <p>
+                Right now I&apos;m deep into building AI-native operational
+                systems. The pattern I keep coming back to: how do you build
+                software that doesn&apos;t just display data, but{" "}
+                <span className="text-foreground font-medium">
+                  acts on it
+                </span>
+                ?
+              </p>
+              <p>
+                I&apos;m exploring AI agents, operational copilots, and AI
+                workflow systems — tools that can reason about operational data,
+                make decisions, and execute tasks autonomously. The renewable
+                energy industry generates massive amounts of telemetry and
+                reporting data. The opportunity is turning that data into
+                automated action.
+              </p>
+            </div>
+          </FadeIn>
+
+          <FadeIn delay={0.3}>
+            <ul className="mt-6 space-y-4">
+              {[
+                {
+                  label: "AI Agents & Copilots",
+                  desc: "Building autonomous systems that reason about operational data and execute workflows",
+                  color: "bg-accent-blue",
+                },
+                {
+                  label: "Realtime Telemetry",
+                  desc: "MQTT, OPC-UA, WebSockets — making renewable plants visible in real time",
+                  color: "bg-accent-teal",
+                },
+                {
+                  label: "Automation Pipelines",
+                  desc: "Cron-based reporting, data processing, government portal integrations",
+                  color: "bg-foreground",
+                },
+                {
+                  label: "Indie Products",
+                  desc: "GoSolarIndex.in, MSMEVault.in — shipping SEO-driven directories",
+                  color: "bg-muted-foreground",
+                },
+              ].map((item) => (
+                <li key={item.label} className="flex gap-3">
+                  <span
+                    className={`mt-1.5 block h-1.5 w-1.5 shrink-0 rounded-full ${item.color}`}
+                  />
+                  <div>
+                    <span className="font-medium text-foreground">
+                      {item.label}
+                    </span>{" "}
+                    <span className="text-muted-foreground">— {item.desc}</span>
+                  </div>
+                </li>
+              ))}
             </ul>
           </FadeIn>
         </div>
       </section>
 
+      {/* ── Systems I've Built ── */}
       <section className="py-12 border-t border-border">
         <div className="max-w-2xl">
-          <FadeIn>
-            <h2 className="text-2xl font-semibold tracking-tight">Tech Stack</h2>
-
-            <div className="mt-6 flex flex-wrap gap-2">
-              {[
-                "Next.js",
-                "TypeScript",
-                "Node.js",
-                "PostgreSQL",
-                "MongoDB",
-                "Docker",
-                "DigitalOcean",
-              ].map((tech) => (
-                <span
-                  key={tech}
-                  className="rounded-md border border-border bg-muted px-3 py-1.5 text-sm font-medium"
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
-
-            <p className="mt-4 leading-relaxed text-muted-foreground">
-              I primarily work across the full TypeScript stack — Next.js for
-              frontends and APIs, Node.js for backend services, and PostgreSQL
-              or MongoDB depending on the use case. I deploy everything on
-              DigitalOcean with Docker, and I&apos;m comfortable provisioning
-              servers, setting up CI/CD, and managing infrastructure.
-            </p>
+          <BlurIn>
+            <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+              Systems
+            </span>
+          </BlurIn>
+          <FadeIn delay={0.1}>
+            <h2 className="mt-4 text-2xl font-semibold tracking-tight">
+              Systems I&apos;ve built
+            </h2>
           </FadeIn>
+
+          <StaggerContainer className="mt-8 space-y-4" staggerDelay={0.1}>
+            {[
+              {
+                name: "RealSync CMS",
+                desc: "Enterprise realtime monitoring system for renewable energy portfolios — WebSockets, MQTT, OPC-UA ingestion, alarm systems, AI-ready telemetry pipelines.",
+                link: "/work/realsync-cms",
+              },
+              {
+                name: "Reflux",
+                desc: "Operational platform for forecasting revisions, scheduling, reporting automation, and government portal integrations serving 3,400+ MW capacity.",
+                link: "/work/reflux",
+              },
+              {
+                name: "DGR Automation",
+                desc: "Enterprise reporting automation parsing 30+ complex Excel reports daily across 35+ renewable plants with cron-based async pipelines.",
+                link: "/work/dgr-automation",
+              },
+              {
+                name: "CMS / DSM Platform",
+                desc: "Energy analytics, DSM analytics, billing workflows, BESS management, and operational dashboards for renewable energy operations.",
+                link: "/work/cms-dsm-platform",
+              },
+            ].map((system) => (
+              <StaggerItem key={system.name}>
+                <Link
+                  href={system.link}
+                  className="group block rounded-lg border border-border p-4 transition-colors hover:border-foreground/20 hover:bg-muted/50"
+                >
+                  <h3 className="font-semibold text-foreground group-hover:text-accent-blue transition-colors">
+                    {system.name}
+                    <span className="ml-2 text-muted-foreground text-xs font-normal group-hover:translate-x-1 inline-block transition-transform">
+                      →
+                    </span>
+                  </h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+                    {system.desc}
+                  </p>
+                </Link>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
         </div>
       </section>
 
-      <section className="py-12 border-t border-border">
+      {/* ── Contact CTA ── */}
+      <section className="py-16 border-t border-border">
         <div className="max-w-2xl">
           <FadeIn>
-            <h2 className="text-2xl font-semibold tracking-tight">Contact</h2>
+            <h2 className="text-2xl font-semibold tracking-tight">
+              Let&apos;s talk
+            </h2>
             <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-              Want to work together?
+              I&apos;m always open to interesting conversations — whether it&apos;s
+              about operational systems, AI agents, indie hacking, or renewable
+              energy.
             </p>
             <Link
               href="/contact"
-              className="mt-2 inline-block text-accent-blue hover:underline"
+              className="mt-4 inline-flex items-center gap-2 rounded-md bg-foreground px-4 py-2 text-sm font-medium text-background transition-colors hover:bg-foreground/90"
             >
-              Get in touch &rarr;
+              Get in touch →
             </Link>
           </FadeIn>
         </div>

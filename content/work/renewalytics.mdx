@@ -1,48 +1,81 @@
 ---
-title: "Renewalytics — Reflux & CMS Portal"
-description: "Production forecasting & energy trading platform serving renewable energy plants across India"
+title: "Reflux & CMS — Forecasting, Operations & Energy Management"
+description: "Two production platforms serving 3400+ MW renewable capacity — forecasting, scheduling, DSM analytics, billing, and BESS management"
 publishedAt: "2025-06-01"
 tags: ["Climate Tech", "SaaS", "Production"]
-tech: ["Next.js", "TypeScript", "Node.js", "PostgreSQL", "MongoDB", "Docker", "DigitalOcean"]
+tech: ["Next.js", "TypeScript", "PostgreSQL", "MongoDB", "Prisma ORM", "Docker", "Tailwind CSS", "shadcn/ui"]
 status: "Production"
 ---
 
 ## Context
 
-Renewalytics is a renewable energy SaaS company based in Pune. The core product serves solar and wind power plants with production forecasting, scheduling, and energy trading capabilities. As the founding engineer, I own the technical architecture and daily operations.
+Renewalytics is a renewable energy SaaS company based in Pune serving solar and wind power plants across India. The platform handles production forecasting, scheduling, energy trading, DSM analytics, billing, and BESS management. As the Lead Software Engineer, I own the technical architecture and build the systems from the ground up.
 
-## Problem
+## The Two Platforms
 
-The existing monolithic Node.js application was a single DigitalOcean droplet serving 5 plants. As the customer base grew to 50+ plants, the system faced performance bottlenecks, single points of failure, and a slow, outdated customer dashboard.
+### Reflux — Forecasting & Operations
+
+The operational backbone for renewable energy forecasting and scheduling. It handles forecast revisions, scheduling workflows, reporting automation, and government portal integrations.
+
+- **3400+ MW capacity** under management across multiple renewable portfolios
+- **Cron-based automation** for daily report generation and data pipelines
+- **Government portal integrations** for regulatory compliance and reporting
+- **Operational workflows** for forecasting revisions, deviation management, and scheduling
+
+### CMS — DSM Analytics & BESS Management
+
+The customer-facing energy management platform for DSM analytics, billing workflows, BESS (Battery Energy Storage System) management, and agreement management.
+
+- **DSM analytics** for demand-side management reporting and visualization
+- **Billing workflows** for energy billing, invoicing, and financial reporting
+- **BESS management** for battery storage monitoring, control, and optimization
+- **Agreement management** for contracts, SLAs, and compliance tracking
+- **Operational dashboards** for real-time visibility into plant operations
 
 ## What I Built
 
-### Reflux — Forecasting Engine
-A time-series pipeline that ingests weather data, plant configuration, and historical generation data to produce 48-hour production forecasts. The predictions feed directly into energy trading decisions where accuracy penalties are real financial costs.
+### Core Architecture
+- Full-stack application with Next.js frontend, REST APIs, and background job processing
+- Dual-database architecture: PostgreSQL for relational data and MongoDB for flexible document storage
+- Docker containerized services behind Nginx for production deployment
+- Prisma ORM for type-safe database interactions with PostgreSQL
 
-### CMS Portal
-A Next.js + TypeScript customer-facing portal for plant operators to view forecasts, manage scheduling, and generate reports. Replaced the legacy React dashboard with a modern, fast, and accessible interface.
+### Automation Systems
+- Cron-based pipelines for daily operational reports across 35+ plants
+- Automated data ingestion from government energy portals
+- Scheduled report generation and distribution workflows
+- Excel file parsing and multi-sheet report processing
 
-### Infrastructure Migration
-Migrated from a single-droplet architecture to Docker containers behind Nginx, with separate services for API, forecasting engine, and CMS. Zero downtime migration over 3 weekends using parallel traffic switching.
+### Analytics & Dashboards
+- DSM analytics dashboards with real-time energy data visualization
+- BESS monitoring dashboards for battery storage systems
+- Forecast accuracy tracking and deviation analysis
+- Operational KPI dashboards for plant performance
+
+### Customer-Facing Portal
+- Modern dashboard built with Tailwind CSS and shadcn/ui
+- Role-based access control for different user types
+- Agreement and billing management interfaces
+- Report download and export functionality
 
 ## Stack
 
-- **Next.js + TypeScript** — CMS portal and customer dashboards
-- **Node.js** — API and forecasting engine services
-- **PostgreSQL** — Relational data for plant configs and forecasts
-- **MongoDB** — Time-series storage for historical generation data
+- **Next.js + TypeScript** — Frontend application and API routes
+- **PostgreSQL** — Relational data (plant configs, users, agreements)
+- **MongoDB** — Document storage (reports, telemetry snapshots)
+- **Prisma ORM** — Type-safe database access layer
 - **Docker** — Containerized microservices
-- **DigitalOcean** — Infrastructure and deployment
+- **Tailwind CSS + shadcn/ui** — UI framework
+- **Nginx** — Reverse proxy and load balancing
 
 ## Outcomes
 
-- Scaled from 5 to 50+ plants with zero downtime
-- 95%+ day-ahead forecast accuracy
-- 4-hour response time for CVE-2025-55182 security incident
-- Published transparent post-mortem, zero customer data compromised
-- CMS portal load time reduced from 8s to under 2s
+- Scaled platform to serve **3,400+ MW** of renewable energy capacity
+- Automated **30+ daily reports** across 35+ plants
+- Eliminated manual data entry for government portal submissions
+- Built and shipped DSM analytics and BESS management from zero
+- Customer portal serving multiple renewable energy companies
 
 ## Lessons
 
-Production software is about reliability, not features. Automated dependency auditing, documented incident response playbooks, and infrastructure-as-code are not nice-to-haves — they're requirements when real power plants depend on your software.
+Operational software for the energy industry requires deep understanding of domain workflows. Building these two platforms taught me that the best systems are invisible — operators don't think about the software, they think about their plants. The cron pipelines, the automated reports, the dashboard that loads in under 2 seconds — these are the features that matter.

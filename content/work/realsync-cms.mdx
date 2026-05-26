@@ -1,0 +1,53 @@
+---
+title: "RealSync CMS — Enterprise Realtime Monitoring"
+description: "Realtime telemetry monitoring system for renewable energy portfolios with WebSocket, MQTT, and OPC-UA ingestion"
+publishedAt: "2025-08-01"
+tags: ["Climate Tech", "Monitoring", "Realtime"]
+tech: ["Next.js", "TimescaleDB", "PostgreSQL", "WebSockets", "MQTT", "OPC-UA", "Docker", "Azure"]
+status: "Production"
+---
+
+## Context
+
+Multi-MW renewable energy plants generate massive amounts of telemetry data every second. Plant operators and portfolio managers need realtime operational visibility — knowing exactly what's happening across every inverter, transformer, and weather station at any given moment. Without realtime monitoring, issues go undetected, performance drops, and revenue is lost.
+
+## Problem
+
+Renewable energy operators were relying on delayed data and manual checks to monitor their portfolios. Existing monitoring solutions were either too expensive, too slow, or couldn't handle the scale of multi-plant portfolios. There was no unified, realtime view across different plant types and SCADA systems.
+
+## What I Built
+
+### RealSync CMS — Enterprise Realtime Monitoring Platform
+
+A comprehensive realtime monitoring system that ingests telemetry from multiple sources and presents a unified operational view across the entire renewable energy portfolio.
+
+- **WebSockets** — Realtime data streaming from server to dashboard with sub-second latency
+- **MQTT ingestion** — Lightweight message protocol for high-frequency telemetry from field devices
+- **OPC-UA integration** — Direct SCADA system connectivity for plant-level data extraction
+- **Event-driven telemetry pipelines** — Async processing pipeline that transforms raw telemetry into structured, queryable data
+- **Alarm systems** — Threshold-based alerting with configurable rules, notification channels, and alarm acknowledgment workflows
+- **AI-ready workflows** — Data pipeline architecture designed for AI/ML integration, with structured outputs ready for forecasting models and anomaly detection
+- **Forecasting integrations** — Direct data feeds to forecasting engines for real-time accuracy tracking
+- **Downtime classification** — Automated categorization of plant downtime events with root cause tagging
+
+## Stack
+
+- **Next.js** — Dashboard frontend and API layer
+- **TimescaleDB / PostgreSQL** — Time-series optimized storage for telemetry data with hypertable partitioning
+- **WebSockets** — Realtime bidirectional communication between server and client
+- **MQTT** — Lightweight messaging protocol for field device telemetry
+- **OPC-UA** — Industrial protocol for SCADA system integration
+- **Docker** — Containerized microservices architecture
+- **Azure** — Cloud infrastructure and deployment
+
+## Outcomes
+
+- **Realtime visibility** across the entire renewable energy portfolio from a single dashboard
+- **AI-ready data pipelines** feeding structured telemetry to forecasting and anomaly detection systems
+- **Operational dashboards** with live metrics, historical comparisons, and trend analysis
+- **Alarm management** reducing mean-time-to-detection for operational issues
+- **Unified monitoring** across multiple SCADA systems and plant configurations
+
+## Lessons
+
+Realtime systems are fundamentally different from request-response applications. You have to think about message ordering, backpressure, reconnection strategies, and graceful degradation. The hardest part isn't ingesting the data — it's presenting it in a way that operators can actually make decisions from.
