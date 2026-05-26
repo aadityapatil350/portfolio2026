@@ -1,0 +1,63 @@
+---
+title: "What I learned shipping production renewable energy software"
+description: "Hard-won lessons from building and maintaining production software for renewable energy plants — from forecasting accuracy to incident response."
+publishedAt: "2026-02-20"
+tags: ["Climate Tech", "Engineering"]
+---
+
+## Context
+
+I joined Renewalytics as the founding engineer. The product is a production forecasting and energy trading platform that serves renewable energy plants across India. When I started, the codebase was a monolithic Node.js app with MongoDB, deployed on a single DigitalOcean droplet.
+
+## What I Built
+
+### Reflux — Production Forecasting
+
+The core product. We take weather data, plant configuration, and historical generation data to predict how much energy a solar or wind plant will produce in the next 48 hours. This prediction feeds directly into energy trading decisions — if you over-predict, you pay penalties. If you under-predict, you leave money on the table.
+
+The forecasting engine runs on a time-series pipeline: ingest weather APIs -> normalize data -> run ML models -> generate predictions -> push to trading dashboard. Accuracy targets are 95%+ for day-ahead forecasts.
+
+### CMS Portal
+
+A customer-facing portal where plant operators view their forecasts, manage scheduling, and download reports. Built as a Next.js app with TypeScript, it replaced the old React dashboard that was slow and unreliable.
+
+## The Hard Parts
+
+### Data Quality is the Real Problem
+
+The weather APIs we depend on have gaps, delays, and inaccuracies. We built a fallback chain: primary API -> secondary API -> interpolated historical data -> manual override. Each fallback degrades accuracy by 2-5%, so we track which fallback was used and surface that to traders.
+
+```typescript
+// Simplified fallback chain
+async function getWeatherData(location: Location, timestamp: Date) {
+  const primary = await primaryAPI.get(location, timestamp).catch(() => null);
+  if (primary && primary.confidence > 0.9) return { data: primary, source: "primary" };
+
+  const secondary = await secondaryAPI.get(location, timestamp).catch(() => null);
+  if (secondary) return { data: secondary, source: "secondary", degraded: true };
+
+  return interpolateFromHistory(location, timestamp);
+}
+```
+
+### The Security Incident (CVE-2025-55182)
+
+In early 2025, a vulnerability was disclosed in one of our dependencies. The affected package was 3 levels deep in our dependency tree. We had the patch deployed within 4 hours of the CVE being published, before any exploit attempts hit our infrastructure.
+
+The key was having automated dependency auditing in CI and a documented incident response playbook. No customer data was compromised, and we published a transparent post-mortem.
+
+### Scaling from 5 Plants to 50+
+
+When we went from serving 5 plants to 50+, the single-droplet architecture broke. We moved to Docker containers behind an Nginx reverse proxy, with separate services for the API, the forecasting engine, and the CMS. Database reads were offloaded to read replicas.
+
+The migration happened over 3 weekends with zero downtime. The trick: run new and old infrastructure in parallel, switch traffic gradually using DNS weights.
+
+## Lessons
+
+1. **Production software is about reliability, not features.** Customers don't care about your fancy dashboard if the forecast data is delayed by 5 minutes.
+
+2. **Automate everything you can.** Dependency updates, database backups, log rotation, SSL renewal. If a human has to do it, it will eventually be forgotten.
+
+3. **Document your incidents.** The post-mortem for CVE-2025-55182 became our incident response template. When the next vulnerability hit, we were ready.
+
+4. **Domain expertise compounds.** After 18 months in renewable energy, I can have a meaningful conversation with plant operators about inverter efficiency and curtailment patterns. That knowledge makes me a better engineer.

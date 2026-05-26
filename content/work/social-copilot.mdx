@@ -1,0 +1,45 @@
+---
+title: "Social Copilot"
+description: "Social media management + AI video generation SaaS for creators and businesses"
+publishedAt: "2026-04-01"
+tags: ["SaaS", "AI", "Indie Hacking"]
+tech: ["Next.js", "Supabase", "BullMQ", "ElevenLabs", "Creatomate"]
+status: "In Development"
+---
+
+## Context
+
+Social media management tools either cater to enterprise teams with complex workflows or individual creators with limited features. There's a gap in the market for a tool that combines post scheduling with AI-powered content generation — specifically video.
+
+## Problem
+
+Content creators and small businesses need to produce social media content at scale, but video creation is time-consuming and requires specialized skills. Existing tools treat scheduling and content creation as separate workflows.
+
+## What I Built
+
+Social Copilot — an all-in-one platform that combines social media scheduling with AI-powered video generation. Users can plan their content calendar, generate short-form videos using AI voiceovers (ElevenLabs) and video templates (Creatomate), and schedule posts across multiple platforms.
+
+### Architecture
+
+- **Queue System**: BullMQ for job processing (video generation, post scheduling)
+- **Auth + Database**: Supabase for authentication, user data, and file storage
+- **AI Pipeline**: ElevenLabs for text-to-speech, Creatomate for video rendering
+- **Frontend**: Next.js with real-time job status updates
+
+## Stack
+
+- **Next.js** — Application frontend and API routes
+- **Supabase** — Authentication, database, and file storage
+- **BullMQ** — Job queue for video generation and post scheduling
+- **ElevenLabs** — AI voiceover generation
+- **Creatomate** — Video template rendering
+
+## Outcomes
+
+- Core architecture and auth flow complete
+- Video generation pipeline functional with end-to-end tests
+- Currently in private beta development phase
+
+## Lessons
+
+Building with AI APIs requires robust error handling and retry logic. Rate limits, latency spikes, and output quality variance are real challenges that need to be handled gracefully in the user experience.

@@ -1,0 +1,48 @@
+---
+title: "Renewalytics — Reflux & CMS Portal"
+description: "Production forecasting & energy trading platform serving renewable energy plants across India"
+publishedAt: "2025-06-01"
+tags: ["Climate Tech", "SaaS", "Production"]
+tech: ["Next.js", "TypeScript", "Node.js", "PostgreSQL", "MongoDB", "Docker", "DigitalOcean"]
+status: "Production"
+---
+
+## Context
+
+Renewalytics is a renewable energy SaaS company based in Pune. The core product serves solar and wind power plants with production forecasting, scheduling, and energy trading capabilities. As the founding engineer, I own the technical architecture and daily operations.
+
+## Problem
+
+The existing monolithic Node.js application was a single DigitalOcean droplet serving 5 plants. As the customer base grew to 50+ plants, the system faced performance bottlenecks, single points of failure, and a slow, outdated customer dashboard.
+
+## What I Built
+
+### Reflux — Forecasting Engine
+A time-series pipeline that ingests weather data, plant configuration, and historical generation data to produce 48-hour production forecasts. The predictions feed directly into energy trading decisions where accuracy penalties are real financial costs.
+
+### CMS Portal
+A Next.js + TypeScript customer-facing portal for plant operators to view forecasts, manage scheduling, and generate reports. Replaced the legacy React dashboard with a modern, fast, and accessible interface.
+
+### Infrastructure Migration
+Migrated from a single-droplet architecture to Docker containers behind Nginx, with separate services for API, forecasting engine, and CMS. Zero downtime migration over 3 weekends using parallel traffic switching.
+
+## Stack
+
+- **Next.js + TypeScript** — CMS portal and customer dashboards
+- **Node.js** — API and forecasting engine services
+- **PostgreSQL** — Relational data for plant configs and forecasts
+- **MongoDB** — Time-series storage for historical generation data
+- **Docker** — Containerized microservices
+- **DigitalOcean** — Infrastructure and deployment
+
+## Outcomes
+
+- Scaled from 5 to 50+ plants with zero downtime
+- 95%+ day-ahead forecast accuracy
+- 4-hour response time for CVE-2025-55182 security incident
+- Published transparent post-mortem, zero customer data compromised
+- CMS portal load time reduced from 8s to under 2s
+
+## Lessons
+
+Production software is about reliability, not features. Automated dependency auditing, documented incident response playbooks, and infrastructure-as-code are not nice-to-haves — they're requirements when real power plants depend on your software.

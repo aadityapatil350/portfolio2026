@@ -1,0 +1,51 @@
+---
+title: "How I built GoSolarIndex.in in 3 days with Claude Code"
+description: "The full story of building India's solar installer directory in 72 hours — from domain registration to 17x indexed pages growth in under a week."
+publishedAt: "2026-03-15"
+tags: ["AI", "Indie Hacking"]
+cover: "/images/gosolarindex-blog.jpg"
+---
+
+## The Idea
+
+India's solar energy sector is booming, but finding a reliable solar installer is still a mess. Google searches return lead-gen farms with paid listings, not genuine directories. I saw a gap — a technical SEO play that could rank organically and actually be useful.
+
+## Day 1: The Build
+
+I registered the domain at 11 PM on a Friday. By Saturday evening, I had a working Next.js app with PostgreSQL, a basic search interface, and city-wise installer listings scraped from public government data. The entire backend was built with Claude Code — I described what I wanted, iterated on the schema, and let it generate the CRUD operations and API routes.
+
+## Day 2: The Content
+
+Sunday was all about content. I wrote unique city pages for 50+ Indian cities with proper heading hierarchies, local keywords, and structured data. Each page answered the exact questions people search for: "best solar installer in [city]", "solar panel cost in [city]", "government subsidies for solar in [city]".
+
+The key insight: these are informational queries with clear commercial intent. Google rewards pages that answer the question directly, not pages that just list businesses.
+
+## Day 3: The Launch
+
+Monday morning I deployed to Vercel, submitted the sitemap to Google Search Console, and set up monitoring. The first 24 hours were quiet — zero impressions. Then on Day 4, Google started crawling aggressively.
+
+## The Results
+
+By Day 6, indexed pages went from 3 to 51 — a 17x increase. Organic impressions started flowing in by Day 8. The site was ranking on page 1 for several city-level keywords within two weeks.
+
+```typescript
+// The technical SEO checklist that made the difference
+const seoChecklist = {
+  sitemap: "Auto-generated with next-sitemap",
+  robots: "Proper crawl directives",
+  structuredData: "LocalBusiness schema on every listing",
+  metaTags: "Unique title + description per page",
+  internalLinks: "City -> installer -> city cross-linking",
+  pageSpeed: "Static generation, no client-side data fetching",
+};
+```
+
+## Lessons Learned
+
+1. **Speed matters more than perfection.** Ship first, optimize later. Three days to a working product is better than three months to a perfect one.
+
+2. **Claude Code changed my workflow.** I'm not a prompt engineer — I describe what I want in plain English and iterate. The code quality is good enough for a first version, and I refactor after.
+
+3. **Technical SEO is a moat.** Most directory founders don't understand indexation, canonical tags, or structured data. This knowledge alone can give you a 6-month head start on competition.
+
+4. **Content velocity wins.** 50+ unique city pages in one weekend. Most competitors had 10-15 generic pages. Google rewarded the depth and specificity.
