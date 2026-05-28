@@ -1,0 +1,120 @@
+---
+title: "Technical SEO for developers: how to rank without paid marketing"
+description: "How I got GoSolarIndex.in to page 1 rankings with zero ad spend — a developer's guide to technical SEO that actually works."
+publishedAt: "2026-04-15"
+tags: ["SEO", "Next.js", "Indie Hacking"]
+cover: "/images/blog-seo.jpg"
+---
+
+## Developers underestimate SEO
+
+Most developers think SEO is about stuffing keywords and building backlinks. That's 2015 SEO. In 2026, technical SEO — the stuff developers are uniquely qualified to do — is what moves the needle.
+
+I built GoSolarIndex.in and got it ranking on page 1 for competitive keywords in under 2 weeks. Zero ad spend. Zero backlink outreach. Pure technical execution.
+
+## The playbook
+
+### 1. Programmatic pages at scale
+
+The biggest SEO advantage developers have: we can generate thousands of optimized pages programmatically. GoSolarIndex.in has a unique page for every city in India with solar installers. Each page is:
+
+- Server-rendered with Next.js (crawlable HTML, not client-rendered JS)
+- Semantically structured with proper heading hierarchy
+- Enriched with structured data (JSON-LD)
+- Internally linked to related cities and categories
+
+```tsx
+// generateStaticParams creates a page for every city
+export async function generateStaticParams() {
+  const cities = await db.city.findMany({ select: { slug: true } });
+  return cities.map((city) => ({ slug: city.slug }));
+}
+```
+
+One template. 500+ unique, indexable pages. Each targeting a specific long-tail keyword.
+
+### 2. Structured data is non-negotiable
+
+Google's rich results come from structured data. For a directory site, this means `LocalBusiness` schema on every listing:
+
+```tsx
+function generateJsonLd(installer) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: installer.name,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: installer.city,
+      addressRegion: installer.state,
+      addressCountry: "IN",
+    },
+    telephone: installer.phone,
+    aggregateRating: installer.rating
+      ? {
+          "@type": "AggregateRating",
+          ratingValue: installer.rating,
+          reviewCount: installer.reviewCount,
+        }
+      : undefined,
+  };
+}
+```
+
+### 3. Core Web Vitals matter
+
+Google explicitly uses page experience signals for ranking. As a developer, you can nail these:
+
+- **LCP under 2.5s** — server-render above-the-fold content, optimize images with `next/image`, preload critical fonts
+- **CLS near 0** — set explicit dimensions on images/embeds, avoid layout shifts from late-loading content
+- **INP under 200ms** — minimize client-side JavaScript, use Server Components for data-heavy sections
+
+My sites score 95+ on Lighthouse. This isn't vanity — it directly impacts rankings.
+
+### 4. Dynamic sitemaps and proper indexing
+
+```tsx
+// app/sitemap.ts
+export default async function sitemap() {
+  const cities = await db.city.findMany();
+
+  return [
+    { url: "https://gosolarindex.in", lastModified: new Date() },
+    ...cities.map((city) => ({
+      url: `https://gosolarindex.in/solar-installers/${city.slug}`,
+      lastModified: city.updatedAt,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    })),
+  ];
+}
+```
+
+Submit to Google Search Console immediately after deploy. Monitor the Coverage report daily for the first week.
+
+### 5. Internal linking architecture
+
+Every page should link to related pages. For GoSolarIndex.in:
+
+- City pages link to nearby cities
+- Category pages link to relevant city pages
+- Every page links back to the main directory
+
+This creates a crawlable graph that helps Google discover and understand your content hierarchy.
+
+## Results: GoSolarIndex.in
+
+- **Day 1**: 3 indexed pages
+- **Day 6**: 51 indexed pages (17x growth)
+- **Week 2**: page 1 rankings for city-level keywords
+- **Month 1**: consistent organic traffic with zero ad spend
+
+## The same playbook works for MSMEVault.in
+
+I applied identical techniques to MSMEVault.in — a directory of Indian MSME government schemes. Programmatic pages for each scheme, structured data, proper sitemaps. Same results: organic traffic from day one.
+
+## Why this matters for your business
+
+If you're building a SaaS, marketplace, or directory — technical SEO can be your primary growth channel. No ad spend. No content marketing team. Just solid engineering that makes Google want to rank your pages.
+
+I build SEO-optimized web applications from the ground up. If you want organic traffic baked into your product architecture, [let's talk](/contact).

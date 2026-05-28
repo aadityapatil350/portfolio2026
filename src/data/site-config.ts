@@ -189,6 +189,23 @@ export const caseStudies: CaseStudy[] = [
     metrics: ["Built in 3 days", "17x index growth", "Page 1 rankings", "100% organic"],
   },
   {
+    slug: "cops-dsm-csm",
+    title: "COPS DSM & CSM Portal",
+    oneLiner:
+      "DSM and CSM operational portal for Juniper Green Energy",
+    description:
+      "Operational portal for DSM (Deviation Settlement Mechanism) and CSM (Commercial Settlement Mechanism) management for Juniper Green Energy's renewable portfolio.",
+    thumbnail: "/images/cops-dsm-csm.jpg",
+    tech: ["Next.js", "PostgreSQL", "Prisma ORM", "Tailwind CSS"],
+    status: "Production",
+    metrics: [
+      "DSM analytics",
+      "CSM management",
+      "Juniper Green Energy",
+      "Operational portal",
+    ],
+  },
+  {
     slug: "msmevault",
     title: "MSMEVault.in",
     oneLiner:
@@ -210,11 +227,11 @@ export const caseStudies: CaseStudy[] = [
 
 export const indieProjects: IndieProject[] = [
   {
-    title: "RealSync CMS",
+    title: "Imaginate.pro",
     description:
-      "Enterprise-grade realtime monitoring system for renewable portfolios. SCADA, MQTT, OPC-UA, alarm systems.",
-    tech: ["Next.js", "TimescaleDB", "WebSockets", "MQTT"],
-    status: "Production",
+      "AI image generation platform. Create stunning visuals with AI-powered tools.",
+    tech: ["Next.js", "AI", "Image Generation"],
+    status: "Archived",
     pinned: true,
   },
   {

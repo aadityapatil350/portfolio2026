@@ -1,0 +1,191 @@
+---
+title: "Docker for full-stack developers: a production deployment guide"
+description: "How I deploy Next.js apps with Docker, Caddy, and PostgreSQL — the same setup running Renewalytics' production systems."
+publishedAt: "2026-03-05"
+tags: ["Docker", "DevOps", "Next.js", "Engineering"]
+cover: "/images/blog-docker.jpg"
+---
+
+## Why Docker for Next.js?
+
+Vercel is great for indie projects. But when you're building enterprise software — multi-tenant dashboards, internal tools, systems handling sensitive operational data — you need to self-host. Docker gives you reproducible deployments on any infrastructure.
+
+All Renewalytics production systems run on Docker. Here's the setup.
+
+## The Dockerfile
+
+Next.js has a standalone output mode that creates a minimal production server:
+
+```dockerfile
+# Stage 1: Dependencies
+FROM node:20-alpine AS deps
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci --omit=dev
+
+# Stage 2: Build
+FROM node:20-alpine AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+RUN npx prisma generate
+RUN npm run build
+
+# Stage 3: Production
+FROM node:20-alpine AS runner
+WORKDIR /app
+ENV NODE_ENV=production
+
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
+COPY --from=builder /app/prisma ./prisma
+
+USER nextjs
+EXPOSE 3000
+CMD ["node", "server.js"]
+```
+
+The final image is ~150MB. Compare that to 1GB+ if you copy `node_modules` directly.
+
+## Docker Compose for the full stack
+
+```yaml
+version: "3.8"
+
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=postgresql://app:secret@db:5432/myapp
+      - NEXTAUTH_URL=https://app.example.com
+      - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  db:
+    image: postgres:16-alpine
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=myapp
+      - POSTGRES_USER=app
+      - POSTGRES_PASSWORD=secret
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U app -d myapp"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  caddy:
+    image: caddy:2-alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - app
+    restart: unless-stopped
+
+volumes:
+  pgdata:
+  caddy_data:
+  caddy_config:
+```
+
+## Caddy for automatic HTTPS
+
+Forget nginx configs and Let's Encrypt cron jobs. Caddy handles HTTPS automatically:
+
+```
+app.example.com {
+    reverse_proxy app:3000
+}
+```
+
+That's the entire Caddyfile. Caddy obtains and renews TLS certificates automatically. Zero maintenance.
+
+## Database migrations in Docker
+
+Run migrations before starting the app:
+
+```dockerfile
+# In your entrypoint script
+#!/bin/sh
+npx prisma migrate deploy
+node server.js
+```
+
+Or run migrations as a separate job in your CI/CD pipeline before deploying the new container.
+
+## Health checks and monitoring
+
+Always add a health endpoint:
+
+```typescript
+// app/api/health/route.ts
+export async function GET() {
+  try {
+    await db.$queryRaw`SELECT 1`;
+    return Response.json({ status: "ok", db: "connected" });
+  } catch {
+    return Response.json({ status: "error", db: "disconnected" }, { status: 503 });
+  }
+}
+```
+
+Use this with Docker health checks and your monitoring system (we use UptimeRobot for external checks).
+
+## Multi-stage CI/CD
+
+Our deployment pipeline:
+
+```yaml
+# GitHub Actions
+deploy:
+  steps:
+    - name: Build image
+      run: docker build -t app:${{ github.sha }} .
+
+    - name: Push to registry
+      run: |
+        docker tag app:${{ github.sha }} registry.example.com/app:latest
+        docker push registry.example.com/app:latest
+
+    - name: Deploy
+      run: |
+        ssh deploy@server "cd /opt/app && docker compose pull && docker compose up -d"
+```
+
+## Production tips
+
+1. **Always use named volumes for databases** — anonymous volumes get deleted on `docker compose down`
+2. **Set memory limits** — `deploy.resources.limits.memory: 512M` prevents runaway processes
+3. **Log to stdout** — Docker captures stdout/stderr; don't write log files inside containers
+4. **Use `.dockerignore`** — exclude `node_modules`, `.next`, `.git` from the build context
+5. **Pin image versions** — `node:20-alpine`, not `node:latest`
+
+## When to use this vs. Vercel
+
+| | Docker self-host | Vercel |
+|---|---|---|
+| Cost at scale | Cheaper (fixed VPS cost) | Expensive (per-request pricing) |
+| Data sovereignty | Full control | US/EU regions only |
+| Custom infra | Anything goes | Limited to Vercel's platform |
+| Setup effort | Medium | Zero |
+| Best for | Enterprise, internal tools | Indie products, marketing sites |
+
+I use both. Renewalytics systems run on Docker. GoSolarIndex.in runs on Vercel. Pick the right tool for the job.
+
+Need help deploying your Next.js app to production? I set up Docker deployments, CI/CD pipelines, and production infrastructure. [Let's talk](/contact).

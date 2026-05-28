@@ -154,7 +154,7 @@ export default function ResumePage() {
               Download PDF
             </a>
             <Link
-              href="/work"
+              href="/projects"
               className="inline-flex items-center gap-2 rounded-md border border-border px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted print:hidden"
             >
               View case studies
@@ -383,7 +383,7 @@ export default function ResumePage() {
               MSMEVault.in as indie SEO-driven directory products.
             </p>
             <Link
-              href="/work"
+              href="/projects"
               className="mt-3 inline-flex items-center gap-2 text-sm font-medium text-foreground hover:text-accent-blue transition-colors print:hidden"
             >
               View all case studies

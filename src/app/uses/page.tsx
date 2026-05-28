@@ -33,13 +33,28 @@ const categories: UseCategory[] = [
       },
       {
         name: "Languages",
-        description: "TypeScript, Python (for ML experiments)",
+        description: "TypeScript, JavaScript, Python, SQL",
       },
-      { name: "Framework", description: "Next.js (App Router)" },
-      { name: "Backend", description: "Node.js, Express" },
-      { name: "Database", description: "PostgreSQL, MongoDB, Redis" },
+      { name: "Framework", description: "Next.js 16 (App Router), React 19" },
+      { name: "Backend", description: "Node.js, Express, Bun" },
+      { name: "Database", description: "PostgreSQL, TimescaleDB, MongoDB, SQLite, Redis" },
       { name: "ORM", description: "Prisma" },
-      { name: "Auth", description: "NextAuth.js, Supabase Auth" },
+      { name: "Auth", description: "NextAuth.js" },
+      { name: "Validation", description: "Zod" },
+      { name: "State Management", description: "Zustand, React Query (TanStack Query)" },
+      { name: "Forms", description: "React Hook Form + Zod resolvers" },
+      { name: "Search", description: "Fuse.js (client-side fuzzy search)" },
+      { name: "Content", description: "MDX, next-mdx-remote, rehype-pretty-code, Shiki" },
+    ],
+  },
+  {
+    heading: "Realtime & Data",
+    items: [
+      { name: "WebSockets", description: "Native WS, Socket.io" },
+      { name: "Protocols", description: "MQTT, OPC-UA (SCADA integrations)" },
+      { name: "Time-Series", description: "TimescaleDB (PostgreSQL extension)" },
+      { name: "Queues", description: "BullMQ, node-cron (job scheduling)" },
+      { name: "Excel Parsing", description: "SheetJS (xlsx) — vendor-specific report automation" },
     ],
   },
   {
@@ -47,19 +62,26 @@ const categories: UseCategory[] = [
     items: [
       {
         name: "Hosting",
-        description: "Vercel (frontend), DigitalOcean (backend services)",
+        description: "Vercel (frontend/indie), DigitalOcean (production services)",
       },
       { name: "Containers", description: "Docker + Docker Compose" },
+      { name: "Reverse Proxy", description: "Caddy (automatic HTTPS)" },
       { name: "CI/CD", description: "GitHub Actions" },
-      { name: "Monitoring", description: "Coming soon" },
+      { name: "DNS & CDN", description: "Cloudflare" },
+      { name: "Monitoring", description: "UptimeRobot, custom health endpoints" },
     ],
   },
   {
-    heading: "Design",
+    heading: "Design & UI",
     items: [
-      { name: "Styling", description: "Tailwind CSS" },
-      { name: "Components", description: "shadcn/ui" },
+      { name: "Styling", description: "Tailwind CSS v4" },
+      { name: "Components", description: "shadcn/ui, Radix UI primitives" },
+      { name: "Animations", description: "Framer Motion" },
+      { name: "Charts", description: "Recharts" },
+      { name: "Tables", description: "TanStack Table" },
+      { name: "Drag & Drop", description: "dnd-kit" },
       { name: "Icons", description: "Lucide React" },
+      { name: "Themes", description: "next-themes (light/dark mode)" },
       {
         name: "Fonts",
         description: "Inter (body), JetBrains Mono (code)",
@@ -67,13 +89,23 @@ const categories: UseCategory[] = [
     ],
   },
   {
+    heading: "SEO & Marketing",
+    items: [
+      { name: "Technical SEO", description: "Next.js Metadata API, JSON-LD, dynamic sitemaps, robots.txt" },
+      { name: "Content", description: "Programmatic pages, structured data, RSS feeds" },
+      { name: "Analytics", description: "Google Search Console" },
+      { name: "Image Optimization", description: "Sharp, next/image, OG image generation" },
+    ],
+  },
+  {
     heading: "AI Tools",
     items: [
-      { name: "Coding", description: "Claude Code" },
+      { name: "Coding", description: "Claude Code, Cursor" },
       {
         name: "Writing",
-        description: "Claude (for first drafts and brainstorming)",
+        description: "Claude (drafts, brainstorming, documentation)",
       },
+      { name: "Image Generation", description: "Imaginate.pro (own project)" },
     ],
   },
   {

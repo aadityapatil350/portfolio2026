@@ -1,0 +1,65 @@
+---
+title: "Tailwind CSS v4: what's new and why it matters"
+description: "Tailwind v4 is a ground-up rewrite. Faster builds, CSS-first config, and native cascade layers. Here's what changed and how to migrate."
+publishedAt: "2026-03-18"
+tags: ["Tailwind CSS", "CSS", "Engineering"]
+---
+
+## Tailwind v4 is not an incremental update
+
+It's a full rewrite. New engine (Oxide), CSS-first configuration, and performance improvements that make the old PostCSS plugin feel sluggish.
+
+I've migrated 4 production projects to v4. Here's what you need to know.
+
+## CSS-first configuration
+
+The biggest change: `tailwind.config.js` is replaced by CSS `@theme` directives.
+
+```css
+/* globals.css */
+@import "tailwindcss";
+
+@theme {
+  --color-accent-blue: #2563eb;
+  --color-accent-teal: #0d9488;
+  --font-mono: "JetBrains Mono", monospace;
+  --breakpoint-content: 72rem;
+}
+```
+
+No more JavaScript config file. Your design tokens live in CSS where they belong. You can still use a JS config if you need computed values, but for most projects, CSS is cleaner.
+
+## Performance is dramatic
+
+The new Oxide engine (written in Rust) makes Tailwind v4 significantly faster:
+
+- **Dev builds**: near-instant HMR, no perceptible delay
+- **Production builds**: 2-5x faster than v3
+- **No more JIT surprises**: the engine handles all class detection natively
+
+For RealSync CMS with 100+ components, the dev server HMR went from ~300ms to imperceptible.
+
+## Native cascade layers
+
+Tailwind v4 uses `@layer` natively. This means your custom CSS plays nicely with Tailwind without specificity wars:
+
+```css
+@layer base {
+  body { font-feature-settings: "kern" 1; }
+}
+
+@layer components {
+  .card { @apply rounded-xl border border-border bg-card p-5; }
+}
+```
+
+## Migration tips
+
+1. **Remove `tailwind.config.js`** — move theme values to `@theme` in your CSS
+2. **Update PostCSS config** — use `@tailwindcss/postcss` instead of the old plugin
+3. **Check custom plugins** — v4's plugin API changed; most community plugins have v4 versions
+4. **Test dark mode** — the `dark:` variant works the same, but check your custom colors
+
+## Worth the migration
+
+Every project I've migrated felt snappier in development. The CSS-first config is more intuitive. If you're starting a new project, use v4. If you're on v3, migrate — it's straightforward for most apps.

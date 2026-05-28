@@ -1,0 +1,96 @@
+---
+title: "The indie hacker's guide to building SEO directories"
+description: "How to build, launch, and monetize niche directory sites with Next.js and technical SEO — from someone who's shipped two profitable ones."
+publishedAt: "2025-12-20"
+tags: ["SEO", "Indie Hacking", "Next.js"]
+---
+
+## Directories are underrated
+
+While everyone chases AI wrappers and SaaS products, niche directories quietly print money through organic traffic. GoSolarIndex.in and MSMEVault.in both generate leads with zero ad spend.
+
+## The formula
+
+1. **Pick a niche with search demand** — use Google Keyword Planner to find niches where people search for "[category] in [location]" or "[thing] directory"
+2. **Build with Next.js** — server-rendered pages, dynamic sitemaps, structured data
+3. **Programmatic pages at scale** — one template, hundreds of unique pages
+4. **Monetize with leads** — collect inquiries, sell to service providers, or run affiliate partnerships
+
+## Step 1: Find the niche
+
+The best directory niches have:
+- High search volume for "[category] in [city]" queries
+- Fragmented supply (many small providers, no dominant platform)
+- Commercial intent (people searching are ready to buy)
+
+Solar installers in India? Perfect. 10,000+ monthly searches, hundreds of small installers, no dominant directory.
+
+## Step 2: Build the data layer
+
+```prisma
+model Listing {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  category    String
+  city        String
+  state       String
+  description String?
+  phone       String?
+  website     String?
+  rating      Float?
+  verified    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+
+  @@index([city, category])
+  @@index([state, category])
+}
+```
+
+Seed data from public sources — government registries, professional associations, public databases. Enrich with Google Places API if budget allows.
+
+## Step 3: Programmatic pages
+
+Every city × category combination gets a unique page:
+
+```tsx
+// app/[category]/[city]/page.tsx
+export async function generateStaticParams() {
+  const combos = await db.listing.findMany({
+    select: { category: true, city: true },
+    distinct: ["category", "city"],
+  });
+  return combos.map((c) => ({
+    category: slugify(c.category),
+    city: slugify(c.city),
+  }));
+}
+```
+
+Each page has unique content: city-specific intro text, listing cards, FAQ section with local keywords, structured data for each listing.
+
+## Step 4: Monetize
+
+Three models that work:
+
+1. **Lead generation** — contact forms on listings, sell inquiries to providers ($5-50 per lead)
+2. **Featured listings** — charge providers for top placement ($50-200/month)
+3. **Affiliate** — link to related services (financing, insurance) with affiliate codes
+
+MSMEVault.in uses model #1 — NBFC partners pay per qualified loan inquiry.
+
+## The numbers
+
+GoSolarIndex.in:
+- Built in 3 days
+- 500+ pages indexed in 2 weeks
+- Page 1 rankings in under a month
+- Cost: domain registration + Vercel free tier
+
+The ROI on directory sites is absurd if you pick the right niche and execute on technical SEO.
+
+## Start this weekend
+
+You can build and launch a directory in a weekend with Next.js, PostgreSQL, and the patterns I've described. The hardest part isn't the code — it's picking the niche. But once you find a good one, the organic traffic compounds.
+
+Need help building a directory or lead-generation site? [Let's talk](/contact).

@@ -1,0 +1,91 @@
+---
+title: "How I structure large Next.js projects"
+description: "The file structure and conventions I use across all my production Next.js apps — from indie products to enterprise dashboards."
+publishedAt: "2026-04-20"
+tags: ["Next.js", "Architecture", "Engineering"]
+---
+
+## Structure matters at scale
+
+A Next.js app with 5 pages can be structured however you want. A Next.js app with 50 pages, 30 components, 10 server actions, and multiple data sources needs conventions — or it becomes a maze.
+
+Here's the structure I use across every project.
+
+## The layout
+
+```
+src/
+├── app/                    # Routes only — no business logic
+│   ├── (dashboard)/        # Route groups for layouts
+│   │   ├── layout.tsx
+│   │   ├── plants/
+│   │   ├── reports/
+│   │   └── settings/
+│   ├── (marketing)/
+│   │   ├── layout.tsx
+│   │   ├── page.tsx
+│   │   └── pricing/
+│   └── api/                # API routes (webhooks, external APIs only)
+├── components/
+│   ├── ui/                 # shadcn/ui primitives (never edit directly)
+│   ├── forms/              # Form components with validation
+│   ├── tables/             # Data table components
+│   └── [feature].tsx       # Feature-specific components
+├── lib/
+│   ├── db.ts               # Prisma client singleton
+│   ├── auth.ts             # Auth configuration
+│   ├── utils.ts            # Shared utilities
+│   └── validations/        # Zod schemas
+├── data/
+│   └── site-config.ts      # Static configuration
+├── actions/                # Server actions grouped by domain
+│   ├── plants.ts
+│   ├── reports.ts
+│   └── users.ts
+└── types/                  # Shared TypeScript types
+```
+
+## Key principles
+
+### 1. App directory = routes only
+
+Page files should be thin. They fetch data and render components. No business logic, no complex state management.
+
+```tsx
+// app/(dashboard)/plants/page.tsx
+export default async function PlantsPage() {
+  const plants = await getPlants();
+  return <PlantList plants={plants} />;
+}
+```
+
+### 2. Colocate server actions with their domain
+
+Don't put server actions in the app directory next to the page that uses them. Group them by domain so multiple pages can share them.
+
+### 3. Route groups for shared layouts
+
+The `(dashboard)` and `(marketing)` groups share different layouts — sidebar nav vs. landing page nav — without affecting the URL structure.
+
+### 4. One component per file
+
+No exceptions. A file named `plant-card.tsx` exports `PlantCard`. If a component grows too large, split it — don't nest components in the same file.
+
+### 5. Zod schemas are the source of truth
+
+Define your data shape once with Zod. Derive TypeScript types from it. Use the same schema for form validation, API input validation, and database writes.
+
+```typescript
+// lib/validations/plant.ts
+export const createPlantSchema = z.object({
+  name: z.string().min(1),
+  capacity: z.number().positive(),
+  location: z.string(),
+});
+
+export type CreatePlantInput = z.infer<typeof createPlantSchema>;
+```
+
+## This structure scales
+
+I've used this exact layout for apps ranging from 5 pages (GoSolarIndex.in) to 50+ pages (Reflux forecasting platform). It works because the conventions are simple and the boundaries are clear.

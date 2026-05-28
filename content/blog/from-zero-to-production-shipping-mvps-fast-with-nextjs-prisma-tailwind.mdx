@@ -1,0 +1,123 @@
+---
+title: "From zero to production: shipping MVPs fast with Next.js, Prisma & Tailwind"
+description: "My exact stack and process for going from idea to deployed product in days — the same approach I use for client projects and indie products."
+publishedAt: "2026-04-01"
+tags: ["Next.js", "Prisma", "SaaS", "Engineering"]
+cover: "/images/blog-mvp-stack.jpg"
+---
+
+## Speed matters more than perfection
+
+The fastest way to validate a product idea is to ship it. Not a landing page. Not a waitlist. A working product that real users can touch. I've shipped 8+ products this way — some became production systems serving thousands of users, others were validated and killed in a week.
+
+Here's the exact stack and process.
+
+## The stack
+
+| Layer | Tool | Why |
+|-------|------|-----|
+| Framework | Next.js 16 (App Router) | Full-stack, server-rendered, edge-ready |
+| Database | PostgreSQL + Prisma | Type-safe queries, easy migrations |
+| Styling | Tailwind CSS + shadcn/ui | Ship beautiful UI without design skills |
+| Auth | NextAuth.js | OAuth + credentials in minutes |
+| Hosting | Vercel or Docker | Zero-config deploy or self-host |
+| Payments | Stripe (if needed) | Battle-tested billing |
+
+This stack optimizes for **time-to-production**, not theoretical scalability. You can always refactor later — but you can't get back the weeks you spent over-engineering an MVP.
+
+## Day 1: Schema and core flows
+
+I start with the database schema. Not wireframes. Not user stories. The schema forces you to think about what data you actually need.
+
+```prisma
+model Project {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  status      Status   @default(ACTIVE)
+  ownerId     String
+  owner       User     @relation(fields: [ownerId], references: [id])
+  tasks       Task[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+```
+
+Then I build the two or three core flows that define the product. For a project management tool, that's: create project, add tasks, mark complete. Everything else is a nice-to-have.
+
+## Day 2: UI and polish
+
+shadcn/ui is the secret weapon. It gives you production-quality components that you own and can customize. No fighting a component library's opinions.
+
+```bash
+npx shadcn@latest add button card dialog form input
+```
+
+I build the UI directly on top of the server components from Day 1. No separate frontend/backend. No API layer to maintain. The page fetches data and renders it:
+
+```tsx
+export default async function ProjectsPage() {
+  const projects = await db.project.findMany({
+    where: { ownerId: currentUser.id },
+    orderBy: { updatedAt: "desc" },
+  });
+
+  return (
+    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      {projects.map((project) => (
+        <ProjectCard key={project.id} project={project} />
+      ))}
+    </div>
+  );
+}
+```
+
+## Day 3: Deploy and iterate
+
+Deploy to Vercel with `git push`. Or build a Docker image and deploy anywhere:
+
+```dockerfile
+FROM node:20-alpine AS builder
+WORKDIR /app
+COPY . .
+RUN npm ci && npm run build
+
+FROM node:20-alpine AS runner
+WORKDIR /app
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next/static ./.next/static
+CMD ["node", "server.js"]
+```
+
+The product is live. Real users can use it. Now iterate based on actual feedback, not assumptions.
+
+## What I skip in MVPs
+
+- **Comprehensive error handling** — handle the happy path well; log errors for later
+- **Full test coverage** — write tests for critical business logic only
+- **Perfect responsive design** — desktop-first; mobile can wait a week
+- **Email notifications** — Slack webhooks are faster to implement
+- **Admin panels** — use Prisma Studio or direct database queries
+
+## What I never skip
+
+- **Authentication** — security from day one
+- **Database migrations** — Prisma Migrate, always
+- **Environment variables** — no hardcoded secrets, ever
+- **HTTPS** — Vercel handles this; for Docker, use Caddy
+- **Input validation** — Zod schemas on every form
+
+## Real examples
+
+**GoSolarIndex.in** — Built in 3 days. Next.js + PostgreSQL + Prisma. Now ranking on page 1 for city-level solar keywords.
+
+**DGR Automation** — MVP in 2 weeks. Replaced a 4-hour daily manual process. Now processes 30+ reports daily across 35 plants.
+
+**MSMEVault.in** — Built in a weekend. Directory of government schemes. Monetized via NBFC lead generation within the first month.
+
+## The bottom line
+
+You don't need 6 months and a team of 10 to build a product. The modern stack — Next.js, Prisma, Tailwind, shadcn/ui — lets a single developer ship production-quality software in days.
+
+If you have a product idea and need it built fast, I can take it from zero to production. [Let's talk](/contact).

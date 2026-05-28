@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
 import { getGitHubRepos } from "@/lib/github";
-import { indieProjects } from "@/data/site-config";
+import { indieProjects, caseStudies } from "@/data/site-config";
 import { ProjectArchive } from "@/components/project-archive";
 import { FadeIn } from "@/components/fade-in";
 
 export const metadata: Metadata = {
   title: "Projects",
   description:
-    "Everything Aditya has shipped — from indie products to open source. Browse SaaS tools, SEO directories, and GitHub projects.",
+    "Everything Aditya has shipped — from production systems and indie products to open source. Browse case studies, SaaS tools, SEO directories, and GitHub projects.",
   openGraph: {
     title: "Projects | Aditya",
     description:
-      "Everything Aditya has shipped — from indie products to open source.",
+      "Everything Aditya has shipped — from production systems to open source.",
   },
 };
 
@@ -28,14 +28,18 @@ export default async function ProjectsPage() {
               Projects
             </h1>
             <p className="mt-3 text-muted-foreground text-lg">
-              Everything I&apos;ve shipped — from indie products to open source.
+              Everything I&apos;ve shipped — from production systems and indie products to open source.
             </p>
           </div>
         </FadeIn>
 
         {/* Project Archive */}
         <FadeIn delay={0.1}>
-          <ProjectArchive repos={repos} indieProjects={indieProjects} />
+          <ProjectArchive
+            repos={repos}
+            indieProjects={indieProjects}
+            caseStudies={caseStudies}
+          />
         </FadeIn>
       </div>
     </div>

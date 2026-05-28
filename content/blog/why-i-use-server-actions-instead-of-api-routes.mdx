@@ -1,0 +1,74 @@
+---
+title: "Why I use Server Actions instead of API routes in Next.js"
+description: "Server Actions replaced half my API routes and made my codebase simpler. Here's when to use them — and when not to."
+publishedAt: "2026-05-15"
+tags: ["Next.js", "React", "Engineering"]
+---
+
+## The old way was tedious
+
+Every form submission needed: an API route, a fetch call, error handling on both sides, type definitions shared between client and server. For a contact form, that's 4 files minimum.
+
+Server Actions collapse this into a single function.
+
+## A real example: contact form
+
+```tsx
+// app/contact/actions.ts
+"use server";
+
+import { z } from "zod";
+
+const schema = z.object({
+  name: z.string().min(2),
+  email: z.string().email(),
+  message: z.string().min(10),
+});
+
+export async function submitContact(formData: FormData) {
+  const parsed = schema.safeParse({
+    name: formData.get("name"),
+    email: formData.get("email"),
+    message: formData.get("message"),
+  });
+
+  if (!parsed.success) {
+    return { error: "Invalid input" };
+  }
+
+  await db.contactSubmission.create({ data: parsed.data });
+  return { success: true };
+}
+```
+
+The form component calls it directly — no fetch, no API URL, no CORS:
+
+```tsx
+"use client";
+
+import { submitContact } from "./actions";
+
+function ContactForm() {
+  const [state, formAction] = useActionState(submitContact, null);
+  return <form action={formAction}>...</form>;
+}
+```
+
+## When Server Actions shine
+
+- **Form submissions** — contact forms, settings pages, CRUD operations
+- **Mutations** — create, update, delete operations that need server-side validation
+- **Revalidation** — call `revalidatePath()` or `revalidateTag()` after mutations
+
+## When I still use API routes
+
+- **Webhooks** — Stripe, GitHub, external services need a URL to call
+- **Public APIs** — if other apps consume your API
+- **Long-polling** — streaming responses, SSE endpoints
+- **File uploads** — complex multipart handling
+
+## The productivity gain is real
+
+In our DGR Automation dashboard, switching from API routes to Server Actions for all CRUD operations cut 1,200 lines of code and eliminated an entire category of bugs (mismatched request/response types).
+
+Server Actions aren't a toy feature. They're a fundamental shift in how we build full-stack React apps.

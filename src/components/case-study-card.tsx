@@ -18,7 +18,7 @@ export function CaseStudyCard({ study }: { study: CaseStudy }) {
 
   return (
     <Link
-      href={`/work/${study.slug}`}
+      href={`/projects/${study.slug}`}
       className="group block rounded-lg border border-border p-4 transition-colors hover:border-foreground/20"
     >
       {/* Thumbnail placeholder */}

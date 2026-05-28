@@ -335,22 +335,22 @@ export default function AboutPage() {
               {
                 name: "RealSync CMS",
                 desc: "Enterprise realtime monitoring system for renewable energy portfolios — WebSockets, MQTT, OPC-UA ingestion, alarm systems, AI-ready telemetry pipelines.",
-                link: "/work/realsync-cms",
+                link: "/projects/realsync-cms",
               },
               {
                 name: "Reflux",
                 desc: "Operational platform for forecasting revisions, scheduling, reporting automation, and government portal integrations serving 3,400+ MW capacity.",
-                link: "/work/reflux",
+                link: "/projects/reflux",
               },
               {
                 name: "DGR Automation",
                 desc: "Enterprise reporting automation parsing 30+ complex Excel reports daily across 35+ renewable plants with cron-based async pipelines.",
-                link: "/work/dgr-automation",
+                link: "/projects/dgr-automation",
               },
               {
                 name: "CMS / DSM Platform",
                 desc: "Energy analytics, DSM analytics, billing workflows, BESS management, and operational dashboards for renewable energy operations.",
-                link: "/work/cms-dsm-platform",
+                link: "/projects/cms-dsm-platform",
               },
             ].map((system) => (
               <StaggerItem key={system.name}>

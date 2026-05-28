@@ -1,0 +1,159 @@
+---
+title: "Prisma at scale: lessons from production PostgreSQL"
+description: "Practical Prisma patterns and pitfalls from running PostgreSQL in production across multiple systems serving thousands of daily operations."
+publishedAt: "2026-03-25"
+tags: ["Prisma", "PostgreSQL", "Engineering"]
+cover: "/images/blog-prisma-scale.jpg"
+---
+
+## Prisma in production is different from Prisma in tutorials
+
+I've used Prisma across every production system at Renewalytics — from the main forecasting platform handling 3,400+ MW of renewable capacity to reporting automation processing 30+ daily Excel reports. Here are the patterns that work and the pitfalls that will burn you.
+
+## Use `select` and `include` deliberately
+
+The most common Prisma mistake: fetching entire records when you need two fields.
+
+```typescript
+// Bad — fetches all 30+ columns
+const plants = await db.plant.findMany();
+
+// Good — fetches only what you need
+const plants = await db.plant.findMany({
+  select: { id: true, name: true, capacity: true },
+});
+```
+
+This matters more than you think. Our `plant` table has 35 columns including JSON fields with nested SCADA configuration. A single unnecessary `findMany()` was adding 200ms to dashboard loads.
+
+## Connection pooling is not optional
+
+Prisma creates a connection pool per `PrismaClient` instance. In a serverless environment (Vercel, Lambda), every cold start creates a new pool. You'll hit PostgreSQL's `max_connections` limit fast.
+
+Solutions that work:
+
+1. **PgBouncer** — external connection pooler, works everywhere
+2. **Prisma Accelerate** — managed connection pooling from Prisma
+3. **Singleton pattern** — for long-running servers (not serverless)
+
+```typescript
+// lib/db.ts — singleton for non-serverless
+const globalForPrisma = globalThis as unknown as { prisma: PrismaClient };
+
+export const db =
+  globalForPrisma.prisma ||
+  new PrismaClient({
+    log: process.env.NODE_ENV === "development" ? ["query"] : [],
+  });
+
+if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = db;
+```
+
+## Transactions for complex operations
+
+Our reporting pipeline processes a plant's daily generation data in multiple steps: parse → validate → store → aggregate → notify. If any step fails, the entire operation should roll back.
+
+```typescript
+await db.$transaction(async (tx) => {
+  // Store raw parsed data
+  const rawReport = await tx.rawDGR.create({
+    data: { plantId, date, rawData },
+  });
+
+  // Validate and store processed metrics
+  const metrics = validateAndProcess(rawData);
+  await tx.dailyMetrics.create({
+    data: { plantId, date, ...metrics },
+  });
+
+  // Update plant's latest generation timestamp
+  await tx.plant.update({
+    where: { id: plantId },
+    data: { lastReportDate: date },
+  });
+});
+```
+
+## Raw queries for complex aggregations
+
+Prisma's query builder can't express everything. For complex aggregations, window functions, or CTEs — use raw SQL:
+
+```typescript
+const monthlyGeneration = await db.$queryRaw`
+  WITH daily AS (
+    SELECT
+      plant_id,
+      date_trunc('day', timestamp) AS day,
+      SUM(generation_kwh) AS daily_gen
+    FROM telemetry
+    WHERE timestamp >= ${startDate}
+      AND timestamp < ${endDate}
+    GROUP BY plant_id, day
+  )
+  SELECT
+    plant_id,
+    date_trunc('month', day) AS month,
+    SUM(daily_gen) AS monthly_gen,
+    AVG(daily_gen) AS avg_daily_gen
+  FROM daily
+  GROUP BY plant_id, month
+  ORDER BY month DESC
+`;
+```
+
+Don't fight the ORM. Use raw SQL when it's the right tool.
+
+## Migration strategy
+
+Never use `prisma db push` in production. Always use `prisma migrate dev` to create migration files, review them, and apply with `prisma migrate deploy`.
+
+Our workflow:
+
+1. Change `schema.prisma`
+2. Run `prisma migrate dev --name descriptive-name`
+3. Review the generated SQL migration
+4. Commit the migration file
+5. CI/CD runs `prisma migrate deploy` on staging, then production
+
+## Indexing matters
+
+Prisma doesn't add indexes automatically (beyond primary keys and unique constraints). You need to think about your query patterns:
+
+```prisma
+model Telemetry {
+  id        String   @id @default(cuid())
+  plantId   String
+  timestamp DateTime
+  value     Float
+
+  plant Plant @relation(fields: [plantId], references: [id])
+
+  @@index([plantId, timestamp(sort: Desc)])
+  @@index([timestamp])
+}
+```
+
+That composite index on `[plantId, timestamp]` took a dashboard query from 1.2s to 15ms. Always check `EXPLAIN ANALYZE` on slow queries.
+
+## Soft deletes with middleware
+
+We never hard-delete operational data. Prisma middleware handles soft deletes transparently:
+
+```typescript
+db.$use(async (params, next) => {
+  if (params.action === "delete") {
+    params.action = "update";
+    params.args.data = { deletedAt: new Date() };
+  }
+  if (params.action === "findMany") {
+    params.args.where = { ...params.args.where, deletedAt: null };
+  }
+  return next(params);
+});
+```
+
+## Bottom line
+
+Prisma is excellent for production use — but you need to go beyond the getting-started tutorial. Think about connection management, query performance, migration strategy, and indexing from the start.
+
+I build production database systems with Prisma and PostgreSQL. If you need a backend that handles real-world data at scale, [let's talk](/contact).

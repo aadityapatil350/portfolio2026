@@ -1,0 +1,92 @@
+---
+title: "MQTT and SCADA integrations for web developers"
+description: "How I connected renewable energy SCADA systems to a modern web dashboard using MQTT, OPC-UA, and Node.js — a guide for web devs entering IoT."
+publishedAt: "2026-01-15"
+tags: ["IoT", "MQTT", "Node.js", "Engineering"]
+---
+
+## Web developers can build IoT systems
+
+When I joined Renewalytics, I was a web developer. I'd never heard of MQTT, OPC-UA, or SCADA. Two years later, I've built a production telemetry system ingesting data from dozens of renewable energy plants. The learning curve is steep but manageable if you come from a web background.
+
+## What is SCADA?
+
+SCADA (Supervisory Control and Data Acquisition) is the backbone of industrial systems. Every solar plant, wind farm, and factory has SCADA systems monitoring equipment in real time — power output, temperature, voltage, alarm states.
+
+The challenge: SCADA systems speak industrial protocols (Modbus, OPC-UA), not HTTP. To build a modern web dashboard on top of SCADA data, you need a translation layer.
+
+## MQTT: the bridge
+
+MQTT is a lightweight publish-subscribe messaging protocol. Think of it as WebSockets for IoT. A device publishes telemetry to a topic, and any subscriber gets it instantly.
+
+```
+Solar Plant → SCADA → MQTT Broker → Your App
+```
+
+In practice, most modern SCADA gateways can publish to MQTT natively or through a middleware.
+
+## Building the ingestion service
+
+```typescript
+import mqtt from "mqtt";
+
+const client = mqtt.connect(process.env.MQTT_BROKER_URL, {
+  username: process.env.MQTT_USERNAME,
+  password: process.env.MQTT_PASSWORD,
+});
+
+client.on("connect", () => {
+  // Subscribe to all plant telemetry topics
+  client.subscribe("plants/+/telemetry/#");
+  console.log("Connected to MQTT broker");
+});
+
+client.on("message", async (topic, message) => {
+  // topic: plants/PLANT_001/telemetry/generation_kw
+  const [, plantId, , metricName] = topic.split("/");
+  const value = parseFloat(message.toString());
+
+  await db.telemetry.create({
+    data: {
+      plantId,
+      metric: metricName,
+      value,
+      timestamp: new Date(),
+    },
+  });
+});
+```
+
+## OPC-UA for direct SCADA access
+
+When MQTT isn't available, OPC-UA gives you direct access to SCADA data points. It's more complex but more powerful:
+
+```typescript
+import { OPCUAClient, DataType } from "node-opcua";
+
+const client = OPCUAClient.create({ endpoint_must_exist: false });
+await client.connect(process.env.OPCUA_ENDPOINT);
+
+const session = await client.createSession();
+
+// Read a specific data point
+const result = await session.read({
+  nodeId: "ns=2;s=Plant.Generation.ActivePower",
+  attributeId: 13, // Value attribute
+});
+
+console.log(result.value.value); // e.g., 1523.7 (kW)
+```
+
+## Lessons from production
+
+1. **Buffer writes** — don't write every MQTT message to the database individually. Batch them in 5-second windows.
+2. **Handle stale data** — if a plant stops sending data, your dashboard should show "last updated 10 min ago", not stale values that look current.
+3. **Alarm deduplication** — SCADA systems can send the same alarm hundreds of times. Deduplicate by alarm code + plant + time window.
+4. **Time zone hell** — plants are in different time zones. Store everything in UTC. Convert for display only.
+
+## The web developer advantage
+
+Coming from web development, I brought modern tooling to a domain still running on legacy desktop apps. A Next.js dashboard with WebSocket updates is objectively better than the 20-year-old SCADA HMI software most plants use.
+
+If you're a web developer interested in IoT, industrial automation, or climate tech — the demand is huge and the competition is thin. Start with MQTT. Build a dashboard. The skills transfer directly.

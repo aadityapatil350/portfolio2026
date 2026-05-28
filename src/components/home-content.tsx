@@ -155,7 +155,7 @@ export function HomeContent({
             <div className="mt-8 flex flex-wrap gap-3">
               <Magnetic>
                 <Button size="lg" asChild className="gap-2">
-                  <Link href="/work">
+                  <Link href="/projects">
                     View Work
                     <ArrowRight className="h-4 w-4" />
                   </Link>
@@ -243,8 +243,7 @@ export function HomeContent({
             </p>
           </FadeIn>
 
-          <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            <StaggerContainer staggerDelay={0.1} className="contents">
+          <StaggerContainer staggerDelay={0.1} className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {services.map((service) => (
                 <StaggerItem key={service.title}>
                   <HoverScale>
@@ -277,8 +276,7 @@ export function HomeContent({
                   </HoverScale>
                 </StaggerItem>
               ))}
-            </StaggerContainer>
-          </div>
+          </StaggerContainer>
         </div>
       </section>
 
@@ -303,7 +301,7 @@ export function HomeContent({
                 Featured Systems
               </h2>
               <Link
-                href="/work"
+                href="/projects"
                 className="hidden sm:inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
                 All case studies
@@ -316,7 +314,7 @@ export function HomeContent({
           <BlurIn delay={0.15} className="mt-10">
             <HoverScale scale={1.01}>
               <Link
-                href={`/work/${caseStudies[0].slug}`}
+                href={`/projects/${caseStudies[0].slug}`}
                 className="group block overflow-hidden rounded-xl border border-border"
               >
                 <div className="grid lg:grid-cols-2">

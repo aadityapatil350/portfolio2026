@@ -1,0 +1,171 @@
+---
+title: "Building realtime dashboards with Next.js and WebSockets"
+description: "A practical guide to building production-grade realtime dashboards — lessons from building RealSync CMS, a monitoring system for renewable energy plants."
+publishedAt: "2026-05-10"
+tags: ["Next.js", "WebSockets", "Engineering"]
+cover: "/images/blog-realtime-dashboards.jpg"
+---
+
+## The problem
+
+At Renewalytics, we needed a realtime monitoring dashboard for renewable energy plants. Telemetry data flows in every 5 seconds from SCADA systems across dozens of plants. Operators need to see live generation data, alarm states, and performance metrics — with zero perceived latency.
+
+This is a different beast from a typical CRUD dashboard. Here's how we built it.
+
+## Architecture overview
+
+The system has three layers:
+
+1. **Ingestion layer** — Node.js service consuming MQTT and OPC-UA streams from plant SCADA systems, writing to TimescaleDB
+2. **WebSocket gateway** — broadcasts live updates to connected dashboard clients
+3. **Next.js dashboard** — server-rendered initial state + WebSocket for live updates
+
+```
+SCADA → MQTT Broker → Ingestion Service → TimescaleDB
+                                        ↘ WebSocket Gateway → Dashboard
+```
+
+The key insight: **don't use WebSockets for initial page load**. Server-render the current state, then upgrade to WebSocket for live updates. This gives you instant first paint and realtime updates.
+
+## Server-side: initial state
+
+The dashboard page loads with the latest telemetry data server-rendered:
+
+```tsx
+async function PlantDashboard({ params }: { params: { plantId: string } }) {
+  const plant = await db.plant.findUnique({
+    where: { id: params.plantId },
+    include: {
+      latestTelemetry: true,
+      activeAlarms: true,
+    },
+  });
+
+  return (
+    <div>
+      <PlantHeader plant={plant} />
+      <TelemetryGrid initialData={plant.latestTelemetry} plantId={plant.id} />
+      <AlarmPanel initialAlarms={plant.activeAlarms} plantId={plant.id} />
+    </div>
+  );
+}
+```
+
+## Client-side: WebSocket upgrade
+
+The `TelemetryGrid` component connects to WebSocket on mount and merges live updates into the server-rendered state:
+
+```tsx
+"use client";
+
+function TelemetryGrid({ initialData, plantId }) {
+  const [data, setData] = useState(initialData);
+
+  useEffect(() => {
+    const ws = new WebSocket(`${WS_URL}/plants/${plantId}/telemetry`);
+
+    ws.onmessage = (event) => {
+      const update = JSON.parse(event.data);
+      setData((prev) => ({
+        ...prev,
+        [update.metricId]: {
+          ...prev[update.metricId],
+          value: update.value,
+          timestamp: update.timestamp,
+        },
+      }));
+    };
+
+    return () => ws.close();
+  }, [plantId]);
+
+  return (
+    <div className="grid grid-cols-4 gap-4">
+      {Object.entries(data).map(([key, metric]) => (
+        <MetricCard key={key} metric={metric} />
+      ))}
+    </div>
+  );
+}
+```
+
+## Handling reconnection
+
+WebSocket connections drop. Networks are unreliable. You need exponential backoff with jitter:
+
+```tsx
+function useReliableWebSocket(url: string) {
+  const [data, setData] = useState(null);
+  const retriesRef = useRef(0);
+
+  useEffect(() => {
+    let ws: WebSocket;
+    let timeout: NodeJS.Timeout;
+
+    function connect() {
+      ws = new WebSocket(url);
+
+      ws.onopen = () => {
+        retriesRef.current = 0; // reset on successful connection
+      };
+
+      ws.onmessage = (event) => {
+        setData(JSON.parse(event.data));
+      };
+
+      ws.onclose = () => {
+        const delay = Math.min(1000 * 2 ** retriesRef.current, 30000);
+        const jitter = delay * 0.1 * Math.random();
+        timeout = setTimeout(connect, delay + jitter);
+        retriesRef.current++;
+      };
+    }
+
+    connect();
+    return () => {
+      ws?.close();
+      clearTimeout(timeout);
+    };
+  }, [url]);
+
+  return data;
+}
+```
+
+## TimescaleDB for time-series data
+
+PostgreSQL with the TimescaleDB extension handles our telemetry storage. Why not InfluxDB or Prometheus?
+
+- **Familiar SQL** — our team knows PostgreSQL
+- **JOINs** — join telemetry with plant metadata, user data, alarm configurations
+- **Continuous aggregates** — precompute hourly/daily rollups automatically
+- **Compression** — 10x storage reduction on historical data
+
+```sql
+-- Continuous aggregate for hourly generation data
+CREATE MATERIALIZED VIEW hourly_generation
+WITH (timescaledb.continuous) AS
+SELECT
+  plant_id,
+  time_bucket('1 hour', timestamp) AS hour,
+  AVG(generation_kw) AS avg_generation,
+  MAX(generation_kw) AS peak_generation
+FROM telemetry
+GROUP BY plant_id, hour;
+```
+
+## Performance results
+
+- **Initial load**: under 800ms (server-rendered)
+- **Live update latency**: under 200ms end-to-end (SCADA → dashboard)
+- **Concurrent connections**: tested with 500+ simultaneous dashboard sessions
+- **Data retention**: 2+ years of 5-second resolution data with TimescaleDB compression
+
+## Lessons learned
+
+1. **Server-render first, WebSocket second** — don't make users wait for a WebSocket connection to see anything
+2. **Separate your ingestion from your serving** — MQTT processing should never block dashboard rendering
+3. **Use database-level aggregations** — don't compute rollups in your application code
+4. **Test with realistic data volumes** — a dashboard that works with 10 data points will break with 10,000
+
+If you need a realtime dashboard for your operations, IoT fleet, or monitoring system — I've built this at scale. [Get in touch](/contact).

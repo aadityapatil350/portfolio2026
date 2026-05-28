@@ -1,0 +1,75 @@
+---
+title: "Why Next.js is the best framework for building SaaS in 2026"
+description: "After shipping 8+ production products with Next.js — from realtime monitoring dashboards to SEO directories — here's why it's still my go-to framework for SaaS."
+publishedAt: "2026-05-20"
+tags: ["Next.js", "SaaS", "Engineering"]
+cover: "/images/blog-nextjs-saas.jpg"
+---
+
+## I've shipped 8+ products with Next.js
+
+Every production system I've built at Renewalytics — realtime monitoring dashboards, forecasting platforms, reporting automation — runs on Next.js. My indie projects (GoSolarIndex.in, MSMEVault.in) are Next.js too. After years of shipping with this framework, here's why I keep choosing it.
+
+## Server Components changed everything
+
+Before React Server Components, building a dashboard meant shipping a massive JS bundle to the client, fetching data on mount, and managing loading states everywhere. Now I render data-heavy pages on the server with zero client-side JavaScript overhead.
+
+For RealSync CMS — our realtime monitoring system serving multi-MW renewable portfolios — this was transformative. The initial dashboard load went from 3.2s to under 800ms because we stopped shipping chart libraries and data-fetching logic to the browser.
+
+```tsx
+// This runs on the server — zero JS shipped to client
+async function DashboardPage() {
+  const plants = await db.plant.findMany({
+    include: { latestTelemetry: true },
+  });
+
+  return (
+    <div className="grid grid-cols-3 gap-4">
+      {plants.map((plant) => (
+        <PlantCard key={plant.id} plant={plant} />
+      ))}
+    </div>
+  );
+}
+```
+
+## Server Actions replaced your API layer
+
+I used to write REST endpoints for every form submission and mutation. Server Actions eliminated that entire layer. For our DGR Automation Platform, form submissions that trigger 30+ report parsing jobs are just async functions:
+
+```tsx
+"use server";
+
+async function triggerReportParsing(formData: FormData) {
+  const plantId = formData.get("plantId") as string;
+  await queue.add("parse-dgr", { plantId });
+  revalidatePath("/reports");
+}
+```
+
+No API route. No fetch calls. No loading state management. The form just works.
+
+## The App Router is production-ready
+
+I know the App Router had a rocky start. I shipped with it from day one at Renewalytics and hit every bug along the way. But as of Next.js 15+, it's solid. The features that matter for SaaS:
+
+- **Parallel routes** — show modals without losing page state
+- **Intercepting routes** — preview items in a modal, deep-link to the full page
+- **Streaming** — show the shell instantly, stream in data-heavy sections
+- **ISR** — cache pages at the edge, revalidate on demand
+
+## The full-stack DX is unmatched
+
+One codebase. One deployment. TypeScript end-to-end. Prisma for the database. Tailwind for styling. Vercel for hosting (or self-host with Docker — we do both).
+
+When a client asks me to build an MVP, I can go from zero to deployed in days, not weeks. The DGR Automation Platform went from concept to production in under 3 weeks. GoSolarIndex.in was built in 3 days.
+
+## When I wouldn't use Next.js
+
+- **Heavy realtime apps** — if your entire app is WebSocket-driven, consider a dedicated backend (we use a separate Node.js service for MQTT/OPC-UA ingestion at RealSync)
+- **Mobile apps** — React Native or Expo is the right call
+- **Simple static sites** — Astro is lighter if you don't need interactivity
+
+## Bottom line
+
+Next.js lets me ship production SaaS faster than any other framework. The gap between prototype and production is smaller than ever. If you're building a SaaS product and need it shipped fast without compromising on quality, [let's talk](/contact).

@@ -1,0 +1,65 @@
+---
+title: "shadcn/ui: the component library that doesn't fight you"
+description: "Why I use shadcn/ui on every project instead of Material UI, Chakra, or Ant Design — and how to get the most out of it."
+publishedAt: "2026-01-28"
+tags: ["React", "UI", "shadcn/ui", "Engineering"]
+---
+
+## The problem with component libraries
+
+I've used them all. Material UI, Chakra, Ant Design, Mantine. They all share the same problem: when you need to customize something beyond the provided props, you fight the library.
+
+Override styles? Specificity wars. Custom behavior? Fork the component. Different design language? Good luck theming a library that was designed for Material Design.
+
+## shadcn/ui is different
+
+It's not a library you install. It's a collection of components you copy into your project. You own the code. You modify it directly. There's no abstraction layer between you and the DOM.
+
+```bash
+npx shadcn@latest add button dialog form table
+```
+
+This copies the component source into `src/components/ui/`. Need to change the button's border radius? Edit the file. Need a custom variant? Add it.
+
+## Why this works for client projects
+
+Every client has different design requirements. With a traditional component library, customization is:
+
+1. Read the theming docs
+2. Create a custom theme
+3. Override individual component styles
+4. Discover some styles can't be overridden
+5. Use `!important` or CSS hacks
+6. Hate your life
+
+With shadcn/ui:
+
+1. Edit the component file
+2. Done
+
+## The Radix UI foundation
+
+Under the hood, shadcn/ui components use Radix UI primitives for accessibility and behavior. This means you get:
+
+- Keyboard navigation
+- Screen reader support
+- Focus management
+- ARIA attributes
+
+All without thinking about it. The accessible behavior is baked into the primitives. You just style the surface.
+
+## My most-used components
+
+Across all my projects, these get used on every build:
+
+- **Button** — the foundation of every UI
+- **Dialog** — modals done right (focus trap, escape to close)
+- **Form** — React Hook Form + Zod integration out of the box
+- **Table** — pairs perfectly with TanStack Table for data-heavy dashboards
+- **Tabs** — for dashboard layouts
+- **Toast** (Sonner) — non-intrusive notifications
+- **Command** (cmdk) — command palette for power users
+
+## The ecosystem is thriving
+
+shadcn/ui has become the de facto standard for React projects. The community contributes new components regularly, and the CLI makes adding them frictionless. It's the first thing I install on every new project.

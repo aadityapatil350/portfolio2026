@@ -1,0 +1,63 @@
+---
+title: "Zustand vs Redux: why I switched and never looked back"
+description: "After years of Redux boilerplate, Zustand gave me the same power with 90% less code. Here's why it's my default for every React project."
+publishedAt: "2026-05-25"
+tags: ["React", "State Management", "Engineering"]
+---
+
+## Redux fatigue is real
+
+I used Redux for 3 years. Action types, action creators, reducers, selectors, middleware, thunks — the boilerplate was suffocating. For a simple counter, you'd write 40 lines of code. For a real app, you'd spend more time wiring Redux than building features.
+
+Then I tried Zustand. My first store was 8 lines. It just worked.
+
+## The Zustand way
+
+```typescript
+import { create } from "zustand";
+
+interface PlantStore {
+  selectedPlantId: string | null;
+  filters: Record<string, string>;
+  setSelectedPlant: (id: string) => void;
+  setFilter: (key: string, value: string) => void;
+  resetFilters: () => void;
+}
+
+export const usePlantStore = create<PlantStore>((set) => ({
+  selectedPlantId: null,
+  filters: {},
+  setSelectedPlant: (id) => set({ selectedPlantId: id }),
+  setFilter: (key, value) =>
+    set((state) => ({ filters: { ...state.filters, [key]: value } })),
+  resetFilters: () => set({ filters: {} }),
+}));
+```
+
+That's it. No provider wrapper. No context. No boilerplate. Use it anywhere:
+
+```tsx
+function PlantSelector() {
+  const { selectedPlantId, setSelectedPlant } = usePlantStore();
+  // ...
+}
+```
+
+## Why Zustand wins for dashboard apps
+
+At Renewalytics, our dashboards have complex filter states — date ranges, plant selections, metric types, view modes. With Redux, managing this meant a dedicated slice, actions for each filter, and selectors that composed them.
+
+With Zustand, I define the store inline and use it directly. When the state shape changes (which happens constantly during development), I change one file.
+
+## When I still reach for React Query
+
+Zustand is for client state — UI state, filter selections, modal states. For server state (API data, database queries), React Query (TanStack Query) is the right tool. They complement each other perfectly:
+
+- **Zustand**: "which plant is selected?" "is the sidebar open?" "what filters are active?"
+- **React Query**: "what's the latest telemetry data?" "what are the active alarms?"
+
+## The migration was painless
+
+I replaced Redux stores one at a time over a sprint. Each migration took 15-30 minutes. The total codebase shrank by ~2,000 lines. Performance stayed the same. Developer experience improved dramatically.
+
+If you're still on Redux and feeling the pain — just try Zustand. You won't go back.
