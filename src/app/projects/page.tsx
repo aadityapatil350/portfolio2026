@@ -7,11 +7,11 @@ import { FadeIn } from "@/components/fade-in";
 export const metadata: Metadata = {
   title: "Projects",
   description:
-    "Everything Aditya has shipped — from production systems and indie products to open source. Browse case studies, SaaS tools, SEO directories, and GitHub projects.",
+    "Two tracks: production systems I lead at the day job, and indie products I ship on the side. Everything I've built, killed, or kept alive.",
   openGraph: {
     title: "Projects | Aditya",
     description:
-      "Everything Aditya has shipped — from production systems to open source.",
+      "Production systems from the day job + indie products from the night shift.",
   },
 };
 
@@ -28,7 +28,8 @@ export default async function ProjectsPage() {
               Projects
             </h1>
             <p className="mt-3 text-muted-foreground text-lg">
-              Everything I&apos;ve shipped — from production systems and indie products to open source.
+              Two tracks. Production systems I lead at Renewalytics, and indie
+              products I ship on the side, some live, some killed, all real.
             </p>
           </div>
         </FadeIn>

@@ -1,6 +1,6 @@
 ---
 title: "Docker for full-stack developers: a production deployment guide"
-description: "How I deploy Next.js apps with Docker, Caddy, and PostgreSQL — the same setup running Renewalytics' production systems."
+description: "How I deploy Next.js apps with Docker, Caddy, and PostgreSQL, the same setup running Renewalytics' production systems."
 publishedAt: "2026-03-05"
 tags: ["Docker", "DevOps", "Next.js", "Engineering"]
 cover: "/images/blog-docker.jpg"
@@ -8,7 +8,7 @@ cover: "/images/blog-docker.jpg"
 
 ## Why Docker for Next.js?
 
-Vercel is great for indie projects. But when you're building enterprise software — multi-tenant dashboards, internal tools, systems handling sensitive operational data — you need to self-host. Docker gives you reproducible deployments on any infrastructure.
+Vercel is great for indie projects. But when you're building enterprise software, multi-tenant dashboards, internal tools, systems handling sensitive operational data, you need to self-host. Docker gives you reproducible deployments on any infrastructure.
 
 All Renewalytics production systems run on Docker. Here's the setup.
 
@@ -170,11 +170,11 @@ deploy:
 
 ## Production tips
 
-1. **Always use named volumes for databases** — anonymous volumes get deleted on `docker compose down`
-2. **Set memory limits** — `deploy.resources.limits.memory: 512M` prevents runaway processes
-3. **Log to stdout** — Docker captures stdout/stderr; don't write log files inside containers
-4. **Use `.dockerignore`** — exclude `node_modules`, `.next`, `.git` from the build context
-5. **Pin image versions** — `node:20-alpine`, not `node:latest`
+1. **Always use named volumes for databases**, anonymous volumes get deleted on `docker compose down`
+2. **Set memory limits**, `deploy.resources.limits.memory: 512M` prevents runaway processes
+3. **Log to stdout**, Docker captures stdout/stderr; don't write log files inside containers
+4. **Use `.dockerignore`**, exclude `node_modules`, `.next`, `.git` from the build context
+5. **Pin image versions**, `node:20-alpine`, not `node:latest`
 
 ## When to use this vs. Vercel
 

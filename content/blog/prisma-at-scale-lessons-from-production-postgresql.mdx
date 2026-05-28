@@ -8,17 +8,17 @@ cover: "/images/blog-prisma-scale.jpg"
 
 ## Prisma in production is different from Prisma in tutorials
 
-I've used Prisma across every production system at Renewalytics — from the main forecasting platform handling 3,400+ MW of renewable capacity to reporting automation processing 30+ daily Excel reports. Here are the patterns that work and the pitfalls that will burn you.
+I've used Prisma across every production system at Renewalytics, from the main forecasting platform handling 3,400+ MW of renewable capacity to reporting automation processing 30+ daily Excel reports. Here are the patterns that work and the pitfalls that will burn you.
 
 ## Use `select` and `include` deliberately
 
 The most common Prisma mistake: fetching entire records when you need two fields.
 
 ```typescript
-// Bad — fetches all 30+ columns
+// Bad, fetches all 30+ columns
 const plants = await db.plant.findMany();
 
-// Good — fetches only what you need
+// Good, fetches only what you need
 const plants = await db.plant.findMany({
   select: { id: true, name: true, capacity: true },
 });
@@ -32,12 +32,12 @@ Prisma creates a connection pool per `PrismaClient` instance. In a serverless en
 
 Solutions that work:
 
-1. **PgBouncer** — external connection pooler, works everywhere
-2. **Prisma Accelerate** — managed connection pooling from Prisma
-3. **Singleton pattern** — for long-running servers (not serverless)
+1. **PgBouncer**, external connection pooler, works everywhere
+2. **Prisma Accelerate**, managed connection pooling from Prisma
+3. **Singleton pattern**, for long-running servers (not serverless)
 
 ```typescript
-// lib/db.ts — singleton for non-serverless
+// lib/db.ts, singleton for non-serverless
 const globalForPrisma = globalThis as unknown as { prisma: PrismaClient };
 
 export const db =
@@ -76,7 +76,7 @@ await db.$transaction(async (tx) => {
 
 ## Raw queries for complex aggregations
 
-Prisma's query builder can't express everything. For complex aggregations, window functions, or CTEs — use raw SQL:
+Prisma's query builder can't express everything. For complex aggregations, window functions, or CTEs, use raw SQL:
 
 ```typescript
 const monthlyGeneration = await db.$queryRaw`
@@ -154,6 +154,6 @@ db.$use(async (params, next) => {
 
 ## Bottom line
 
-Prisma is excellent for production use — but you need to go beyond the getting-started tutorial. Think about connection management, query performance, migration strategy, and indexing from the start.
+Prisma is excellent for production use, but you need to go beyond the getting-started tutorial. Think about connection management, query performance, migration strategy, and indexing from the start.
 
 I build production database systems with Prisma and PostgreSQL. If you need a backend that handles real-world data at scale, [let's talk](/contact).

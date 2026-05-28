@@ -12,11 +12,11 @@ import { FadeIn, StaggerContainer, StaggerItem } from "@/components/animations";
 import { siteConfig } from "@/data/site-config";
 
 export const metadata: Metadata = {
-  title: "Resume — Aditya Patil",
+  title: "Resume, Aditya Patil",
   description:
-    "Resume of Aditya Patil — Lead Software Engineer specializing in full-stack development, realtime systems, and AI workflow automation for renewable energy.",
+    "Resume of Aditya Patil, Lead Software Engineer specializing in full-stack development, realtime systems, and AI workflow automation for renewable energy.",
   openGraph: {
-    title: "Resume — Aditya Patil",
+    title: "Resume, Aditya Patil",
     description:
       "Lead Software Engineer specializing in full-stack development, realtime systems, and AI workflow automation.",
     url: "https://adityapatil.dev/resume",
@@ -174,7 +174,7 @@ export default function ResumePage() {
               building production-grade operational platforms for the renewable
               energy industry. Full-stack expertise spanning Next.js, Node.js,
               TypeScript, and modern database systems. Currently leading
-              engineering at Renewalytics — architecting realtime monitoring
+              engineering at Renewalytics, architecting realtime monitoring
               systems, automated reporting pipelines, and AI workflow systems
               serving 3,400+ MW of renewable energy capacity across India. Passionate
               about AI agents, operational copilots, and systems that turn data
@@ -207,9 +207,11 @@ export default function ResumePage() {
                   isCurrent
                   bullets={[
                     "Full-stack development and backend architecture for renewable energy SaaS platform serving 3,400+ MW capacity across India",
-                    "Built RealSync CMS — enterprise realtime monitoring system with WebSockets, MQTT, OPC-UA ingestion, alarm systems, and AI-ready telemetry pipelines",
-                    "Architected and built Reflux — operational platform for forecasting revisions, scheduling, reporting automation, and government portal integrations",
-                    "Designed and shipped DGR Automation Platform — automated 30+ daily Excel report processing across 35+ renewable plants via cron-based async pipelines",
+                    "Built RealSync CMS, enterprise realtime monitoring system with WebSockets, MQTT, OPC-UA ingestion, alarm systems, and AI-ready telemetry pipelines",
+                    "Architected and built Reflux, operational platform for solar + hydro forecasting revisions (CT/ST schedules to SLDC), scheduling, reporting automation, and government portal integrations",
+                    "Designed and shipped Excel Flow, automated 30+ daily reports and alerts across 33+ solar/wind/BESS plants, scraping 30+ daily Excel sheets and generating next-day outputs",
+                    "Built COPS, DSM penalties and asset management dashboard for client Juniper Green Energy",
+                    "Shipped internal Invoice Management System for tracking and reconciling client invoices generated through Reflux",
                     "Containerized services with Docker, managed Linux infrastructure, and set up CI/CD with GitHub Actions",
                     "Integrated SCADA systems and government energy portal APIs for realtime data exchange",
                   ]}
@@ -222,10 +224,10 @@ export default function ResumePage() {
                   role="Software Engineer"
                   period="Jul 2022 – Jan 2024"
                   bullets={[
-                    "Full-stack development of web applications using React, Node.js, and TypeScript",
-                    "Built and maintained API integrations with third-party services and internal systems",
-                    "Led frontend system architecture and component library development",
-                    "Implemented features end-to-end from database design to UI polish",
+                    "Built ARS (Automatic Reporting System) for wind and solar plants, full-stack development in PHP",
+                    "Owned end-to-end feature delivery from database design to UI polish",
+                    "Maintained API integrations with third-party services and internal systems",
+                    "Led frontend architecture decisions and component library work",
                   ]}
                 />
               </StaggerItem>
@@ -236,8 +238,8 @@ export default function ResumePage() {
                   role="Full Stack Engineer"
                   period="Nov 2021 – Jul 2022"
                   bullets={[
-                    "Developed features using React for frontend and Node.js for backend services",
-                    "Designed and implemented database architectures for application data models",
+                    "Developed PHP-based features across the renewable energy product surface",
+                    "Designed and implemented database schemas for new application modules",
                     "Shipped multiple production features independently",
                   ]}
                 />
@@ -250,7 +252,7 @@ export default function ResumePage() {
                   period="Jun 2021 – Nov 2021"
                   bullets={[
                     "Onboarded into the engineering team with zero prior professional software experience",
-                    "Learned React, Node.js, and modern web development practices on the job",
+                    "Learned PHP and modern web development practices on the job",
                     "Contributed to production codebases within the first month",
                   ]}
                 />
@@ -299,7 +301,6 @@ export default function ResumePage() {
                 skills={[
                   "PostgreSQL",
                   "MongoDB",
-                  "TimescaleDB",
                   "Redis",
                 ]}
               />
@@ -346,10 +347,10 @@ export default function ResumePage() {
               <div className="relative pl-6 border-l-2 border-border">
                 <span className="absolute -left-[7px] top-1.5 block h-3 w-3 rounded-full border-2 border-muted-foreground bg-background" />
                 <h3 className="font-semibold text-foreground">
-                  PGDM — IT Management
+                  PGDM, IT Management
                 </h3>
                 <p className="text-sm text-muted-foreground">
-                  MIT School of Management — Final Semester
+                  MIT School of Management, Final Semester
                 </p>
               </div>
             </FadeIn>
@@ -378,7 +379,7 @@ export default function ResumePage() {
 
           <FadeIn delay={0.2} className="print:animate-none">
             <p className="mt-3 text-sm text-muted-foreground">
-              Built RealSync CMS, Reflux, DGR Automation, and CMS/DSM Platform
+              Built RealSync CMS, Reflux, Excel Flow, and COPS for Juniper Green
               at Renewalytics. Independently shipped GoSolarIndex.in and
               MSMEVault.in as indie SEO-driven directory products.
             </p>

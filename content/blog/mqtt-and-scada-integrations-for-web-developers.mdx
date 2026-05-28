@@ -1,6 +1,6 @@
 ---
 title: "MQTT and SCADA integrations for web developers"
-description: "How I connected renewable energy SCADA systems to a modern web dashboard using MQTT, OPC-UA, and Node.js — a guide for web devs entering IoT."
+description: "How I connected renewable energy SCADA systems to a modern web dashboard using MQTT, OPC-UA, and Node.js, a guide for web devs entering IoT."
 publishedAt: "2026-01-15"
 tags: ["IoT", "MQTT", "Node.js", "Engineering"]
 ---
@@ -11,7 +11,7 @@ When I joined Renewalytics, I was a web developer. I'd never heard of MQTT, OPC-
 
 ## What is SCADA?
 
-SCADA (Supervisory Control and Data Acquisition) is the backbone of industrial systems. Every solar plant, wind farm, and factory has SCADA systems monitoring equipment in real time — power output, temperature, voltage, alarm states.
+SCADA (Supervisory Control and Data Acquisition) is the backbone of industrial systems. Every solar plant, wind farm, and factory has SCADA systems monitoring equipment in real time, power output, temperature, voltage, alarm states.
 
 The challenge: SCADA systems speak industrial protocols (Modbus, OPC-UA), not HTTP. To build a modern web dashboard on top of SCADA data, you need a translation layer.
 
@@ -80,13 +80,13 @@ console.log(result.value.value); // e.g., 1523.7 (kW)
 
 ## Lessons from production
 
-1. **Buffer writes** — don't write every MQTT message to the database individually. Batch them in 5-second windows.
-2. **Handle stale data** — if a plant stops sending data, your dashboard should show "last updated 10 min ago", not stale values that look current.
-3. **Alarm deduplication** — SCADA systems can send the same alarm hundreds of times. Deduplicate by alarm code + plant + time window.
-4. **Time zone hell** — plants are in different time zones. Store everything in UTC. Convert for display only.
+1. **Buffer writes**, don't write every MQTT message to the database individually. Batch them in 5-second windows.
+2. **Handle stale data**, if a plant stops sending data, your dashboard should show "last updated 10 min ago", not stale values that look current.
+3. **Alarm deduplication**, SCADA systems can send the same alarm hundreds of times. Deduplicate by alarm code + plant + time window.
+4. **Time zone hell**, plants are in different time zones. Store everything in UTC. Convert for display only.
 
 ## The web developer advantage
 
 Coming from web development, I brought modern tooling to a domain still running on legacy desktop apps. A Next.js dashboard with WebSocket updates is objectively better than the 20-year-old SCADA HMI software most plants use.
 
-If you're a web developer interested in IoT, industrial automation, or climate tech — the demand is huge and the competition is thin. Start with MQTT. Build a dashboard. The skills transfer directly.
+If you're a web developer interested in IoT, industrial automation, or climate tech, the demand is huge and the competition is thin. Start with MQTT. Build a dashboard. The skills transfer directly.

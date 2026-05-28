@@ -1,6 +1,6 @@
 ---
-title: "DGR Automation Platform"
-description: "Enterprise reporting automation for 35+ renewable energy plants — parsing 30+ complex Excel reports daily"
+title: "Excel Flow, Reporting Automation"
+description: "Automated 30+ daily reports + alerts across 33+ solar/wind/BESS plants, replacing a manual multi-sheet Excel workflow"
 publishedAt: "2025-09-01"
 tags: ["Climate Tech", "Automation", "Reporting"]
 tech: ["Node.js", "PostgreSQL", "Docker", "Cron Systems", "Excel Parsing", "Async Workers"]
@@ -9,45 +9,45 @@ status: "Production"
 
 ## Context
 
-Renewable energy plants in India are required to submit Daily Generation Reports (DGR) — complex Excel files containing generation data, meteorological readings, availability metrics, and deviation calculations. With 35+ plants generating these reports daily, manual processing was a significant operational bottleneck.
+Renewable energy plants in India are required to submit Daily Generation Reports (DGR), complex Excel files containing generation data, meteorological readings, availability metrics, and deviation calculations. With 33+ solar, wind, and BESS plants generating these reports daily, manual processing was a significant operational bottleneck.
 
 ## Problem
 
 The DGR reporting process was entirely manual. Operations teams would download Excel files from individual plant SCADA systems, manually parse multi-sheet workbooks, extract specific data points, reformat them, and submit to government portals. This process consumed hours every day, was error-prone, and created dependency on specific team members who knew the format.
 
-Additionally, the team was dependent on a third-party vendor for a legacy report processing tool — creating vendor lock-in and limiting the ability to customize or extend the reporting pipeline.
+Additionally, the team was dependent on a third-party vendor for a legacy report processing tool, creating vendor lock-in and limiting the ability to customize or extend the reporting pipeline.
 
 ## What I Built
 
-### DGR Automation Platform
+### Excel Flow
 
 An automated reporting pipeline that completely eliminated manual Excel processing for daily generation reports.
 
-- **Excel file parsing** — Robust parser handling complex multi-sheet Excel workbooks with varying formats across different plant configurations
-- **Multi-sheet report processing** — Extracts data from generation sheets, weather sheets, availability sheets, and deviation calculations
-- **Cron pipelines** — Scheduled jobs that automatically fetch, parse, validate, and process reports at configured intervals
-- **Async workers** — Background job processing for CPU-intensive Excel parsing and data transformation tasks
-- **Automated report generation** — Produces formatted output reports ready for submission to government energy portals
-- **Error handling & retry** — Graceful handling of malformed files, missing data, and processing failures with automatic retry logic
-- **Validation layer** — Cross-validates parsed data against expected ranges and plant-specific configurations
+- **Excel file parsing**, Robust parser handling complex multi-sheet Excel workbooks with varying formats across different plant configurations
+- **Multi-sheet report processing**, Extracts data from generation sheets, weather sheets, availability sheets, and deviation calculations
+- **Cron pipelines**, Scheduled jobs that automatically fetch, parse, validate, and process reports at configured intervals
+- **Async workers**, Background job processing for CPU-intensive Excel parsing and data transformation tasks
+- **Automated report generation**, Produces formatted output reports ready for submission to government energy portals
+- **Error handling & retry**, Graceful handling of malformed files, missing data, and processing failures with automatic retry logic
+- **Validation layer**, Cross-validates parsed data against expected ranges and plant-specific configurations
 
 ## Stack
 
-- **Node.js** — Application runtime and processing pipeline
-- **PostgreSQL** — Storage for parsed report data, audit logs, and processing history
-- **Docker** — Containerized deployment for isolated, reproducible processing environments
-- **Cron systems** — Scheduled task execution for automated daily processing
-- **Excel parsing libraries** — Robust XLSX/XLS parsing with support for complex formulas and multi-sheet workbooks
-- **Async workers** — Background job queue for parallel report processing
+- **Node.js**, Application runtime and processing pipeline
+- **PostgreSQL**, Storage for parsed report data, audit logs, and processing history
+- **Docker**, Containerized deployment for isolated, reproducible processing environments
+- **Cron systems**, Scheduled task execution for automated daily processing
+- **Excel parsing libraries**, Robust XLSX/XLS parsing with support for complex formulas and multi-sheet workbooks
+- **Async workers**, Background job queue for parallel report processing
 
 ## Outcomes
 
-- **30+ daily reports automated** — Every plant's DGR is now processed automatically without human intervention
-- **Reduced manual operations** — Operations team saves hours daily that were previously spent on Excel processing
-- **Eliminated vendor dependency** — Built in-house, removing reliance on third-party report processing tools
-- **Improved accuracy** — Automated validation catches data inconsistencies that manual processing missed
-- **Audit trail** — Complete processing history and audit logs for compliance and debugging
+- **30+ daily reports automated**, Every plant's DGR is now processed automatically without human intervention
+- **Reduced manual operations**, Operations team saves hours daily that were previously spent on Excel processing
+- **Eliminated vendor dependency**, Built in-house, removing reliance on third-party report processing tools
+- **Improved accuracy**, Automated validation catches data inconsistencies that manual processing missed
+- **Audit trail**, Complete processing history and audit logs for compliance and debugging
 
 ## Lessons
 
-Automation doesn't have to be glamorous to be impactful. This system isn't a fancy AI pipeline or realtime dashboard — it's a cron job that parses Excel files. But it saves the operations team hours every day and eliminates a vendor dependency. The best automation targets are often the most boring, repetitive tasks that everyone hates doing.
+Automation doesn't have to be glamorous to be impactful. This system isn't a fancy AI pipeline or realtime dashboard, it's a cron job that parses Excel files. But it saves the operations team hours every day and eliminates a vendor dependency. The best automation targets are often the most boring, repetitive tasks that everyone hates doing.

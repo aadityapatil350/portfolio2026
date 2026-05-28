@@ -1,6 +1,6 @@
 ---
 title: "Why I use Server Actions instead of API routes in Next.js"
-description: "Server Actions replaced half my API routes and made my codebase simpler. Here's when to use them — and when not to."
+description: "Server Actions replaced half my API routes and made my codebase simpler. Here's when to use them, and when not to."
 publishedAt: "2026-05-15"
 tags: ["Next.js", "React", "Engineering"]
 ---
@@ -41,7 +41,7 @@ export async function submitContact(formData: FormData) {
 }
 ```
 
-The form component calls it directly — no fetch, no API URL, no CORS:
+The form component calls it directly, no fetch, no API URL, no CORS:
 
 ```tsx
 "use client";
@@ -56,19 +56,19 @@ function ContactForm() {
 
 ## When Server Actions shine
 
-- **Form submissions** — contact forms, settings pages, CRUD operations
-- **Mutations** — create, update, delete operations that need server-side validation
-- **Revalidation** — call `revalidatePath()` or `revalidateTag()` after mutations
+- **Form submissions**, contact forms, settings pages, CRUD operations
+- **Mutations**, create, update, delete operations that need server-side validation
+- **Revalidation**, call `revalidatePath()` or `revalidateTag()` after mutations
 
 ## When I still use API routes
 
-- **Webhooks** — Stripe, GitHub, external services need a URL to call
-- **Public APIs** — if other apps consume your API
-- **Long-polling** — streaming responses, SSE endpoints
-- **File uploads** — complex multipart handling
+- **Webhooks**, Stripe, GitHub, external services need a URL to call
+- **Public APIs**, if other apps consume your API
+- **Long-polling**, streaming responses, SSE endpoints
+- **File uploads**, complex multipart handling
 
 ## The productivity gain is real
 
-In our DGR Automation dashboard, switching from API routes to Server Actions for all CRUD operations cut 1,200 lines of code and eliminated an entire category of bugs (mismatched request/response types).
+In our Excel Flow dashboard, switching from API routes to Server Actions for all CRUD operations cut 1,200 lines of code and eliminated an entire category of bugs (mismatched request/response types).
 
 Server Actions aren't a toy feature. They're a fundamental shift in how we build full-stack React apps.

@@ -1,35 +1,35 @@
 ---
 title: "How I built GoSolarIndex.in in 3 days with Claude Code"
-description: "The full story of building India's solar installer directory in 72 hours — from domain registration to 17x indexed pages growth in under a week."
+description: "Domain to deployment in 72 hours. Then 17x indexed pages in under a week. Here's exactly how."
 publishedAt: "2026-03-15"
 tags: ["AI", "Indie Hacking"]
 cover: "/images/gosolarindex-blog.jpg"
 ---
 
-## The Idea
+## The idea
 
-India's solar energy sector is booming, but finding a reliable solar installer is still a mess. Google searches return lead-gen farms with paid listings, not genuine directories. I saw a gap — a technical SEO play that could rank organically and actually be useful.
+India's solar sector is exploding, but try Googling "solar installer in Pune" and tell me you find anything useful. It's all lead-gen farms with paid listings. There's no actual directory. So I built one over a weekend.
 
-## Day 1: The Build
+## Day 1, the build
 
-I registered the domain at 11 PM on a Friday. By Saturday evening, I had a working Next.js app with PostgreSQL, a basic search interface, and city-wise installer listings scraped from public government data. The entire backend was built with Claude Code — I described what I wanted, iterated on the schema, and let it generate the CRUD operations and API routes.
+Registered the domain at 11 PM on a Friday. By Saturday evening I had a working Next.js app with PostgreSQL, a basic search, and city-wise installer listings scraped from public government data. Almost all of the backend was Claude Code. I described what I wanted, iterated on the schema with it, and let it generate the CRUD and the API routes. My job was mostly to point out what was wrong and where to look next.
 
-## Day 2: The Content
+## Day 2, the content
 
-Sunday was all about content. I wrote unique city pages for 50+ Indian cities with proper heading hierarchies, local keywords, and structured data. Each page answered the exact questions people search for: "best solar installer in [city]", "solar panel cost in [city]", "government subsidies for solar in [city]".
+Sunday was pure content. I wrote unique city pages for 50+ Indian cities, with proper heading hierarchies, local keywords, and structured data. Each one answers the exact thing people actually type: "best solar installer in Pune", "solar panel cost in Bengaluru", "government subsidies for solar in Jaipur".
 
-The key insight: these are informational queries with clear commercial intent. Google rewards pages that answer the question directly, not pages that just list businesses.
+That's the whole trick. These are informational queries with commercial intent. Google ranks pages that answer the question, not pages that just dump a list of businesses on you.
 
-## Day 3: The Launch
+## Day 3, the launch
 
-Monday morning I deployed to Vercel, submitted the sitemap to Google Search Console, and set up monitoring. The first 24 hours were quiet — zero impressions. Then on Day 4, Google started crawling aggressively.
+Monday morning I pushed to Vercel, submitted the sitemap to Search Console, and set up monitoring. First 24 hours were dead silent, zero impressions. Started to think I'd messed something up. Day 4, Google began crawling hard.
 
-## The Results
+## Results
 
-By Day 6, indexed pages went from 3 to 51 — a 17x increase. Organic impressions started flowing in by Day 8. The site was ranking on page 1 for several city-level keywords within two weeks.
+By Day 6, indexed pages went from 3 to 51. A 17x jump. Organic impressions started landing on Day 8. Inside two weeks the site was on page 1 for several city-level keywords. Zero rupees of marketing spend.
 
 ```typescript
-// The technical SEO checklist that made the difference
+// The boring SEO checklist that did the heavy lifting
 const seoChecklist = {
   sitemap: "Auto-generated with next-sitemap",
   robots: "Proper crawl directives",
@@ -40,12 +40,12 @@ const seoChecklist = {
 };
 ```
 
-## Lessons Learned
+## What I actually took away
 
-1. **Speed matters more than perfection.** Ship first, optimize later. Three days to a working product is better than three months to a perfect one.
+**Ship first, optimize later.** Three days to a live product beats three months to a perfect one. Nobody sees the perfect version because it never ships.
 
-2. **Claude Code changed my workflow.** I'm not a prompt engineer — I describe what I want in plain English and iterate. The code quality is good enough for a first version, and I refactor after.
+**Claude Code changed how I work.** I'm not a prompt engineer. I just describe what I want in plain English and iterate. The first pass is usually good enough, and I refactor what survives.
 
-3. **Technical SEO is a moat.** Most directory founders don't understand indexation, canonical tags, or structured data. This knowledge alone can give you a 6-month head start on competition.
+**Technical SEO is still a real moat.** Most directory founders don't understand indexation, canonical tags, or structured data. Knowing this stuff gives you a six-month head start, no joke.
 
-4. **Content velocity wins.** 50+ unique city pages in one weekend. Most competitors had 10-15 generic pages. Google rewarded the depth and specificity.
+**Content depth beats content polish.** 50+ unique city pages in one weekend. Competitors had 10-15 generic ones. Google noticed.

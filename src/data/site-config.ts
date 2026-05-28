@@ -2,14 +2,14 @@ export const siteConfig = {
   name: "Aditya Patil",
   url: "https://adityapatil.dev",
   description:
-    "Self-taught Lead Software Engineer building operational systems, automation platforms, and AI-powered workflows at Renewalytics. Based in Pune, India.",
+    "I'm Aditya. Engineer-for-hire by day, indie hacker by night. I lead engineering at Renewalytics in Pune and build AI-native indie products on the side.",
   location: "Pune, India",
   role: "Lead Software Engineer",
   company: "Renewalytics",
   tagline:
-    "Building operational systems, automation platforms & AI-powered workflows.",
+    "Engineer-for-hire by day. Indie hacker by night.",
   subtagline:
-    "Lead Software Engineer at Renewalytics building real-time renewable energy systems, monitoring platforms, reporting automation, and AI-assisted operational tooling.",
+    "Lead engineer at Renewalytics building forecasting, reporting, and realtime monitoring for renewable plants. On the side, I ship indie products, break most of them, and take on freelance MVPs and AI workflow automation.",
   social: {
     github: "https://github.com/aadityapatil350",
     twitter: "https://x.com/adityapatil350",
@@ -53,84 +53,95 @@ export interface Service {
 
 export const services: Service[] = [
   {
-    icon: "monitor",
-    title: "Operational Platforms",
+    icon: "layers",
+    title: "Full-stack MVPs for founders",
     description:
-      "Full-stack operational systems that replace manual workflows with production-grade software. Dashboards, admin systems, analytics platforms, and reporting engines.",
+      "Idea to deployed product in weeks. Next.js, Prisma, Postgres, Docker. I've shipped enough MVPs to know the shortcuts and the landmines.",
     capabilities: [
-      "Admin dashboards",
-      "Analytics systems",
-      "Reporting automation",
-      "Workflow engines",
+      "Zero-to-launch builds",
+      "Auth, payments, dashboards",
+      "Production deploy",
+      "Post-launch iteration",
     ],
   },
   {
     icon: "cpu",
-    title: "AI Workflow Systems",
+    title: "AI workflow automation",
     description:
-      "AI agents, operational copilots, and workflow automation platforms. Building the next generation of AI-native enterprise systems.",
+      "If your team is doing repetitive Excel or email work, there's a good chance I can replace most of it with an AI-driven pipeline. This is what I do at the day job.",
     capabilities: [
-      "AI agents",
-      "Operational copilots",
-      "Workflow automation",
-      "AI dashboards",
+      "AI agents for ops",
+      "Document + email automation",
+      "Data extraction pipelines",
+      "Workflow copilots",
     ],
   },
   {
-    icon: "layers",
-    title: "SaaS Engineering",
+    icon: "monitor",
+    title: "Small business websites + SEO",
     description:
-      "MVPs, product platforms, APIs, and backend systems. From zero to production at startup speed.",
+      "Fast Next.js websites for shops, clinics, services, and small businesses. SEO-ready from day one, with Google Business setup and a sensible CMS.",
     capabilities: [
-      "MVP development",
-      "Product platforms",
-      "API design",
-      "Backend systems",
+      "Next.js + Tailwind site",
+      "On-page SEO",
+      "Google Business setup",
+      "Contact forms + analytics",
     ],
   },
   {
-    icon: "activity",
-    title: "Monitoring & Data Systems",
+    icon: "search",
+    title: "SEO content + indexation",
     description:
-      "Realtime telemetry, monitoring systems, alerting platforms, and SCADA integrations for operational visibility.",
+      "Write and ship the blog content that brings inbound leads. Same playbook I used on GoSolarIndex.in to hit page-1 rankings inside two weeks.",
     capabilities: [
-      "Realtime telemetry",
-      "Monitoring systems",
-      "Alerting platforms",
-      "SCADA integrations",
+      "Technical SEO audit",
+      "Keyword + topic strategy",
+      "Blog content production",
+      "Structured data + sitemaps",
+    ],
+  },
+  {
+    icon: "database",
+    title: "Internal dashboards + admin tools",
+    description:
+      "Replace the team's manual Excel workflows with a real dashboard. Custom-built, fits your actual process, not a no-code prison.",
+    capabilities: [
+      "Custom admin panels",
+      "Reporting dashboards",
+      "Role-based access",
+      "Excel/data ingestion",
+    ],
+  },
+  {
+    icon: "messageSquare",
+    title: "AI chatbots + lead capture",
+    description:
+      "Set up a customer support, FAQ, or lead-capture bot end-to-end. Trained on your content, integrated into your site, easy to maintain.",
+    capabilities: [
+      "Custom chatbot setup",
+      "Lead capture flows",
+      "Knowledge base ingestion",
+      "WhatsApp / web embeds",
+    ],
+  },
+  {
+    icon: "lightbulb",
+    title: "Tech advisor for non-tech founders",
+    description:
+      "Pick the right stack. Vet a developer. Avoid getting ripped off. Hourly advisory for founders who don't want to learn the hard way.",
+    capabilities: [
+      "Stack + vendor selection",
+      "Developer vetting",
+      "Architecture reviews",
+      "Cost / scope sanity checks",
     ],
   },
 ];
 
 export const caseStudies: CaseStudy[] = [
   {
-    slug: "realsync-cms",
-    title: "RealSync CMS",
-    oneLiner:
-      "Enterprise-grade realtime monitoring system for renewable energy portfolios",
-    description:
-      "Realtime telemetry, SCADA integrations, MQTT/OPC-UA ingestion, alarm systems, and AI-ready workflows serving multi-MW renewable portfolios.",
-    thumbnail: "/images/realsync.jpg",
-    tech: [
-      "Next.js",
-      "TimescaleDB",
-      "PostgreSQL",
-      "WebSockets",
-      "MQTT",
-      "OPC-UA",
-      "Docker",
-    ],
-    status: "Production",
-    metrics: [
-      "Realtime telemetry",
-      "SCADA integration",
-      "Alarm systems",
-      "AI-ready pipelines",
-    ],
-  },
-  {
     slug: "reflux",
-    title: "Reflux — Forecasting & Operations",
+    title: "Reflux, Forecasting & Operations",
     oneLiner:
       "Operational platform for forecasting, scheduling, and reporting automation",
     description:
@@ -154,11 +165,11 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: "dgr-automation",
-    title: "DGR Automation Platform",
+    title: "Excel Flow, Reporting Automation",
     oneLiner:
-      "Enterprise reporting automation parsing 30+ complex operational reports daily",
+      "Automated 30+ daily reports and alerts across 33+ solar/wind/BESS plants",
     description:
-      "Automated reporting platform that parses complex Excel files, processes multi-sheet operational reports, and generates outputs via cron pipelines with async processing workers.",
+      "Replaced a manual Excel workflow across 33+ renewable plants. Scrapes 30+ daily uploaded sheets, processes multi-sheet operational data, and generates next-day reports + alerts via cron-based async pipelines.",
     thumbnail: "/images/dgr.jpg",
     tech: [
       "Node.js",
@@ -223,15 +234,39 @@ export const caseStudies: CaseStudy[] = [
       "Lead generation",
     ],
   },
+  {
+    slug: "realsync-cms",
+    title: "RealSync CMS",
+    oneLiner:
+      "Realtime monitoring system for renewable energy portfolios (MVP)",
+    description:
+      "Realtime telemetry, SCADA integrations, MQTT/OPC-UA ingestion, alarm systems, and AI-ready workflows. Currently in development, MVP built, integrations in progress.",
+    thumbnail: "/images/realsync.jpg",
+    tech: [
+      "Next.js",
+      "PostgreSQL",
+      "WebSockets",
+      "MQTT",
+      "OPC-UA",
+      "Docker",
+    ],
+    status: "In Development",
+    metrics: [
+      "Realtime telemetry",
+      "SCADA integration",
+      "Alarm systems",
+      "AI-ready pipelines",
+    ],
+  },
 ];
 
 export const indieProjects: IndieProject[] = [
   {
-    title: "Imaginate.pro",
+    title: "Social Copilot",
     description:
-      "AI image generation platform. Create stunning visuals with AI-powered tools.",
-    tech: ["Next.js", "AI", "Image Generation"],
-    status: "Archived",
+      "Social media scheduler with AI-powered content + video generation. Currently building.",
+    tech: ["Next.js", "Supabase", "BullMQ", "ElevenLabs", "Creatomate"],
+    status: "In Development",
     pinned: true,
   },
   {
@@ -251,6 +286,27 @@ export const indieProjects: IndieProject[] = [
     tech: ["Next.js", "Technical SEO"],
     status: "Live",
     pinned: true,
+  },
+  {
+    title: "Discover AI Tools",
+    description:
+      "Web directory of AI tools across categories, discovery-focused, SEO-driven.",
+    tech: ["Next.js", "Technical SEO"],
+    status: "Live",
+  },
+  {
+    title: "Imaginate.pro",
+    description:
+      "AI image generation platform. Taken down.",
+    tech: ["Next.js", "AI", "Image Generation"],
+    status: "Archived",
+  },
+  {
+    title: "AI Brand Voice",
+    description:
+      "Voice clone app for brand audio. Shipped but failed to find traction.",
+    tech: ["Next.js", "AI", "Voice Cloning"],
+    status: "Archived",
   },
 ];
 

@@ -6,29 +6,29 @@ import { getPosts } from "@/lib/mdx";
 import type { Post } from "@/lib/mdx";
 
 export const metadata: Metadata = {
-  title: "Aditya Patil — Lead Software Engineer | Systems Builder",
+  title: "Aditya Patil, Engineer-for-hire by day. Indie hacker by night.",
   description:
-    "Self-taught Lead Software Engineer building operational systems, automation platforms, and AI-powered workflows at Renewalytics. Based in Pune, India.",
+    "Lead engineer at Renewalytics by day, indie hacker by night. Available for full-stack MVPs and AI workflow automation. Pune, India.",
   openGraph: {
-    title: "Aditya Patil — Lead Software Engineer | Systems Builder",
+    title: "Aditya Patil, Engineer-for-hire by day. Indie hacker by night.",
     description:
-      "Building operational systems, automation platforms & AI-powered workflows. 3400+ MW renewable capacity served. Pune, India.",
+      "Lead engineer at Renewalytics by day, indie hacker by night. Freelance MVPs and AI workflow automation on the side.",
     url: "https://adityapatil.dev",
     type: "website",
     images: [
       {
-        url: "/og?title=Aditya%20Patil&description=Systems%20Engineer%20%7C%20Building%20operational%20platforms",
+        url: "/og?title=Aditya%20Patil&description=Engineer-for-hire%20%7C%20Indie%20hacker",
         width: 1200,
         height: 630,
-        alt: "Aditya Patil — Systems Engineer",
+        alt: "Aditya Patil",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Aditya Patil — Lead Software Engineer | Systems Builder",
+    title: "Aditya Patil, Engineer-for-hire by day. Indie hacker by night.",
     description:
-      "Building operational systems, automation platforms & AI-powered workflows.",
+      "Lead engineer at Renewalytics by day, indie hacker by night. Freelance MVPs and AI workflow automation on the side.",
     creator: "@adityapatil350",
   },
 };

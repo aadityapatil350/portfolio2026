@@ -1,22 +1,22 @@
 ---
 title: "How I automate 30+ daily reports with Node.js cron pipelines"
-description: "The architecture behind DGR Automation — a system that parses complex Excel reports across 35 renewable plants using async workers and cron jobs."
+description: "The architecture behind Excel Flow, a system that parses complex Excel reports across 33+ solar/wind/BESS plants using async workers and cron jobs."
 publishedAt: "2026-04-28"
 tags: ["Node.js", "Automation", "Engineering"]
 cover: "/images/blog-automation.jpg"
 ---
 
-## The manual process was killing us
+## The manual process was eating our mornings
 
-Every morning at Renewalytics, operations teams would manually download Excel reports from 35+ renewable energy plants, copy-paste numbers into a master sheet, run calculations, and generate deviation reports. This took 3-4 hours daily. Errors were common. Reports were late.
+Every morning at Renewalytics, the ops team would download Excel reports from 33+ solar, wind, and BESS plants, copy numbers into a master sheet, run the math, and put together deviation reports. Three to four hours, every day, before anyone could do real work. Errors slipped in constantly. Reports went out late.
 
-I built a system that does it in 12 minutes with zero human intervention.
+I replaced that with a system that does it in 12 minutes, no human in the loop.
 
-## What the system processes
+## What it actually processes
 
-Each plant sends Daily Generation Reports (DGRs) — multi-sheet Excel files with generation data, weather readings, grid availability, inverter-level performance, and maintenance logs. The formats vary by plant vendor (there are 6+ different formats). Some use merged cells. Some have dynamic row counts. Some have data split across sheets with cross-references.
+Each plant sends a Daily Generation Report (DGR). These are multi-sheet Excel files with generation data, weather readings, grid availability, inverter-level performance, and maintenance logs. The catch: every vendor's format is different. We see 6+ variants. Some use merged cells. Some have dynamic row counts. Some split data across sheets with cross-references.
 
-This is not a "parse CSV" problem. This is an "understand vendor-specific Excel chaos" problem.
+This isn't a "parse CSV" problem. It's an "interpret vendor-specific Excel chaos" problem, which is a different beast.
 
 ## Architecture
 
@@ -70,18 +70,18 @@ Each parser knows how to detect its vendor's template (by checking specific cell
 
 Excel parsing in production is brutal. Here are real issues we've handled:
 
-- **Merged cells** — `xlsx` library returns `undefined` for cells covered by a merge; you need to find the merge range and read the top-left cell
-- **Date formats** — Excel stores dates as serial numbers; some vendors use custom date strings
-- **Dynamic row ranges** — data rows can vary from 10 to 500+; detect the end by looking for totals rows or empty sequences
-- **Hidden sheets** — some vendors put raw data in hidden sheets
-- **Formula cells** — some cells contain formulas that reference external files; you only get the cached value
+- **Merged cells**, `xlsx` library returns `undefined` for cells covered by a merge; you need to find the merge range and read the top-left cell
+- **Date formats**, Excel stores dates as serial numbers; some vendors use custom date strings
+- **Dynamic row ranges**, data rows can vary from 10 to 500+; detect the end by looking for totals rows or empty sequences
+- **Hidden sheets**, some vendors put raw data in hidden sheets
+- **Formula cells**, some cells contain formulas that reference external files; you only get the cached value
 
 ## The cron orchestrator
 
 Jobs run on a schedule using a simple cron system built on `node-cron`:
 
 ```typescript
-// 5:30 AM — collect files from all sources
+// 5:30 AM, collect files from all sources
 cron.schedule("30 5 * * *", async () => {
   const files = await collectFromAllSources();
   for (const file of files) {
@@ -89,12 +89,12 @@ cron.schedule("30 5 * * *", async () => {
   }
 });
 
-// 6:00 AM — generate portfolio rollups
+// 6:00 AM, generate portfolio rollups
 cron.schedule("0 6 * * *", async () => {
   await generatePortfolioReport(new Date());
 });
 
-// 6:30 AM — send alerts for missing/failed reports
+// 6:30 AM, send alerts for missing/failed reports
 cron.schedule("30 6 * * *", async () => {
   await checkCompleteness(new Date());
 });
@@ -104,10 +104,10 @@ cron.schedule("30 6 * * *", async () => {
 
 An automated system that fails silently is worse than a manual process. We monitor:
 
-- **Completeness** — did all 35 plants report today?
-- **Timeliness** — were reports collected before the processing window?
-- **Data quality** — are values within expected ranges?
-- **Pipeline health** — are any workers backed up or failing?
+- **Completeness**, did all 33+ plants report today?
+- **Timeliness**, were reports collected before the processing window?
+- **Data quality**, are values within expected ranges?
+- **Pipeline health**, are any workers backed up or failing?
 
 Alerts go to a Slack channel and the ops dashboard. If a plant's report is missing at 6:30 AM, the relevant operator gets pinged automatically.
 
@@ -115,13 +115,15 @@ Alerts go to a Slack channel and the ops dashboard. If a plant's report is missi
 
 - **Processing time**: 3-4 hours manual → 12 minutes automated
 - **Error rate**: ~5% manual → under 0.1% automated
-- **Coverage**: 35+ plants, 6+ vendor formats
+- **Coverage**: 33+ plants, 6+ vendor formats
 - **Uptime**: 99.7% over 12 months
 
-## What I'd do differently
+## What I'd do differently next time
 
-1. **Start with the output format** — define what the final reports need to look like before building parsers
-2. **Version your parsers** — vendors update their Excel templates without warning; keep old parsers around
-3. **Build a reconciliation step** — automatically compare automated output with manual spot-checks for the first month
+**Start from the output, not the input.** Define what the final reports need to look like before you write a single parser. I built the first parsers, then realized the rollup format was different, and had to redo extraction logic. Save yourself that round trip.
 
-If your business runs on manual report processing, spreadsheet workflows, or copy-paste operations — this is exactly the kind of automation I build. [Let's talk](/contact).
+**Version your parsers.** Vendors update their Excel templates without telling anyone. Keep the old parsers around and route by template version, not just vendor.
+
+**Reconcile against humans for the first month.** Run automated and manual in parallel for the first 30 days and diff the outputs. You'll find edge cases nobody documented. Until you do that, nobody trusts the pipeline.
+
+If your business is still running on manual report processing, copy-paste workflows, or fragile spreadsheets, this is exactly what I build. [Drop me a line](/contact).

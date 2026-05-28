@@ -32,16 +32,16 @@ export default function AboutPage() {
           </BlurIn>
           <FadeIn delay={0.1}>
             <h1 className="mt-4 text-3xl sm:text-4xl font-bold tracking-tight">
-              I build systems that run operations.
+              Engineer-for-hire by day. Builder by night.
             </h1>
           </FadeIn>
           <FadeIn delay={0.2}>
             <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-              I&apos;m Aditya — a self-taught Lead Software Engineer based in
-              Pune, India. I architect full-stack platforms, realtime monitoring
-              systems, and automated reporting pipelines for the renewable energy
-              industry. No CS degree, no bootcamp — just YouTube, side projects,
-              and shipping real software.
+              I&apos;m Aditya. I lead engineering at Renewalytics out of Pune,
+              building forecasting, reporting, and realtime monitoring software
+              that renewable plants depend on. On the side I ship indie products,
+              break most of them, and learn from the rubble. If you need an MVP
+              built or a workflow automated with AI, I take on freelance work too.
             </p>
           </FadeIn>
         </div>
@@ -64,28 +64,29 @@ export default function AboutPage() {
           <FadeIn delay={0.2}>
             <div className="mt-6 space-y-6 leading-relaxed text-muted-foreground">
               <p>
-                I don&apos;t have a computer science degree. My formal education
-                is in Mechanical Engineering (Diploma, 2020) and I&apos;m
-                currently in my final semester of PGDM in IT Management at MIT
-                School of Management. Everything I know about software —
-                TypeScript, React, Node.js, system design — I taught myself.
+                No CS degree. My formal education is a Mechanical Engineering
+                diploma from 2020, and I&apos;m wrapping up a PGDM in IT
+                Management at MIT School of Management right now. Everything I
+                know about TypeScript, React, Node.js, system design, I picked
+                up myself.
               </p>
               <p>
-                It started with YouTube tutorials and Stack Overflow threads.
-                I&apos;d spend nights building small side projects — CRUD apps,
-                API wrappers, anything that let me write code and see it work.
-                Then I landed an internship at Climate Connect Digital, where I
-                learned React and Node.js on the job. Within months I was a Full
-                Stack Engineer, and within two years I was a Software Engineer
-                leading projects.
+                It started with YouTube and Stack Overflow. Nights spent on
+                small projects, CRUD apps, API wrappers, anything that let me
+                write code and watch it run. Then I got an internship at
+                Climate Connect Digital where I shipped PHP for two and a half
+                years, mostly building ARS, their automatic reporting system
+                for wind and solar. Got promoted twice, then got laid off in
+                the 2024 round.
               </p>
               <p>
                 In June 2024, I joined Renewalytics as Lead Software Engineer.
-                Here I found my edge — building operational software that
-                renewable energy plants actually depend on. The stakes are real:
-                3,400+ MW of capacity, government portal integrations, realtime
-                telemetry, automated reporting for 35+ plants. No tutorials
-                prepare you for this — only shipping does.
+                This is where it clicked. Real stakes, 3,400+ MW of capacity
+                flowing through systems I built, government portal integrations
+                that legally have to work, reporting automation for 33+ plants
+                that runs every single day. You don&apos;t learn this stuff
+                from tutorials. You learn it by being on call when something
+                breaks at 6 AM.
               </p>
             </div>
           </FadeIn>
@@ -131,7 +132,7 @@ export default function AboutPage() {
               </div>
             </StaggerItem>
 
-            {/* CCD — Software Engineer */}
+            {/* CCD, Software Engineer */}
             <StaggerItem>
               <div className="relative pl-6 border-l-2 border-foreground/15">
                 <span className="absolute -left-[7px] top-1.5 block h-3 w-3 rounded-full border-2 border-muted-foreground bg-background" />
@@ -147,13 +148,14 @@ export default function AboutPage() {
                   Climate Connect Digital
                 </p>
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                  Full-stack development, API integrations, frontend systems.
-                  Led feature development and maintained production applications.
+                  Built ARS (Automatic Reporting System) for wind and solar
+                  plants, full-stack PHP development. Owned features end-to-end
+                  and led frontend architecture decisions.
                 </p>
               </div>
             </StaggerItem>
 
-            {/* CCD — Full Stack Engineer */}
+            {/* CCD, Full Stack Engineer */}
             <StaggerItem>
               <div className="relative pl-6 border-l-2 border-foreground/15">
                 <span className="absolute -left-[7px] top-1.5 block h-3 w-3 rounded-full border-2 border-muted-foreground bg-background" />
@@ -169,13 +171,13 @@ export default function AboutPage() {
                   Climate Connect Digital
                 </p>
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                  React, Node.js, database architecture. Built and shipped
-                  multiple features end-to-end.
+                  PHP, database design, full-stack feature delivery on the
+                  renewable energy product surface.
                 </p>
               </div>
             </StaggerItem>
 
-            {/* CCD — Intern */}
+            {/* CCD, Intern */}
             <StaggerItem>
               <div className="relative pl-6 border-l-2 border-foreground/15">
                 <span className="absolute -left-[7px] top-1.5 block h-3 w-3 rounded-full border-2 border-muted-foreground/50 bg-background" />
@@ -191,8 +193,8 @@ export default function AboutPage() {
                   Climate Connect Digital
                 </p>
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                  Onboarding, learning React and Node.js on the job. First real
-                  exposure to production software development.
+                  Onboarding, learning PHP and modern web development on the
+                  job. First real exposure to production software development.
                 </p>
               </div>
             </StaggerItem>
@@ -219,10 +221,10 @@ export default function AboutPage() {
               <div className="relative pl-6 border-l-2 border-foreground/15">
                 <span className="absolute -left-[7px] top-1.5 block h-3 w-3 rounded-full border-2 border-muted-foreground bg-background" />
                 <h3 className="font-semibold text-foreground">
-                  PGDM — IT Management
+                  PGDM, IT Management
                 </h3>
                 <p className="text-sm text-muted-foreground mt-0.5">
-                  MIT School of Management — Final Semester
+                  MIT School of Management, Final Semester
                 </p>
               </div>
             </StaggerItem>
@@ -256,21 +258,16 @@ export default function AboutPage() {
           <FadeIn delay={0.2}>
             <div className="mt-6 space-y-4 leading-relaxed text-muted-foreground">
               <p>
-                Right now I&apos;m deep into building AI-native operational
-                systems. The pattern I keep coming back to: how do you build
-                software that doesn&apos;t just display data, but{" "}
-                <span className="text-foreground font-medium">
-                  acts on it
-                </span>
-                ?
+                I want to be an indie hacker who pays the bills with his own
+                products. The day job at Renewalytics is real and I love it, but
+                the long game is shipping AI-native SaaS that earns on its own.
+                Pieter Levels is the template. Ship fast, kill faster, keep what
+                works.
               </p>
               <p>
-                I&apos;m exploring AI agents, operational copilots, and AI
-                workflow systems — tools that can reason about operational data,
-                make decisions, and execute tasks autonomously. The renewable
-                energy industry generates massive amounts of telemetry and
-                reporting data. The opportunity is turning that data into
-                automated action.
+                Right now I&apos;m in the &quot;ship and learn&quot; phase, not
+                the &quot;scale a winner&quot; phase. Here&apos;s what that
+                actually looks like:
               </p>
             </div>
           </FadeIn>
@@ -279,23 +276,23 @@ export default function AboutPage() {
             <ul className="mt-6 space-y-4">
               {[
                 {
-                  label: "AI Agents & Copilots",
-                  desc: "Building autonomous systems that reason about operational data and execute workflows",
+                  label: "Social Copilot (MVP)",
+                  desc: "Social media scheduler with AI video generation. My main indie bet for the year.",
                   color: "bg-accent-blue",
                 },
                 {
-                  label: "Realtime Telemetry",
-                  desc: "MQTT, OPC-UA, WebSockets — making renewable plants visible in real time",
+                  label: "Learning AI agents",
+                  desc: "Going deep on agent frameworks and AI workflow tooling. Every indie product I ship from here is AI-native by default.",
                   color: "bg-accent-teal",
                 },
                 {
-                  label: "Automation Pipelines",
-                  desc: "Cron-based reporting, data processing, government portal integrations",
+                  label: "SEO experiments",
+                  desc: "MSMEVault.in and GoSolarIndex.in started as weekend tests. Built with Claude Code, indexed with Claude AI, and they&apos;re actually pulling organic traffic now.",
                   color: "bg-foreground",
                 },
                 {
-                  label: "Indie Products",
-                  desc: "GoSolarIndex.in, MSMEVault.in — shipping SEO-driven directories",
+                  label: "Day job at Renewalytics",
+                  desc: "Leading engineering on forecasting, reporting automation, and realtime monitoring for 3,400+ MW of renewable capacity.",
                   color: "bg-muted-foreground",
                 },
               ].map((item) => (
@@ -307,7 +304,7 @@ export default function AboutPage() {
                     <span className="font-medium text-foreground">
                       {item.label}
                     </span>{" "}
-                    <span className="text-muted-foreground">— {item.desc}</span>
+                    <span className="text-muted-foreground">, {item.desc}</span>
                   </div>
                 </li>
               ))}
@@ -334,7 +331,7 @@ export default function AboutPage() {
             {[
               {
                 name: "RealSync CMS",
-                desc: "Enterprise realtime monitoring system for renewable energy portfolios — WebSockets, MQTT, OPC-UA ingestion, alarm systems, AI-ready telemetry pipelines.",
+                desc: "Enterprise realtime monitoring system for renewable energy portfolios, WebSockets, MQTT, OPC-UA ingestion, alarm systems, AI-ready telemetry pipelines.",
                 link: "/projects/realsync-cms",
               },
               {
@@ -343,13 +340,13 @@ export default function AboutPage() {
                 link: "/projects/reflux",
               },
               {
-                name: "DGR Automation",
-                desc: "Enterprise reporting automation parsing 30+ complex Excel reports daily across 35+ renewable plants with cron-based async pipelines.",
+                name: "Excel Flow",
+                desc: "Reporting automation that generates 30+ daily reports and alerts across 33+ solar, wind, and BESS plants, scraping 30+ daily Excel sheets via cron-based async pipelines.",
                 link: "/projects/dgr-automation",
               },
               {
-                name: "CMS / DSM Platform",
-                desc: "Energy analytics, DSM analytics, billing workflows, BESS management, and operational dashboards for renewable energy operations.",
+                name: "COPS, Juniper Green",
+                desc: "DSM penalties analytics + CMS asset management dashboard for client Juniper Green Energy, covering solar and hydro plants.",
                 link: "/projects/cms-dsm-platform",
               },
             ].map((system) => (
@@ -374,23 +371,57 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── Contact CTA ── */}
-      <section className="py-16 border-t border-border">
+      {/* ── Work with me ── */}
+      <section className="py-12 border-t border-border">
         <div className="max-w-2xl">
-          <FadeIn>
-            <h2 className="text-2xl font-semibold tracking-tight">
-              Let&apos;s talk
+          <BlurIn>
+            <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+              Hire me
+            </span>
+          </BlurIn>
+          <FadeIn delay={0.1}>
+            <h2 className="mt-4 text-2xl font-semibold tracking-tight">
+              Work with me
             </h2>
-            <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-              I&apos;m always open to interesting conversations — whether it&apos;s
-              about operational systems, AI agents, indie hacking, or renewable
-              energy.
-            </p>
+          </FadeIn>
+          <FadeIn delay={0.2}>
+            <div className="mt-6 space-y-4 leading-relaxed text-muted-foreground">
+              <p>
+                I take on a small number of freelance projects on the side.
+                I&apos;m most useful to you if you need one of these:
+              </p>
+              <ul className="space-y-3 pl-4">
+                <li>
+                  <span className="font-medium text-foreground">
+                    Full-stack MVPs for founders.
+                  </span>{" "}
+                  Idea to deployed product in weeks. Next.js, Prisma, Postgres,
+                  Docker. I&apos;ve done it enough times to know the shortcuts
+                  and the landmines.
+                </li>
+                <li>
+                  <span className="font-medium text-foreground">
+                    AI workflow automation for businesses.
+                  </span>{" "}
+                  If your team is doing repetitive manual work in spreadsheets
+                  or email, there&apos;s a good chance I can replace most of it
+                  with an AI-driven pipeline. This is exactly what I do at the
+                  day job, just for someone else.
+                </li>
+              </ul>
+              <p>
+                Not the right fit if you want pure design, pure mobile native,
+                or a 6-month enterprise rollout. I work best on scoped,
+                shippable things.
+              </p>
+            </div>
+          </FadeIn>
+          <FadeIn delay={0.3}>
             <Link
               href="/contact"
-              className="mt-4 inline-flex items-center gap-2 rounded-md bg-foreground px-4 py-2 text-sm font-medium text-background transition-colors hover:bg-foreground/90"
+              className="mt-6 inline-flex items-center gap-2 rounded-md bg-foreground px-4 py-2 text-sm font-medium text-background transition-colors hover:bg-foreground/90"
             >
-              Get in touch →
+              Let&apos;s talk →
             </Link>
           </FadeIn>
         </div>

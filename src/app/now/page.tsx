@@ -31,35 +31,39 @@ export default function NowPage() {
         <div className="max-w-2xl space-y-12 leading-relaxed text-muted-foreground">
           <FadeIn>
             <h2 className="text-xl font-semibold text-foreground">
-              At Work
+              At work
             </h2>
             <p className="mt-3">
-              Building the Reflux weather chatbot and auto portal pusher at
-              Renewalytics. The chatbot lets plant operators query forecast data
-              in natural language instead of digging through dashboards. The
-              portal pusher automatically generates and emails daily production
-              reports to plant managers.
+              Leading engineering at Renewalytics. Day-to-day is Reflux,
+              Excel Flow, and the internal invoice system. Right now I&apos;m
+              building a Reflux chatbot so operators can query forecasts in
+              natural language instead of clicking through dashboards. Also
+              pushing RealSync (our realtime monitoring MVP) toward its first
+              paying customer this year.
             </p>
           </FadeIn>
 
           <FadeIn>
             <h2 className="text-xl font-semibold text-foreground">
-              On the Side
+              Indie projects
             </h2>
             <div className="mt-3 space-y-4">
               <p>
-                Growing GoSolarIndex&apos;s SEO presence — currently ranking
-                for 15+ city-level keywords and expanding to cover 100+ cities.
-                Exploring monetization through featured installer listings.
+                <span className="font-medium text-foreground">Social Copilot</span>{" "}
+                is my main bet. Social media scheduler with AI video generation.
+                MVP in progress. This is the one I want to turn into real indie
+                income.
               </p>
               <p>
-                Planning the Social Copilot development sprint. The core
-                architecture is designed — starting on the AI video generation
-                pipeline next.
-              </p>
-              <p>
-                MSMEVault is scaling the NBFC lead generation funnel.
-                Partnerships with 3 NBFCs in pipeline.
+                <span className="font-medium text-foreground">
+                  GoSolarIndex and MSMEVault
+                </span>{" "}
+                started as weekend SEO experiments and they&apos;re actually
+                working. I built both with Claude Code, let Claude AI handle
+                the structured content and indexation strategy, and the
+                organic response has been better than I expected. Not directory
+                businesses I&apos;m trying to scale, just live tests for what
+                SEO tactics actually move the needle in 2026.
               </p>
             </div>
           </FadeIn>
@@ -67,17 +71,18 @@ export default function NowPage() {
           <FadeIn>
             <h2 className="text-xl font-semibold text-foreground">Learning</h2>
             <p className="mt-3">
-              Going deeper on energy markets and power trading mechanics.
-              Building intuition for how weather, demand patterns, and policy
-              affect energy prices.
+              Going deep on AI agents and agent frameworks. Every indie product
+              I ship from here on out is AI-native by default, not a feature
+              bolted on. Reading code more than docs, building small
+              throwaway agents to feel the rough edges.
             </p>
           </FadeIn>
 
           <FadeIn>
             <h2 className="text-xl font-semibold text-foreground">Reading</h2>
             <ul className="mt-3 list-inside list-disc space-y-1">
-              <li>&quot;The Staff Engineer&apos;s Path&quot; by Tanya Reilly</li>
               <li>&quot;Build&quot; by Tony Fadell</li>
+              <li>Pieter Levels&apos; Make book (re-read)</li>
             </ul>
           </FadeIn>
 

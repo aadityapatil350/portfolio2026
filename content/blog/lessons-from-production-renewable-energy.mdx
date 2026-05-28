@@ -1,34 +1,35 @@
 ---
 title: "What I learned shipping production renewable energy software"
-description: "Hard-won lessons from building and maintaining production software for renewable energy plants — from forecasting accuracy to incident response."
+description: "Hard-won lessons from building and maintaining software for renewable energy plants. Forecasting, incidents, scale."
 publishedAt: "2026-02-20"
 tags: ["Climate Tech", "Engineering"]
 ---
 
 ## Context
 
-I joined Renewalytics as the founding engineer. The product is a production forecasting and energy trading platform that serves renewable energy plants across India. When I started, the codebase was a monolithic Node.js app with MongoDB, deployed on a single DigitalOcean droplet.
+I joined Renewalytics as a founding engineer in mid-2024. The product is a forecasting and energy trading platform for renewable plants across India. When I walked in, the whole thing was one monolithic Node.js app on MongoDB, running on a single DigitalOcean droplet. It worked, until it didn't.
 
-## What I Built
+This is what I learned cleaning that up and scaling it to serve 3,400+ MW of capacity.
 
-### Reflux — Production Forecasting
+## What I built
 
-The core product. We take weather data, plant configuration, and historical generation data to predict how much energy a solar or wind plant will produce in the next 48 hours. This prediction feeds directly into energy trading decisions — if you over-predict, you pay penalties. If you under-predict, you leave money on the table.
+### Reflux, the forecasting platform
 
-The forecasting engine runs on a time-series pipeline: ingest weather APIs -> normalize data -> run ML models -> generate predictions -> push to trading dashboard. Accuracy targets are 95%+ for day-ahead forecasts.
+Reflux is the heart of it. We pull weather data, plant configs, and historical generation, then predict how much power a solar or wind plant will generate over the next 48 hours. That prediction goes straight into trading decisions. Over-predict and you pay penalties to the grid. Under-predict and you leave money on the table. There's no neutral mistake.
 
-### CMS Portal
+The pipeline is straightforward on paper: ingest weather APIs, normalize the data, run the models, push predictions to the trading dashboard. The reality is messier, because every step has failure modes. We target 95%+ accuracy on day-ahead forecasts and most of the engineering effort is just defending that number.
 
-A customer-facing portal where plant operators view their forecasts, manage scheduling, and download reports. Built as a Next.js app with TypeScript, it replaced the old React dashboard that was slow and unreliable.
+### The customer portal
 
-## The Hard Parts
+Plant operators live in this. They see their forecasts, manage scheduling, send revisions (CT/ST schedules to SLDC), and pull reports. I rebuilt the old React dashboard as a Next.js app in TypeScript, mostly because the old one was slow and operators were copy-pasting numbers into Excel to work around it.
 
-### Data Quality is the Real Problem
+## The hard parts
 
-The weather APIs we depend on have gaps, delays, and inaccuracies. We built a fallback chain: primary API -> secondary API -> interpolated historical data -> manual override. Each fallback degrades accuracy by 2-5%, so we track which fallback was used and surface that to traders.
+### Data quality is the actual problem
+
+I used to think the hard part was the ML models. It's not. The hard part is that the weather APIs you depend on have gaps, delays, and quiet outages. Half my "model accuracy" work has been fallback chains.
 
 ```typescript
-// Simplified fallback chain
 async function getWeatherData(location: Location, timestamp: Date) {
   const primary = await primaryAPI.get(location, timestamp).catch(() => null);
   if (primary && primary.confidence > 0.9) return { data: primary, source: "primary" };
@@ -40,24 +41,26 @@ async function getWeatherData(location: Location, timestamp: Date) {
 }
 ```
 
-### The Security Incident (CVE-2025-55182)
+Every fallback step costs you 2-5% accuracy. So we track which one fired and surface that to the traders. They'd rather know the forecast is degraded than trust a number that's silently wrong.
 
-In early 2025, a vulnerability was disclosed in one of our dependencies. The affected package was 3 levels deep in our dependency tree. We had the patch deployed within 4 hours of the CVE being published, before any exploit attempts hit our infrastructure.
+### The CVE that didn't burn us
 
-The key was having automated dependency auditing in CI and a documented incident response playbook. No customer data was compromised, and we published a transparent post-mortem.
+Early 2025, a CVE dropped on a package three levels deep in our dependency tree. We had the patch out in under 4 hours, before anything tried to exploit it.
 
-### Scaling from 5 Plants to 50+
+That wasn't luck. It was automated dependency scanning in CI plus a written incident playbook from a previous near-miss. The post-mortem for that one became the template for the next.
 
-When we went from serving 5 plants to 50+, the single-droplet architecture broke. We moved to Docker containers behind an Nginx reverse proxy, with separate services for the API, the forecasting engine, and the CMS. Database reads were offloaded to read replicas.
+### Going from 5 plants to 50+
 
-The migration happened over 3 weekends with zero downtime. The trick: run new and old infrastructure in parallel, switch traffic gradually using DNS weights.
+The single-droplet setup broke once we crossed maybe 15 plants. I moved everything to Docker behind Nginx, split out the API, the forecasting engine, and the portal into separate services, and offloaded reads to replicas.
 
-## Lessons
+I did the migration over three weekends with zero downtime by running both stacks in parallel and shifting traffic with DNS weights. The first weekend was terrifying. By the third it was boring, which is exactly how it should feel.
 
-1. **Production software is about reliability, not features.** Customers don't care about your fancy dashboard if the forecast data is delayed by 5 minutes.
+## What I actually learned
 
-2. **Automate everything you can.** Dependency updates, database backups, log rotation, SSL renewal. If a human has to do it, it will eventually be forgotten.
+**Reliability beats features, every time.** Operators don't care about your beautiful chart if yesterday's forecast was 10 minutes late. Fix the boring things first.
 
-3. **Document your incidents.** The post-mortem for CVE-2025-55182 became our incident response template. When the next vulnerability hit, we were ready.
+**If a human has to do it, it will eventually be forgotten.** Backups, SSL renewal, log rotation, dependency updates. Automate it or it will bite you the one week you're on leave.
 
-4. **Domain expertise compounds.** After 18 months in renewable energy, I can have a meaningful conversation with plant operators about inverter efficiency and curtailment patterns. That knowledge makes me a better engineer.
+**Write the post-mortem even when nothing bad happened.** The near-miss docs have saved me more than the real incident reports.
+
+**Domain knowledge compounds faster than you expect.** After ~18 months I can talk to plant operators about inverter efficiency and curtailment patterns without translating. That changes what software I build, not just how I build it.

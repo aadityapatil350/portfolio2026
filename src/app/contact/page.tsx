@@ -5,11 +5,11 @@ import { ContactForm } from "./contact-form";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Have a project in mind? Get in touch — I'm open to freelance contracts and full-time roles in climate tech.",
+    "Need a full-stack MVP built or an AI workflow that replaces manual ops work? Let's talk.",
   openGraph: {
     title: "Contact | Aditya",
     description:
-      "Have a project in mind? Get in touch — I'm open to freelance contracts and full-time roles in climate tech.",
+      "Need a full-stack MVP built or an AI workflow that replaces manual ops work? Let's talk.",
     url: "https://aditya.dev/contact",
   },
 };
@@ -21,11 +21,31 @@ export default function ContactPage() {
         <div className="max-w-2xl">
           <FadeIn>
             <h1 className="text-3xl sm:text-4xl font-bold tracking-tight">
-              Get in touch
+              Let&apos;s talk
             </h1>
             <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-              Have a project in mind, or just want to say hello? Fill out the
-              form below and I&apos;ll get back to you.
+              I take on a small number of freelance projects on the side. The
+              fit is best if you need one of these:
+            </p>
+            <ul className="mt-4 space-y-2 text-base leading-relaxed text-muted-foreground">
+              <li>
+                <span className="font-medium text-foreground">
+                  A full-stack MVP shipped in weeks, not months.
+                </span>{" "}
+                Next.js, Prisma, Postgres, Docker, deployed and working.
+              </li>
+              <li>
+                <span className="font-medium text-foreground">
+                  AI workflow automation.
+                </span>{" "}
+                Replace the manual spreadsheet/email work your team is doing
+                with an AI-driven pipeline. This is what I do at the day job.
+              </li>
+            </ul>
+            <p className="mt-4 text-base leading-relaxed text-muted-foreground">
+              Not the right fit for pure design, native mobile, or long
+              enterprise rollouts. Tell me what you&apos;re trying to build
+              and I&apos;ll be honest about whether I&apos;m the right person.
             </p>
           </FadeIn>
         </div>

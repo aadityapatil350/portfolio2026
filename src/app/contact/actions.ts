@@ -8,7 +8,7 @@ const contactSchema = z.object({
   email: z.string().email("Invalid email address").max(200),
   projectType: z.string().min(1, "Please select a project type"),
   message: z.string().min(1, "Message is required").max(5000),
-  website: z.string().max(0), // honeypot — if filled, it's a bot
+  website: z.string().max(0), // honeypot, if filled, it's a bot
 });
 
 // Simple in-memory rate limiter: max 3 submissions per hour per IP
@@ -61,7 +61,7 @@ export async function submitContactForm(
     website: formData.get("website") as string,
   };
 
-  // Honeypot check — silently succeed if filled
+  // Honeypot check, silently succeed if filled
   if (raw.website && raw.website.length > 0) {
     return { success: true, message: "Message sent!" };
   }

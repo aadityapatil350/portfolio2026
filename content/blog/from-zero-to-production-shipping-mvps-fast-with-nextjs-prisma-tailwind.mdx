@@ -1,6 +1,6 @@
 ---
 title: "From zero to production: shipping MVPs fast with Next.js, Prisma & Tailwind"
-description: "My exact stack and process for going from idea to deployed product in days — the same approach I use for client projects and indie products."
+description: "My exact stack and process for going from idea to deployed product in days, the same approach I use for client projects and indie products."
 publishedAt: "2026-04-01"
 tags: ["Next.js", "Prisma", "SaaS", "Engineering"]
 cover: "/images/blog-mvp-stack.jpg"
@@ -8,7 +8,7 @@ cover: "/images/blog-mvp-stack.jpg"
 
 ## Speed matters more than perfection
 
-The fastest way to validate a product idea is to ship it. Not a landing page. Not a waitlist. A working product that real users can touch. I've shipped 8+ products this way — some became production systems serving thousands of users, others were validated and killed in a week.
+The fastest way to validate a product idea is to ship it. Not a landing page. Not a waitlist. A working product that real users can touch. I've shipped 8+ products this way, some became production systems serving thousands of users, others were validated and killed in a week.
 
 Here's the exact stack and process.
 
@@ -23,7 +23,7 @@ Here's the exact stack and process.
 | Hosting | Vercel or Docker | Zero-config deploy or self-host |
 | Payments | Stripe (if needed) | Battle-tested billing |
 
-This stack optimizes for **time-to-production**, not theoretical scalability. You can always refactor later — but you can't get back the weeks you spent over-engineering an MVP.
+This stack optimizes for **time-to-production**, not theoretical scalability. You can always refactor later, but you can't get back the weeks you spent over-engineering an MVP.
 
 ## Day 1: Schema and core flows
 
@@ -94,30 +94,30 @@ The product is live. Real users can use it. Now iterate based on actual feedback
 
 ## What I skip in MVPs
 
-- **Comprehensive error handling** — handle the happy path well; log errors for later
-- **Full test coverage** — write tests for critical business logic only
-- **Perfect responsive design** — desktop-first; mobile can wait a week
-- **Email notifications** — Slack webhooks are faster to implement
-- **Admin panels** — use Prisma Studio or direct database queries
+- **Comprehensive error handling**, handle the happy path well; log errors for later
+- **Full test coverage**, write tests for critical business logic only
+- **Perfect responsive design**, desktop-first; mobile can wait a week
+- **Email notifications**, Slack webhooks are faster to implement
+- **Admin panels**, use Prisma Studio or direct database queries
 
 ## What I never skip
 
-- **Authentication** — security from day one
-- **Database migrations** — Prisma Migrate, always
-- **Environment variables** — no hardcoded secrets, ever
-- **HTTPS** — Vercel handles this; for Docker, use Caddy
-- **Input validation** — Zod schemas on every form
+- **Authentication**, security from day one
+- **Database migrations**, Prisma Migrate, always
+- **Environment variables**, no hardcoded secrets, ever
+- **HTTPS**, Vercel handles this; for Docker, use Caddy
+- **Input validation**, Zod schemas on every form
 
 ## Real examples
 
-**GoSolarIndex.in** — Built in 3 days. Next.js + PostgreSQL + Prisma. Now ranking on page 1 for city-level solar keywords.
+**GoSolarIndex.in**, Built in 3 days. Next.js + PostgreSQL + Prisma. Now ranking on page 1 for city-level solar keywords.
 
-**DGR Automation** — MVP in 2 weeks. Replaced a 4-hour daily manual process. Now processes 30+ reports daily across 35 plants.
+**Excel Flow**, MVP in 2 weeks. Replaced a 4-hour daily manual process. Now processes 30+ reports daily across 33+ solar/wind/BESS plants.
 
-**MSMEVault.in** — Built in a weekend. Directory of government schemes. Monetized via NBFC lead generation within the first month.
+**MSMEVault.in**, Built in a weekend. Directory of government schemes. Monetized via NBFC lead generation within the first month.
 
 ## The bottom line
 
-You don't need 6 months and a team of 10 to build a product. The modern stack — Next.js, Prisma, Tailwind, shadcn/ui — lets a single developer ship production-quality software in days.
+You don't need 6 months and a team of 10 to build a product. The modern stack, Next.js, Prisma, Tailwind, shadcn/ui, lets a single developer ship production-quality software in days.
 
 If you have a product idea and need it built fast, I can take it from zero to production. [Let's talk](/contact).

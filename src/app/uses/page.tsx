@@ -37,7 +37,7 @@ const categories: UseCategory[] = [
       },
       { name: "Framework", description: "Next.js 16 (App Router), React 19" },
       { name: "Backend", description: "Node.js, Express, Bun" },
-      { name: "Database", description: "PostgreSQL, TimescaleDB, MongoDB, SQLite, Redis" },
+      { name: "Database", description: "PostgreSQL, MongoDB, SQLite, Redis" },
       { name: "ORM", description: "Prisma" },
       { name: "Auth", description: "NextAuth.js" },
       { name: "Validation", description: "Zod" },
@@ -52,9 +52,8 @@ const categories: UseCategory[] = [
     items: [
       { name: "WebSockets", description: "Native WS, Socket.io" },
       { name: "Protocols", description: "MQTT, OPC-UA (SCADA integrations)" },
-      { name: "Time-Series", description: "TimescaleDB (PostgreSQL extension)" },
       { name: "Queues", description: "BullMQ, node-cron (job scheduling)" },
-      { name: "Excel Parsing", description: "SheetJS (xlsx) — vendor-specific report automation" },
+      { name: "Excel Parsing", description: "SheetJS (xlsx), vendor-specific report automation" },
     ],
   },
   {

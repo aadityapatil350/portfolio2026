@@ -1,13 +1,13 @@
 ---
 title: "How I structure large Next.js projects"
-description: "The file structure and conventions I use across all my production Next.js apps — from indie products to enterprise dashboards."
+description: "The file structure and conventions I use across all my production Next.js apps, from indie products to enterprise dashboards."
 publishedAt: "2026-04-20"
 tags: ["Next.js", "Architecture", "Engineering"]
 ---
 
 ## Structure matters at scale
 
-A Next.js app with 5 pages can be structured however you want. A Next.js app with 50 pages, 30 components, 10 server actions, and multiple data sources needs conventions — or it becomes a maze.
+A Next.js app with 5 pages can be structured however you want. A Next.js app with 50 pages, 30 components, 10 server actions, and multiple data sources needs conventions, or it becomes a maze.
 
 Here's the structure I use across every project.
 
@@ -15,7 +15,7 @@ Here's the structure I use across every project.
 
 ```
 src/
-├── app/                    # Routes only — no business logic
+├── app/                    # Routes only, no business logic
 │   ├── (dashboard)/        # Route groups for layouts
 │   │   ├── layout.tsx
 │   │   ├── plants/
@@ -65,11 +65,11 @@ Don't put server actions in the app directory next to the page that uses them. G
 
 ### 3. Route groups for shared layouts
 
-The `(dashboard)` and `(marketing)` groups share different layouts — sidebar nav vs. landing page nav — without affecting the URL structure.
+The `(dashboard)` and `(marketing)` groups share different layouts, sidebar nav vs. landing page nav, without affecting the URL structure.
 
 ### 4. One component per file
 
-No exceptions. A file named `plant-card.tsx` exports `PlantCard`. If a component grows too large, split it — don't nest components in the same file.
+No exceptions. A file named `plant-card.tsx` exports `PlantCard`. If a component grows too large, split it, don't nest components in the same file.
 
 ### 5. Zod schemas are the source of truth
 

@@ -49,7 +49,7 @@ export function ContactForm() {
     <div className="space-y-8">
       <FadeIn>
         <form action={formAction} className="max-w-lg space-y-6">
-          {/* Honeypot field — hidden from real users */}
+          {/* Honeypot field, hidden from real users */}
           <div className="absolute -left-[9999px]" aria-hidden="true">
             <label htmlFor="website">Website</label>
             <input
@@ -152,7 +152,7 @@ export function ContactForm() {
           <div className="flex items-center gap-3">
             <Mail className="h-4 w-4 shrink-0 text-foreground" />
             <span>
-              Book a call —{" "}
+              Book a call , {" "}
               <a
                 href="https://cal.com"
                 target="_blank"

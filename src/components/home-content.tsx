@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import {
   MapPin,
   ArrowRight,
@@ -19,6 +20,9 @@ import {
   Braces,
   Server,
   Wifi,
+  Search,
+  MessageSquare,
+  Lightbulb,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -44,6 +48,10 @@ const iconMap: Record<string, React.ReactNode> = {
   cpu: <Cpu className="h-5 w-5" />,
   layers: <Layers className="h-5 w-5" />,
   activity: <Activity className="h-5 w-5" />,
+  search: <Search className="h-5 w-5" />,
+  database: <Database className="h-5 w-5" />,
+  messageSquare: <MessageSquare className="h-5 w-5" />,
+  lightbulb: <Lightbulb className="h-5 w-5" />,
 };
 
 interface BlogPostPreview {
@@ -87,17 +95,20 @@ export function HomeContent({
   return (
     <div>
       {/* ════════════════════════════════════════════════════════════
-          HERO — Cinematic with text reveal + grid background
+          HERO, Cinematic with text reveal + grid background
       ════════════════════════════════════════════════════════════ */}
       <section className="relative overflow-hidden py-20 sm:py-32 lg:py-40">
         {/* Subtle grid background */}
         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.03)_1px,transparent_1px)] bg-[size:4rem_4rem] dark:bg-[linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)]" />
 
-        {/* Gradient orb — very subtle, just for depth */}
+        {/* Gradient orb, very subtle, just for depth */}
         <div className="pointer-events-none absolute -top-40 right-0 h-[500px] w-[500px] rounded-full bg-accent-blue/5 blur-[120px] dark:bg-accent-blue/3" />
         <div className="pointer-events-none absolute bottom-0 -left-20 h-[300px] w-[300px] rounded-full bg-accent-teal/5 blur-[100px] dark:bg-accent-teal/3" />
 
         <div className="content-width relative px-4 sm:px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-12 lg:gap-16 items-start">
+            {/* ─── LEFT: text content ─── */}
+            <div>
           {/* Availability badge */}
           <FadeIn delay={0.1}>
             <div className="mb-6 flex items-center gap-3">
@@ -113,16 +124,16 @@ export function HomeContent({
             </div>
           </FadeIn>
 
-          {/* Name — text reveal animation */}
+          {/* Name, text reveal animation */}
           <div className="overflow-hidden">
             <TextReveal
               text={name}
-              className="text-5xl sm:text-6xl lg:text-8xl font-bold tracking-tighter"
+              className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tighter"
               wordDelay={0.06}
             />
           </div>
 
-          {/* Tagline — delayed reveal */}
+          {/* Tagline, delayed reveal */}
           <BlurIn delay={0.5} className="mt-2 max-w-3xl">
             <p className="text-xl sm:text-2xl lg:text-3xl font-medium text-muted-foreground leading-snug tracking-tight">
               {tagline}
@@ -188,11 +199,60 @@ export function HomeContent({
               </Magnetic>
             </div>
           </FadeIn>
+            </div>
+            {/* ─── /LEFT ─── */}
+
+            {/* ─── RIGHT: portrait + stats ─── */}
+            <FadeIn delay={0.3} className="hidden lg:block">
+              <div className="flex flex-col items-center gap-8">
+                <div className="relative h-72 w-72 xl:h-80 xl:w-80 overflow-hidden rounded-2xl border border-border bg-black shadow-2xl shadow-accent-blue/5">
+                  <Image
+                    src="/hero-portrait.png"
+                    alt="Aditya Patil"
+                    fill
+                    priority
+                    sizes="(max-width: 1280px) 288px, 320px"
+                    className="object-cover scale-[1.6] translate-y-2"
+                  />
+                  {/* subtle gradient overlay to blend with the page */}
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+                </div>
+
+                <div className="grid grid-cols-3 gap-6 text-center w-full">
+                  <div>
+                    <div className="font-mono text-2xl xl:text-3xl font-bold tracking-tight">
+                      <CountUp target={5} suffix="+" />
+                    </div>
+                    <p className="mt-1 text-[11px] uppercase tracking-wider text-muted-foreground">
+                      Years shipping
+                    </p>
+                  </div>
+                  <div>
+                    <div className="font-mono text-2xl xl:text-3xl font-bold tracking-tight">
+                      <CountUp target={8} suffix="+" />
+                    </div>
+                    <p className="mt-1 text-[11px] uppercase tracking-wider text-muted-foreground">
+                      Products shipped
+                    </p>
+                  </div>
+                  <div>
+                    <div className="font-mono text-2xl xl:text-3xl font-bold tracking-tight">
+                      <CountUp target={16} suffix="+" />
+                    </div>
+                    <p className="mt-1 text-[11px] uppercase tracking-wider text-muted-foreground">
+                      Built &amp; killed
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </FadeIn>
+            {/* ─── /RIGHT ─── */}
+          </div>
         </div>
       </section>
 
       {/* ════════════════════════════════════════════════════════════
-          TECH MARQUEE — Scrolling tech stack bar
+          TECH MARQUEE, Scrolling tech stack bar
       ════════════════════════════════════════════════════════════ */}
       <section className="border-y border-border py-5 bg-muted/30">
         <Marquee speed={40} className="opacity-50">
@@ -202,7 +262,6 @@ export function HomeContent({
             "Node.js",
             "PostgreSQL",
             "MongoDB",
-            "TimescaleDB",
             "Docker",
             "Prisma",
             "MQTT",
@@ -226,7 +285,7 @@ export function HomeContent({
       </section>
 
       {/* ════════════════════════════════════════════════════════════
-          SERVICES — What I Build
+          SERVICES, What I Build
       ════════════════════════════════════════════════════════════ */}
       <section className="py-20 sm:py-28">
         <div className="content-width px-4 sm:px-6">
@@ -235,15 +294,16 @@ export function HomeContent({
               Services
             </div>
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
-              What I Build
+              What I can build for you
             </h2>
-            <p className="mt-3 max-w-xl text-muted-foreground">
-              From operational dashboards to AI-powered workflow engines. I convert
-              manual processes into production software systems.
+            <p className="mt-3 max-w-2xl text-muted-foreground">
+              Founders need MVPs. Ops teams need automation. Small businesses
+              need a real website and a way to get found. I do all of it,
+              same person, same standards, same Pune timezone.
             </p>
           </FadeIn>
 
-          <StaggerContainer staggerDelay={0.1} className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <StaggerContainer staggerDelay={0.08} className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {services.map((service) => (
                 <StaggerItem key={service.title}>
                   <HoverScale>
@@ -288,7 +348,7 @@ export function HomeContent({
       </div>
 
       {/* ════════════════════════════════════════════════════════════
-          FEATURED WORK — Case studies with stagger + metrics
+          FEATURED WORK, Case studies with stagger + metrics
       ════════════════════════════════════════════════════════════ */}
       <section className="py-20 sm:py-28">
         <div className="content-width px-4 sm:px-6">
@@ -310,7 +370,7 @@ export function HomeContent({
             </div>
           </FadeIn>
 
-          {/* Primary case study — large card */}
+          {/* Primary case study, large card */}
           <BlurIn delay={0.15} className="mt-10">
             <HoverScale scale={1.01}>
               <Link
@@ -318,7 +378,7 @@ export function HomeContent({
                 className="group block overflow-hidden rounded-xl border border-border"
               >
                 <div className="grid lg:grid-cols-2">
-                  {/* Left — visual */}
+                  {/* Left, visual */}
                   <div className="relative flex items-center justify-center bg-gradient-to-br from-accent-blue/5 to-accent-teal/5 p-10 lg:p-16 min-h-[240px]">
                     <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.04)_1px,transparent_1px)] bg-[size:2rem_2rem]" />
                     <div className="relative">
@@ -334,7 +394,7 @@ export function HomeContent({
                     </div>
                   </div>
 
-                  {/* Right — content */}
+                  {/* Right, content */}
                   <div className="p-6 lg:p-10">
                     <h3 className="text-xl font-semibold group-hover:text-accent-blue transition-colors">
                       {caseStudies[0].title}
@@ -374,7 +434,7 @@ export function HomeContent({
             </HoverScale>
           </BlurIn>
 
-          {/* Other case studies — 2x2 grid */}
+          {/* Other case studies, 2x2 grid */}
           <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-2">
             {caseStudies.slice(1).map((study, i) => (
               <FadeIn key={study.slug} delay={0.1 * (i + 1)}>
@@ -386,11 +446,11 @@ export function HomeContent({
       </section>
 
       {/* ════════════════════════════════════════════════════════════
-          ANIMATED STATS — with count-up
+          ANIMATED STATS, with count-up
       ════════════════════════════════════════════════════════════ */}
-      <section className="border-y border-border bg-muted/20 py-16 sm:py-20">
+      <section className="border-y border-border bg-muted/20 py-16 sm:py-20 lg:hidden">
         <div className="content-width px-4 sm:px-6">
-          <StaggerContainer staggerDelay={0.15} className="grid grid-cols-2 gap-8 sm:grid-cols-4">
+          <StaggerContainer staggerDelay={0.15} className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-3xl mx-auto">
             <StaggerItem>
               <div className="text-center">
                 <div className="font-mono text-3xl sm:text-4xl font-bold tracking-tight">
@@ -402,25 +462,17 @@ export function HomeContent({
             <StaggerItem>
               <div className="text-center">
                 <div className="font-mono text-3xl sm:text-4xl font-bold tracking-tight">
-                  <CountUp target={3400} suffix=" MW" />
-                </div>
-                <p className="mt-1 text-sm text-muted-foreground">Renewable capacity served</p>
-              </div>
-            </StaggerItem>
-            <StaggerItem>
-              <div className="text-center">
-                <div className="font-mono text-3xl sm:text-4xl font-bold tracking-tight">
-                  <CountUp target={30} suffix="+" />
-                </div>
-                <p className="mt-1 text-sm text-muted-foreground">Automated reports daily</p>
-              </div>
-            </StaggerItem>
-            <StaggerItem>
-              <div className="text-center">
-                <div className="font-mono text-3xl sm:text-4xl font-bold tracking-tight">
                   <CountUp target={8} suffix="+" />
                 </div>
                 <p className="mt-1 text-sm text-muted-foreground">Products shipped</p>
+              </div>
+            </StaggerItem>
+            <StaggerItem>
+              <div className="text-center">
+                <div className="font-mono text-3xl sm:text-4xl font-bold tracking-tight">
+                  <CountUp target={16} suffix="+" />
+                </div>
+                <p className="mt-1 text-sm text-muted-foreground">Things built, broken, abandoned</p>
               </div>
             </StaggerItem>
           </StaggerContainer>
@@ -428,7 +480,7 @@ export function HomeContent({
       </section>
 
       {/* ════════════════════════════════════════════════════════════
-          ENGINEERING IDENTITY — What sets me apart
+          ENGINEERING IDENTITY, What sets me apart
       ════════════════════════════════════════════════════════════ */}
       <section className="py-20 sm:py-28">
         <div className="content-width px-4 sm:px-6">
@@ -451,7 +503,7 @@ export function HomeContent({
               {
                 icon: <Cloud className="h-5 w-5" />,
                 title: "Infrastructure Owner",
-                desc: "Docker, Linux servers, CI/CD pipelines, monitoring — I deploy and operate what I build. No hand-off to DevOps.",
+                desc: "Docker, Linux servers, CI/CD pipelines, monitoring, I deploy and operate what I build. No hand-off to DevOps.",
               },
               {
                 icon: <Wifi className="h-5 w-5" />,
@@ -466,12 +518,12 @@ export function HomeContent({
               {
                 icon: <GitBranch className="h-5 w-5" />,
                 title: "Startup Speed",
-                desc: "Built GoSolarIndex in 3 days. Shipped DGR automation in a sprint. I convert chaos into working systems under real pressure.",
+                desc: "Built GoSolarIndex in 3 days. Shipped Excel Flow in a sprint. I turn chaos into working systems under real pressure.",
               },
               {
                 icon: <Cpu className="h-5 w-5" />,
                 title: "AI-Native Thinking",
-                desc: "Moving toward AI agents, operational copilots, and agentic workflows. Not just using AI — building systems that are AI-native.",
+                desc: "Moving toward AI agents, operational copilots, and agentic workflows. Not just using AI, building systems that are AI-native.",
               },
             ].map((item, i) => (
               <FadeIn key={item.title} delay={0.08 * (i + 1)}>
@@ -545,9 +597,9 @@ export function HomeContent({
                 Have a system to build?
               </h2>
               <p className="mt-4 text-muted-foreground leading-relaxed">
-                I&apos;m open to freelance projects, full-time roles, startup
-                partnerships, and consulting engagements. If you need someone who
-                can architect, build, and operate — let&apos;s talk.
+                Freelance work, full-time roles, startup partnerships,
+                consulting, all open. If you need someone who can architect it,
+                build it, and stay on call when it breaks, let&apos;s talk.
               </p>
               <div className="mt-8 flex flex-wrap justify-center gap-3">
                 <Magnetic>

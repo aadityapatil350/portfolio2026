@@ -20,11 +20,11 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://adityapatil.dev"),
   title: {
-    default: "Aditya Patil — Lead Software Engineer | Systems Builder",
+    default: "Aditya Patil, Engineer-for-hire by day. Indie hacker by night.",
     template: "%s | Aditya Patil",
   },
   description:
-    "Self-taught Lead Software Engineer building operational systems, automation platforms, and AI-powered workflows at Renewalytics. 3400+ MW renewable capacity served. Based in Pune, India.",
+    "Lead engineer at Renewalytics by day, indie hacker by night. Available for full-stack MVPs and AI workflow automation. Pune, India.",
   keywords: [
     "Aditya Patil",
     "Lead Software Engineer",
@@ -49,21 +49,21 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://adityapatil.dev",
     siteName: "Aditya Patil",
-    title: "Aditya Patil — Lead Software Engineer | Systems Builder",
+    title: "Aditya Patil, Engineer-for-hire by day. Indie hacker by night.",
     description:
-      "Building operational systems, automation platforms & AI-powered workflows. 3400+ MW renewable capacity served.",
+      "Lead engineer at Renewalytics by day, indie hacker by night. Freelance MVPs and AI workflow automation on the side.",
     images: [
       {
         url: "/og?title=Aditya%20Patil&description=Systems%20Engineer%20%7C%20Building%20operational%20platforms",
         width: 1200,
         height: 630,
-        alt: "Aditya Patil — Systems Engineer",
+        alt: "Aditya Patil, Systems Engineer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Aditya Patil — Lead Software Engineer | Systems Builder",
+    title: "Aditya Patil, Lead Software Engineer | Systems Builder",
     description:
       "Building operational systems, automation platforms & AI-powered workflows.",
     creator: "@adityapatil350",

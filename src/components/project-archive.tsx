@@ -143,7 +143,7 @@ export function ProjectArchive({ repos, indieProjects, caseStudies = [] }: Proje
             <FadeIn>
               <section>
                 <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-6">
-                  Featured Work
+                  Production systems (day job)
                 </h3>
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                   {searchedCaseStudies.map((cs) => (
@@ -159,7 +159,7 @@ export function ProjectArchive({ repos, indieProjects, caseStudies = [] }: Proje
             <FadeIn delay={0.1}>
               <section>
                 <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-6">
-                  Indie Projects
+                  Indie products & experiments
                 </h3>
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                   {searchedIndieProjects.map((project) => (
