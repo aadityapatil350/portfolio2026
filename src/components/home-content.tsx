@@ -203,9 +203,9 @@ export function HomeContent({
             {/* ─── /LEFT ─── */}
 
             {/* ─── RIGHT: portrait + stats ─── */}
-            <FadeIn delay={0.3} className="hidden lg:block">
-              <div className="flex flex-col items-center gap-8">
-                <div className="relative h-72 w-72 xl:h-80 xl:w-80 overflow-hidden rounded-2xl border border-border bg-black shadow-2xl shadow-accent-blue/5">
+            <FadeIn delay={0.3} className="order-first lg:order-none">
+              <div className="flex flex-col items-center gap-6 lg:gap-8">
+                <div className="relative h-56 w-56 sm:h-64 sm:w-64 lg:h-72 lg:w-72 xl:h-80 xl:w-80 overflow-hidden rounded-2xl border border-border bg-black shadow-2xl shadow-accent-blue/5">
                   <Image
                     src="/hero-portrait.png"
                     alt="Aditya Patil"
@@ -448,7 +448,7 @@ export function HomeContent({
       {/* ════════════════════════════════════════════════════════════
           ANIMATED STATS, with count-up
       ════════════════════════════════════════════════════════════ */}
-      <section className="border-y border-border bg-muted/20 py-16 sm:py-20 lg:hidden">
+      <section className="border-y border-border bg-muted/20 py-16 sm:py-20 hidden">
         <div className="content-width px-4 sm:px-6">
           <StaggerContainer staggerDelay={0.15} className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-3xl mx-auto">
             <StaggerItem>
