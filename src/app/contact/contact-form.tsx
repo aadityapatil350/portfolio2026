@@ -14,7 +14,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { FadeIn } from "@/components/fade-in";
-import { Mail, ExternalLink, CheckCircle2 } from "lucide-react";
+import { Mail, ExternalLink, CheckCircle2, MessageCircle } from "lucide-react";
 
 const initialState: ContactFormState = {
   success: false,
@@ -150,16 +150,16 @@ export function ContactForm() {
             </span>
           </div>
           <div className="flex items-center gap-3">
-            <Mail className="h-4 w-4 shrink-0 text-foreground" />
+            <MessageCircle className="h-4 w-4 shrink-0 text-foreground" />
             <span>
-              Book a call , {" "}
+              Prefer WhatsApp?{" "}
               <a
-                href="https://cal.com"
+                href="https://wa.me/919373238164?text=Hi%20Aditya%2C%20I%20saw%20your%20portfolio%20and%20wanted%20to%20chat%20about%20a%20project."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-accent-blue hover:underline"
               >
-                Schedule on Cal.com
+                +91 93732 38164
               </a>
             </span>
           </div>
