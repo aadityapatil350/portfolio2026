@@ -34,12 +34,15 @@ export default function NowPage() {
               At work
             </h2>
             <p className="mt-3">
-              Leading engineering at Renewalytics. Day-to-day is Reflux,
-              Excel Flow, and the internal invoice system. Right now I&apos;m
-              building a Reflux chatbot so operators can query forecasts in
-              natural language instead of clicking through dashboards. Also
-              pushing RealSync (our realtime monitoring MVP) toward its first
-              paying customer this year.
+              I lead engineering at Renewalytics, but the title undersells it.
+              On a normal week I&apos;m owning the engineering roadmap, managing
+              servers and the wider infra, mentoring our junior devs through
+              their tickets, jumping into client calls when something needs
+              explaining, and writing the actual code. Day-to-day projects are
+              Reflux, Excel Flow, and the internal invoice system. Right now
+              I&apos;m building a Reflux chatbot so operators can query
+              forecasts in natural language, and pushing RealSync (our realtime
+              monitoring MVP) toward its first paying customer.
             </p>
           </FadeIn>
 

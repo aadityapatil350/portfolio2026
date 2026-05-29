@@ -67,23 +67,40 @@ export default function AboutPage() {
                 No CS degree. My formal education is a Mechanical Engineering
                 diploma from 2020, and I&apos;m wrapping up a PGDM in IT
                 Management at MIT School of Management right now. Everything I
-                know about TypeScript, React, Node.js, system design, I picked
-                up myself.
+                know about code, I picked up myself.
               </p>
               <p>
-                It started with YouTube and Stack Overflow. Nights spent on
-                small projects, CRUD apps, API wrappers, anything that let me
-                write code and watch it run. Then I got an internship at
-                Climate Connect Digital where I shipped PHP for two and a half
-                years, mostly building ARS, their automatic reporting system
-                for wind and solar. Got promoted twice, then got laid off in
-                the 2024 round.
+                It actually started with games. I wanted to build my own, so I
+                taught myself C# and Unity, spent late nights chasing tutorials
+                and breaking things until something moved on screen. Some of
+                that early work still lives at{" "}
+                <a
+                  href="https://instagram.com/arcadeaart"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-foreground font-medium underline underline-offset-2 decoration-muted-foreground/40 hover:decoration-foreground transition-colors"
+                >
+                  @arcadeaart
+                </a>
+                {" "}on Instagram. That obsession with seeing code do something
+                real is what kept me going.
               </p>
               <p>
-                In June 2024, I joined Renewalytics as Lead Software Engineer.
-                This is where it clicked. Real stakes, 3,400+ MW of capacity
-                flowing through systems I built, government portal integrations
-                that legally have to work, reporting automation for 33+ plants
+                From there I jumped into web. Picked up PHP at my first
+                internship at Climate Connect Digital and shipped it for two
+                and a half years, mostly building ARS, their automatic
+                reporting system for wind and solar. Got promoted twice, then
+                got laid off in the 2024 round. Somewhere in the middle of
+                that I started learning the MERN stack on the side, then went
+                deep on vanilla JavaScript, then TypeScript, then everything
+                modern around React and Node.
+              </p>
+              <p>
+                In June 2024, I joined Renewalytics as a Software Engineer,
+                got promoted to Lead Software Engineer on the back of what I
+                shipped. This is where it clicked. Real stakes, 3,400+ MW of
+                capacity flowing through systems I built, SCADA integrations
+                that have to stay live, reporting automation for 33+ plants
                 that runs every single day. You don&apos;t learn this stuff
                 from tutorials. You learn it by being on call when something
                 breaks at 6 AM.
@@ -114,14 +131,14 @@ export default function AboutPage() {
                 <span className="absolute -left-[7px] top-1.5 block h-3 w-3 rounded-full border-2 border-foreground bg-background" />
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
                   <h3 className="font-semibold text-foreground">
-                    Lead Software Engineer
+                    Software Engineer → Lead Software Engineer
                   </h3>
                   <span className="font-mono text-xs text-muted-foreground">
                     Jun 2024 – Present
                   </span>
                 </div>
                 <p className="text-sm text-muted-foreground mt-0.5">
-                  Renewalytics
+                  Renewalytics · Promoted to Lead based on what I shipped
                 </p>
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                   Full-stack development, backend architecture, Docker
@@ -336,7 +353,7 @@ export default function AboutPage() {
               },
               {
                 name: "Reflux",
-                desc: "Operational platform for forecasting revisions, scheduling, reporting automation, and government portal integrations serving 3,400+ MW capacity.",
+                desc: "Operational platform for solar + hydro forecasting revisions, scheduling, and reporting automation serving 3,400+ MW capacity.",
                 link: "/projects/reflux",
               },
               {

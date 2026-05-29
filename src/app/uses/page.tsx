@@ -91,7 +91,7 @@ const categories: UseCategory[] = [
     heading: "SEO & Marketing",
     items: [
       { name: "Technical SEO", description: "Next.js Metadata API, JSON-LD, dynamic sitemaps, robots.txt" },
-      { name: "Content", description: "Programmatic pages, structured data, RSS feeds" },
+      { name: "Content", description: "Programmatic pages, structured data, sitemaps" },
       { name: "Analytics", description: "Google Search Console" },
       { name: "Image Optimization", description: "Sharp, next/image, OG image generation" },
     ],
@@ -104,7 +104,6 @@ const categories: UseCategory[] = [
         name: "Writing",
         description: "Claude (drafts, brainstorming, documentation)",
       },
-      { name: "Image Generation", description: "Imaginate.pro (own project)" },
     ],
   },
   {
@@ -112,7 +111,7 @@ const categories: UseCategory[] = [
     items: [
       {
         name: "Machine",
-        description: 'MacBook Pro 14" M3 Pro, 32GB RAM',
+        description: 'MacBook Air 15" M4, 16GB RAM',
       },
     ],
   },

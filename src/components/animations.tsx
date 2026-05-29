@@ -256,22 +256,26 @@ export function Marquee({
 }: MarqueeProps) {
   return (
     <div className={`overflow-hidden ${className || ""}`}>
-      <motion.div
-        animate={{ x: reverse ? ["0%", "-50%"] : ["-50%", "0%"] }}
-        transition={{
-          x: {
-            repeat: Infinity,
-            repeatType: "loop",
-            duration: speed,
-            ease: "linear",
-          },
-        }}
+      <div
         className="flex shrink-0 gap-8"
-        style={{ width: "max-content" }}
+        style={{
+          width: "max-content",
+          animation: `marquee-${reverse ? "rtl" : "ltr"} ${speed}s linear infinite`,
+        }}
       >
         {children}
         {children}
-      </motion.div>
+      </div>
+      <style>{`
+        @keyframes marquee-ltr {
+          from { transform: translateX(0); }
+          to   { transform: translateX(-50%); }
+        }
+        @keyframes marquee-rtl {
+          from { transform: translateX(-50%); }
+          to   { transform: translateX(0); }
+        }
+      `}</style>
     </div>
   );
 }

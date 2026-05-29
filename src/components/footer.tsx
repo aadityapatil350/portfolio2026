@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Github, Twitter, Rss, Mail } from "lucide-react";
+import { Github, Twitter, Mail } from "lucide-react";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -21,7 +21,7 @@ export function Footer() {
             <Github className="h-4 w-4" />
           </Link>
           <Link
-            href="https://x.com/adityapatil350"
+            href="https://x.com/aadityapatil350"
             target="_blank"
             rel="noopener noreferrer"
             className="text-muted-foreground transition-colors hover:text-foreground"
@@ -30,14 +30,7 @@ export function Footer() {
             <Twitter className="h-4 w-4" />
           </Link>
           <Link
-            href="/rss.xml"
-            className="text-muted-foreground transition-colors hover:text-foreground"
-            aria-label="RSS Feed"
-          >
-            <Rss className="h-4 w-4" />
-          </Link>
-          <Link
-            href="mailto:hello@aditya.dev"
+            href="mailto:adityabiz350@gmail.com"
             className="text-muted-foreground transition-colors hover:text-foreground"
             aria-label="Email"
           >

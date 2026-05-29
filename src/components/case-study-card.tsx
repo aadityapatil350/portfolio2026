@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { TechBadge } from "@/components/tech-badge";
 import { StatusBadge } from "@/components/status-badge";
@@ -17,9 +16,8 @@ export function CaseStudyCard({ study }: { study: CaseStudy }) {
   const initial = study.title.charAt(0).toUpperCase();
 
   return (
-    <Link
-      href={`/projects/${study.slug}`}
-      className="group block rounded-lg border border-border p-4 transition-colors hover:border-foreground/20"
+    <div
+      className="group block rounded-lg border border-border p-4"
     >
       {/* Thumbnail placeholder */}
       <div
@@ -28,13 +26,10 @@ export function CaseStudyCard({ study }: { study: CaseStudy }) {
         <span className="text-4xl font-bold">{initial}</span>
       </div>
 
-      {/* Title + arrow */}
-      <div className="mb-1 flex items-start justify-between gap-2">
-        <h3 className="font-semibold text-lg leading-snug group-hover:text-accent-blue transition-colors">
-          {study.title}
-        </h3>
-        <ArrowUpRight className="mt-1 h-4 w-4 shrink-0 text-muted-foreground opacity-0 transition-all group-hover:opacity-100 group-hover:text-accent-blue" />
-      </div>
+      {/* Title */}
+      <h3 className="mb-1 font-semibold text-lg leading-snug">
+        {study.title}
+      </h3>
 
       {/* One-liner */}
       <p className="mb-3 text-sm text-muted-foreground leading-relaxed">
@@ -55,6 +50,6 @@ export function CaseStudyCard({ study }: { study: CaseStudy }) {
 
       {/* Status */}
       <StatusBadge status={study.status} />
-    </Link>
+    </div>
   );
 }

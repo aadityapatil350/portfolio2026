@@ -7,13 +7,13 @@ export const siteConfig = {
   role: "Lead Software Engineer",
   company: "Renewalytics",
   tagline:
-    "Engineer-for-hire by day. Indie hacker by night.",
+    "Engineer. Builder. Shipper.",
   subtagline:
-    "Lead engineer at Renewalytics building forecasting, reporting, and realtime monitoring for renewable plants. On the side, I ship indie products, break most of them, and take on freelance MVPs and AI workflow automation.",
+    "Lead engineer at Renewalytics by day, indie hacker by night. Available for freelance MVPs and AI workflow automation.",
   social: {
     github: "https://github.com/aadityapatil350",
-    twitter: "https://x.com/adityapatil350",
-    email: "hello@adityapatil.dev",
+    twitter: "https://x.com/aadityapatil350",
+    email: "adityabiz350@gmail.com",
     linkedin: "",
   },
   available: true, // Toggle this to show/hide availability badge
@@ -86,18 +86,6 @@ export const services: Service[] = [
       "On-page SEO",
       "Google Business setup",
       "Contact forms + analytics",
-    ],
-  },
-  {
-    icon: "search",
-    title: "SEO content + indexation",
-    description:
-      "Write and ship the blog content that brings inbound leads. Same playbook I used on GoSolarIndex.in to hit page-1 rankings inside two weeks.",
-    capabilities: [
-      "Technical SEO audit",
-      "Keyword + topic strategy",
-      "Blog content production",
-      "Structured data + sitemaps",
     ],
   },
   {

@@ -106,21 +106,21 @@ export function HomeContent({
         <div className="pointer-events-none absolute bottom-0 -left-20 h-[300px] w-[300px] rounded-full bg-accent-teal/5 blur-[100px] dark:bg-accent-teal/3" />
 
         <div className="content-width relative px-4 sm:px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-12 lg:gap-16 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-12 lg:gap-16 items-center">
             {/* ─── LEFT: text content ─── */}
             <div>
-          {/* Availability badge */}
+          {/* Status line */}
           <FadeIn delay={0.1}>
-            <div className="mb-6 flex items-center gap-3">
-              {available && (
-                <span className="inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-700 dark:text-emerald-400">
-                  <span className="relative flex h-2 w-2">
-                    <GlowPulse className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-60" />
-                    <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-                  </span>
-                  Available for work
-                </span>
-              )}
+            <div className="mb-6 flex items-center gap-2 font-mono text-[11px] sm:text-xs uppercase tracking-[0.18em] text-muted-foreground">
+              <span className="relative flex h-2 w-2">
+                <GlowPulse className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-60" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+              </span>
+              Currently at Renewalytics
+              <span className="text-muted-foreground/50">—</span>
+              {available
+                ? "open to interesting conversations"
+                : "not currently taking new work"}
             </div>
           </FadeIn>
 
@@ -147,17 +147,11 @@ export function HomeContent({
             </p>
           </FadeIn>
 
-          {/* Location + meta */}
+          {/* Location */}
           <FadeIn delay={0.85}>
-            <div className="mt-6 flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
-              <span className="inline-flex items-center gap-1.5">
-                <MapPin className="h-3.5 w-3.5" />
-                {location}
-              </span>
-              <span className="inline-flex items-center gap-1.5 font-mono text-xs">
-                <Terminal className="h-3.5 w-3.5" />
-                Lead Software Engineer @ Renewalytics
-              </span>
+            <div className="mt-6 inline-flex items-center gap-1.5 text-sm text-muted-foreground">
+              <MapPin className="h-3.5 w-3.5" />
+              {location}
             </div>
           </FadeIn>
 
@@ -177,26 +171,6 @@ export function HomeContent({
                   <Link href="/contact">Hire Me</Link>
                 </Button>
               </Magnetic>
-              <Magnetic>
-                <Button size="lg" variant="ghost" asChild className="gap-2">
-                  <Link href={resumeUrl}>
-                    <Download className="h-4 w-4" />
-                    Resume
-                  </Link>
-                </Button>
-              </Magnetic>
-              <Magnetic>
-                <Button size="lg" variant="ghost" asChild className="gap-2">
-                  <Link
-                    href="https://github.com/aadityapatil350"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Github className="h-4 w-4" />
-                    GitHub
-                  </Link>
-                </Button>
-              </Magnetic>
             </div>
           </FadeIn>
             </div>
@@ -204,21 +178,19 @@ export function HomeContent({
 
             {/* ─── RIGHT: portrait + stats ─── */}
             <FadeIn delay={0.3} className="order-first lg:order-none">
-              <div className="flex flex-col items-center gap-6 lg:gap-8">
-                <div className="relative h-56 w-56 sm:h-64 sm:w-64 lg:h-72 lg:w-72 xl:h-80 xl:w-80 overflow-hidden rounded-2xl border border-border bg-black shadow-2xl shadow-accent-blue/5">
+              <div className="flex flex-col items-center">
+                <div className="relative h-72 w-72 sm:h-80 sm:w-80 lg:h-96 lg:w-96 xl:h-[28rem] xl:w-[28rem]">
                   <Image
-                    src="/hero-portrait.png"
+                    src="/hero-portrait-v2.png"
                     alt="Aditya Patil"
                     fill
                     priority
-                    sizes="(max-width: 1280px) 288px, 320px"
-                    className="object-cover scale-[1.6] translate-y-2"
+                    sizes="(max-width: 640px) 288px, (max-width: 1024px) 320px, (max-width: 1280px) 384px, 448px"
+                    className="object-contain object-bottom"
                   />
-                  {/* subtle gradient overlay to blend with the page */}
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
                 </div>
 
-                <div className="grid grid-cols-3 gap-6 text-center w-full">
+                <div className="grid grid-cols-3 gap-6 text-center w-full -mt-4 sm:-mt-6 lg:-mt-8 xl:-mt-10">
                   <div>
                     <div className="font-mono text-2xl xl:text-3xl font-bold tracking-tight">
                       <CountUp target={5} suffix="+" />
@@ -372,10 +344,8 @@ export function HomeContent({
 
           {/* Primary case study, large card */}
           <BlurIn delay={0.15} className="mt-10">
-            <HoverScale scale={1.01}>
-              <Link
-                href={`/projects/${caseStudies[0].slug}`}
-                className="group block overflow-hidden rounded-xl border border-border"
+              <div
+                className="block overflow-hidden rounded-xl border border-border"
               >
                 <div className="grid lg:grid-cols-2">
                   {/* Left, visual */}
@@ -430,8 +400,7 @@ export function HomeContent({
                     </div>
                   </div>
                 </div>
-              </Link>
-            </HoverScale>
+              </div>
           </BlurIn>
 
           {/* Other case studies, 2x2 grid */}
@@ -441,6 +410,79 @@ export function HomeContent({
                 <CaseStudyCard study={study} />
               </FadeIn>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════════════════════════
+          NOW, what I'm working on right now
+      ════════════════════════════════════════════════════════════ */}
+      <section className="border-y border-border bg-muted/20 py-20 sm:py-28">
+        <div className="content-width px-4 sm:px-6">
+          <FadeIn>
+            <div className="flex items-end justify-between gap-4 flex-wrap">
+              <div>
+                <div className="mb-2 text-xs font-mono uppercase tracking-widest text-muted-foreground">
+                  Now
+                </div>
+                <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
+                  What I&apos;m working on right now
+                </h2>
+              </div>
+              <Link
+                href="/now"
+                className="inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
+              >
+                Full now page
+                <ArrowRight className="h-3 w-3" />
+              </Link>
+            </div>
+          </FadeIn>
+
+          <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <FadeIn delay={0.1}>
+              <div className="rounded-xl border border-border bg-background p-6 h-full">
+                <div className="mb-3 text-xs font-mono uppercase tracking-widest text-accent-blue">
+                  At work
+                </div>
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  At Renewalytics I wear most of the hats. Owning the engineering
+                  roadmap, managing servers and infra, guiding the junior devs,
+                  handling client conversations, and shipping the actual code.
+                  Right now: a Reflux chatbot for natural-language forecast
+                  queries, and pushing RealSync toward its first paying customer.
+                </p>
+              </div>
+            </FadeIn>
+
+            <FadeIn delay={0.2}>
+              <div className="rounded-xl border border-border bg-background p-6 h-full">
+                <div className="mb-3 text-xs font-mono uppercase tracking-widest text-accent-teal">
+                  Indie projects
+                </div>
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  <span className="font-medium text-foreground">Social Copilot</span>{" "}
+                  is my main bet, social scheduler with AI video gen. MVP in
+                  progress. <span className="font-medium text-foreground">GoSolarIndex</span> and{" "}
+                  <span className="font-medium text-foreground">MSMEVault</span>{" "}
+                  are live SEO experiments built with Claude Code, both pulling
+                  real organic traffic.
+                </p>
+              </div>
+            </FadeIn>
+
+            <FadeIn delay={0.3}>
+              <div className="rounded-xl border border-border bg-background p-6 h-full">
+                <div className="mb-3 text-xs font-mono uppercase tracking-widest text-foreground/70">
+                  Learning
+                </div>
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  Going deep on AI agents and agent frameworks. Every indie
+                  product I ship from here on out is AI-native by default, not
+                  a feature bolted on. Reading code more than docs.
+                </p>
+              </div>
+            </FadeIn>
           </div>
         </div>
       </section>

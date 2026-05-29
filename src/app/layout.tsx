@@ -67,7 +67,7 @@ export const metadata: Metadata = {
     title: "Aditya Patil, Lead Software Engineer | Systems Builder",
     description:
       "Building operational systems, automation platforms & AI-powered workflows.",
-    creator: "@adityapatil350",
+    creator: "@aadityapatil350",
     images: ["/og?title=Aditya%20Patil&description=Systems%20Engineer"],
   },
   robots: {
@@ -100,7 +100,7 @@ const jsonLd = {
   },
   sameAs: [
     "https://github.com/aadityapatil350",
-    "https://x.com/adityapatil350",
+    "https://x.com/aadityapatil350",
   ],
   knowsAbout: [
     "operational systems",
@@ -127,12 +127,6 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-        <link
-          rel="alternate"
-          type="application/rss+xml"
-          title="Aditya Patil's Blog"
-          href="/rss.xml"
         />
       </head>
       <body

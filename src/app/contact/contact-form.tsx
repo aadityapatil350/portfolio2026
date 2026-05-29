@@ -128,10 +128,10 @@ export function ContactForm() {
             <span>
               Prefer email?{" "}
               <a
-                href="mailto:hello@aditya.dev"
+                href="mailto:adityabiz350@gmail.com"
                 className="text-accent-blue hover:underline"
               >
-                hello@aditya.dev
+                adityabiz350@gmail.com
               </a>
             </span>
           </div>
@@ -140,7 +140,7 @@ export function ContactForm() {
             <span>
               Find me on{" "}
               <a
-                href="https://x.com/aditya"
+                href="https://x.com/aadityapatil350"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-accent-blue hover:underline"

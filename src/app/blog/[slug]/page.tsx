@@ -188,12 +188,6 @@ export default async function BlogPostPage({
                 >
                   Subscribe via email
                 </a>
-                <a
-                  href="/rss.xml"
-                  className="inline-flex items-center justify-center rounded-md border border-border px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground hover:border-foreground/20"
-                >
-                  RSS feed
-                </a>
               </div>
             </div>
           </div>

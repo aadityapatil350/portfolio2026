@@ -89,7 +89,7 @@ export async function submitContactForm(
     try {
       const { Resend } = await import("resend");
       const resend = new Resend(process.env.RESEND_API_KEY);
-      const toEmail = process.env.CONTACT_EMAIL || "hello@aditya.dev";
+      const toEmail = process.env.CONTACT_EMAIL || "adityabiz350@gmail.com";
 
       await resend.emails.send({
         from: "Portfolio Contact <onboarding@resend.dev>",

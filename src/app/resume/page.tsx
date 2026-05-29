@@ -202,18 +202,20 @@ export default function ResumePage() {
               <StaggerItem className="print:animate-none">
                 <ExperienceEntry
                   company="Renewalytics"
-                  role="Lead Software Engineer"
+                  role="Software Engineer → Lead Software Engineer"
                   period="Jun 2024 – Present"
                   isCurrent
                   bullets={[
+                    "Joined as Software Engineer; promoted to Lead Software Engineer based on shipped product impact",
                     "Full-stack development and backend architecture for renewable energy SaaS platform serving 3,400+ MW capacity across India",
                     "Built RealSync CMS, enterprise realtime monitoring system with WebSockets, MQTT, OPC-UA ingestion, alarm systems, and AI-ready telemetry pipelines",
-                    "Architected and built Reflux, operational platform for solar + hydro forecasting revisions (CT/ST schedules to SLDC), scheduling, reporting automation, and government portal integrations",
+                    "Architected and built Reflux, operational platform for solar + hydro forecasting revisions (CTU/STU schedules to SLDC), scheduling, and reporting automation, serving 40+ plants across 13+ clients",
                     "Designed and shipped Excel Flow, automated 30+ daily reports and alerts across 33+ solar/wind/BESS plants, scraping 30+ daily Excel sheets and generating next-day outputs",
-                    "Built COPS, DSM penalties and asset management dashboard for client Juniper Green Energy",
+                    "Built COPS, DSM penalties and asset management dashboard for client Juniper Green Energy, covering 14+ plants",
+                    "Reflux, Excel Flow, and COPS were all shipped to production within ~1.2 years",
                     "Shipped internal Invoice Management System for tracking and reconciling client invoices generated through Reflux",
                     "Containerized services with Docker, managed Linux infrastructure, and set up CI/CD with GitHub Actions",
-                    "Integrated SCADA systems and government energy portal APIs for realtime data exchange",
+                    "Integrated SCADA systems for realtime data exchange",
                   ]}
                 />
               </StaggerItem>
@@ -366,32 +368,6 @@ export default function ResumePage() {
           </div>
         </section>
 
-        {/* ── Projects ── */}
-        <section className="mt-12 print:mt-8">
-          <FadeIn delay={0.1} className="print:animate-none">
-            <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-              Projects
-            </span>
-            <h2 className="mt-3 text-xl font-semibold tracking-tight">
-              Selected Projects
-            </h2>
-          </FadeIn>
-
-          <FadeIn delay={0.2} className="print:animate-none">
-            <p className="mt-3 text-sm text-muted-foreground">
-              Built RealSync CMS, Reflux, Excel Flow, and COPS for Juniper Green
-              at Renewalytics. Independently shipped GoSolarIndex.in and
-              MSMEVault.in as indie SEO-driven directory products.
-            </p>
-            <Link
-              href="/projects"
-              className="mt-3 inline-flex items-center gap-2 text-sm font-medium text-foreground hover:text-accent-blue transition-colors print:hidden"
-            >
-              View all case studies
-              <ArrowRight className="h-3.5 w-3.5" />
-            </Link>
-          </FadeIn>
-        </section>
       </div>
     </div>
   );
