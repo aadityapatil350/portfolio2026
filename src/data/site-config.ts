@@ -1,6 +1,6 @@
 export const siteConfig = {
   name: "Aditya Patil",
-  url: "https://adityapatil.dev",
+  url: "https://adityapatil.work",
   description:
     "I'm Aditya. Engineer-for-hire by day, indie hacker by night. I lead engineering at Renewalytics in Pune and build AI-native indie products on the side.",
   location: "Pune, India",

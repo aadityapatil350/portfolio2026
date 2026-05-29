@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     title: "Aditya Patil, Engineer-for-hire by day. Indie hacker by night.",
     description:
       "Lead engineer at Renewalytics by day, indie hacker by night. Freelance MVPs and AI workflow automation on the side.",
-    url: "https://adityapatil.dev",
+    url: "https://adityapatil.work",
     type: "website",
     images: [
       {

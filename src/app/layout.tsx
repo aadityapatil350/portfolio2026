@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
 import { PageTransition } from "@/components/page-transition";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -19,7 +20,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://adityapatil.dev"),
+  metadataBase: new URL("https://adityapatil.work"),
   title: {
     default: "Aditya Patil, Engineer-for-hire by day. Indie hacker by night.",
     template: "%s | Aditya Patil",
@@ -43,12 +44,12 @@ export const metadata: Metadata = {
     "climate tech",
     "backend engineer",
   ],
-  authors: [{ name: "Aditya Patil", url: "https://adityapatil.dev" }],
+  authors: [{ name: "Aditya Patil", url: "https://adityapatil.work" }],
   creator: "Aditya Patil",
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://adityapatil.dev",
+    url: "https://adityapatil.work",
     siteName: "Aditya Patil",
     title: "Aditya Patil, Engineer-for-hire by day. Indie hacker by night.",
     description:
@@ -87,7 +88,7 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Aditya Patil",
-  url: "https://adityapatil.dev",
+  url: "https://adityapatil.work",
   jobTitle: "Lead Software Engineer",
   worksFor: {
     "@type": "Organization",
@@ -121,6 +122,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const gaId = process.env.NEXT_PUBLIC_GA_ID;
+  const gscVerification = process.env.NEXT_PUBLIC_GSC_VERIFICATION;
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -128,6 +132,9 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        {gscVerification && (
+          <meta name="google-site-verification" content={gscVerification} />
+        )}
       </head>
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased bg-background text-foreground`}
@@ -141,6 +148,7 @@ export default function RootLayout({
             <Footer />
           </div>
         </ThemeProvider>
+        {gaId && <GoogleAnalytics gaId={gaId} />}
       </body>
     </html>
   );

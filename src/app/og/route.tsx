@@ -4,7 +4,7 @@ import { type NextRequest } from "next/server";
 export const runtime = "edge";
 
 const SITE_NAME = "Aditya";
-const SITE_URL = "https://aditya.dev";
+const SITE_URL = "https://adityapatil.work";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -57,7 +57,7 @@ export async function GET(request: NextRequest) {
               letterSpacing: "-0.02em",
             }}
           >
-            aditya.dev
+            adityapatil.work
           </span>
         </div>
 

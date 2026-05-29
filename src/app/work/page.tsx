@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Work | Aditya",
     description: "Selected case studies and projects I've shipped.",
-    url: "https://aditya.dev/work",
+    url: "https://adityapatil.work/work",
   },
 };
 

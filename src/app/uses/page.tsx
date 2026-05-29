@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     title: "Uses | Aditya",
     description:
       "The tools, software, and hardware I use to build and ship products.",
-    url: "https://aditya.dev/uses",
+    url: "https://adityapatil.work/uses",
   },
 };
 

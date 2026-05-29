@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     title: "Contact | Aditya",
     description:
       "Need a full-stack MVP built or an AI workflow that replaces manual ops work? Let's talk.",
-    url: "https://aditya.dev/contact",
+    url: "https://adityapatil.work/contact",
   },
 };
 

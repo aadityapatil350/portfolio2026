@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     title: "Resume, Aditya Patil",
     description:
       "Lead Software Engineer specializing in full-stack development, realtime systems, and AI workflow automation.",
-    url: "https://adityapatil.dev/resume",
+    url: "https://adityapatil.work/resume",
   },
 };
 

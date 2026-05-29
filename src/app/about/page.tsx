@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     title: "About | Aditya Patil",
     description:
       "Self-taught Lead Software Engineer building operational systems, automation platforms, and AI-powered workflows. Based in Pune, India.",
-    url: "https://adityapatil.dev/about",
+    url: "https://adityapatil.work/about",
   },
 };
 

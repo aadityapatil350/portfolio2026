@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/api/"],
       },
     ],
-    sitemap: "https://aditya.dev/sitemap.xml",
+    sitemap: "https://adityapatil.work/sitemap.xml",
   };
 }

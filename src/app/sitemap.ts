@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 import { getAllSlugs } from "@/lib/mdx";
 
-const BASE_URL = "https://adityapatil.dev";
+const BASE_URL = "https://adityapatil.work";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const blogSlugs = getAllSlugs("blog");
