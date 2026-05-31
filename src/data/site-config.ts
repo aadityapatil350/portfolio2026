@@ -68,7 +68,7 @@ export const services: Service[] = [
     icon: "cpu",
     title: "AI workflow automation",
     description:
-      "If your team is doing repetitive Excel or email work, there's a good chance I can replace most of it with an AI-driven pipeline. This is what I do at the day job.",
+      "If your team is doing repetitive Excel or email work, there's a good chance I can replace most of it with an AI-driven pipeline. This is exactly what I do at the day job, across 33+ plants.",
     capabilities: [
       "AI agents for ops",
       "Document + email automation",
@@ -77,51 +77,15 @@ export const services: Service[] = [
     ],
   },
   {
-    icon: "monitor",
-    title: "Small business websites + SEO",
-    description:
-      "Fast Next.js websites for shops, clinics, services, and small businesses. SEO-ready from day one, with Google Business setup and a sensible CMS.",
-    capabilities: [
-      "Next.js + Tailwind site",
-      "On-page SEO",
-      "Google Business setup",
-      "Contact forms + analytics",
-    ],
-  },
-  {
     icon: "database",
     title: "Internal dashboards + admin tools",
     description:
-      "Replace the team's manual Excel workflows with a real dashboard. Custom-built, fits your actual process, not a no-code prison.",
+      "Replace the team's manual Excel workflows with a real dashboard. Custom-built, fits your actual process, not a no-code prison. SCADA, realtime data, reporting, all in scope.",
     capabilities: [
       "Custom admin panels",
-      "Reporting dashboards",
+      "Realtime + reporting dashboards",
       "Role-based access",
-      "Excel/data ingestion",
-    ],
-  },
-  {
-    icon: "messageSquare",
-    title: "AI chatbots + lead capture",
-    description:
-      "Set up a customer support, FAQ, or lead-capture bot end-to-end. Trained on your content, integrated into your site, easy to maintain.",
-    capabilities: [
-      "Custom chatbot setup",
-      "Lead capture flows",
-      "Knowledge base ingestion",
-      "WhatsApp / web embeds",
-    ],
-  },
-  {
-    icon: "lightbulb",
-    title: "Tech advisor for non-tech founders",
-    description:
-      "Pick the right stack. Vet a developer. Avoid getting ripped off. Hourly advisory for founders who don't want to learn the hard way.",
-    capabilities: [
-      "Stack + vendor selection",
-      "Developer vetting",
-      "Architecture reviews",
-      "Cost / scope sanity checks",
+      "Excel / SCADA / API ingestion",
     ],
   },
 ];
