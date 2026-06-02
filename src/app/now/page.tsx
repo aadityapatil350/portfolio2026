@@ -21,7 +21,7 @@ export default function NowPage() {
               Now
             </h1>
             <p className="mt-2 font-mono text-sm text-muted-foreground">
-              Last updated: May 2026
+              Last updated: June 2026
             </p>
           </FadeIn>
         </div>
@@ -34,15 +34,44 @@ export default function NowPage() {
               At work
             </h2>
             <p className="mt-3">
-              I lead engineering at Renewalytics, but the title undersells it.
-              On a normal week I&apos;m owning the engineering roadmap, managing
-              servers and the wider infra, mentoring our junior devs through
-              their tickets, jumping into client calls when something needs
-              explaining, and writing the actual code. Day-to-day projects are
-              Reflux, Excel Flow, and the internal invoice system. Right now
-              I&apos;m building a Reflux chatbot so operators can query
-              forecasts in natural language, and pushing RealSync (our realtime
-              monitoring MVP) toward its first paying customer.
+              I&apos;m Lead Software Engineer at Renewalytics on a
+              two-engineer team (down from three earlier this year). The
+              title undersells the scope &mdash; alongside architecture and
+              full-stack development I own the infrastructure on
+              DigitalOcean, deploys, monitoring, and the on-call rotation.
+              Three of my products run in production right now:{" "}
+              <span className="font-medium text-foreground">Reflux</span>{" "}
+              (forecasting + scheduling for 40+ plants),{" "}
+              <span className="font-medium text-foreground">Excel Flow</span>{" "}
+              (DGR automation across 33+ plants), and{" "}
+              <span className="font-medium text-foreground">COPS</span> (DSM
+              dashboard for Juniper Green Energy). Right now I&apos;m
+              shipping a Reflux chatbot so operators can query forecasts in
+              natural language, and pushing{" "}
+              <span className="font-medium text-foreground">RealSync CMS</span>{" "}
+              (our realtime monitoring MVP) toward its first paying customer.
+            </p>
+          </FadeIn>
+
+          <FadeIn>
+            <h2 className="text-xl font-semibold text-foreground">
+              Taking on client work
+            </h2>
+            <p className="mt-3">
+              As of June 2026 I&apos;m saying yes to a small number of
+              freelance projects on the side. Custom websites, web apps, AI
+              workflow automation, and internal dashboards. Sector-agnostic
+              &mdash; I&apos;m most useful where there&apos;s a real
+              business problem to solve, not just a design ask. The day job
+              pays the rent, so freelance gets to be the work I actually
+              want to take on. Packages and the pitch live on my{" "}
+              <a
+                href="/hire"
+                className="text-foreground font-medium underline underline-offset-2 decoration-muted-foreground/40 hover:decoration-foreground transition-colors"
+              >
+                hire page
+              </a>
+              .
             </p>
           </FadeIn>
 
@@ -77,7 +106,9 @@ export default function NowPage() {
               Going deep on AI agents and agent frameworks. Every indie product
               I ship from here on out is AI-native by default, not a feature
               bolted on. Reading code more than docs, building small
-              throwaway agents to feel the rough edges.
+              throwaway agents to feel the rough edges. Also wrapping up the
+              final semester of my PGDM in IT Management at MIT School of
+              Management.
             </p>
           </FadeIn>
 

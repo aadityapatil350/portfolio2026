@@ -9,7 +9,6 @@ import {
   Database,
   Cpu,
   Zap,
-  Instagram,
 } from "lucide-react";
 import { FadeIn, BlurIn, StaggerContainer, StaggerItem } from "@/components/animations";
 import { EmailDialog } from "@/components/contact/email-dialog";
@@ -467,17 +466,7 @@ export default function HirePage() {
                 <MessageCircle className="h-4 w-4" />
                 WhatsApp +91 93732 38164
               </a>
-              <a
-                href="https://instagram.com/localhostescape"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-md border border-border px-6 py-3 text-sm font-semibold transition-colors hover:bg-muted"
-              >
-                <Instagram className="h-4 w-4" />
-                @localhostescape
-              </a>
               <EmailDialog triggerLabel="Email" />
-
             </div>
             <div className="mt-12">
               <Link

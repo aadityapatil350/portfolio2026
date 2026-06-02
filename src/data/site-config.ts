@@ -140,18 +140,6 @@ export const caseStudies: CaseStudy[] = [
     ],
   },
   {
-    slug: "gosolarindex",
-    title: "GoSolarIndex.in",
-    oneLiner: "17x indexed pages growth in 6 days via technical SEO",
-    description:
-      "India's solar installer directory. Built in 3 days, shipped to page-1 rankings through pure technical SEO execution.",
-    thumbnail: "/images/gosolarindex.jpg",
-    tech: ["Next.js", "PostgreSQL", "Technical SEO"],
-    status: "Live",
-    link: "https://gosolarindex.in",
-    metrics: ["Built in 3 days", "17x index growth", "Page 1 rankings", "100% organic"],
-  },
-  {
     slug: "cops-dsm-csm",
     title: "COPS DSM & CSM Portal",
     oneLiner:
@@ -166,24 +154,6 @@ export const caseStudies: CaseStudy[] = [
       "CSM management",
       "Juniper Green Energy",
       "Operational portal",
-    ],
-  },
-  {
-    slug: "msmevault",
-    title: "MSMEVault.in",
-    oneLiner:
-      "Indian MSME government schemes directory with NBFC lead generation",
-    description:
-      "Directory of Indian MSME government schemes, monetized via NBFC loan lead generation. Pure SEO play with zero paid marketing.",
-    thumbnail: "/images/msmevault.jpg",
-    tech: ["Next.js", "Technical SEO"],
-    status: "Live",
-    link: "https://msmevault.in",
-    metrics: [
-      "100+ scheme listings",
-      "NBFC partnerships",
-      "Organic traffic",
-      "Lead generation",
     ],
   },
   {
