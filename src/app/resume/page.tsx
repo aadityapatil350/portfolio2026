@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import {
   Github,
-  Twitter,
   Mail,
+  Phone,
   Download,
   ArrowRight,
   MapPin,
@@ -119,11 +119,18 @@ export default function ResumePage() {
               Pune, India
             </span>
             <a
-              href={`mailto:${siteConfig.social.email}`}
+              href="tel:+917875655996"
+              className="inline-flex items-center gap-1.5 hover:text-foreground transition-colors"
+            >
+              <Phone className="h-3.5 w-3.5" />
+              +91 78756 55996
+            </a>
+            <a
+              href="mailto:aadityapatil350@gmail.com"
               className="inline-flex items-center gap-1.5 hover:text-foreground transition-colors"
             >
               <Mail className="h-3.5 w-3.5" />
-              {siteConfig.social.email}
+              aadityapatil350@gmail.com
             </a>
             <a
               href={siteConfig.social.github}
@@ -134,20 +141,12 @@ export default function ResumePage() {
               <Github className="h-3.5 w-3.5" />
               GitHub
             </a>
-            <a
-              href={siteConfig.social.twitter}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 hover:text-foreground transition-colors"
-            >
-              <Twitter className="h-3.5 w-3.5" />
-              X
-            </a>
           </div>
 
           <div className="mt-6 flex flex-wrap gap-3">
             <a
               href={siteConfig.resumeUrl}
+              download="Aditya-Patil-Resume.pdf"
               className="inline-flex items-center gap-2 rounded-md bg-foreground px-4 py-2 text-sm font-medium text-background transition-colors hover:bg-foreground/90 print:hidden"
             >
               <Download className="h-4 w-4" />
@@ -170,15 +169,21 @@ export default function ResumePage() {
               Summary
             </span>
             <p className="mt-3 text-base leading-relaxed text-muted-foreground">
-              Self-taught Lead Software Engineer with 3.5+ years of experience
-              building production-grade operational platforms for the renewable
-              energy industry. Full-stack expertise spanning Next.js, Node.js,
-              TypeScript, and modern database systems. Currently leading
-              engineering at Renewalytics, architecting realtime monitoring
-              systems, automated reporting pipelines, and AI workflow systems
-              serving 3,400+ MW of renewable energy capacity across India. Passionate
-              about AI agents, operational copilots, and systems that turn data
-              into automated action.
+              Lead Software Engineer with 4+ years of experience building and
+              scaling production systems for the renewable energy sector.
+              Currently leading engineering initiatives at Renewalytics, where I
+              architect, develop, deploy, and maintain mission-critical platforms
+              serving 3,400+ MW of renewable assets across India.
+            </p>
+            <p className="mt-4 text-base leading-relaxed text-muted-foreground">
+              I operate across the full technology stack&mdash;from product
+              design and software architecture to cloud infrastructure, DevOps,
+              and team leadership. My work includes forecasting and scheduling
+              platforms, operational automation systems, DSM management, asset
+              monitoring, and AI-driven workflows that help energy companies
+              make faster and more accurate decisions. Passionate about building
+              products from zero to scale, solving complex business problems,
+              and leveraging AI to automate operational processes.
             </p>
           </FadeIn>
         </section>
@@ -206,16 +211,15 @@ export default function ResumePage() {
                   period="Jun 2024 – Present"
                   isCurrent
                   bullets={[
-                    "Joined as Software Engineer; promoted to Lead Software Engineer based on shipped product impact",
-                    "Full-stack development and backend architecture for renewable energy SaaS platform serving 3,400+ MW capacity across India",
-                    "Built RealSync CMS, enterprise realtime monitoring system with WebSockets, MQTT, OPC-UA ingestion, alarm systems, and AI-ready telemetry pipelines",
-                    "Architected and built Reflux, operational platform for solar + hydro forecasting revisions (CTU/STU schedules to SLDC), scheduling, and reporting automation, serving 40+ plants across 13+ clients",
-                    "Designed and shipped Excel Flow, automated 30+ daily reports and alerts across 33+ solar/wind/BESS plants, scraping 30+ daily Excel sheets and generating next-day outputs",
-                    "Built COPS, DSM penalties and asset management dashboard for client Juniper Green Energy, covering 14+ plants",
-                    "Reflux, Excel Flow, and COPS were all shipped to production within ~1.2 years",
-                    "Shipped internal Invoice Management System for tracking and reconciling client invoices generated through Reflux",
-                    "Containerized services with Docker, managed Linux infrastructure, and set up CI/CD with GitHub Actions",
-                    "Integrated SCADA systems for realtime data exchange",
+                    "Promoted from Software Engineer to Lead Software Engineer within the first year based on shipped product impact",
+                    "Own full-stack development and backend architecture for a renewable energy SaaS platform serving 3,400+ MW across India",
+                    "Shipped Reflux within 3 months of joining, partnering with the ops team. Operational platform for solar and hydro forecasting revisions (CTU/STU to SLDC), scheduling, and reporting automation; now serves 40+ plants across 13+ clients",
+                    "Shipped Excel Flow later the same year with one intern. Automated DGR reporting pipeline and ops dashboards for 33+ solar/wind/BESS plants; scrapes 30+ daily Excel sheets, generates next-day outputs, and surfaces live ops data",
+                    "Took on COPS for Juniper Green Energy once Excel Flow workload eased; developed and deployed end-to-end as primary engineer, working directly with Juniper's Digital Transformation Leader. DSM penalties and asset management dashboard covering 14+ plants",
+                    "Delivered an internal Invoice Management System for tracking and reconciling client invoices generated through Reflux",
+                    "Containerized services with Docker, manage Linux infrastructure, and set up CI/CD with GitHub Actions",
+                    "Integrated SCADA systems for realtime data exchange across multiple renewable assets",
+                    "Currently building RealSync CMS, an enterprise realtime monitoring system with WebSockets, MQTT, OPC-UA ingestion, alarm systems, and AI-ready telemetry pipelines (in development)",
                   ]}
                 />
               </StaggerItem>

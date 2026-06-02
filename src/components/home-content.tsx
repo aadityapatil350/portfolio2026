@@ -168,7 +168,7 @@ export function HomeContent({
               </Magnetic>
               <Magnetic>
                 <Button size="lg" variant="outline" asChild>
-                  <Link href="/contact">Hire Me</Link>
+                  <Link href="/hire">Hire Me</Link>
                 </Button>
               </Magnetic>
             </div>
@@ -201,7 +201,7 @@ export function HomeContent({
                   </div>
                   <div>
                     <div className="font-mono text-2xl xl:text-3xl font-bold tracking-tight">
-                      <CountUp target={8} suffix="+" />
+                      <CountUp target={36} suffix="+" />
                     </div>
                     <p className="mt-1 text-[11px] uppercase tracking-wider text-muted-foreground">
                       Products shipped
@@ -209,10 +209,10 @@ export function HomeContent({
                   </div>
                   <div>
                     <div className="font-mono text-2xl xl:text-3xl font-bold tracking-tight">
-                      <CountUp target={16} suffix="+" />
+                      <CountUp target={13} suffix="+" />
                     </div>
                     <p className="mt-1 text-[11px] uppercase tracking-wider text-muted-foreground">
-                      Built &amp; killed
+                      Clients served
                     </p>
                   </div>
                 </div>
@@ -269,9 +269,8 @@ export function HomeContent({
               What I can build for you
             </h2>
             <p className="mt-3 max-w-2xl text-muted-foreground">
-              Three things I do best, drawn straight from what I ship every day
-              for production renewable-energy systems. Senior engineering, not
-              an agency.
+              Three things I do best, drawn from what I ship every day in
+              production. Senior engineering, not an agency.
             </p>
           </FadeIn>
 
@@ -327,175 +326,6 @@ export function HomeContent({
         <AnimatedLine />
       </div>
 
-      {/* ════════════════════════════════════════════════════════════
-          ENGAGEMENT MODELS, pricing without exact rates
-      ════════════════════════════════════════════════════════════ */}
-      <section className="border-y border-border bg-muted/20 py-20 sm:py-28">
-        <div className="content-width px-4 sm:px-6">
-          <FadeIn>
-            <div className="mb-2 text-xs font-mono uppercase tracking-widest text-muted-foreground">
-              Engagement
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
-              Three ways to work together
-            </h2>
-            <p className="mt-3 max-w-2xl text-muted-foreground">
-              Pick whichever fits the shape of your problem. Pricing depends on
-              scope, share the details and I&apos;ll give you a real number
-              within 24 hours.
-            </p>
-          </FadeIn>
-
-          <StaggerContainer staggerDelay={0.1} className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
-            <StaggerItem>
-              <div className="h-full rounded-xl border border-border bg-background p-6">
-                <div className="mb-3 text-xs font-mono uppercase tracking-widest text-accent-blue">
-                  Fixed-scope MVP
-                </div>
-                <h3 className="text-lg font-semibold">
-                  Idea to live product in 2–6 weeks
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                  One agreed scope, one price, one ship date. Next.js + Prisma
-                  + Postgres + Docker, deployed and working. Best for founders
-                  with a clear product idea and a deadline.
-                </p>
-                <p className="mt-4 font-mono text-sm text-foreground">
-                  From <span className="text-muted-foreground">[YOUR_MVP_RATE]</span>
-                </p>
-              </div>
-            </StaggerItem>
-
-            <StaggerItem>
-              <div className="h-full rounded-xl border border-border bg-background p-6">
-                <div className="mb-3 text-xs font-mono uppercase tracking-widest text-accent-teal">
-                  Monthly retainer
-                </div>
-                <h3 className="text-lg font-semibold">
-                  Ongoing automation + dashboards
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                  For teams that need a senior engineer on tap to ship AI
-                  automations, internal dashboards, or operational tooling
-                  every month. Scoped hours, predictable bill, no agency
-                  layers.
-                </p>
-                <p className="mt-4 font-mono text-sm text-foreground">
-                  From <span className="text-muted-foreground">[YOUR_RETAINER_RATE]</span> / month
-                </p>
-              </div>
-            </StaggerItem>
-
-            <StaggerItem>
-              <div className="h-full rounded-xl border border-border bg-background p-6">
-                <div className="mb-3 text-xs font-mono uppercase tracking-widest text-foreground/70">
-                  Hourly advisory
-                </div>
-                <h3 className="text-lg font-semibold">
-                  Architecture + decision calls
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                  Stuck choosing a stack, vetting a developer, sanity-checking
-                  scope, or unblocking a debugging session. Pay-as-you-go for
-                  founders who need senior input without a long contract.
-                </p>
-                <p className="mt-4 font-mono text-sm text-foreground">
-                  <span className="text-muted-foreground">[YOUR_HOURLY_RATE]</span> / hour
-                </p>
-              </div>
-            </StaggerItem>
-          </StaggerContainer>
-        </div>
-      </section>
-
-      {/* ════════════════════════════════════════════════════════════
-          SOCIAL PROOF, hard metrics until real testimonials land
-      ════════════════════════════════════════════════════════════ */}
-      <section className="py-20 sm:py-28">
-        <div className="content-width px-4 sm:px-6">
-          <FadeIn>
-            <div className="mb-2 text-xs font-mono uppercase tracking-widest text-muted-foreground">
-              Proof
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
-              What the work actually does
-            </h2>
-            <p className="mt-3 max-w-2xl text-muted-foreground">
-              Until clients send me quotes I can publish, here are the numbers
-              the systems I&apos;ve shipped are doing in production right now.
-            </p>
-          </FadeIn>
-
-          <StaggerContainer staggerDelay={0.1} className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
-            <StaggerItem>
-              <div className="h-full rounded-xl border border-border p-6">
-                <div className="font-mono text-3xl font-bold tracking-tight text-foreground">
-                  3,400+ MW
-                </div>
-                <p className="mt-2 text-sm font-medium text-foreground">
-                  Renewable capacity monitored
-                </p>
-                <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                  Forecasting, scheduling, and reporting infrastructure I built
-                  at Renewalytics, serving 40+ plants across 13+ clients.
-                </p>
-              </div>
-            </StaggerItem>
-
-            <StaggerItem>
-              <div className="h-full rounded-xl border border-border p-6">
-                <div className="font-mono text-3xl font-bold tracking-tight text-foreground">
-                  30+ reports
-                </div>
-                <p className="mt-2 text-sm font-medium text-foreground">
-                  Automated daily across 33+ plants
-                </p>
-                <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                  Excel Flow replaced a 3-hour manual workflow with a 12-minute
-                  cron pipeline. Multi-sheet parsing, vendor-specific extractors,
-                  zero human in the loop.
-                </p>
-              </div>
-            </StaggerItem>
-
-            <StaggerItem>
-              <div className="h-full rounded-xl border border-border p-6">
-                <div className="font-mono text-3xl font-bold tracking-tight text-foreground">
-                  17× growth
-                </div>
-                <p className="mt-2 text-sm font-medium text-foreground">
-                  Indexed pages in 6 days
-                </p>
-                <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                  GoSolarIndex went from 3 to 51 indexed pages in under a week
-                  via technical SEO alone. Page-1 rankings inside two weeks,
-                  zero paid marketing.
-                </p>
-              </div>
-            </StaggerItem>
-          </StaggerContainer>
-
-          {/* Testimonial placeholders, swap in real quotes when collected */}
-          <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
-            {[1, 2, 3].map((i) => (
-              <FadeIn key={i} delay={0.1 * i}>
-                <figure className="h-full rounded-xl border border-dashed border-border p-6">
-                  <blockquote className="text-sm leading-relaxed text-muted-foreground">
-                    &ldquo;[TESTIMONIAL_QUOTE_{i}]&rdquo;
-                  </blockquote>
-                  <figcaption className="mt-4 text-xs text-muted-foreground">
-                    <span className="font-medium text-foreground">
-                      [NAME_{i}]
-                    </span>
-                    <br />
-                    [ROLE_{i}], [COMPANY_{i}]
-                  </figcaption>
-                </figure>
-              </FadeIn>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* ════════════════════════════════════════════════════════════
           FEATURED WORK, Case studies with stagger + metrics
@@ -682,7 +512,7 @@ export function HomeContent({
             <StaggerItem>
               <div className="text-center">
                 <div className="font-mono text-3xl sm:text-4xl font-bold tracking-tight">
-                  <CountUp target={8} suffix="+" />
+                  <CountUp target={36} suffix="+" />
                 </div>
                 <p className="mt-1 text-sm text-muted-foreground">Products shipped</p>
               </div>
@@ -690,9 +520,9 @@ export function HomeContent({
             <StaggerItem>
               <div className="text-center">
                 <div className="font-mono text-3xl sm:text-4xl font-bold tracking-tight">
-                  <CountUp target={16} suffix="+" />
+                  <CountUp target={13} suffix="+" />
                 </div>
-                <p className="mt-1 text-sm text-muted-foreground">Things built, broken, abandoned</p>
+                <p className="mt-1 text-sm text-muted-foreground">Clients served</p>
               </div>
             </StaggerItem>
           </StaggerContainer>
@@ -711,6 +541,11 @@ export function HomeContent({
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight max-w-2xl">
               Not a tutorial developer. A systems builder.
             </h2>
+            <p className="mt-3 max-w-2xl text-muted-foreground">
+              I don&apos;t learn a stack from a YouTube video and call it a day.
+              I build things that have to stay up, get paged for, and survive
+              the messy edges of real users and real data.
+            </p>
           </FadeIn>
 
           <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -814,12 +649,12 @@ export function HomeContent({
                 Work with me
               </div>
               <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
-                Need an MVP built or a workflow automated?
+                Have a business problem to solve?
               </h2>
               <p className="mt-4 text-muted-foreground leading-relaxed">
-                I take on a small number of freelance projects on the side.
-                If you need someone who can architect it, build it, and stay
-                on call when it breaks, let&apos;s talk.
+                Websites, web apps, AI automation, internal tools &mdash;
+                whatever the shape of the problem, I architect it, build it,
+                and stay on call when it breaks. Let&apos;s talk.
               </p>
               <div className="mt-8 flex flex-wrap justify-center gap-3">
                 <Magnetic>

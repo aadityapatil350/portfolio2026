@@ -7,6 +7,15 @@ const nextConfig: NextConfig = {
     ignoreBuildErrors: true,
   },
   reactStrictMode: false,
+  async redirects() {
+    return [
+      {
+        source: "/contact",
+        destination: "/hire",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

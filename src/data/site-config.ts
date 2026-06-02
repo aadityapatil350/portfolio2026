@@ -7,9 +7,9 @@ export const siteConfig = {
   role: "Lead Software Engineer",
   company: "Renewalytics",
   tagline:
-    "Engineer. Builder. Shipper.",
+    "Turning business problems into software solutions.",
   subtagline:
-    "Lead engineer at Renewalytics by day, indie hacker by night. Available for freelance MVPs and AI workflow automation.",
+    "Custom Websites • Web Applications • AI Automation • Internal Tools",
   social: {
     github: "https://github.com/aadityapatil350",
     twitter: "https://x.com/aadityapatil350",
@@ -54,9 +54,9 @@ export interface Service {
 export const services: Service[] = [
   {
     icon: "layers",
-    title: "Full-stack MVPs for founders",
+    title: "Full-stack MVPs",
     description:
-      "Idea to deployed product in weeks. Next.js, Prisma, Postgres, Docker. I've shipped enough MVPs to know the shortcuts and the landmines.",
+      "For founders and operations leads who need a real product in weeks, not months. Next.js + Prisma + Postgres + Docker, deployed and working, with the architecture choices a senior would make on day one.",
     capabilities: [
       "Zero-to-launch builds",
       "Auth, payments, dashboards",
@@ -68,7 +68,7 @@ export const services: Service[] = [
     icon: "cpu",
     title: "AI workflow automation",
     description:
-      "If your team is doing repetitive Excel or email work, there's a good chance I can replace most of it with an AI-driven pipeline. This is exactly what I do at the day job, across 33+ plants.",
+      "Replace your team's manual Excel, email, and reporting workflows with an AI-driven pipeline. From sales ops to finance to support — anywhere a human is copy-pasting between tools every day, there's a pipeline that can do it instead.",
     capabilities: [
       "AI agents for ops",
       "Document + email automation",
@@ -80,12 +80,12 @@ export const services: Service[] = [
     icon: "database",
     title: "Internal dashboards + admin tools",
     description:
-      "Replace the team's manual Excel workflows with a real dashboard. Custom-built, fits your actual process, not a no-code prison. SCADA, realtime data, reporting, all in scope.",
+      "For ops, finance, sales, and operations teams who have outgrown spreadsheets. Custom-built around your actual process — not a generic template. Realtime data, reporting, role-based access, all in scope.",
     capabilities: [
       "Custom admin panels",
       "Realtime + reporting dashboards",
       "Role-based access",
-      "Excel / SCADA / API ingestion",
+      "Excel / API / database ingestion",
     ],
   },
 ];
@@ -117,11 +117,11 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: "dgr-automation",
-    title: "Excel Flow, Reporting Automation",
+    title: "Excel Flow, Reporting Automation + Dashboard",
     oneLiner:
-      "Automated 30+ daily reports and alerts across 33+ solar/wind/BESS plants",
+      "Automated reporting + ops dashboard for Acme client, covering 33+ solar/wind/BESS plants",
     description:
-      "Replaced a manual Excel workflow across 33+ renewable plants. Scrapes 30+ daily uploaded sheets, processes multi-sheet operational data, and generates next-day reports + alerts via cron-based async pipelines.",
+      "Built for Acme as both an automation pipeline and an operations dashboard. Scrapes 30+ daily uploaded Excel sheets across 33+ renewable plants, processes multi-sheet operational data, generates next-day reports + alerts via cron-based async pipelines, and surfaces it all in a dashboard the ops team uses every morning.",
     thumbnail: "/images/dgr.jpg",
     tech: [
       "Node.js",
@@ -264,7 +264,7 @@ export const indieProjects: IndieProject[] = [
 
 export const stats = {
   yearsCoding: "5+",
-  productsShipped: "8+",
+  productsShipped: "36+",
   systemsAtScale: "3,400+ MW",
   automatedReports: "30+",
   githubUsername: "aadityapatil350",

@@ -91,10 +91,11 @@ export function ContactForm() {
                 <SelectValue placeholder="Select a type" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="freelance">Freelance project</SelectItem>
-                <SelectItem value="fulltime">Full-time role</SelectItem>
-                <SelectItem value="partnership">Partnership</SelectItem>
-                <SelectItem value="hello">Just saying hi</SelectItem>
+                <SelectItem value="website">Website / landing page</SelectItem>
+                <SelectItem value="webapp">Web app / MVP</SelectItem>
+                <SelectItem value="automation">AI / workflow automation</SelectItem>
+                <SelectItem value="dashboard">Internal dashboard</SelectItem>
+                <SelectItem value="other">Something else</SelectItem>
               </SelectContent>
             </Select>
           </div>
