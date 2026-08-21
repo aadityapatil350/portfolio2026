@@ -3,30 +3,46 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Phone, MessageCircle } from "lucide-react";
 import { ThemeToggle } from "./theme-toggle";
 import { cn } from "@/lib/utils";
+import { trackEvent } from "@/lib/analytics";
 
 const navLinks = [
   { href: "/", label: "Home" },
+  { href: "/services/reporting-automation", label: "Services" },
+  { href: "/work", label: "Case Studies" },
   { href: "/about", label: "About" },
-  { href: "/projects", label: "Projects" },
   { href: "/blog", label: "Blog" },
-  { href: "/now", label: "Now" },
-  { href: "/uses", label: "Uses" },
-  { href: "/resume", label: "Resume" },
 ];
 
+const PHONE_NUMBER = "+919373238164";
+const FORMATTED_PHONE = "+91 93732 38164";
+
 export function Nav() {
-  const pathname = usePathname();
+  const pathname = usePathname() || "/";
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  const handlePhoneClick = () => {
+    trackEvent("phone_click", {
+      page_path: pathname,
+    });
+  };
+
+  const handleWhatsAppClick = () => {
+    trackEvent("whatsapp_click", {
+      page_path: pathname,
+      cta_variant: "primary",
+      context: "header nav button",
+    });
+  };
+
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/80 backdrop-blur-sm">
+    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/85 backdrop-blur-md">
       <nav className="content-width flex h-14 items-center justify-between px-4 sm:px-6">
         <Link
           href="/"
-          className="font-mono text-sm font-semibold tracking-tight"
+          className="font-mono text-sm font-semibold tracking-tight hover:opacity-90 transition-opacity"
         >
           aditya<span className="text-accent-blue">.</span>
         </Link>
@@ -39,7 +55,7 @@ export function Nav() {
               href={link.href}
               className={cn(
                 "px-3 py-1.5 text-sm transition-colors hover:text-foreground",
-                pathname === link.href
+                pathname === link.href || (link.href.startsWith("/services") && pathname.startsWith("/services"))
                   ? "text-foreground font-medium"
                   : "text-muted-foreground"
               )}
@@ -47,28 +63,50 @@ export function Nav() {
               {link.label}
             </Link>
           ))}
-          <div className="ml-2 flex items-center gap-1">
+
+          {/* Desktop phone link */}
+          <a
+            href={`tel:${PHONE_NUMBER}`}
+            onClick={handlePhoneClick}
+            className="ml-2 inline-flex items-center gap-1.5 rounded-md border border-border/80 bg-muted/40 px-2.5 py-1 font-mono text-xs text-muted-foreground transition-colors hover:border-border hover:bg-muted hover:text-foreground"
+            title="Direct phone line"
+          >
+            <Phone className="h-3 w-3 text-emerald-500" />
+            <span>{FORMATTED_PHONE}</span>
+          </a>
+
+          <div className="ml-2 flex items-center gap-2">
             <ThemeToggle />
-            <Link
-              href="/hire"
-              className="hire-cta group relative ml-1 inline-flex items-center gap-2 overflow-hidden rounded-md bg-foreground px-3 py-1.5 text-sm font-semibold text-background transition-transform hover:scale-[1.03] active:scale-[0.98]"
+            <a
+              href={`https://wa.me/919373238164?text=${encodeURIComponent("Hi Aditya, I saw your website and wanted to discuss an engineering project: ")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={handleWhatsAppClick}
+              className="group relative ml-1 inline-flex items-center gap-2 overflow-hidden rounded-md bg-emerald-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm transition-all hover:bg-emerald-500 active:scale-[0.98]"
             >
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-70 animate-ping" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
-              </span>
-              <span className="relative z-10">Hire me</span>
-              <span aria-hidden className="hire-cta-shine" />
-            </Link>
+              <MessageCircle className="h-3.5 w-3.5" />
+              <span>Discuss Project</span>
+            </a>
           </div>
         </div>
 
-        {/* Mobile nav toggle */}
+        {/* Mobile nav controls */}
         <div className="flex items-center gap-1 md:hidden">
+          {/* Mobile direct phone dialer */}
+          <a
+            href={`tel:${PHONE_NUMBER}`}
+            onClick={handlePhoneClick}
+            className="inline-flex items-center justify-center rounded-md p-2 text-emerald-600 dark:text-emerald-400 hover:bg-muted"
+            aria-label={`Call ${FORMATTED_PHONE}`}
+          >
+            <Phone className="h-4 w-4" />
+          </a>
+
           <ThemeToggle />
+
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="inline-flex items-center justify-center rounded-md p-2 text-muted-foreground hover:text-foreground"
+            className="inline-flex items-center justify-center rounded-md p-2 text-muted-foreground hover:text-foreground hover:bg-muted"
             aria-label="Toggle menu"
           >
             {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -76,10 +114,10 @@ export function Nav() {
         </div>
       </nav>
 
-      {/* Mobile menu */}
+      {/* Mobile dropdown menu */}
       {mobileOpen && (
         <div className="border-b border-border bg-background md:hidden">
-          <div className="content-width space-y-1 px-4 py-3 sm:px-6">
+          <div className="content-width space-y-1.5 px-4 py-3 sm:px-6">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -87,7 +125,7 @@ export function Nav() {
                 onClick={() => setMobileOpen(false)}
                 className={cn(
                   "block rounded-md px-3 py-2 text-sm transition-colors",
-                  pathname === link.href
+                  pathname === link.href || (link.href.startsWith("/services") && pathname.startsWith("/services"))
                     ? "bg-accent font-medium text-foreground"
                     : "text-muted-foreground hover:text-foreground"
                 )}
@@ -95,53 +133,37 @@ export function Nav() {
                 {link.label}
               </Link>
             ))}
-            <Link
-              href="/hire"
-              onClick={() => setMobileOpen(false)}
-              className="hire-cta group relative flex items-center justify-center gap-2 overflow-hidden rounded-md bg-foreground px-3 py-2.5 text-center text-sm font-semibold text-background"
-            >
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-70 animate-ping" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
-              </span>
-              <span className="relative z-10">Hire me</span>
-              <span aria-hidden className="hire-cta-shine" />
-            </Link>
+
+            <div className="pt-2 border-t border-border space-y-2">
+              <a
+                href={`tel:${PHONE_NUMBER}`}
+                onClick={() => {
+                  handlePhoneClick();
+                  setMobileOpen(false);
+                }}
+                className="flex items-center justify-center gap-2 rounded-md border border-border bg-muted/60 px-3 py-2 text-sm font-mono text-foreground"
+              >
+                <Phone className="h-3.5 w-3.5 text-emerald-500" />
+                <span>Call {FORMATTED_PHONE}</span>
+              </a>
+
+              <a
+                href={`https://wa.me/919373238164?text=${encodeURIComponent("Hi Aditya, I saw your website and wanted to discuss an engineering project: ")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => {
+                  handleWhatsAppClick();
+                  setMobileOpen(false);
+                }}
+                className="flex items-center justify-center gap-2 rounded-md bg-emerald-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm"
+              >
+                <MessageCircle className="h-4 w-4" />
+                <span>Chat on WhatsApp</span>
+              </a>
+            </div>
           </div>
         </div>
       )}
-      <style>{`
-        @keyframes hire-cta-glow {
-          0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.0); }
-          50%      { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0.15); }
-        }
-        @keyframes hire-cta-sweep {
-          0%   { transform: translateX(-120%) skewX(-12deg); }
-          60%  { transform: translateX(220%)  skewX(-12deg); }
-          100% { transform: translateX(220%)  skewX(-12deg); }
-        }
-        .hire-cta {
-          animation: hire-cta-glow 2.4s ease-in-out infinite;
-        }
-        .hire-cta-shine {
-          position: absolute;
-          top: 0; left: 0;
-          height: 100%;
-          width: 40%;
-          background: linear-gradient(
-            90deg,
-            transparent 0%,
-            rgba(255,255,255,0.35) 50%,
-            transparent 100%
-          );
-          pointer-events: none;
-          animation: hire-cta-sweep 3.2s ease-in-out infinite;
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .hire-cta,
-          .hire-cta-shine { animation: none; }
-        }
-      `}</style>
     </header>
   );
 }

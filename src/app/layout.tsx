@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
 import { PageTransition } from "@/components/page-transition";
+import { StickyMobileCTA } from "@/components/sticky-mobile-cta";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 
@@ -22,27 +23,26 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://adityapatil.work"),
   title: {
-    default: "Aditya Patil, Engineer-for-hire by day. Indie hacker by night.",
+    default: "Aditya Patil — Independent Systems Engineer & Delivery Partner",
     template: "%s | Aditya Patil",
   },
   description:
-    "Lead engineer at Renewalytics by day, indie hacker by night. Available for full-stack MVPs and AI workflow automation. Pune, India.",
+    "Aditya Patil builds operational software that survives real use — reporting that runs itself, dashboards ops teams actually open, realtime monitoring, and AI workflows. Pune, India.",
   keywords: [
     "Aditya Patil",
-    "Lead Software Engineer",
+    "Independent Software Engineer",
     "Systems Engineer",
     "Renewalytics",
     "operational platforms",
     "automation",
     "realtime monitoring",
     "AI workflows",
-    "renewable energy",
+    "reporting automation",
     "SCADA",
-    "Next.js developer",
+    "Next.js",
     "TypeScript",
     "Pune",
-    "climate tech",
-    "backend engineer",
+    "delivery partner",
   ],
   authors: [{ name: "Aditya Patil", url: "https://adityapatil.work" }],
   creator: "Aditya Patil",
@@ -51,25 +51,25 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://adityapatil.work",
     siteName: "Aditya Patil",
-    title: "Aditya Patil, Engineer-for-hire by day. Indie hacker by night.",
+    title: "Aditya Patil — Operational Software & Engineering Delivery Partner",
     description:
-      "Lead engineer at Renewalytics by day, indie hacker by night. Freelance MVPs and AI workflow automation on the side.",
+      "Operational software that survives real use — reporting pipelines, ops dashboards, realtime systems, and AI workflows.",
     images: [
       {
-        url: "/og?title=Aditya%20Patil&description=Systems%20Engineer%20%7C%20Building%20operational%20platforms",
+        url: "/og?title=Aditya%20Patil&description=Independent%20Systems%20Engineer",
         width: 1200,
         height: 630,
-        alt: "Aditya Patil, Systems Engineer",
+        alt: "Aditya Patil, Independent Systems Engineer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Aditya Patil, Lead Software Engineer | Systems Builder",
+    title: "Aditya Patil — Independent Systems Engineer",
     description:
-      "Building operational systems, automation platforms & AI-powered workflows.",
+      "Operational software that survives real use — reporting pipelines, ops dashboards, realtime systems, and AI workflows.",
     creator: "@aadityapatil350",
-    images: ["/og?title=Aditya%20Patil&description=Systems%20Engineer"],
+    images: ["/og?title=Aditya%20Patil&description=Independent%20Systems%20Engineer"],
   },
   robots: {
     index: true,
@@ -89,7 +89,8 @@ const jsonLd = {
   "@type": "Person",
   name: "Aditya Patil",
   url: "https://adityapatil.work",
-  jobTitle: "Lead Software Engineer",
+  jobTitle: "Lead Software Engineer & Delivery Partner",
+  telephone: "+91-9373238164",
   worksFor: {
     "@type": "Organization",
     name: "Renewalytics",
@@ -105,11 +106,11 @@ const jsonLd = {
   ],
   knowsAbout: [
     "operational systems",
-    "automation platforms",
+    "reporting automation",
+    "internal dashboards",
     "realtime monitoring",
     "SCADA integrations",
-    "renewable energy",
-    "AI workflows",
+    "AI workflow automation",
     "Next.js",
     "TypeScript",
     "PostgreSQL",
@@ -142,10 +143,11 @@ export default function RootLayout({
         <ThemeProvider>
           <div className="flex min-h-screen flex-col">
             <Nav />
-            <main className="flex-1">
+            <main className="flex-1 pb-16 md:pb-0">
               <PageTransition>{children}</PageTransition>
             </main>
             <Footer />
+            <StickyMobileCTA />
           </div>
         </ThemeProvider>
         {gaId && <GoogleAnalytics gaId={gaId} />}

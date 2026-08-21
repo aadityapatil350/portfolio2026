@@ -47,7 +47,9 @@ export function ScrollToNextPage({ pathname }: { pathname: string }) {
     upDeltaRef.current = 0;
     bottomSinceRef.current = null;
     topSinceRef.current = null;
-    setIsTransitioning(false);
+    requestAnimationFrame(() => {
+      setIsTransitioning(false);
+    });
   }, [pathname]);
 
   useEffect(() => {

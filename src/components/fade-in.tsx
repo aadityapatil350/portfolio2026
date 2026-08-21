@@ -1,19 +1,36 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
+import { useSyncExternalStore, type ReactNode } from "react";
 
-interface FadeInProps {
-  children: React.ReactNode;
+const emptySubscribe = () => () => {};
+
+export function FadeIn({
+  children,
+  delay = 0,
+  className,
+}: {
+  children: ReactNode;
   delay?: number;
   className?: string;
-}
+}) {
+  const mounted = useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  );
+  const shouldReduceMotion = useReducedMotion();
 
-export function FadeIn({ children, delay = 0, className }: FadeInProps) {
+  // SSR, no-JS, or reduced motion: render fully visible plain div
+  if (!mounted || shouldReduceMotion) {
+    return <div className={className}>{children}</div>;
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 12 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-40px" }}
+      viewport={{ once: true, margin: "-20px" }}
       transition={{ duration: 0.4, delay, ease: "easeOut" }}
       className={className}
     >

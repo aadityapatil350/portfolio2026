@@ -1,678 +1,650 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import {
-  MapPin,
   ArrowRight,
-  ArrowUpRight,
-  Monitor,
-  Cpu,
+  Sparkles,
+  Phone,
   Layers,
-  Activity,
-  Download,
-  Github,
-  Terminal,
+  Cpu,
   Database,
-  Cloud,
-  Shield,
-  GitBranch,
-  Braces,
-  Server,
-  Wifi,
-  Search,
-  MessageSquare,
-  Lightbulb,
+  ShieldCheck,
+  CheckCircle2,
+  FileSpreadsheet,
+  Globe,
+  Radio,
+  Clock,
+  IndianRupee,
+  Factory,
+  Truck,
+  Briefcase,
+  SunMedium,
+  Rocket,
+  ChevronRight,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import {
-  FadeIn,
-  BlurIn,
-  TextReveal,
-  CountUp,
-  StaggerContainer,
-  StaggerItem,
-  AnimatedLine,
-  HoverScale,
-  Magnetic,
-  Marquee,
-  GlowPulse,
-} from "@/components/animations";
-import { CaseStudyCard } from "@/components/case-study-card";
-import { BlogPostCard } from "@/components/blog-post-card";
-import type { CaseStudy, Service, IndieProject } from "@/data/site-config";
-
-/* ─── Icon mapping for services ─── */
-const iconMap: Record<string, React.ReactNode> = {
-  monitor: <Monitor className="h-5 w-5" />,
-  cpu: <Cpu className="h-5 w-5" />,
-  layers: <Layers className="h-5 w-5" />,
-  activity: <Activity className="h-5 w-5" />,
-  search: <Search className="h-5 w-5" />,
-  database: <Database className="h-5 w-5" />,
-  messageSquare: <MessageSquare className="h-5 w-5" />,
-  lightbulb: <Lightbulb className="h-5 w-5" />,
-};
-
-interface BlogPostPreview {
-  title: string;
-  date: string;
-  tags: string[];
-  slug: string;
-  description?: string;
-}
+import { WhatsAppCTA } from "@/components/whatsapp-cta";
+import { OperationalTerminal } from "@/components/operational-terminal";
+import { FadeIn } from "@/components/fade-in";
+import type { CaseStudy } from "@/data/site-config";
 
 interface HomeContentProps {
-  name: string;
-  tagline: string;
-  subtagline: string;
-  location: string;
-  available: boolean;
   caseStudies: CaseStudy[];
-  services: Service[];
-  blogPosts: BlogPostPreview[];
-  stats: {
-    yearsCoding: string;
-    productsShipped: string;
-    systemsAtScale: string;
-    automatedReports: string;
-  };
-  resumeUrl: string;
 }
 
-export function HomeContent({
-  name,
-  tagline,
-  subtagline,
-  location,
-  available,
-  caseStudies,
-  services,
-  blogPosts,
-  stats,
-  resumeUrl,
-}: HomeContentProps) {
+export function HomeContent({ caseStudies }: HomeContentProps) {
+  const problems = [
+    {
+      pain: "Your team rebuilds the same report every morning.",
+      service: "Reporting Automation",
+      href: "/services/reporting-automation",
+    },
+    {
+      pain: "You're running 15 spreadsheets with no access control or audit logs.",
+      service: "Internal Dashboards",
+      href: "/services/internal-dashboards",
+    },
+    {
+      pain: "High-value staff are manually reading PDFs and typing data into software.",
+      service: "AI Workflow Automation",
+      href: "/services/ai-workflow-automation",
+    },
+    {
+      pain: "Your previous developer disappeared and left an undocumented mess.",
+      service: "Codebase Rescue",
+      href: "/services/codebase-rescue",
+    },
+  ];
+
+  const targetSectors = [
+    {
+      name: "Manufacturing",
+      icon: Factory,
+      pain: "Shift reports & SCADA machine data",
+      href: "/industries/manufacturing",
+    },
+    {
+      name: "Logistics & Fleet",
+      icon: Truck,
+      pain: "WhatsApp dispatch chaos & POD collection",
+      href: "/industries/logistics",
+    },
+    {
+      name: "Professional Services",
+      icon: Briefcase,
+      pain: "Document intake & compliance deadlines",
+      href: "/industries/professional-services",
+    },
+    {
+      name: "Energy & Infrastructure",
+      icon: SunMedium,
+      pain: "DGR automation, SLDC portals & 3.4 GW telemetry",
+      href: "/industries/energy",
+    },
+    {
+      name: "Startups & Scaleups",
+      icon: Rocket,
+      pain: "MVP speed, no in-house engineers & ops panels",
+      href: "/industries/startups",
+    },
+  ];
+
   return (
     <div>
       {/* ════════════════════════════════════════════════════════════
-          HERO, Cinematic with text reveal + grid background
+          1. HERO SECTION: Lead with Proof & Horizontal Breadth
       ════════════════════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden py-20 sm:py-32 lg:py-40">
-        {/* Subtle grid background */}
-        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.03)_1px,transparent_1px)] bg-[size:4rem_4rem] dark:bg-[linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)]" />
-
-        {/* Gradient orb, very subtle, just for depth */}
-        <div className="pointer-events-none absolute -top-40 right-0 h-[500px] w-[500px] rounded-full bg-accent-blue/5 blur-[120px] dark:bg-accent-blue/3" />
-        <div className="pointer-events-none absolute bottom-0 -left-20 h-[300px] w-[300px] rounded-full bg-accent-teal/5 blur-[100px] dark:bg-accent-teal/3" />
-
-        <div className="content-width relative px-4 sm:px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-12 lg:gap-16 items-center">
-            {/* ─── LEFT: text content ─── */}
+      <section
+        id="hero-section"
+        className="relative overflow-hidden border-b border-border py-16 sm:py-24 lg:py-28"
+      >
+        <div className="content-width px-4 sm:px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-12 items-center">
+            {/* Left: Headline & CTAs */}
             <div>
-          {/* Status line */}
-          <FadeIn delay={0.1}>
-            <div className="mb-6 flex items-center gap-2 font-mono text-[11px] sm:text-xs uppercase tracking-[0.18em] text-muted-foreground">
-              <span className="relative flex h-2 w-2">
-                <GlowPulse className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-60" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-              </span>
-              Currently at Renewalytics
-              <span className="text-muted-foreground/50">·</span>
-              {available
-                ? "Taking freelance projects"
-                : "Not taking new projects right now"}
-            </div>
-          </FadeIn>
+              <FadeIn>
+                <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 font-mono text-xs font-semibold text-emerald-600 dark:text-emerald-400">
+                  <span className="relative flex h-2 w-2">
+                    <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+                  </span>
+                  <span>Available For Delivery Partnerships &amp; Core Builds</span>
+                </div>
+              </FadeIn>
 
-          {/* Name, text reveal animation */}
-          <div className="overflow-hidden">
-            <TextReveal
-              text={name}
-              className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tighter"
-              wordDelay={0.06}
-            />
-          </div>
+              <FadeIn delay={0.1}>
+                <h1 className="mt-5 text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-foreground leading-[1.1]">
+                  Aditya Patil builds operational software that survives real use.
+                </h1>
+              </FadeIn>
 
-          {/* Tagline, delayed reveal */}
-          <BlurIn delay={0.5} className="mt-2 max-w-3xl">
-            <p className="text-xl sm:text-2xl lg:text-3xl font-medium text-muted-foreground leading-snug tracking-tight">
-              {tagline}
-            </p>
-          </BlurIn>
+              <FadeIn delay={0.15}>
+                <p className="mt-6 text-lg sm:text-xl text-muted-foreground leading-relaxed">
+                  Reporting that runs itself. Dashboards ops teams actually open.
+                  Realtime systems that page someone at 3 AM. AI workflows that replace manual processes.
+                </p>
+              </FadeIn>
 
-          {/* Subtagline */}
-          <FadeIn delay={0.7}>
-            <p className="mt-4 max-w-2xl text-base sm:text-lg text-muted-foreground/80 leading-relaxed">
-              {subtagline}
-            </p>
-          </FadeIn>
+              {/* Sector Scope Bar */}
+              <FadeIn delay={0.2}>
+                <div className="mt-6 flex flex-wrap items-center gap-2 text-xs font-mono text-muted-foreground">
+                  <span className="text-foreground font-semibold">Sectors:</span>
+                  <span>Manufacturing</span>
+                  <span>·</span>
+                  <span>Logistics</span>
+                  <span>·</span>
+                  <span>Professional Services</span>
+                  <span>·</span>
+                  <span>Energy</span>
+                  <span>·</span>
+                  <span>Startups</span>
+                </div>
+              </FadeIn>
 
-          {/* Location */}
-          <FadeIn delay={0.85}>
-            <div className="mt-6 inline-flex items-center gap-1.5 text-sm text-muted-foreground">
-              <MapPin className="h-3.5 w-3.5" />
-              {location}
-            </div>
-          </FadeIn>
-
-          {/* CTAs */}
-          <FadeIn delay={1}>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Magnetic>
-                <Button size="lg" asChild className="gap-2">
-                  <Link href="/projects">
-                    View Work
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                </Button>
-              </Magnetic>
-              <Magnetic>
-                <Button size="lg" variant="outline" asChild>
-                  <Link href="/hire">Hire Me</Link>
-                </Button>
-              </Magnetic>
-            </div>
-          </FadeIn>
-            </div>
-            {/* ─── /LEFT ─── */}
-
-            {/* ─── RIGHT: portrait + stats ─── */}
-            <FadeIn delay={0.3} className="order-first lg:order-none">
-              <div className="flex flex-col items-center">
-                <div className="relative h-72 w-72 sm:h-80 sm:w-80 lg:h-96 lg:w-96 xl:h-[28rem] xl:w-[28rem]">
-                  <Image
-                    src="/hero-portrait-v2.png"
-                    alt="Aditya Patil"
-                    fill
-                    priority
-                    sizes="(max-width: 640px) 288px, (max-width: 1024px) 320px, (max-width: 1280px) 384px, 448px"
-                    className="object-contain object-bottom"
+              {/* CTAs */}
+              <FadeIn delay={0.25}>
+                <div className="mt-8 flex flex-wrap items-center gap-4">
+                  <WhatsAppCTA
+                    context="homepage hero"
+                    label="Discuss a Build on WhatsApp"
+                    size="lg"
+                    showArrow
                   />
-                </div>
-
-                <div className="grid grid-cols-3 gap-6 text-center w-full -mt-4 sm:-mt-6 lg:-mt-8 xl:-mt-10">
-                  <div>
-                    <div className="font-mono text-2xl xl:text-3xl font-bold tracking-tight">
-                      <CountUp target={5} suffix="+" />
-                    </div>
-                    <p className="mt-1 text-[11px] uppercase tracking-wider text-muted-foreground">
-                      Years shipping
-                    </p>
-                  </div>
-                  <div>
-                    <div className="font-mono text-2xl xl:text-3xl font-bold tracking-tight">
-                      <CountUp target={36} suffix="+" />
-                    </div>
-                    <p className="mt-1 text-[11px] uppercase tracking-wider text-muted-foreground">
-                      Products shipped
-                    </p>
-                  </div>
-                  <div>
-                    <div className="font-mono text-2xl xl:text-3xl font-bold tracking-tight">
-                      <CountUp target={13} suffix="+" />
-                    </div>
-                    <p className="mt-1 text-[11px] uppercase tracking-wider text-muted-foreground">
-                      Clients served
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </FadeIn>
-            {/* ─── /RIGHT ─── */}
-          </div>
-        </div>
-      </section>
-
-      {/* ════════════════════════════════════════════════════════════
-          TECH MARQUEE, Scrolling tech stack bar
-      ════════════════════════════════════════════════════════════ */}
-      <section className="border-y border-border py-5 bg-muted/30">
-        <Marquee speed={40} className="opacity-50">
-          {[
-            "Next.js",
-            "TypeScript",
-            "Node.js",
-            "PostgreSQL",
-            "MongoDB",
-            "Docker",
-            "Prisma",
-            "MQTT",
-            "WebSockets",
-            "Tailwind CSS",
-            "SCADA",
-            "AI Workflows",
-            "OPC-UA",
-            "Realtime Systems",
-            "Automation",
-          ].map((tech) => (
-            <span
-              key={tech}
-              className="flex items-center gap-2 whitespace-nowrap text-sm font-mono text-muted-foreground"
-            >
-              <Braces className="h-3 w-3" />
-              {tech}
-            </span>
-          ))}
-        </Marquee>
-      </section>
-
-      {/* ════════════════════════════════════════════════════════════
-          SERVICES, What I Build
-      ════════════════════════════════════════════════════════════ */}
-      <section className="py-20 sm:py-28">
-        <div className="content-width px-4 sm:px-6">
-          <FadeIn>
-            <div className="mb-2 text-xs font-mono uppercase tracking-widest text-muted-foreground">
-              Services
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
-              What I can build for you
-            </h2>
-            <p className="mt-3 max-w-2xl text-muted-foreground">
-              Three things I do best, drawn from what I ship every day in
-              production. Senior engineering, not an agency.
-            </p>
-          </FadeIn>
-
-          <StaggerContainer staggerDelay={0.08} className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {services.map((service) => (
-                <StaggerItem key={service.title}>
-                  <HoverScale>
-                    <div className="group relative h-full rounded-xl border border-border p-6 transition-colors hover:border-foreground/15">
-                      {/* Icon */}
-                      <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-muted transition-colors group-hover:border-accent-blue/30 group-hover:bg-accent-blue/5">
-                        <span className="text-accent-blue">
-                          {iconMap[service.icon] || <Layers className="h-5 w-5" />}
-                        </span>
-                      </div>
-
-                      <h3 className="text-base font-semibold">{service.title}</h3>
-                      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                        {service.description}
-                      </p>
-
-                      {/* Capabilities */}
-                      <ul className="mt-4 space-y-1.5">
-                        {service.capabilities.map((cap) => (
-                          <li
-                            key={cap}
-                            className="flex items-center gap-2 text-xs text-muted-foreground"
-                          >
-                            <span className="h-1 w-1 rounded-full bg-accent-blue" />
-                            {cap}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </HoverScale>
-                </StaggerItem>
-              ))}
-          </StaggerContainer>
-
-          <FadeIn delay={0.3}>
-            <p className="mt-8 text-sm text-muted-foreground">
-              <span className="font-medium text-foreground">Also available for:</span>{" "}
-              SEO-ready small business websites · AI chatbots + lead capture ·
-              technical advisory for non-technical founders.
-            </p>
-          </FadeIn>
-        </div>
-      </section>
-
-      {/* ════════════════════════════════════════════════════════════
-          ANIMATED DIVIDER
-      ════════════════════════════════════════════════════════════ */}
-      <div className="content-width px-4 sm:px-6">
-        <AnimatedLine />
-      </div>
-
-
-      {/* ════════════════════════════════════════════════════════════
-          FEATURED WORK, Case studies with stagger + metrics
-      ════════════════════════════════════════════════════════════ */}
-      <section className="py-20 sm:py-28">
-        <div className="content-width px-4 sm:px-6">
-          <FadeIn>
-            <div className="mb-2 text-xs font-mono uppercase tracking-widest text-muted-foreground">
-              Portfolio
-            </div>
-            <div className="flex items-end justify-between">
-              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
-                Featured Systems
-              </h2>
-              <Link
-                href="/projects"
-                className="hidden sm:inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
-              >
-                All case studies
-                <ArrowRight className="h-3 w-3" />
-              </Link>
-            </div>
-          </FadeIn>
-
-          {/* Primary case study, large card */}
-          <BlurIn delay={0.15} className="mt-10">
-              <div
-                className="block overflow-hidden rounded-xl border border-border"
-              >
-                <div className="grid lg:grid-cols-2">
-                  {/* Left, visual */}
-                  <div className="relative flex items-center justify-center bg-gradient-to-br from-accent-blue/5 to-accent-teal/5 p-10 lg:p-16 min-h-[240px]">
-                    <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.04)_1px,transparent_1px)] bg-[size:2rem_2rem]" />
-                    <div className="relative">
-                      <Terminal className="h-12 w-12 text-accent-blue/60" />
-                      <div className="mt-2 font-mono text-xs text-muted-foreground">
-                        {caseStudies[0].tech.slice(0, 3).join(" / ")}
-                      </div>
-                    </div>
-                    <div className="absolute top-4 right-4">
-                      <span className="rounded-full border border-border bg-background/80 px-2.5 py-0.5 text-xs font-medium">
-                        {caseStudies[0].status}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Right, content */}
-                  <div className="p-6 lg:p-10">
-                    <h3 className="text-xl font-semibold group-hover:text-accent-blue transition-colors">
-                      {caseStudies[0].title}
-                    </h3>
-                    <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-                      {caseStudies[0].description}
-                    </p>
-
-                    {/* Metrics */}
-                    {caseStudies[0].metrics && (
-                      <div className="mt-4 flex flex-wrap gap-2">
-                        {caseStudies[0].metrics.map((metric) => (
-                          <span
-                            key={metric}
-                            className="rounded-md bg-muted px-2 py-0.5 text-xs font-mono text-muted-foreground"
-                          >
-                            {metric}
-                          </span>
-                        ))}
-                      </div>
-                    )}
-
-                    {/* Tech */}
-                    <div className="mt-4 flex flex-wrap gap-1.5">
-                      {caseStudies[0].tech.slice(0, 5).map((t) => (
-                        <span
-                          key={t}
-                          className="rounded-md border border-border px-2 py-0.5 text-xs font-mono"
-                        >
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-          </BlurIn>
-
-          {/* Other case studies, 2x2 grid */}
-          <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-2">
-            {caseStudies.slice(1).map((study, i) => (
-              <FadeIn key={study.slug} delay={0.1 * (i + 1)}>
-                <CaseStudyCard study={study} />
-              </FadeIn>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ════════════════════════════════════════════════════════════
-          NOW, what I'm working on right now
-      ════════════════════════════════════════════════════════════ */}
-      <section className="border-y border-border bg-muted/20 py-20 sm:py-28">
-        <div className="content-width px-4 sm:px-6">
-          <FadeIn>
-            <div className="flex items-end justify-between gap-4 flex-wrap">
-              <div>
-                <div className="mb-2 text-xs font-mono uppercase tracking-widest text-muted-foreground">
-                  Now
-                </div>
-                <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
-                  What I&apos;m working on right now
-                </h2>
-              </div>
-              <Link
-                href="/now"
-                className="inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
-              >
-                Full now page
-                <ArrowRight className="h-3 w-3" />
-              </Link>
-            </div>
-          </FadeIn>
-
-          <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
-            <FadeIn delay={0.1}>
-              <div className="rounded-xl border border-border bg-background p-6 h-full">
-                <div className="mb-3 text-xs font-mono uppercase tracking-widest text-accent-blue">
-                  At work
-                </div>
-                <p className="text-sm leading-relaxed text-muted-foreground">
-                  At Renewalytics I wear most of the hats. Owning the engineering
-                  roadmap, managing servers and infra, guiding the junior devs,
-                  handling client conversations, and shipping the actual code.
-                  Right now: a Reflux chatbot for natural-language forecast
-                  queries, and pushing RealSync toward its first paying customer.
-                </p>
-              </div>
-            </FadeIn>
-
-            <FadeIn delay={0.2}>
-              <div className="rounded-xl border border-border bg-background p-6 h-full">
-                <div className="mb-3 text-xs font-mono uppercase tracking-widest text-accent-teal">
-                  Indie projects
-                </div>
-                <p className="text-sm leading-relaxed text-muted-foreground">
-                  <span className="font-medium text-foreground">Social Copilot</span>{" "}
-                  is my main bet, social scheduler with AI video gen. MVP in
-                  progress. <span className="font-medium text-foreground">GoSolarIndex</span> and{" "}
-                  <span className="font-medium text-foreground">MSMEVault</span>{" "}
-                  are live SEO experiments built with Claude Code, both pulling
-                  real organic traffic.
-                </p>
-              </div>
-            </FadeIn>
-
-            <FadeIn delay={0.3}>
-              <div className="rounded-xl border border-border bg-background p-6 h-full">
-                <div className="mb-3 text-xs font-mono uppercase tracking-widest text-foreground/70">
-                  Learning
-                </div>
-                <p className="text-sm leading-relaxed text-muted-foreground">
-                  Going deep on AI agents and agent frameworks. Every indie
-                  product I ship from here on out is AI-native by default, not
-                  a feature bolted on. Reading code more than docs.
-                </p>
-              </div>
-            </FadeIn>
-          </div>
-        </div>
-      </section>
-
-      {/* ════════════════════════════════════════════════════════════
-          ANIMATED STATS, with count-up
-      ════════════════════════════════════════════════════════════ */}
-      <section className="border-y border-border bg-muted/20 py-16 sm:py-20 hidden">
-        <div className="content-width px-4 sm:px-6">
-          <StaggerContainer staggerDelay={0.15} className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-3xl mx-auto">
-            <StaggerItem>
-              <div className="text-center">
-                <div className="font-mono text-3xl sm:text-4xl font-bold tracking-tight">
-                  <CountUp target={5} suffix="+" />
-                </div>
-                <p className="mt-1 text-sm text-muted-foreground">Years shipping systems</p>
-              </div>
-            </StaggerItem>
-            <StaggerItem>
-              <div className="text-center">
-                <div className="font-mono text-3xl sm:text-4xl font-bold tracking-tight">
-                  <CountUp target={36} suffix="+" />
-                </div>
-                <p className="mt-1 text-sm text-muted-foreground">Products shipped</p>
-              </div>
-            </StaggerItem>
-            <StaggerItem>
-              <div className="text-center">
-                <div className="font-mono text-3xl sm:text-4xl font-bold tracking-tight">
-                  <CountUp target={13} suffix="+" />
-                </div>
-                <p className="mt-1 text-sm text-muted-foreground">Clients served</p>
-              </div>
-            </StaggerItem>
-          </StaggerContainer>
-        </div>
-      </section>
-
-      {/* ════════════════════════════════════════════════════════════
-          ENGINEERING IDENTITY, What sets me apart
-      ════════════════════════════════════════════════════════════ */}
-      <section className="py-20 sm:py-28">
-        <div className="content-width px-4 sm:px-6">
-          <FadeIn>
-            <div className="mb-2 text-xs font-mono uppercase tracking-widest text-muted-foreground">
-              Engineering Identity
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight max-w-2xl">
-              Not a tutorial developer. A systems builder.
-            </h2>
-            <p className="mt-3 max-w-2xl text-muted-foreground">
-              I don&apos;t learn a stack from a YouTube video and call it a day.
-              I build things that have to stay up, get paged for, and survive
-              the messy edges of real users and real data.
-            </p>
-          </FadeIn>
-
-          <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {[
-              {
-                icon: <Database className="h-5 w-5" />,
-                title: "Backend-First Full-Stack",
-                desc: "I think in data models, APIs, and system boundaries before pixels. Production databases, cron systems, and ingestion pipelines are my playground.",
-              },
-              {
-                icon: <Cloud className="h-5 w-5" />,
-                title: "Infrastructure Owner",
-                desc: "Docker, Linux servers, CI/CD pipelines, monitoring, I deploy and operate what I build. No hand-off to DevOps.",
-              },
-              {
-                icon: <Wifi className="h-5 w-5" />,
-                title: "Realtime Systems",
-                desc: "WebSockets, MQTT, OPC-UA, event-driven architectures. I build systems where latency matters and data flows continuously.",
-              },
-              {
-                icon: <Shield className="h-5 w-5" />,
-                title: "Production Hardened",
-                desc: "Security incident response (CVE-2025-55182), production debugging, 99.9% uptime systems. I've been paged at 3 AM and shipped the fix.",
-              },
-              {
-                icon: <GitBranch className="h-5 w-5" />,
-                title: "Startup Speed",
-                desc: "Built GoSolarIndex in 3 days. Shipped Excel Flow in a sprint. I turn chaos into working systems under real pressure.",
-              },
-              {
-                icon: <Cpu className="h-5 w-5" />,
-                title: "AI-Native Thinking",
-                desc: "Moving toward AI agents, operational copilots, and agentic workflows. Not just using AI, building systems that are AI-native.",
-              },
-            ].map((item, i) => (
-              <FadeIn key={item.title} delay={0.08 * (i + 1)}>
-                <div className="group flex flex-col gap-3 rounded-xl border border-border p-5 transition-colors hover:border-foreground/15">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-muted text-accent-blue transition-colors group-hover:border-accent-blue/30 group-hover:bg-accent-blue/5">
-                    {item.icon}
-                  </div>
-                  <h3 className="font-semibold">{item.title}</h3>
-                  <p className="text-sm leading-relaxed text-muted-foreground">
-                    {item.desc}
-                  </p>
+                  <a
+                    href="#proof"
+                    className="inline-flex items-center gap-2 rounded-lg border border-border bg-muted/60 px-5 py-3 text-sm font-semibold text-foreground hover:bg-accent transition-colors"
+                  >
+                    <span>See what I&apos;ve built</span>
+                    <ArrowRight className="h-4 w-4 text-muted-foreground" />
+                  </a>
                 </div>
               </FadeIn>
-            ))}
+            </div>
+
+            {/* Right: Signature Operational Terminal Element */}
+            <FadeIn delay={0.2} className="lg:pl-4">
+              <OperationalTerminal />
+            </FadeIn>
           </div>
         </div>
       </section>
 
-      <div className="content-width px-4 sm:px-6">
-        <AnimatedLine />
-      </div>
-
       {/* ════════════════════════════════════════════════════════════
-          LATEST WRITING
+          2. THE PROBLEM STRIP: 4 One-Line Statements of Buyer Pain
       ════════════════════════════════════════════════════════════ */}
-      {blogPosts.length > 0 && (
-        <section className="py-20 sm:py-28">
-          <div className="content-width px-4 sm:px-6">
-            <FadeIn>
-              <div className="flex items-end justify-between">
-                <div>
-                  <div className="mb-2 text-xs font-mono uppercase tracking-widest text-muted-foreground">
-                    Blog
-                  </div>
-                  <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
-                    Latest Writing
-                  </h2>
-                </div>
+      <section className="border-b border-border bg-muted/20 py-10">
+        <div className="content-width px-4 sm:px-6">
+          <div className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-4">
+            Identify Your Operational Bottleneck
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {problems.map((item, idx) => (
+              <FadeIn key={idx} delay={0.05 * (idx + 1)}>
                 <Link
-                  href="/blog"
-                  className="hidden sm:inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                  href={item.href}
+                  className="group flex flex-col justify-between h-full rounded-xl border border-border bg-card p-4 transition-all hover:border-emerald-500/40 hover:bg-muted/30"
                 >
-                  All posts
-                  <ArrowRight className="h-3 w-3" />
+                  <p className="text-sm font-medium text-foreground group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+                    &ldquo;{item.pain}&rdquo;
+                  </p>
+                  <div className="mt-4 flex items-center justify-between border-t border-border/60 pt-3 text-xs font-semibold text-muted-foreground group-hover:text-foreground">
+                    <span>{item.service}</span>
+                    <ChevronRight className="h-3.5 w-3.5 text-emerald-500 group-hover:translate-x-1 transition-transform" />
+                  </div>
                 </Link>
-              </div>
-            </FadeIn>
-
-            <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-3">
-              {blogPosts.map((post, i) => (
-                <FadeIn key={post.slug} delay={0.1 * (i + 1)}>
-                  <BlogPostCard post={post} />
-                </FadeIn>
-              ))}
-            </div>
+              </FadeIn>
+            ))}
           </div>
-        </section>
-      )}
+        </div>
+      </section>
 
       {/* ════════════════════════════════════════════════════════════
-          CONTACT CTA
+          3. SERVICES CATALOGUE: Grouped Build / Automate / Fix
       ════════════════════════════════════════════════════════════ */}
-      <section className="border-t border-border">
-        <div className="content-width px-4 sm:px-6 py-20 sm:py-28">
+      <section id="services" className="py-20 border-b border-border">
+        <div className="content-width px-4 sm:px-6">
           <FadeIn>
-            <div className="mx-auto max-w-2xl text-center">
-              <div className="mb-4 text-xs font-mono uppercase tracking-widest text-muted-foreground">
-                Work with me
+            <div className="text-xs font-mono uppercase tracking-widest text-muted-foreground">
+              Fixed-Scope Outcome Packages
+            </div>
+            <h2 className="mt-2 text-3xl sm:text-4xl font-bold tracking-tight text-foreground">
+              Software engineering packages for operational teams
+            </h2>
+            <p className="mt-3 text-base sm:text-lg text-muted-foreground max-w-2xl">
+              Every service is outcome-named, fixed-scope, and sector-neutral.
+              No surprise hourly overages.
+            </p>
+          </FadeIn>
+
+          <div className="mt-12 space-y-12">
+            {/* GROUP A: BUILD */}
+            <div>
+              <div className="flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-accent-blue mb-4">
+                <Layers className="h-4 w-4" />
+                <span>Core Builds — Full Products &amp; Platforms</span>
               </div>
-              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
-                Have a business problem to solve?
-              </h2>
-              <p className="mt-4 text-muted-foreground leading-relaxed">
-                Websites, web apps, AI automation, internal tools &mdash;
-                whatever the shape of the problem, I architect it, build it,
-                and stay on call when it breaks. Let&apos;s talk.
-              </p>
-              <div className="mt-8 flex flex-wrap justify-center gap-3">
-                <Magnetic>
-                  <Button size="lg" asChild className="gap-2">
-                    <Link href="/contact">
-                      Start a project
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="flex flex-col justify-between rounded-2xl border border-border bg-card p-6 md:col-span-2">
+                  <div>
+                    <span className="font-mono text-xs text-emerald-600 dark:text-emerald-400 font-semibold">
+                      ₹2.5L – ₹8L · 3–8 weeks
+                    </span>
+                    <h3 className="mt-2 text-2xl font-bold text-foreground">
+                      Web App / MVP Build
+                    </h3>
+                    <p className="mt-2 text-sm sm:text-base text-muted-foreground leading-relaxed">
+                      Full product from zero. Authentication, multi-tenant database, Razorpay/Stripe payments,
+                      admin control center, and containerized cloud deployment.
+                    </p>
+                  </div>
+                  <div className="mt-6 pt-4 border-t border-border flex items-center justify-between">
+                    <Link
+                      href="/services/web-app-mvp-development"
+                      className="text-sm font-semibold text-foreground hover:text-emerald-500 flex items-center gap-1"
+                    >
+                      <span>Explore MVP Scope</span>
                       <ArrowRight className="h-4 w-4" />
                     </Link>
-                  </Button>
-                </Magnetic>
-                <Magnetic>
-                  <Button size="lg" variant="outline" asChild className="gap-2">
-                    <a href="[MY_CAL_LINK]" target="_blank" rel="noopener noreferrer">
-                      Book a call
-                      <ArrowUpRight className="h-4 w-4" />
-                    </a>
-                  </Button>
-                </Magnetic>
+                    <WhatsAppCTA context="Web App MVP Build" label="Discuss" variant="inline" size="sm" />
+                  </div>
+                </div>
+
+                <div className="flex flex-col justify-between rounded-2xl border border-border bg-card p-6">
+                  <div>
+                    <span className="font-mono text-xs text-emerald-600 dark:text-emerald-400 font-semibold">
+                      ₹3L – ₹10L · 5–10 weeks
+                    </span>
+                    <h3 className="mt-2 text-xl font-bold text-foreground">
+                      Realtime Monitoring
+                    </h3>
+                    <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+                      High-throughput MQTT, WebSockets, and OPC-UA telemetry dashboards with automated threshold alerts.
+                    </p>
+                  </div>
+                  <div className="mt-6 pt-4 border-t border-border flex items-center justify-between">
+                    <Link
+                      href="/services/realtime-monitoring"
+                      className="text-sm font-semibold text-foreground hover:text-emerald-500 flex items-center gap-1"
+                    >
+                      <span>View Scope</span>
+                      <ArrowRight className="h-3.5 w-3.5" />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* GROUP B: AUTOMATE */}
+            <div>
+              <div className="flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 mb-4">
+                <Cpu className="h-4 w-4" />
+                <span>Automation &amp; Internal Panels</span>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="flex flex-col justify-between rounded-2xl border border-border bg-card p-6">
+                  <div>
+                    <span className="font-mono text-xs text-emerald-600 dark:text-emerald-400 font-semibold">
+                      ₹1.5L – ₹5L · 3–6 weeks
+                    </span>
+                    <h3 className="mt-2 text-xl font-bold text-foreground">
+                      Reporting Automation
+                    </h3>
+                    <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+                      Replace manual Excel and email compiling with automated daily cron pipelines and WhatsApp dispatches.
+                    </p>
+                  </div>
+                  <div className="mt-6 pt-4 border-t border-border flex items-center justify-between">
+                    <Link
+                      href="/services/reporting-automation"
+                      className="text-sm font-semibold text-foreground hover:text-emerald-500 flex items-center gap-1"
+                    >
+                      <span>View Scope</span>
+                      <ArrowRight className="h-3.5 w-3.5" />
+                    </Link>
+                    <WhatsAppCTA context="Reporting Automation" label="Discuss" variant="inline" size="sm" />
+                  </div>
+                </div>
+
+                <div className="flex flex-col justify-between rounded-2xl border border-border bg-card p-6">
+                  <div>
+                    <span className="font-mono text-xs text-emerald-600 dark:text-emerald-400 font-semibold">
+                      ₹1L – ₹5L · 2–6 weeks
+                    </span>
+                    <h3 className="mt-2 text-xl font-bold text-foreground">
+                      AI Workflow Automation
+                    </h3>
+                    <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+                      Deterministic LLM pipelines for invoice parsing, WhatsApp inquiry triage, and internal copilots.
+                    </p>
+                  </div>
+                  <div className="mt-6 pt-4 border-t border-border flex items-center justify-between">
+                    <Link
+                      href="/services/ai-workflow-automation"
+                      className="text-sm font-semibold text-foreground hover:text-emerald-500 flex items-center gap-1"
+                    >
+                      <span>View Scope</span>
+                      <ArrowRight className="h-3.5 w-3.5" />
+                    </Link>
+                    <WhatsAppCTA context="AI Workflow Automation" label="Discuss" variant="inline" size="sm" />
+                  </div>
+                </div>
+
+                <div className="flex flex-col justify-between rounded-2xl border border-border bg-card p-6">
+                  <div>
+                    <span className="font-mono text-xs text-emerald-600 dark:text-emerald-400 font-semibold">
+                      ₹1.5L – ₹4L · 2–5 weeks
+                    </span>
+                    <h3 className="mt-2 text-xl font-bold text-foreground">
+                      Internal Dashboards
+                    </h3>
+                    <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+                      Custom admin panels and role-based permissions around your real operations and approval flows.
+                    </p>
+                  </div>
+                  <div className="mt-6 pt-4 border-t border-border flex items-center justify-between">
+                    <Link
+                      href="/services/internal-dashboards"
+                      className="text-sm font-semibold text-foreground hover:text-emerald-500 flex items-center gap-1"
+                    >
+                      <span>View Scope</span>
+                      <ArrowRight className="h-3.5 w-3.5" />
+                    </Link>
+                    <WhatsAppCTA context="Internal Dashboards" label="Discuss" variant="inline" size="sm" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* GROUP C: FIX & DIAGNOSTIC */}
+            <div>
+              <div className="flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400 mb-4">
+                <ShieldCheck className="h-4 w-4" />
+                <span>Diagnostics &amp; Rescue</span>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="flex flex-col justify-between rounded-2xl border-2 border-emerald-500/30 bg-emerald-500/5 p-6">
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <span className="font-mono text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase">
+                        Tier 0 · The Door Opener
+                      </span>
+                      <span className="font-mono text-xs text-muted-foreground">3 Days</span>
+                    </div>
+                    <h3 className="mt-2 text-xl font-bold text-foreground">
+                      Build Scoping Sprint — ₹15,000
+                    </h3>
+                    <p className="mt-2 text-sm text-foreground/90 leading-relaxed">
+                      A 3-day paid diagnostic. Written specification, schema, fixed quote, and calendar dates.
+                      100% credited against your build if you proceed.
+                    </p>
+                  </div>
+                  <div className="mt-6 pt-4 border-t border-border flex items-center justify-between">
+                    <Link
+                      href="/services/build-scoping-sprint"
+                      className="text-sm font-semibold text-foreground hover:text-emerald-500 flex items-center gap-1"
+                    >
+                      <span>Book Scoping Sprint</span>
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
+                    <WhatsAppCTA context="Build Scoping Sprint" label="Book Sprint" variant="inline" size="sm" />
+                  </div>
+                </div>
+
+                <div className="flex flex-col justify-between rounded-2xl border border-border bg-card p-6">
+                  <div>
+                    <span className="font-mono text-xs text-amber-600 dark:text-amber-400 font-semibold">
+                      From ₹1L · 2–4 weeks
+                    </span>
+                    <h3 className="mt-2 text-xl font-bold text-foreground">
+                      Codebase Rescue
+                    </h3>
+                    <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+                      Inherited a half-finished system? Developer vanished?
+                      I audit, stabilise, document, and fix broken codebases so you can launch.
+                    </p>
+                  </div>
+                  <div className="mt-6 pt-4 border-t border-border flex items-center justify-between">
+                    <Link
+                      href="/services/codebase-rescue"
+                      className="text-sm font-semibold text-foreground hover:text-emerald-500 flex items-center gap-1"
+                    >
+                      <span>View Rescue Scope</span>
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
+                    <WhatsAppCTA context="Codebase Rescue" label="Discuss" variant="inline" size="sm" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════════════════════════
+          4. PROOF: Outcome-First Production Case Studies
+      ════════════════════════════════════════════════════════════ */}
+      <section id="proof" className="py-20 border-b border-border">
+        <div className="content-width px-4 sm:px-6">
+          <FadeIn>
+            <div className="text-xs font-mono uppercase tracking-widest text-muted-foreground">
+              Production Severity
+            </div>
+            <h2 className="mt-2 text-3xl sm:text-4xl font-bold tracking-tight text-foreground">
+              Systems running under real operational load
+            </h2>
+            <p className="mt-3 text-base text-muted-foreground max-w-2xl">
+              &ldquo;If it survives 3,400 MW of live industrial plant telemetry, it will survive your operational workflow.&rdquo;
+            </p>
+          </FadeIn>
+
+          <div className="mt-12 space-y-8">
+            {caseStudies.slice(0, 3).map((study, idx) => (
+              <FadeIn key={study.slug} delay={0.1 * (idx + 1)}>
+                <div className="rounded-2xl border border-border bg-card p-6 sm:p-8 transition-all hover:border-foreground/20">
+                  <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border/80 pb-4">
+                    <h3 className="text-xl sm:text-2xl font-bold text-foreground">
+                      {study.title}
+                    </h3>
+                    <span className="font-mono text-xs rounded-md bg-muted px-2.5 py-1 text-muted-foreground">
+                      {study.client}
+                    </span>
+                  </div>
+
+                  <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6 text-sm sm:text-base">
+                    <div>
+                      <div className="font-mono text-xs uppercase text-red-500 font-bold">
+                        1. The Business Problem &amp; Manual Process
+                      </div>
+                      <p className="mt-2 text-foreground/90 leading-relaxed">{study.problem}</p>
+                      <p className="mt-2 text-xs text-muted-foreground">{study.before}</p>
+                    </div>
+
+                    <div>
+                      <div className="font-mono text-xs uppercase text-emerald-500 font-bold">
+                        2. What Was Built &amp; Measurable Outcome
+                      </div>
+                      <p className="mt-2 text-foreground/90 leading-relaxed">{study.built}</p>
+                      <div className="mt-3 rounded-lg bg-emerald-500/10 p-3 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
+                        {study.outcome}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Why this matters to non-energy buyers */}
+                  <div className="mt-6 rounded-xl border border-border/60 bg-muted/30 p-4 font-mono text-xs sm:text-sm text-foreground/90 flex items-start gap-2">
+                    <span className="font-bold text-accent-blue shrink-0">Why this matters to you:</span>
+                    <span>{study.whyItMatters}</span>
+                  </div>
+
+                  {/* De-emphasized Stack */}
+                  <div className="mt-4 flex flex-wrap items-center justify-between gap-2 text-xs text-muted-foreground">
+                    <div className="flex items-center gap-1.5 font-mono">
+                      <span>Stack:</span>
+                      <span>{study.tech.join(" · ")}</span>
+                    </div>
+                    <WhatsAppCTA
+                      context={`${study.title} case study`}
+                      label="Discuss Similar System"
+                      variant="inline"
+                      size="sm"
+                    />
+                  </div>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════════════════════════
+          5. WHO I WORK WITH: Target Industries
+      ════════════════════════════════════════════════════════════ */}
+      <section className="py-20 border-b border-border bg-muted/20">
+        <div className="content-width px-4 sm:px-6">
+          <FadeIn>
+            <div className="text-xs font-mono uppercase tracking-widest text-muted-foreground">
+              Sector Expertise
+            </div>
+            <h2 className="mt-2 text-3xl sm:text-4xl font-bold tracking-tight text-foreground">
+              Who I work with
+            </h2>
+            <p className="mt-3 text-base text-muted-foreground max-w-2xl">
+              Software tailored around the exact operational realities and compliance requirements of each industry.
+            </p>
+          </FadeIn>
+
+          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {targetSectors.map((sector, idx) => {
+              const Icon = sector.icon;
+              return (
+                <FadeIn key={sector.name} delay={0.05 * (idx + 1)}>
+                  <Link
+                    href={sector.href}
+                    className="group block h-full rounded-2xl border border-border bg-card p-6 transition-all hover:border-emerald-500/40 hover:shadow-sm"
+                  >
+                    <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-muted text-foreground group-hover:text-emerald-500 transition-colors">
+                      <Icon className="h-5 w-5" />
+                    </div>
+                    <h3 className="mt-4 text-lg font-bold text-foreground group-hover:text-emerald-500 transition-colors">
+                      {sector.name}
+                    </h3>
+                    <p className="mt-2 text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                      {sector.pain}
+                    </p>
+                    <div className="mt-4 flex items-center gap-1 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
+                      <span>Explore industry solutions</span>
+                      <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </Link>
+                </FadeIn>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════════════════════════
+          6. HOW IT WORKS: 5 Steps from Diagnostic to Production
+      ════════════════════════════════════════════════════════════ */}
+      <section className="py-20 border-b border-border">
+        <div className="content-width px-4 sm:px-6">
+          <FadeIn>
+            <div className="text-xs font-mono uppercase tracking-widest text-muted-foreground">
+              Predictable Delivery
+            </div>
+            <h2 className="mt-2 text-3xl sm:text-4xl font-bold tracking-tight text-foreground">
+              How engineering engagements work
+            </h2>
+            <p className="mt-3 text-base text-muted-foreground max-w-2xl">
+              A structured 5-step process demonstrating delivery partner discipline, not freelancer guesswork.
+            </p>
+          </FadeIn>
+
+          <div className="mt-12 space-y-4">
+            {[
+              {
+                step: "01",
+                title: "Build Scoping Sprint (3-Day Diagnostic)",
+                desc: "We extract your requirements, audit existing schemas, and map edge cases. You receive an airtight specification, fixed quote, and calendar delivery dates. Fee is credited against the build.",
+              },
+              {
+                step: "02",
+                title: "Fixed-Price Agreement & Architecture Sign-Off",
+                desc: "No open-ended hourly billing. Fixed scope, fixed milestone payments, and unambiguous technical contracts.",
+              },
+              {
+                step: "03",
+                title: "Direct Senior Engineering Execution",
+                desc: "I build the system directly using modern TypeScript, Next.js, and PostgreSQL. Weekly staging demos show working software in your actual process.",
+              },
+              {
+                step: "04",
+                title: "Handover, Deployment & 100% IP Ownership",
+                desc: "Deployed to your private cloud account (AWS, GCP, VPS) in Docker. You receive 100% of source code, schemas, and operational runbooks.",
+              },
+              {
+                step: "05",
+                title: "30-Day Post-Launch Warranty & Support Window",
+                desc: "Every core build includes 30 days of high-priority post-launch support and bug fixes at zero extra cost.",
+              },
+            ].map((step, idx) => (
+              <FadeIn key={step.step} delay={0.05 * (idx + 1)}>
+                <div className="flex flex-col sm:flex-row sm:items-start gap-4 rounded-xl border border-border bg-card p-5">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-foreground font-mono text-sm font-bold text-background">
+                    {step.step}
+                  </span>
+                  <div>
+                    <h3 className="text-base sm:text-lg font-bold text-foreground">{step.title}</h3>
+                    <p className="mt-1.5 text-sm sm:text-base leading-relaxed text-muted-foreground">
+                      {step.desc}
+                    </p>
+                  </div>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════════════════════════
+          7. CLOSE: Direct Contact & WhatsApp Commitment
+      ════════════════════════════════════════════════════════════ */}
+      <section className="py-20 bg-muted/40">
+        <div className="content-width px-4 sm:px-6">
+          <FadeIn>
+            <div className="mx-auto max-w-2xl text-center">
+              <div className="text-xs font-mono uppercase tracking-widest text-muted-foreground">
+                Start an Engineering Conversation
+              </div>
+              <h2 className="mt-3 text-3xl sm:text-4xl font-bold tracking-tight text-foreground">
+                Ready to solve an operational bottleneck?
+              </h2>
+              <p className="mt-4 text-base text-muted-foreground leading-relaxed">
+                Send me a summary of your workflow, spreadsheet, or project specification.
+                I will review it and reply directly with scope clarity and next steps.
+              </p>
+
+              <div className="mt-8 flex flex-wrap justify-center items-center gap-4">
+                <WhatsAppCTA
+                  context="homepage close section"
+                  label="Discuss on WhatsApp (+91 93732 38164)"
+                  size="lg"
+                  showArrow
+                />
+                <a
+                  href="tel:+919373238164"
+                  className="inline-flex items-center gap-2 rounded-lg border border-border bg-background px-5 py-3 text-sm font-semibold text-foreground hover:bg-accent transition-colors"
+                >
+                  <Phone className="h-4 w-4 text-emerald-500" />
+                  <span>Call +91 93732 38164</span>
+                </a>
+              </div>
+
+              <div className="mt-8 flex flex-wrap items-center justify-center gap-4 text-xs font-mono text-muted-foreground">
+                <span>Direct engineer response</span>
+                <span>·</span>
+                <span>Under 4-hour response commitment</span>
+                <span>·</span>
+                <span>Based in Pune, serving clients anywhere</span>
               </div>
             </div>
           </FadeIn>

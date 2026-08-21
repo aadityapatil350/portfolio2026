@@ -1,67 +1,35 @@
-import Link from "next/link";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import { HomeContent } from "@/components/home-content";
-import { siteConfig, caseStudies, stats, services } from "@/data/site-config";
-import { getPosts } from "@/lib/mdx";
-import type { Post } from "@/lib/mdx";
+import { caseStudies } from "@/data/site-config";
 
 export const metadata: Metadata = {
-  title: "Aditya Patil, Engineer-for-hire by day. Indie hacker by night.",
+  title: "Aditya Patil — Operational Software, Reporting Automation & AI Workflows",
   description:
-    "Lead engineer at Renewalytics by day, indie hacker by night. Available for full-stack MVPs and AI workflow automation. Pune, India.",
+    "Aditya Patil builds operational software that survives real use — automated reporting pipelines, internal dashboards, realtime telemetry, and AI automation. Pune, India.",
   openGraph: {
-    title: "Aditya Patil, Engineer-for-hire by day. Indie hacker by night.",
+    title: "Aditya Patil — Operational Software & Delivery Partner",
     description:
-      "Lead engineer at Renewalytics by day, indie hacker by night. Freelance MVPs and AI workflow automation on the side.",
+      "Software that survives real operational use — reporting pipelines, ops dashboards, realtime systems, and AI workflows. Pune, India.",
     url: "https://adityapatil.work",
     type: "website",
     images: [
       {
-        url: "/og?title=Aditya%20Patil&description=Engineer-for-hire%20%7C%20Indie%20hacker",
+        url: "/og?title=Aditya%20Patil&description=Operational%20Software%20Engineer",
         width: 1200,
         height: 630,
-        alt: "Aditya Patil",
+        alt: "Aditya Patil, Operational Software Engineer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Aditya Patil, Engineer-for-hire by day. Indie hacker by night.",
+    title: "Aditya Patil — Operational Software Engineer",
     description:
-      "Lead engineer at Renewalytics by day, indie hacker by night. Freelance MVPs and AI workflow automation on the side.",
+      "Software that survives real operational use — reporting pipelines, ops dashboards, realtime systems, and AI workflows.",
     creator: "@aadityapatil350",
   },
 };
 
-function getLatestBlogPosts() {
-  const posts = getPosts("blog");
-  return posts.slice(0, 3).map((p: Post) => ({
-    title: p.title,
-    date: new Date(p.publishedAt).toLocaleDateString("en-US", {
-      month: "short",
-      year: "numeric",
-    }),
-    tags: p.tags || [],
-    slug: p.slug,
-    description: p.description,
-  }));
-}
-
 export default function Home() {
-  const blogPosts = getLatestBlogPosts();
-
-  return (
-    <HomeContent
-      name={siteConfig.name}
-      tagline={siteConfig.tagline}
-      subtagline={siteConfig.subtagline}
-      location={siteConfig.location}
-      available={siteConfig.available}
-      caseStudies={caseStudies}
-      services={services}
-      blogPosts={blogPosts}
-      stats={stats}
-      resumeUrl={siteConfig.resumeUrl}
-    />
-  );
+  return <HomeContent caseStudies={caseStudies} />;
 }

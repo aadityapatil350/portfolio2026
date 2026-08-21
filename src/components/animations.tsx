@@ -1,9 +1,20 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef, useEffect, useState, type ReactNode } from "react";
+import { motion, useInView, useReducedMotion } from "framer-motion";
+import { useRef, useEffect, useState, useSyncExternalStore, type ReactNode } from "react";
 
-/* ─── FadeIn (existing, enhanced) ─── */
+/* ─── Hook for mounting state (React 19 hydration-safe) ─── */
+const emptySubscribe = () => () => {};
+
+function useIsMounted() {
+  return useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  );
+}
+
+/* ─── FadeIn ─── */
 interface FadeInProps {
   children: ReactNode;
   delay?: number;
@@ -18,9 +29,16 @@ export function FadeIn({
   delay = 0,
   className,
   direction = "up",
-  distance = 20,
-  duration = 0.5,
+  distance = 16,
+  duration = 0.45,
 }: FadeInProps) {
+  const mounted = useIsMounted();
+  const shouldReduce = useReducedMotion();
+
+  if (!mounted || shouldReduce) {
+    return <div className={className}>{children}</div>;
+  }
+
   const directionMap = {
     up: { y: distance },
     down: { y: -distance },
@@ -33,7 +51,7 @@ export function FadeIn({
     <motion.div
       initial={{ opacity: 0, ...directionMap[direction] }}
       whileInView={{ opacity: 1, x: 0, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
+      viewport={{ once: true, margin: "-20px" }}
       transition={{ duration, delay, ease: [0.21, 0.47, 0.32, 0.98] }}
       className={className}
     >
@@ -54,11 +72,18 @@ export function StaggerContainer({
   className,
   staggerDelay = 0.08,
 }: StaggerContainerProps) {
+  const mounted = useIsMounted();
+  const shouldReduce = useReducedMotion();
+
+  if (!mounted || shouldReduce) {
+    return <div className={className}>{children}</div>;
+  }
+
   return (
     <motion.div
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-60px" }}
+      viewport={{ once: true, margin: "-30px" }}
       variants={{
         hidden: {},
         visible: {
@@ -81,14 +106,21 @@ export function StaggerItem({
   children: ReactNode;
   className?: string;
 }) {
+  const mounted = useIsMounted();
+  const shouldReduce = useReducedMotion();
+
+  if (!mounted || shouldReduce) {
+    return <div className={className}>{children}</div>;
+  }
+
   return (
     <motion.div
       variants={{
-        hidden: { opacity: 0, y: 16 },
+        hidden: { opacity: 0, y: 14 },
         visible: {
           opacity: 1,
           y: 0,
-          transition: { duration: 0.4, ease: [0.21, 0.47, 0.32, 0.98] },
+          transition: { duration: 0.35, ease: [0.21, 0.47, 0.32, 0.98] },
         },
       }}
       className={className}
@@ -109,19 +141,19 @@ interface CountUpProps {
 
 export function CountUp({
   target,
-  duration = 2,
+  duration = 1.8,
   className,
   suffix = "",
   prefix = "",
 }: CountUpProps) {
   const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-40px" });
-  // Start at target so SSR + first paint show the real number, not "0+"
+  const isInView = useInView(ref, { once: true, margin: "-20px" });
+  const shouldReduce = useReducedMotion();
   const [count, setCount] = useState(target);
   const hasAnimatedRef = useRef(false);
 
   useEffect(() => {
-    if (!isInView || hasAnimatedRef.current) return;
+    if (shouldReduce || !isInView || hasAnimatedRef.current) return;
     hasAnimatedRef.current = true;
 
     let startTime: number;
@@ -138,7 +170,7 @@ export function CountUp({
 
     animationFrame = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(animationFrame);
-  }, [isInView, target, duration]);
+  }, [isInView, target, duration, shouldReduce]);
 
   return (
     <span ref={ref} className={className}>
@@ -159,13 +191,20 @@ export function BlurIn({
   children,
   delay = 0,
   className,
-  duration = 0.6,
+  duration = 0.5,
 }: BlurInProps) {
+  const mounted = useIsMounted();
+  const shouldReduce = useReducedMotion();
+
+  if (!mounted || shouldReduce) {
+    return <div className={className}>{children}</div>;
+  }
+
   return (
     <motion.div
-      initial={{ opacity: 0, filter: "blur(8px)", scale: 0.97 }}
+      initial={{ opacity: 0, filter: "blur(6px)", scale: 0.98 }}
       whileInView={{ opacity: 1, filter: "blur(0px)", scale: 1 }}
-      viewport={{ once: true, margin: "-40px" }}
+      viewport={{ once: true, margin: "-20px" }}
       transition={{ duration, delay, ease: [0.21, 0.47, 0.32, 0.98] }}
       className={className}
     >
@@ -186,17 +225,23 @@ export function TextReveal({
   className,
   wordDelay = 0.04,
 }: TextRevealProps) {
+  const mounted = useIsMounted();
+  const shouldReduce = useReducedMotion();
   const words = text.split(" ");
+
+  if (!mounted || shouldReduce) {
+    return <span className={className}>{text}</span>;
+  }
 
   return (
     <motion.span className={className} aria-label={text}>
       {words.map((word, i) => (
         <motion.span
           key={`${word}-${i}`}
-          initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
+          initial={{ opacity: 0, y: 16, filter: "blur(4px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{
-            duration: 0.4,
+            duration: 0.35,
             delay: i * wordDelay,
             ease: [0.21, 0.47, 0.32, 0.98],
           }}
@@ -221,6 +266,13 @@ export function AnimatedLine({
   delay = 0,
   direction = "left",
 }: AnimatedLineProps) {
+  const mounted = useIsMounted();
+  const shouldReduce = useReducedMotion();
+
+  if (!mounted || shouldReduce) {
+    return <div className={`h-px bg-border ${className || ""}`} />;
+  }
+
   const originMap = {
     left: { scaleX: 1, originX: 0 },
     right: { scaleX: 1, originX: 1 },
@@ -231,9 +283,9 @@ export function AnimatedLine({
     <motion.div
       className={`h-px bg-border ${className || ""}`}
       initial={{ scaleX: 0 }}
-      whileInView={originMap}
+      whileInView={originMap[direction]}
       viewport={{ once: true }}
-      transition={{ duration: 0.8, delay, ease: [0.21, 0.47, 0.32, 0.98] }}
+      transition={{ duration: 0.7, delay, ease: [0.21, 0.47, 0.32, 0.98] }}
       style={{ transformOrigin: direction === "right" ? "100%" : direction === "center" ? "50%" : "0%" }}
     />
   );
@@ -274,6 +326,9 @@ export function Marquee({
           from { transform: translateX(-50%); }
           to   { transform: translateX(0); }
         }
+        @media (prefers-reduced-motion: reduce) {
+          .flex { animation: none !important; }
+        }
       `}</style>
     </div>
   );
@@ -291,6 +346,9 @@ export function HoverScale({
   className,
   scale = 1.02,
 }: HoverScaleProps) {
+  const shouldReduce = useReducedMotion();
+  if (shouldReduce) return <div className={className}>{children}</div>;
+
   return (
     <motion.div
       whileHover={{ scale, y: -2 }}
@@ -309,11 +367,14 @@ interface MagneticProps {
 }
 
 export function Magnetic({ children, className }: MagneticProps) {
+  const shouldReduce = useReducedMotion();
+  if (shouldReduce) return <div className={className}>{children}</div>;
+
   return (
     <motion.div
-      whileHover={{ scale: 1.05 }}
+      whileHover={{ scale: 1.03 }}
       whileTap={{ scale: 0.97 }}
-      transition={{ type: "spring", stiffness: 400, damping: 17 }}
+      transition={{ type: "spring", stiffness: 400, damping: 20 }}
       className={className}
     >
       {children}
@@ -335,6 +396,9 @@ export function Floating({
   amplitude = 6,
   duration = 4,
 }: FloatingProps) {
+  const shouldReduce = useReducedMotion();
+  if (shouldReduce) return <div className={className}>{children}</div>;
+
   return (
     <motion.div
       animate={{ y: [-amplitude, amplitude, -amplitude] }}
@@ -352,6 +416,9 @@ export function Floating({
 
 /* ─── Glow pulse (for status dots) ─── */
 export function GlowPulse({ className }: { className?: string }) {
+  const shouldReduce = useReducedMotion();
+  if (shouldReduce) return <span className={className} />;
+
   return (
     <motion.div
       animate={{ opacity: [0.4, 1, 0.4], scale: [1, 1.1, 1] }}
