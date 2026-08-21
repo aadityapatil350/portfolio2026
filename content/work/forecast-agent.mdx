@@ -1,0 +1,48 @@
+---
+title: "Autonomous Forecasting & Scheduling AI Agent"
+description: "AI agent that blends weather, telemetry, and human operator context to produce production forecasts and adjust schedules across a multi-plant portfolio — with humans stepping in only on edge cases."
+publishedAt: "2026-07-01"
+tags: ["AI Agents", "Autonomous Systems", "Forecasting"]
+tech: ["AI Agents", "ML Forecasting", "Python", "PostgreSQL"]
+status: "Production"
+---
+
+## The business problem
+
+Forecasting production for a renewable portfolio is not a single calculation. It is a continuous decision — updated every fifteen minutes, across every plant, every day of the year. The inputs are messy: weather forecasts that disagree, historical patterns that shift with the seasons, telemetry that says one thing while an operator on site says another.
+
+A human doing this well needs to know the plants, read the weather, trust the models, and know when to override them. Doing it at portfolio scale — dozens of plants, every fifteen minutes — is not something a team of humans can sustain. And every wrong forecast leaks money in penalties.
+
+## What was happening before
+
+- Analysts stitching spreadsheets together with weather checks by eye.
+- Schedule revisions relying on operator memory and pattern-matching.
+- Uneven coverage — the big plants got attention, the small ones drifted.
+- Edge cases quietly costing money.
+- No systematic way to learn from the days the forecast went wrong.
+
+## What I built
+
+An autonomous AI agent that owns the forecasting and scheduling decision loop.
+
+It continuously ingests multiple signals — weather forecasts from several sources, live telemetry from every site, historical patterns for each asset, and human operator input when it exists. It produces a production forecast, generates the corresponding schedule, and updates both as new information arrives. When something it cannot explain shows up — a sensor reading that contradicts weather, an operator note that overrides the model — it flags the decision for human review instead of guessing.
+
+Humans still supervise. But they touch a small fraction of the decisions instead of every one.
+
+## The outcome
+
+- **Autonomous decision loop** running continuously across the portfolio.
+- **Multi-signal fusion** — weather, telemetry, operator context, historicals.
+- **Human-reviewed edge cases only** — analysts spend time on judgment, not typing.
+- **Continuous operation** with no manual scheduling gaps.
+- **Systematic learning** — every override is captured and improves the next decision.
+
+## Why this matters to you
+
+If your business runs on forecasts that combine machine data, external signals, and human judgment — demand forecasts for a distributor, staff scheduling for a hospital chain, cash flow projections for a lender, delivery ETAs for a logistics operator — this is the same problem shape. The decision is continuous. The inputs are messy. The best people are burning out on the boring 95%.
+
+An autonomous AI agent can carry the boring 95% so your best people focus on the 5% that actually needs judgment.
+
+## Stack
+
+AI agents, ML forecasting models, Python, PostgreSQL, time-series data. Specific implementation details are proprietary.

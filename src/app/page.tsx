@@ -30,6 +30,54 @@ export const metadata: Metadata = {
   },
 };
 
+const professionalServiceSchema = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: "Aditya Patil — Independent Systems Engineer",
+  url: "https://adityapatil.work",
+  telephone: "+91-9373238164",
+  priceRange: "₹15,000 – ₹10,00,000",
+  image: "https://adityapatil.work/og?title=Aditya%20Patil",
+  areaServed: [
+    { "@type": "City", name: "Pune" },
+    { "@type": "Country", name: "India" },
+    { "@type": "Place", name: "Remote worldwide" },
+  ],
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Pune",
+    addressRegion: "Maharashtra",
+    addressCountry: "IN",
+  },
+  sameAs: [
+    "https://github.com/aadityapatil350",
+    "https://x.com/aadityapatil350",
+  ],
+  founder: {
+    "@type": "Person",
+    name: "Aditya Patil",
+    jobTitle: "Lead Software Engineer",
+  },
+  makesOffer: [
+    "Reporting Automation",
+    "Internal Dashboards",
+    "Web App / MVP Development",
+    "AI Workflow Automation",
+    "AI Integration",
+    "Realtime Monitoring",
+    "Codebase Rescue",
+    "Build Scoping Sprint",
+  ].map((n) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name: n } })),
+};
+
 export default function Home() {
-  return <HomeContent caseStudies={caseStudies} />;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(professionalServiceSchema) }}
+      />
+      <HomeContent caseStudies={caseStudies} />
+    </>
+  );
 }

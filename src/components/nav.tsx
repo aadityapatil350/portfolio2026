@@ -10,7 +10,8 @@ import { trackEvent } from "@/lib/analytics";
 
 const navLinks = [
   { href: "/", label: "Home" },
-  { href: "/services/reporting-automation", label: "Services" },
+  { href: "/services", label: "Services" },
+  { href: "/industries", label: "Industries" },
   { href: "/work", label: "Case Studies" },
   { href: "/about", label: "About" },
   { href: "/blog", label: "Blog" },
@@ -55,7 +56,7 @@ export function Nav() {
               href={link.href}
               className={cn(
                 "px-3 py-1.5 text-sm transition-colors hover:text-foreground",
-                pathname === link.href || (link.href.startsWith("/services") && pathname.startsWith("/services"))
+                pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href))
                   ? "text-foreground font-medium"
                   : "text-muted-foreground"
               )}
@@ -125,7 +126,7 @@ export function Nav() {
                 onClick={() => setMobileOpen(false)}
                 className={cn(
                   "block rounded-md px-3 py-2 text-sm transition-colors",
-                  pathname === link.href || (link.href.startsWith("/services") && pathname.startsWith("/services"))
+                  pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href))
                     ? "bg-accent font-medium text-foreground"
                     : "text-muted-foreground hover:text-foreground"
                 )}

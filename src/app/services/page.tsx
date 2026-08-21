@@ -45,8 +45,21 @@ const serviceIcons: Record<string, typeof Layers> = {
 export default function ServicesPage() {
   const allServices = Object.values(servicesData);
   const tier0 = allServices.filter((s) => s.slug === "build-scoping-sprint");
-  const tier1 = allServices.filter((s) => s.tier.includes("Tier 1"));
   const tier2 = allServices.filter((s) => s.slug === "codebase-rescue");
+
+  // Explicit display order for Tier 1. Web App first, Reporting Automation last.
+  const tier1Order = [
+    "web-app-mvp-development",
+    "internal-dashboards",
+    "ai-workflow-automation",
+    "ai-integration",
+    "realtime-monitoring",
+    "business-website",
+    "reporting-automation",
+  ];
+  const tier1 = tier1Order
+    .map((slug) => allServices.find((s) => s.slug === slug))
+    .filter((s): s is (typeof allServices)[number] => Boolean(s));
 
   return (
     <div className="content-width px-4 sm:px-6 py-12 sm:py-20">

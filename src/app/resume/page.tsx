@@ -180,10 +180,10 @@ export default function ResumePage() {
               design and software architecture to cloud infrastructure, DevOps,
               and team leadership. My work includes forecasting and scheduling
               platforms, operational automation systems, DSM management, asset
-              monitoring, and AI-driven workflows that help energy companies
-              make faster and more accurate decisions. Passionate about building
-              products from zero to scale, solving complex business problems,
-              and leveraging AI to automate operational processes.
+              monitoring, and AI workflows that help energy companies make
+              faster and more accurate decisions. Ships products from zero to
+              production, tackles hard operational problems, and uses AI to
+              replace manual work where it makes sense.
             </p>
           </FadeIn>
         </section>
@@ -215,7 +215,7 @@ export default function ResumePage() {
                     "Own full-stack development and backend architecture for a renewable energy SaaS platform serving 3,400+ MW across India",
                     "Shipped Reflux within 3 months of joining, partnering with the ops team. Operational platform for solar and hydro forecasting revisions (CTU/STU to SLDC), scheduling, and reporting automation; now serves 40+ plants across 13+ clients",
                     "Shipped Excel Flow later the same year with one intern. Automated DGR reporting pipeline and ops dashboards for 33+ solar/wind/BESS plants; scrapes 30+ daily Excel sheets, generates next-day outputs, and surfaces live ops data",
-                    "Took on COPS for Juniper Green Energy once Excel Flow workload eased; developed and deployed end-to-end as primary engineer, working directly with Juniper's Digital Transformation Leader. DSM penalties and asset management dashboard covering 14+ plants",
+                    "Delivered a deviation & settlement management portal for a renewable energy producer once Excel Flow workload eased; developed and deployed end-to-end as primary engineer, working directly with the client's digital transformation lead. DSM penalties and asset management dashboard covering 14+ plants",
                     "Delivered an internal Invoice Management System for tracking and reconciling client invoices generated through Reflux",
                     "Containerized services with Docker, manage Linux infrastructure, and set up CI/CD with GitHub Actions",
                     "Integrated SCADA systems for realtime data exchange across multiple renewable assets",

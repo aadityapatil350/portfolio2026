@@ -531,7 +531,7 @@ export function HomeContent({ caseStudies }: HomeContentProps) {
                       {sector.pain}
                     </p>
                     <div className="mt-4 flex items-center gap-1 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
-                      <span>Explore industry solutions</span>
+                      <span>See work in your sector</span>
                       <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
                     </div>
                   </Link>

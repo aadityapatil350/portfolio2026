@@ -51,18 +51,18 @@ const portfolio = [
     tag: "Directory · Lead-gen",
   },
   {
-    title: "Reflux (Renewalytics)",
-    desc: "Forecasting + scheduling platform serving 40+ plants across 13+ clients.",
+    title: "Forecasting & Scheduling Platform",
+    desc: "Forecasting + scheduling platform serving 40+ renewable plants across 13+ operators.",
     tag: "Enterprise · Production",
   },
   {
-    title: "Excel Flow (Acme client)",
-    desc: "Reporting automation + ops dashboard for 33+ plants. Replaces a 4-hour manual Excel workflow with a one-click dashboard the ops team actually uses.",
+    title: "Reporting Automation Pipeline",
+    desc: "Automated reporting + ops dashboard for 33+ plants. Replaces a 4-hour manual Excel workflow with a one-click dashboard the ops team actually uses.",
     tag: "Automation · Dashboard",
   },
   {
-    title: "COPS (Juniper Green)",
-    desc: "DSM penalties + CMS asset dashboard for a 14-plant renewable portfolio.",
+    title: "Deviation & Settlement Portal",
+    desc: "DSM penalty tracking + asset management dashboard for a 14-plant renewable portfolio.",
     tag: "Dashboard · B2B",
   },
   {

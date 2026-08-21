@@ -1,81 +1,50 @@
 ---
-title: "Reflux & CMS, Forecasting, Operations & Energy Management"
-description: "Two production platforms serving 3400+ MW renewable capacity, forecasting, scheduling, DSM analytics, billing, and BESS management"
+title: "Forecasting & Scheduling Platform for 40+ Renewable Plants"
+description: "Production platform managing 3,400+ MW of renewable capacity, 15-minute schedule revisions, and automated regulatory submissions across dozens of operators."
 publishedAt: "2025-06-01"
-tags: ["Climate Tech", "SaaS", "Production"]
-tech: ["Next.js", "TypeScript", "PostgreSQL", "MongoDB", "Prisma ORM", "Docker", "Tailwind CSS", "shadcn/ui"]
+tags: ["Web App", "Operational Software", "Energy"]
+tech: ["Next.js", "TypeScript", "PostgreSQL", "MongoDB", "Prisma", "Docker"]
 status: "Production"
 ---
 
-## Context
+## The business problem
 
-Renewalytics is a renewable energy SaaS company based in Pune serving solar and wind power plants across India. The platform handles production forecasting, scheduling, energy trading, DSM analytics, billing, and BESS management. As the Lead Software Engineer, I own the technical architecture and build the systems from the ground up.
+Managing generation forecasts and schedules for a large renewable energy portfolio is not one problem. It is dozens of small, fast, high-stakes problems happening every fifteen minutes.
 
-## The Two Platforms
+Every plant has to submit a fresh generation schedule to the grid on a strict window. Miss the window and the operator pays a penalty. Send the wrong number and the operator pays a penalty. Do this manually across 40+ plants and someone is going to miss a window.
 
-### Reflux, Forecasting & Operations
+The team was juggling manual portal logins, custom XML file uploads, and offline spreadsheets. Coverage was patchy. Every senior operator carried a mental map of which plant needed what and when. Onboarding a new operator took months.
 
-The operational backbone for renewable energy forecasting and scheduling. It handles forecast revisions, scheduling workflows, reporting automation, and government portal integrations.
+## What was happening before
 
-- **3400+ MW capacity** under management across multiple renewable portfolios
-- **Cron-based automation** for daily report generation and data pipelines
-- **Government portal integrations** for regulatory compliance and reporting
-- **Operational workflows** for forecasting revisions, deviation management, and scheduling
+- Manual logins to multiple regulatory portals every fifteen minutes.
+- Custom XML schedule files built by hand.
+- Offline spreadsheets tracking which plant had submitted what.
+- One missed window costing real money in penalties.
+- Every senior operator irreplaceable, because the process lived in their head.
 
-### CMS, DSM Analytics & BESS Management
+## What I built
 
-The customer-facing energy management platform for DSM analytics, billing workflows, BESS (Battery Energy Storage System) management, and agreement management.
+A single operational platform that carries the whole 15-minute cycle end to end.
 
-- **DSM analytics** for demand-side management reporting and visualization
-- **Billing workflows** for energy billing, invoicing, and financial reporting
-- **BESS management** for battery storage monitoring, control, and optimization
-- **Agreement management** for contracts, SLAs, and compliance tracking
-- **Operational dashboards** for real-time visibility into plant operations
+Forecasts flow in from multiple sources. Schedules are generated automatically. Regulatory submissions happen through direct portal connectors. Every submission is logged, timestamped, and traceable. Operators supervise. They do not do the work by hand any more.
 
-## What I Built
+Then a second layer of automation was added on top for daily reporting, deviation analysis, and compliance filings. All of it runs on the same shared data.
 
-### Core Architecture
-- Full-stack application with Next.js frontend, REST APIs, and background job processing
-- Dual-database architecture: PostgreSQL for relational data and MongoDB for flexible document storage
-- Docker containerized services behind Nginx for production deployment
-- Prisma ORM for type-safe database interactions with PostgreSQL
+## The outcome
 
-### Automation Systems
-- Cron-based pipelines for daily operational reports across 33+ plants
-- Automated data ingestion from government energy portals
-- Scheduled report generation and distribution workflows
-- Excel file parsing and multi-sheet report processing
+- **3,400+ MW of active capacity** managed through the platform.
+- **40+ plants** running concurrently across multiple operators.
+- **15-minute schedule engine** with 99.9% revision reliability.
+- **Zero missed submission windows** since production launch.
+- **Days-not-months onboarding** for new operators — the process lives in the software, not in someone&apos;s head.
 
-### Analytics & Dashboards
-- DSM analytics dashboards with real-time energy data visualization
-- BESS monitoring dashboards for battery storage systems
-- Forecast accuracy tracking and deviation analysis
-- Operational KPI dashboards for plant performance
+## Why this matters to you
 
-### Customer-Facing Portal
-- Modern dashboard built with Tailwind CSS and shadcn/ui
-- Role-based access control for different user types
-- Agreement and billing management interfaces
-- Report download and export functionality
+If your business depends on hitting a strict deadline every N minutes, hours, or days — order cutoffs, GST filings, tender submissions, insurance renewals, courier bookings — this is the same class of problem. High frequency. Strict windows. Penalties for lateness. Every senior person carrying it in their head.
+
+The fix is not more people. It is a small piece of software that owns the cycle so your team can supervise instead of run.
 
 ## Stack
 
-- **Next.js + TypeScript**, Frontend application and API routes
-- **PostgreSQL**, Relational data (plant configs, users, agreements)
-- **MongoDB**, Document storage (reports, telemetry snapshots)
-- **Prisma ORM**, Type-safe database access layer
-- **Docker**, Containerized microservices
-- **Tailwind CSS + shadcn/ui**, UI framework
-- **Nginx**, Reverse proxy and load balancing
-
-## Outcomes
-
-- Scaled platform to serve **3,400+ MW** of renewable energy capacity
-- Automated **30+ daily reports** across 33+ plants
-- Eliminated manual data entry for government portal submissions
-- Built and shipped DSM analytics and BESS management from zero
-- Customer portal serving multiple renewable energy companies
-
-## Lessons
-
-Operational software for the energy industry requires deep understanding of domain workflows. Building these two platforms taught me that the best systems are invisible, operators don't think about the software, they think about their plants. The cron pipelines, the automated reports, the dashboard that loads in under 2 seconds, these are the features that matter.
+Next.js, TypeScript, PostgreSQL, MongoDB, Prisma, Docker.

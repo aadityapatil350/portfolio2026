@@ -43,11 +43,11 @@ export default function NowPage() {
               <span className="font-medium text-foreground">Reflux</span>{" "}
               (forecasting + scheduling for 40+ plants),{" "}
               <span className="font-medium text-foreground">Excel Flow</span>{" "}
-              (DGR automation across 33+ plants), and{" "}
-              <span className="font-medium text-foreground">COPS</span> (DSM
-              dashboard for Juniper Green Energy). Right now I&apos;m
-              shipping a Reflux chatbot so operators can query forecasts in
-              natural language, and pushing{" "}
+              (DGR automation across 33+ plants), and a{" "}
+              <span className="font-medium text-foreground">deviation &
+              settlement portal</span> for a multi-plant renewable producer.
+              Right now I&apos;m shipping a Reflux chatbot so operators can
+              query forecasts in natural language, and pushing{" "}
               <span className="font-medium text-foreground">RealSync CMS</span>{" "}
               (our realtime monitoring MVP) toward its first paying customer.
             </p>

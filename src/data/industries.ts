@@ -207,7 +207,7 @@ export const industriesData: Record<string, IndustryItem> = {
       }
     ],
     honestAssessment:
-      "This is my primary domain of expertise. As Lead Software Engineer at Renewalytics, I have architected and deployed production platforms managing 3,400+ MW of capacity across 40+ plants in India, including DGR automation pipelines, forecasting revisions, and state regulatory portal submissions.",
+      "This is my primary domain of expertise. As lead engineer on production platforms for the renewable energy sector, I have shipped systems managing 3,400+ MW of capacity across 40+ plants in India — DGR automation pipelines, forecasting revisions, and state regulatory portal submissions. Specific client names available under NDA.",
     recommendedServices: [
       {
         slug: "reporting-automation",
@@ -289,7 +289,7 @@ export const industriesData: Record<string, IndustryItem> = {
       },
       {
         question: "Can we hire in-house engineers after the MVP launch to take over?",
-        answer: "Yes. The codebase uses standard modern TypeScript, Next.js App Router, and Prisma ORM with comprehensive documentation, making onboarding seamless for future hires."
+        answer: "Yes. The codebase uses standard TypeScript, Next.js App Router, and Prisma. Every project ships with a README, an architecture note, and inline comments where behavior is non-obvious. A new engineer can read it end-to-end in a day."
       },
       {
         question: "What is the billing model?",

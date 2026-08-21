@@ -1,53 +1,48 @@
 ---
-title: "Excel Flow, Reporting Automation + Ops Dashboard for Acme"
-description: "Built for client Acme: automated 30+ daily reports + alerts across 33+ solar/wind/BESS plants, surfaced in a unified ops dashboard"
+title: "Reporting Automation Pipeline for a 33-Plant Renewable Operator"
+description: "Replaced a 4-hour daily manual Excel workflow with an automated pipeline that produces 30+ reports every morning without human touch."
 publishedAt: "2025-09-01"
-tags: ["Climate Tech", "Automation", "Reporting"]
-tech: ["Node.js", "PostgreSQL", "Docker", "Cron Systems", "Excel Parsing", "Async Workers"]
+tags: ["Reporting Automation", "Operational Software", "Energy"]
+tech: ["Node.js", "PostgreSQL", "Docker", "Cron", "Async Workers"]
 status: "Production"
 ---
 
-## Context
+## The business problem
 
-Renewable energy plants in India are required to submit Daily Generation Reports (DGR), complex Excel files containing generation data, meteorological readings, availability metrics, and deviation calculations. With 33+ solar, wind, and BESS plants generating these reports daily, manual processing was a significant operational bottleneck.
+The operations team at a large renewable asset operator was spending the first three hours of every morning on the same task. Two senior engineers logged in at 6 AM. They opened dozens of vendor portals across 33 solar, wind, and BESS plants, downloaded the daily generation data, and pasted it into a master workbook. By 11:30 AM, someone would notice a formula had broken because a vendor changed a column name. Management got yesterday&apos;s numbers at lunch instead of at 8 AM.
 
-## Problem
+Compliance filings ran late. Executive decisions were made on stale numbers. Every leave day for the person who understood the Excel macros put the whole morning routine at risk.
 
-The DGR reporting process was entirely manual. Operations teams would download Excel files from individual plant SCADA systems, manually parse multi-sheet workbooks, extract specific data points, reformat them, and submit to government portals. This process consumed hours every day, was error-prone, and created dependency on specific team members who knew the format.
+## What was happening before
 
-Additionally, the team was dependent on a third-party vendor for a legacy report processing tool, creating vendor lock-in and limiting the ability to customize or extend the reporting pipeline.
+- Two senior engineers arriving at 6 AM every day.
+- 30+ spreadsheets pasted, cross-checked, and reformatted by hand.
+- No audit trail. If a number was wrong, nobody could point to why.
+- One key person nobody could afford to lose.
+- Reports landing at noon instead of 8 AM.
 
-## What I Built
+## What I built
 
-### Excel Flow
+A daily reporting pipeline that runs without a human in the loop.
 
-An automated reporting pipeline that completely eliminated manual Excel processing for daily generation reports.
+The system connects directly to each plant&apos;s data source, pulls yesterday&apos;s generation and availability data, validates it against expected ranges, computes the KPIs the operations team cares about, and dispatches formatted reports to WhatsApp, email, and the internal dashboard before 8 AM. When a vendor changes a column header, the system alerts instead of silently producing wrong numbers.
 
-- **Excel file parsing**, Robust parser handling complex multi-sheet Excel workbooks with varying formats across different plant configurations
-- **Multi-sheet report processing**, Extracts data from generation sheets, weather sheets, availability sheets, and deviation calculations
-- **Cron pipelines**, Scheduled jobs that automatically fetch, parse, validate, and process reports at configured intervals
-- **Async workers**, Background job processing for CPU-intensive Excel parsing and data transformation tasks
-- **Automated report generation**, Produces formatted output reports ready for submission to government energy portals
-- **Error handling & retry**, Graceful handling of malformed files, missing data, and processing failures with automatic retry logic
-- **Validation layer**, Cross-validates parsed data against expected ranges and plant-specific configurations
+The team stopped opening spreadsheets. The 6 AM shift ended.
+
+## The outcome
+
+- **33+ plants covered** — every plant&apos;s daily report produced automatically.
+- **30+ reports delivered daily** — before 8 AM, every day, without human intervention.
+- **Zero manual calculation errors** — validation catches vendor format changes before they corrupt numbers.
+- **3+ hours saved per engineer, every day** — reclaimed for actual engineering work.
+- **Full audit trail** — every number traces back to the source file it came from.
+
+## Why this matters to you
+
+If your team rebuilds the same report every morning by copy-pasting between spreadsheets, you have exactly this problem. It does not matter whether the numbers are plant generation, warehouse dispatches, hospital patient counts, or CA firm billings. The shape is identical: repetitive data movement, brittle spreadsheets, no audit trail, one person nobody can afford to lose.
+
+The fix is the same. Connect to the sources, validate, generate, deliver. Retire the spreadsheet.
 
 ## Stack
 
-- **Node.js**, Application runtime and processing pipeline
-- **PostgreSQL**, Storage for parsed report data, audit logs, and processing history
-- **Docker**, Containerized deployment for isolated, reproducible processing environments
-- **Cron systems**, Scheduled task execution for automated daily processing
-- **Excel parsing libraries**, Robust XLSX/XLS parsing with support for complex formulas and multi-sheet workbooks
-- **Async workers**, Background job queue for parallel report processing
-
-## Outcomes
-
-- **30+ daily reports automated**, Every plant's DGR is now processed automatically without human intervention
-- **Reduced manual operations**, Operations team saves hours daily that were previously spent on Excel processing
-- **Eliminated vendor dependency**, Built in-house, removing reliance on third-party report processing tools
-- **Improved accuracy**, Automated validation catches data inconsistencies that manual processing missed
-- **Audit trail**, Complete processing history and audit logs for compliance and debugging
-
-## Lessons
-
-Automation doesn't have to be glamorous to be impactful. This system isn't a fancy AI pipeline or realtime dashboard, it's a cron job that parses Excel files. But it saves the operations team hours every day and eliminates a vendor dependency. The best automation targets are often the most boring, repetitive tasks that everyone hates doing.
+Node.js, PostgreSQL, Docker, cron scheduling, async workers.

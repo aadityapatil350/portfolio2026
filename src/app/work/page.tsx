@@ -4,15 +4,18 @@ import { getPosts, type Post } from "@/lib/mdx";
 import { FadeIn } from "@/components/fade-in";
 import { TechBadge } from "@/components/tech-badge";
 import { StatusBadge } from "@/components/status-badge";
+import { WhatsAppCTA } from "@/components/whatsapp-cta";
 import { ArrowUpRight } from "lucide-react";
 import type { ProjectStatus } from "@/data/site-config";
 
 export const metadata: Metadata = {
-  title: "Work",
-  description: "Selected case studies and projects I've shipped.",
+  title: "Case Studies",
+  description:
+    "Production systems and AI agents I have shipped — reporting automation, forecasting platforms, realtime monitoring, and autonomous AI agents running in production.",
   openGraph: {
-    title: "Work | Aditya",
-    description: "Selected case studies and projects I've shipped.",
+    title: "Case Studies | Aditya Patil",
+    description:
+      "Production systems and AI agents in the wild. Real numbers, real outcomes, anonymized where the client asked for it.",
     url: "https://adityapatil.work/work",
   },
 };
@@ -32,22 +35,47 @@ export default function WorkPage() {
       <div className="content-width px-4 sm:px-6">
         {/* Header */}
         <FadeIn>
-          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">
-            Work
+          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight">
+            Case studies from production
           </h1>
-          <p className="mt-3 text-muted-foreground max-w-2xl">
-            Selected case studies and projects I&apos;ve shipped.
+          <p className="mt-4 text-muted-foreground max-w-2xl text-lg leading-relaxed">
+            Systems currently running in production and AI agents shipped in
+            the last year. Client names are anonymized where the contract asks
+            for it. The numbers are real.
           </p>
         </FadeIn>
 
         {/* Grid */}
         <div className="mt-12 grid gap-6 sm:grid-cols-2">
           {posts.map((post, i) => (
-            <FadeIn key={post.slug} delay={0.1 * i}>
+            <FadeIn key={post.slug} delay={0.05 * i}>
               <WorkCard post={post} />
             </FadeIn>
           ))}
         </div>
+
+        {/* Mid-page CTA */}
+        <FadeIn delay={0.3}>
+          <div className="mt-16 rounded-2xl border border-border bg-muted/40 p-6 sm:p-8">
+            <h2 className="text-xl font-semibold text-foreground">
+              See a project shape that matches yours?
+            </h2>
+            <p className="mt-3 text-sm text-muted-foreground leading-relaxed max-w-2xl">
+              The problem shapes above repeat across sectors. If any of them
+              look like your operation — the daily reporting, the multi-site
+              telemetry, the AI agent watching the firehose — message me and I
+              will tell you honestly whether it is a good fit.
+            </p>
+            <div className="mt-5">
+              <WhatsAppCTA
+                variant="primary"
+                context="case studies page"
+                label="Discuss a similar project"
+                showArrow
+              />
+            </div>
+          </div>
+        </FadeIn>
       </div>
     </section>
   );

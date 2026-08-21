@@ -76,7 +76,7 @@ export const servicesData: Record<string, ServiceItem> = {
         step: 2,
         title: "Ingestion & Validation Engine",
         timeline: "Weeks 2–3",
-        description: "Build robust extraction scrapers and validation rules. The system handles missing rows, schema shifts, and network retries gracefully."
+        description: "Extraction scripts and validation rules that keep running when a vendor changes a column header, a row goes missing, or the network drops mid-download. Failures alert you; they do not pass silently."
       },
       {
         step: 3,
@@ -165,7 +165,7 @@ export const servicesData: Record<string, ServiceItem> = {
         step: 1,
         title: "Technical Specification & Wireframes",
         timeline: "Week 1",
-        description: "We define user journeys, database entity models, API endpoints, and core constraints. You receive a fixed-scope technical architecture document."
+        description: "We map every user flow, database entity, API endpoint, and hard constraint. You get a fixed-scope architecture document you can hand to any engineer."
       },
       {
         step: 2,
@@ -282,9 +282,9 @@ export const servicesData: Record<string, ServiceItem> = {
       }
     ],
     proof: {
-      system: "COPS DSM & CSM Portal (Juniper Green Energy)",
+      system: "Deviation & Settlement Management Portal",
       metrics: "Multi-plant portfolio · Realtime penalty monitoring · Enterprise RBAC",
-      description: "Engineered an operational compliance and commercial settlement portal for Juniper Green Energy, enabling operations and finance teams to track deviations, revenue settlements, and regulatory submissions across renewable assets.",
+      description: "Engineered an operational compliance and commercial settlement portal for a renewable energy producer, enabling operations and finance teams to track deviations, revenue settlements, and regulatory submissions across a multi-plant portfolio.",
       takeaway: "Built to handle complex enterprise calculations with zero tolerance for calculation drift or data leaks."
     },
     priceFrom: "₹1.5L – ₹4L",
@@ -567,7 +567,7 @@ export const servicesData: Record<string, ServiceItem> = {
       }
     ],
     proof: {
-      system: "RealSync CMS & Renewalytics Platform",
+      system: "Realtime Telemetry & Forecasting Platforms",
       metrics: "3,400+ MW real-time tracking · Sub-500ms telemetry · 40+ plants",
       description: "Designed and engineered high-concurrency realtime monitoring architectures for renewable energy portfolios, integrating live SCADA data, deviation tracking, and multi-tenant alarms.",
       takeaway: "If it maintains sub-second stability across thousands of megawatts of industrial energy assets, it will handle your telemetry with absolute reliability."
@@ -582,7 +582,7 @@ export const servicesData: Record<string, ServiceItem> = {
     faqs: [
       {
         question: "Can your system interface directly with existing industrial PLC/SCADA systems?",
-        answer: "Yes. We support standard industrial telemetry protocols including OPC-UA, Modbus TCP over gateways, and MQTT brokers, allowing seamless bridge connections to legacy plant equipment."
+        answer: "Yes. Standard industrial telemetry protocols are supported directly: OPC-UA, Modbus TCP through a gateway, and MQTT brokers. Legacy equipment usually connects through a small on-site collector, which we specify during scoping."
       },
       {
         question: "How do you prevent the browser UI from lagging with thousands of live updates?",
@@ -813,7 +813,7 @@ export const servicesData: Record<string, ServiceItem> = {
       "The Build Scoping Sprint eliminates this risk completely. Over 3 intensive days, we audit your workflow, define the exact database schemas, map every screen and edge case, choose the optimal infrastructure, and produce a fixed-price, fixed-timeline build proposal. If you proceed with the build, the ₹15,000 fee is credited in full."
     ],
     whatYouGet: [
-      "Complete Written Functional Specification detailing every screen, role, and user journey",
+      "Complete written functional specification detailing every screen, role, and user flow",
       "Relational Database Entity Relationship Diagram (ERD) and Schema definition",
       "API endpoint list, third-party integration contracts, and security architecture",
       "Fixed-price build quote and milestone schedule with exact calendar delivery dates",

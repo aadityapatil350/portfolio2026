@@ -79,7 +79,7 @@ export default async function IndustryDetailPage({ params }: Props) {
         <FadeIn delay={0.05}>
           <div className="inline-flex items-center gap-2 rounded-full border border-border bg-muted px-3 py-1 font-mono text-xs text-muted-foreground">
             <Layers className="h-3.5 w-3.5" />
-            <span>Target Industry Solutions</span>
+            <span>Sector Focus</span>
           </div>
         </FadeIn>
 

@@ -217,7 +217,7 @@ export default function AgencyPartnersPage() {
             <p className="mt-3 text-base text-foreground/90 leading-relaxed">
               No long-term contracts, minimum spend commitments, or upfront retainers.
               We test the working rhythm on one small fixed-scope client module or MVP.
-              Once your team experiences seamless delivery, we expand to larger builds.
+              Once the first project lands on time, we open up to larger builds.
             </p>
 
             <div className="mt-6 flex flex-wrap items-center gap-4">
