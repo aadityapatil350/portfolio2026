@@ -1,0 +1,188 @@
+---
+title: "Do You Actually Need an AI Agent, or Just a Better Script?"
+description: "The honest answer to the question every founder is asking in 2026. Three real examples where AI is the right call, three where a plain script wins."
+publishedAt: "2026-08-22"
+tags: ["AI Agents", "Automation", "Honest Advice"]
+cover: "/images/blog/ai-vs-script.jpg"
+---
+
+Every second LinkedIn post in 2026 tells you your business needs an AI agent. I ship AI agents in production for a living, and I am going to tell you something the LinkedIn crowd will not: most business problems do not need one.
+
+Most business problems need a script that runs on a schedule.
+
+This post is the honest guide to which is which. Three real examples where AI is the right tool. Three where a script beats it by a factor of ten on cost and reliability. And a simple decision rule you can apply to your own workflow tonight.
+
+## The difference between an AI agent and a script
+
+Let me start with plain language. Skip this section if you already know.
+
+- **A script** is a piece of code that follows a fixed set of rules. Input goes in, the rules process it, output comes out. Same input, same output, every time. Cheap to build. Cheap to run. Boring. Reliable.
+
+- **An AI agent** is a program that calls a large language model (like GPT or Claude) to make a decision. Same input can produce different outputs. The agent can handle ambiguous inputs, freeform text, or situations the developer did not think of. More expensive to build. More expensive to run. Sometimes wrong.
+
+That is the whole difference. One is deterministic. One is probabilistic. Neither is better. Each is right for different jobs.
+
+## Where a plain script wins
+
+Here are three real workflows I have built. All three could have been built with AI. All three are better as scripts. All three are cheaper to run than an AI agent by a factor of 10 to 100.
+
+### Example 1: Daily reporting for a 33-plant operation
+
+Every morning, data flows in from 33 different plants — generation numbers, weather readings, equipment status. Someone used to spend three hours consolidating it into an executive report.
+
+This is a script. Not an AI. The data structure is fixed. The rules are fixed. What "consolidate" means is fixed. Adding AI here would be like using a chef's knife to open a letter.
+
+The script runs at 6 AM every day. Costs about ₹0 per run (it is just code). Delivers the report at 8 AM without fail. Six months of production with zero AI-caused errors.
+
+If I had built this as an AI agent, the running cost would be ₹40,000 – ₹80,000 a month for the same output. And it would occasionally hallucinate a number.
+
+### Example 2: Invoice reconciliation across three systems
+
+A finance team was manually matching invoices from vendors against internal purchase orders against payment records. Three systems. Three formats. Same underlying data.
+
+Script territory. The matching rules are fixed. The formats are known. The edge cases are limited and can be handled with explicit logic.
+
+Cost to run: near zero. Errors: fewer than the human it replaced.
+
+### Example 3: Automated overtime calculation for a shift-based workforce
+
+A manufacturing operation was calculating overtime pay by hand from spreadsheet exports. The rules were complicated (different rates for holidays, weekends, night shifts, overtime tiers) but the rules were fixed.
+
+Script. Not AI. Rules that fit on one page get coded once and run forever.
+
+### The pattern
+
+Every one of these workflows had three things in common:
+
+1. The input structure was predictable
+2. The rules that governed the output were fixed
+3. The consequences of a wrong answer were bad enough that we needed determinism
+
+For workflows like this, AI is expensive theatre. Do not do it.
+
+## Where AI actually wins
+
+Now the flip side. Three real cases where AI is the right call, and a script would be either impossible or comically brittle.
+
+### Example 1: Reading messy vendor emails to extract order details
+
+A distributor was receiving 200+ orders a day by email. Every vendor formatted their email differently. Some sent PDFs. Some sent Excel attachments. Some just typed the order into the email body in whatever format they felt like that day.
+
+A script cannot handle this. You could write 200 different parsers, but tomorrow a vendor adds a new format and the script breaks. There is no fixed structure.
+
+AI handles it well. You feed the whole email to the model, ask it to extract product code, quantity, and delivery date, and it gives you a structured output. It gets it right 95%+ of the time. The remaining 5% get flagged for human review.
+
+Build cost: ~₹1,50,000. Running cost: ~₹8,000/month for 200 orders/day. Payback: under 2 months compared to the data entry person who used to do it.
+
+### Example 2: Answering "when will my order arrive" 500 times a day
+
+A logistics company was getting hundreds of "where is my order" WhatsApp messages daily. A script could look up the order status and reply, but customers phrase the question 400 different ways ("hey where's my parcel," "delivery kab aayega," "still nothing?", "order #12345"). And they ask follow-up questions ("why is it delayed?").
+
+AI is the right tool. The AI understands the fuzzy question, looks up the order in the database, generates a natural reply, and hands off to a human if the customer sounds frustrated.
+
+Build cost: ~₹2,50,000. Running cost: ~₹18,000/month. Reduces customer service headcount need by 40%.
+
+### Example 3: Watching plant operations chatter across dozens of sites
+
+Field teams talk on WhatsApp. When something happens — an outage, a weather event, a restoration — it gets mentioned there long before it hits any dashboard. The important signals are buried in noise.
+
+I built an AI agent that watches all the chatter across every site, extracts the operational signals, and surfaces them to the operations lead in near real-time. This is impossible as a script because the input is unstructured natural language and the "important" versus "not important" line is a judgment call.
+
+You can read more about this in the [OpsFlow case study](/work/ops-agent).
+
+### The pattern
+
+All three had:
+
+1. Messy, unstructured, or ambiguous input
+2. Rules that would take a book to write down
+3. High enough volume that a person doing it is bottleneck
+
+For workflows like this, AI is the honest right answer.
+
+## The decision rule you can apply tonight
+
+Ask three questions about your workflow.
+
+**Question 1: Can I write the rules on one page?**
+
+- Yes → Script.
+- No, and I do not know all the edge cases → AI.
+
+**Question 2: Is my input always in the same structure?**
+
+- Yes → Script.
+- No, my input is freeform text, or comes from many sources with different formats → AI.
+
+**Question 3: What happens if a decision is wrong?**
+
+- Someone dies or we lose ₹10 lakh → Script (or AI with mandatory human review).
+- Nothing catastrophic, someone reviews and corrects → AI is fine.
+
+Two "Script" answers → build a script.
+Two "AI" answers → build an AI agent.
+Mixed → probably a script with one AI-powered step in the middle.
+
+## The middle path: scripts with AI-powered steps
+
+Ninety percent of the automation I build in 2026 is not "pure AI" or "pure script." It is a script that calls the AI for one specific step.
+
+For example: parse Excel files with a script (deterministic), but use AI to extract the vendor name and address from freeform text at the top of the sheet (freeform). Or: run a cron job to check the database every hour (script), but use AI to write a natural-sounding WhatsApp alert when something is off (freeform output).
+
+This is the cheapest and most reliable pattern. You pay AI costs only for the parts that need judgment. Everything else is free.
+
+If your vendor is quoting you a "full AI agent" for a workflow that is 90% deterministic, ask them why the AI is doing the deterministic parts. If they cannot answer, they are overcharging you.
+
+Not sure what your workflow needs? [Message me on WhatsApp with what you are trying to automate](https://wa.me/919373238164?text=Hi%20Aditya%2C%20I%20want%20to%20automate%20this%20workflow%3A%20) and I will tell you honestly whether it needs AI, a script, or nothing at all.
+
+## The uncomfortable truth about the AI hype
+
+Half the "AI agent" demos on LinkedIn are scripts that anyone could build in a weekend. The other half are impressive prototypes that would fall apart in production. Very few are real production systems doing real work.
+
+The reason is boring: production is hard. Handling failure gracefully is hard. Making sure the AI does not go off the rails at 3 AM is hard. Keeping a straight face when the customer asks why the bill doubled last month is hard.
+
+Any senior engineer who has shipped production AI will tell you the same thing: the model is the easy part. The 95% of the work is everything around the model — the data pipeline, the guardrails, the review interface, the alerting, the cost caps, the fallback paths.
+
+If you talk to a vendor who spends 90% of the pitch on the model and 10% on the rest, they have never shipped this to production.
+
+## What I recommend
+
+If you have a specific workflow eating hours every week:
+
+1. **Write down the workflow in plain English on one page.** If you can, it is probably a script problem.
+2. **Look at your inputs.** If they are always structured, it is a script. If they are messy natural language or files in ten different formats, it is AI.
+3. **Ask an honest engineer for a scoping conversation before you commit to a build.** The right answer is usually much cheaper than what a vendor first quotes.
+
+I offer a [₹15,000 build scoping sprint](/services/build-scoping-sprint) exactly for this — you get a written scope, a fixed quote, and an honest recommendation of whether you even need to build anything. The fee is credited if you proceed.
+
+## FAQs
+
+**What is the difference between an AI agent and an automation script?**
+
+A script follows fixed rules. An AI agent uses a language model to make decisions. Scripts are cheaper, faster, and more reliable for structured tasks. AI agents handle unstructured or ambiguous inputs that would break a script.
+
+**My problem sounds simple — do I still need an engineer?**
+
+If it fits inside Zapier or Make.com with an AI step, you probably do not need custom development. If it involves your database, private customer data, or has to run reliably at scale, you need a proper build.
+
+**When does adding AI actually make a script better?**
+
+When part of your workflow involves freeform text, ambiguous decisions, or inputs in many formats. Use AI only for that part. Keep the rest as a script.
+
+**Can I use ChatGPT directly instead of building anything?**
+
+For occasional personal tasks, yes. For anything that needs to run automatically, or handle customer data, or run 100 times a day, you need a proper integration.
+
+**How do I know if the person quoting me is over-engineering?**
+
+Ask them: "which parts of this workflow are deterministic, and which need AI?" If they cannot answer clearly, or they say "everything needs AI," they are overcharging. A good engineer will tell you which parts need what, and price accordingly.
+
+## Where to go next
+
+If this helped, you might want to read:
+
+- [What an AI Agent Actually Costs to Build in India](/blog/what-ai-agent-costs-india-2026) — real pricing breakdown
+- [Custom AI Agent vs Zapier or Make.com: When Each One Wins](/blog/custom-ai-vs-zapier) — comparison for founders
+- [/services/build-scoping-sprint](/services/build-scoping-sprint) — the paid diagnostic that answers this for your specific workflow
+
+Or [message me directly](https://wa.me/919373238164?text=Hi%20Aditya%2C%20I%20want%20to%20know%20if%20my%20workflow%20needs%20AI%20or%20a%20script%3A%20) and I will give you an honest answer in one message.

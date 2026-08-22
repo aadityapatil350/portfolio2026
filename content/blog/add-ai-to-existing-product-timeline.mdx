@@ -1,0 +1,191 @@
+---
+title: "How Long Does It Take to Add AI to an Existing Product? A Realistic Week-by-Week Breakdown"
+description: "Real timelines for real AI features. Written by an engineer who has shipped both indie AI products and enterprise integrations."
+publishedAt: "2026-08-22"
+tags: ["AI Integration", "Timeline", "Product"]
+cover: "/images/blog/add-ai-timeline.jpg"
+---
+
+Your competitor shipped an AI feature last week. Your board is asking. Your users are asking. You are wondering how many months of engineering you just committed to.
+
+Answer: probably fewer than you think. And also, probably more than the vendor promising you "2 weeks" is claiming.
+
+This post gives you real week-by-week timelines for the AI features founders actually ship in 2026, plus the parts that always take longer than expected.
+
+## The three tiers of AI features, and how long each really takes
+
+Not all AI features are the same. Some take a weekend. Some take two months. Knowing which tier you are in is 80% of not getting burned by a vendor quote.
+
+### Tier 1: Small features (1-3 weeks)
+
+These are the AI features you can ship without touching your database or user flow. They read existing data and produce something useful.
+
+- **Semantic search** over your existing content (help articles, product catalog, docs)
+- **Automatic summarisation** of long content (long form posts, transcripts, PDFs)
+- **Auto-tagging** and categorisation of user-generated content
+- **Translation** of content into other languages
+- **Sentiment analysis** on customer reviews or support messages
+
+**Realistic timeline:** 1-3 weeks including production hardening.
+
+**Why they are fast:** the feature is a wrapper around an API call. No new database schema, no new user flow, no complex UI. The AI is doing one thing on data that already exists.
+
+**Watch out for:** cost surprises. Semantic search on 100,000 documents can cost ₹15,000-₹40,000 just to index the first time. Ask upfront.
+
+### Tier 2: User-facing AI features (3-6 weeks)
+
+The AI is now part of the product experience. Users see it. Users interact with it.
+
+- **AI chat** interface inside your product
+- **AI-powered drafting** (email replies, marketing copy, code suggestions)
+- **AI recommendations** based on user behaviour
+- **Voice input / voice replies** for existing features
+- **Image generation or editing** inside your product
+
+**Realistic timeline:** 3-6 weeks for a first version, another 2-4 weeks for the polish that makes users actually use it.
+
+**Why they take longer:** you now need a UI, an interaction pattern that feels good, streaming responses (for chat), rate limiting (so users do not accidentally cost you ₹80,000), and a way to handle failures gracefully.
+
+**Watch out for:** the first version always feels like a toy. Real users need onboarding, examples, guardrails, and a way to give feedback. Budget the polish time or the feature will get zero adoption.
+
+### Tier 3: AI agents that take actions (6-12 weeks)
+
+The AI is now doing things inside your product on behalf of your users. Sending emails. Booking appointments. Updating records. Making decisions.
+
+- **Customer support agents** that resolve issues end-to-end
+- **Onboarding agents** that walk new users through setup
+- **Sales assistants** that qualify leads and book calls
+- **Ops agents** that monitor and act on system state
+- **Multi-step task agents** that complete complex workflows
+
+**Realistic timeline:** 6-12 weeks for something you can trust in production. Add 4 more weeks if it touches financial data or has legal exposure.
+
+**Why they take a long time:** the AI part is 20% of the work. The other 80% is: safety guardrails (so the agent does not book 50 appointments by mistake), permission systems (so the agent cannot access data it should not), audit logging (so you can prove what it did), human override flows (so a human can step in), fallback paths (so a broken AI does not break the product), cost caps (so a bug does not cost you ₹5 lakh overnight).
+
+Every one of these is a mini-project. Every one of them is unsexy. Every one of them is required for production.
+
+**Watch out for:** anyone promising a "production AI agent in 2 weeks." They are either lying, or they are cutting one of the eight things I just listed and you will find out which one at the worst possible moment.
+
+## The realistic week-by-week for a Tier 2 feature
+
+Let me give you a concrete example. You want to add AI chat to your existing SaaS product. Users can ask it questions about their own data. This is a Tier 2 feature that should take 4-6 weeks.
+
+### Week 1: Foundation
+
+- Set up API credentials, cost caps, and monitoring
+- Prototype the core chat loop with your data
+- Get one internal user asking questions and getting reasonable answers
+- Nothing polished. Just proves the concept.
+
+### Week 2: Data access and retrieval
+
+- Build the code that fetches only the data this user is allowed to see
+- Feed it to the model in a way that fits within the context window
+- Handle the case where the user asks about data that does not exist
+- Add caching so the same question is not paid for twice
+
+### Week 3: UI and streaming
+
+- Build the chat interface (thread management, message history, avatars)
+- Make responses stream in real-time (users hate waiting for a full response)
+- Handle mobile, keyboard navigation, accessibility
+- Add typing indicators and error states
+
+### Week 4: Guardrails and polish
+
+- Rate limiting per user
+- Prompt injection defence (block attempts to make the AI do something it should not)
+- Response filtering (block AI outputs that reveal other users' data)
+- Cost cap per user per day
+- Fallback messages when the AI is confused
+
+### Week 5: Internal beta
+
+- Roll out to 5-10 internal users
+- Collect feedback
+- Fix the top 3 issues (there will be top 3 issues, always)
+
+### Week 6: Production launch
+
+- Public launch to a subset of users
+- Real-time monitoring for cost and quality
+- Feedback collection built into the UI
+
+Real users often surface issues in the first week of production that never showed up in testing. Budget another 2 weeks of tuning after launch.
+
+## What always takes longer than expected
+
+Every AI project I have shipped has three parts that take twice the estimate. Every time.
+
+### 1. Handling failure gracefully
+
+The API times out. The model gives a garbage response. The context window overflows. The rate limit hits. Each of these needs a plan. "Show an error message" is not a plan for a production feature.
+
+### 2. Cost surprises
+
+The first month of production always has a cost surprise. A user finds a way to burn 100x the average. A retry loop goes wrong. A cached response is not cached. Budget 2x your estimated first-month cost and put hard caps in place before launch.
+
+### 3. The "it kind of works" phase
+
+The AI feature works 80% of the time after week 2. Getting it to 95% takes another 3 weeks. Getting it to 99% takes another 5 weeks. Diminishing returns are steep. Set a target quality bar upfront and stop when you hit it.
+
+## Which model should you start with?
+
+Short version:
+
+- **Start with GPT-4o mini or Claude Haiku for cost-sensitive features.** They handle 80% of real tasks and cost 90% less than the flagship models.
+- **Use GPT-4o or Claude Sonnet for anything requiring reasoning or long context.** They are worth the cost premium for hard tasks.
+- **Do not start with open source unless you have a specific reason.** Self-hosting has real fixed costs and takes real ops effort. Only worth it above 500,000 messages/month or if data cannot leave your servers.
+
+For more depth on model pricing see [ChatGPT vs Claude vs Open Source pricing](/blog/chatgpt-vs-claude-vs-opensource-india).
+
+## When to build vs when to use a no-code tool
+
+If your AI feature is:
+
+- **Standalone** (not deeply tied to your product)
+- **Low volume** (under 10,000 messages/month)
+- **Prototype-stage** (still figuring out if users want it)
+
+Use a no-code tool. Chatbase, Voiceflow, or a Zapier AI action can ship this in a day.
+
+If your AI feature:
+
+- Needs access to your database
+- Needs to enforce user permissions
+- Handles high volume
+- Is core to your product
+
+Build it custom. No-code tools become expensive, brittle, or both at scale.
+
+Want me to look at your specific feature and give you a realistic timeline? [Message me on WhatsApp](https://wa.me/919373238164?text=Hi%20Aditya%2C%20I%20want%20to%20add%20an%20AI%20feature%20to%20my%20product.%20Here%27s%20what%20I%27m%20thinking%3A%20) with what you want to build and I will tell you which tier it is and how long it should really take.
+
+## FAQs
+
+**Can I add AI without touching my main database?**
+
+Yes for Tier 1 features. No for Tier 2 or 3. If the AI needs to know anything about your users' data, it needs a way to fetch that data — and that means database access, however carefully scoped.
+
+**Which model should I start with — GPT, Claude, or open source?**
+
+GPT-4o mini or Claude Haiku for cost-sensitive things. GPT-4o or Claude Sonnet for hard tasks. Skip open source until you have a specific reason.
+
+**How do I stop the AI feature from burning through my monthly budget?**
+
+Set per-user daily cost caps, per-request token limits, and hard monthly cost alerts. Every AI feature must have these before it goes to production. If your engineer or vendor is not implementing them, ask why.
+
+**Do I need a vector database?**
+
+For semantic search across a large corpus, yes. For most other features, no. A regular database with good query design handles most needs cheaper.
+
+**What happens on the day OpenAI has an outage?**
+
+Your feature is down unless you designed for it. Options: (1) fall back to a cached response, (2) show a graceful error and log for retry, (3) fall back to a different provider (Claude, Gemini). Option 3 is the most expensive but the most resilient.
+
+## Where to go next
+
+- [What an AI Agent Actually Costs to Build in India](/blog/what-ai-agent-costs-india-2026) — full cost breakdown
+- [Custom AI Agent vs Zapier or Make.com](/blog/custom-ai-vs-zapier) — build vs buy
+- [/services/ai-integration](/services/ai-integration) — how I add AI to existing products
+
+Or [message me with your feature idea](https://wa.me/919373238164?text=Hi%20Aditya%2C%20I%20want%20a%20realistic%20timeline%20for%20this%20AI%20feature%3A%20) for a straight answer.

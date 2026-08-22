@@ -1,0 +1,214 @@
+---
+title: "ChatGPT API vs Claude API vs Open Source: Which Is Cheapest for Indian Businesses in 2026"
+description: "Real per-token pricing in INR. Worked examples at 10k, 100k, and 1M messages/month. When each model wins."
+publishedAt: "2026-08-22"
+tags: ["AI", "Cost", "Model Comparison"]
+cover: "/images/blog/model-pricing.jpg"
+---
+
+I use Claude Code every day, ship AI features in production, and have paid AI bills for both indie products and enterprise integrations. This post gives you the real per-token pricing math in INR for the models Indian businesses actually use, plus honest guidance on which one wins for which task.
+
+No affiliate links. No sponsorship. Just the numbers as they stand in August 2026, and the reasoning behind them.
+
+## The short version
+
+If you want to stop reading now:
+
+- **GPT-4o mini** is the cheapest capable model per token as of August 2026
+- **Claude Sonnet 4.6** is more expensive per token but often uses fewer tokens for the same task
+- **Open source** (Llama 3.3, Mistral, Qwen) is not free — you pay for the GPU and the ops effort
+- For most Indian small businesses under 100,000 messages/month, hosted APIs beat self-hosting on total cost
+
+Now the details.
+
+## Per-token pricing in INR (August 2026)
+
+Prices are per million tokens. USD converted at ₹85 = $1.
+
+| Model | Input price/1M tokens | Output price/1M tokens |
+|---|---|---|
+| GPT-4o mini | ₹12.75 | ₹51 |
+| Claude Haiku 4.5 | ₹68 | ₹340 |
+| GPT-4o | ₹212 | ₹850 |
+| Claude Sonnet 4.6 | ₹255 | ₹1,275 |
+| Claude Opus 4.7 | ₹1,275 | ₹6,375 |
+| Llama 3.3 70B (via Together AI) | ₹51 | ₹68 |
+
+A quick refresher: "tokens" are roughly 0.75 of a word. A 1,000-word input is about 1,333 tokens.
+
+## Worked example: 50,000 customer support messages/month
+
+Say your AI agent handles 50,000 customer support conversations a month. Each conversation is roughly 500 input tokens (the customer message + a bit of context) and 300 output tokens (the AI's reply).
+
+That works out to:
+- Input tokens per month: 25 million
+- Output tokens per month: 15 million
+
+Here is what the bill looks like on each model:
+
+| Model | Monthly cost | Notes |
+|---|---|---|
+| GPT-4o mini | ₹1,084 | Cheapest, handles typical support well |
+| Claude Haiku 4.5 | ₹6,800 | Slightly better reasoning, still cheap |
+| GPT-4o | ₹18,050 | Overkill for most support |
+| Claude Sonnet 4.6 | ₹25,500 | Best reasoning, most expensive of the mainstream models |
+| Llama 3.3 70B (hosted) | ₹2,295 | Cheaper than GPT-4o mini at higher volume |
+
+At this volume, GPT-4o mini is the obvious choice unless you have a specific reason not to.
+
+## The catch: same task, different token count
+
+The raw per-token price is misleading. Different models use different numbers of tokens for the same task.
+
+A hard example: I ran the same code review task through Claude Sonnet and GPT-4o mini. Sonnet returned a 400-token answer that solved the problem. GPT-4o mini gave a 900-token answer that partially solved it and needed a follow-up prompt.
+
+Total cost:
+- Sonnet: 400 output tokens × ₹1,275/1M = ₹0.51 per task
+- GPT-4o mini: 900 output tokens × ₹51/1M = ₹0.046 per task
+- GPT-4o mini + retry: 2 × 900 = 1,800 output tokens = ₹0.092 per task
+
+GPT-4o mini is still cheaper. But for tasks that require careful reasoning, Sonnet can be worth the price premium because it does not need retries.
+
+**Rule of thumb:** for simple tasks, cheap model wins. For hard tasks, cheap model plus retries can still win, but sometimes the expensive model is cheaper because it needs one call instead of three.
+
+## The mixed-model pattern (the smart way to do this)
+
+Do not commit to one model. Route different tasks to different models based on difficulty.
+
+An example architecture I use in production:
+
+1. **Classifier layer:** GPT-4o mini decides "is this a simple query or a hard one?"
+2. **Simple queries:** answered by GPT-4o mini directly (₹0.001-₹0.005 per query)
+3. **Hard queries:** escalated to Claude Sonnet (₹0.10-₹0.50 per query)
+4. **The 5% that stump both:** escalated to a human
+
+Real cost breakdown for 50,000 queries/month using this pattern:
+- 40,000 simple → GPT-4o mini: ₹120
+- 9,000 hard → Claude Sonnet: ₹2,750
+- 1,000 human review → your ops team
+- **Total AI cost: ₹2,870/month**
+
+vs. running everything through Sonnet: ₹25,500/month.
+
+**~9x cost reduction** for the same output quality. This is the pattern serious production systems use.
+
+## When open source wins
+
+Open source models are "free" to use — you pay for the compute to run them. There are two ways to pay for compute:
+
+### Option 1: Rent it (Together AI, Fireworks, Replicate)
+
+Hosted open source is priced per token, similar to closed models but usually cheaper.
+
+- Llama 3.3 70B on Together: ~₹51 input / ₹68 output per 1M tokens
+- Mistral Large on Fireworks: ~₹85 / ₹255 per 1M tokens
+- Qwen 2.5 72B on Together: ~₹51 / ₹68 per 1M tokens
+
+At 50,000 messages/month, Llama 3.3 costs about ₹2,295 vs GPT-4o mini at ₹1,084. GPT-4o mini wins.
+
+At 5 million messages/month, Llama 3.3 costs ₹2.3L vs GPT-4o mini at ₹1.08L. GPT-4o mini still wins on price, but you might choose open source anyway for data privacy or vendor independence.
+
+### Option 2: Self-host on your own GPU
+
+Renting a beefy GPU (like an H100 or a pair of A100s) costs ₹30,000-₹1,00,000/month on cloud providers. You get roughly unlimited inference within that hardware's throughput limits.
+
+At what volume does this break even against paid APIs?
+
+- Above ~2 million tokens/day, self-hosted starts to beat GPT-4o mini
+- Above ~10 million tokens/day, self-hosted crushes even the cheapest hosted options
+
+Below that, you are paying for a GPU sitting idle most of the day. Not worth it.
+
+### The hidden cost of open source
+
+The real cost of self-hosting is not the GPU. It is the ops effort. Someone has to:
+
+- Configure and update the model server
+- Handle GPU failures and restarts
+- Manage the model versions
+- Debug performance issues
+- Fix things at 2 AM when a request pattern crashes the server
+
+If you do not have this expertise in-house, factor in ₹40,000-₹80,000/month for either a devops contractor or the time your engineer will spend on it.
+
+**My honest take:** unless you have a strong data-privacy requirement, a specific model choice that closed providers do not offer, or genuinely high volume, hosted APIs win in India in 2026.
+
+## Should you use an Indian AI startup (Sarvam, Krutrim)?
+
+Indian AI startups are building models tuned for Indian languages and use cases. In August 2026:
+
+- **Sarvam AI** offers a Llama-based multilingual model with good Hindi, Tamil, Kannada, Telugu. Pricing is competitive with hosted Llama options.
+- **Krutrim** offers Ola's foundation model with strong South Asian language support.
+
+Where they win: if a significant fraction of your users interact in Indian languages, these models often outperform Western models per rupee.
+
+Where they lose: for English-only tasks, GPT-4o mini and Claude Haiku remain the value winners.
+
+Try both on your actual traffic before committing. Language performance varies.
+
+## Prompt caching: the setting that cuts your bill by 90%
+
+Both OpenAI and Anthropic offer prompt caching. If your AI agent has a big system prompt or a repeated context block, prompt caching stores it on their servers and charges you ~90% less for the cached portion on subsequent calls.
+
+Concrete example: an agent with a 3,000-token system prompt handling 20,000 queries/month.
+
+- Without caching: 60 million tokens billed at full price = ₹765/month input cost on GPT-4o mini
+- With caching: same effective work, ~₹80/month
+
+That is a 10x saving for a one-line change in your integration code.
+
+If your vendor is not using prompt caching where it applies, ask why. It is usually laziness, not a technical limitation.
+
+## Which model should you actually pick?
+
+- **Cheapest option that works:** GPT-4o mini
+- **Best price-to-performance for hard tasks:** Claude Sonnet 4.6
+- **Highest quality when cost does not matter:** Claude Opus 4.7 or GPT-4o
+- **Best for Indian-language workloads:** try Sarvam, Krutrim, and hosted Llama in parallel and pick per language
+- **Best long-term architecture:** mix models. Cheap by default, escalate for the hard 10%.
+
+## What I do in production
+
+For every AI feature I ship:
+
+1. Start with GPT-4o mini and see how far it gets
+2. Sample 100 real requests, grade them
+3. If quality is above 90%, ship it
+4. If not, escalate the hard cases to Sonnet or Opus and re-grade
+5. Enable prompt caching before day 1 of production
+6. Set hard cost caps at 3x expected monthly spend
+7. Log token usage per query type so you can see what is actually costing you money
+
+If this feels like a lot, this is exactly what a build should include. If your vendor is not doing all seven, they will burn your money.
+
+Want to know what model is right for your specific use case? [Message me on WhatsApp](https://wa.me/919373238164?text=Hi%20Aditya%2C%20I%20want%20to%20know%20which%20AI%20model%20is%20cheapest%20for%3A%20) with a description of your workload — volume, task type, quality requirement — and I will give you a direct answer.
+
+## FAQs
+
+**What is the cheapest AI model for customer support right now?**
+
+GPT-4o mini as of August 2026. Handles 80%+ of typical customer support conversations for under ₹0.005 per exchange.
+
+**Can I use different models for different tasks in the same product?**
+
+Yes, and this is the smart pattern. Route simple tasks to cheap models, hard tasks to expensive ones. Typical cost reduction: 5-10x.
+
+**How do I set a hard monthly spending cap?**
+
+OpenAI, Anthropic, and Together AI all let you set hard limits in their dashboards. Set them at 2x your expected spend and alert at 80%. If your vendor is not doing this, it is a red flag.
+
+**Does using an Indian AI startup save money?**
+
+For English-only workloads, usually no. For Indian language workloads, sometimes yes. Test on your actual traffic before deciding.
+
+**What is prompt caching and does it actually cut my bill?**
+
+Prompt caching stores repeated context on the AI provider's servers. You pay ~90% less for the cached portion. Enable it any time your prompts have a large repeated section (system prompts, long docs). It is nearly always worth it.
+
+## Where to go next
+
+- [What an AI Agent Actually Costs to Build in India](/blog/what-ai-agent-costs-india-2026) — end-to-end cost including build
+- [Add AI to Existing Product Timeline](/blog/add-ai-to-existing-product-timeline) — how long integration takes
+- [/services/ai-integration](/services/ai-integration) — how I add AI to existing products
+
+Or [message me directly](https://wa.me/919373238164?text=Hi%20Aditya%2C%20I%20need%20help%20picking%20an%20AI%20model%20for%3A%20) for a straight answer on your specific case.

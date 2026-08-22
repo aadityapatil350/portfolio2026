@@ -1,0 +1,186 @@
+---
+title: "What to Do When Your Software Developer Disappears Mid-Project (A Rescue Guide)"
+description: "Emergency triage from an engineer who rescues abandoned codebases. How to secure your credentials, audit what works, and decide whether to fix or rebuild."
+publishedAt: "2026-08-22"
+tags: ["Codebase Rescue", "Emergency", "Business"]
+cover: "/images/blog/dev-disappeared.jpg"
+---
+
+You paid your developer. Half the money upfront. They shipped some things, promised more, then stopped replying. Now your project is half-built, deadlines are missed, and you are wondering if you just lost the money.
+
+I do codebase rescue as one of my services. I have seen this exact story more times than I can count. This post is the honest emergency guide — what to do in the first 48 hours, how to figure out what you actually have, and how to decide whether to try to save it or start over.
+
+Do not panic. Do not spend more money yet. Do this first.
+
+## First 48 hours: secure everything
+
+Before anything else, protect what you have.
+
+### Change every password the developer knew
+
+- Your hosting account (Vercel, Netlify, AWS, DigitalOcean, wherever)
+- Your database (change the DB password)
+- Your domain registrar
+- GitHub / GitLab (revoke the developer's access, change your password, enable 2FA if not already)
+- Any third-party services (Stripe, Razorpay, Twilio, WhatsApp Business API, SendGrid)
+- Your DNS provider (Cloudflare, etc.)
+
+If the developer has access to any of these, they can lock you out of your own product at any time. This is the first thing to do. Today.
+
+### Take a full backup
+
+- **Database:** export a full dump. Do it now. Save it somewhere safe (your laptop AND a cloud drive).
+- **Code:** clone your repository to your own machine. If the developer built it on their own GitHub account and never gave you access, you may need to negotiate — see below.
+- **Uploaded files:** if your product stores user uploads (images, PDFs), download the whole bucket.
+- **Environment configs:** copy the exact values of every environment variable you can find.
+
+If the developer put the code on their own account (a real risk), you need to get access before they revoke it. Contact them politely, in writing, asking for the code transfer. Do not accuse. Do not threaten. Just ask.
+
+### Document what you actually have
+
+Before you go looking for a new engineer, make a list:
+
+- What URLs are working? Test every page. Note which ones error out.
+- What features work? Test the signup, login, core flows, payments.
+- What database do you have? What tables? Roughly how many rows in each?
+- What third-party services are you paying for? Cancel the ones you do not need.
+- What was promised but not shipped? Get the original scope in writing.
+
+This list is what you will hand to the next engineer. Without it, they will need to spend 20 hours doing this discovery themselves and charge you for it.
+
+## 48-hour to 2-week phase: get an honest assessment
+
+You now need someone technical to look at what you have and give you an honest opinion. This is called a codebase audit or rescue audit.
+
+**Do not hire the next developer to build. Hire them to audit first.** Two very different things.
+
+A proper rescue audit answers:
+
+1. **What is actually built?** Not what the original developer claimed. What actually exists in the code.
+2. **What condition is it in?** Is the code readable? Documented? Testable? Or is it spaghetti nobody can safely touch?
+3. **What is missing that you thought was done?** Frequently the previous developer marked things as "done" that were 60% done.
+4. **What is broken that you did not know was broken?** Bugs that only show up under specific conditions.
+5. **What are the security holes?** Missing authentication checks, exposed API endpoints, credentials committed to code.
+6. **What are the ongoing costs?** Servers, databases, third-party services — some of which the developer may have set up on their own account.
+7. **How much to finish vs how much to rebuild?** The recommendation with honest reasoning.
+
+A proper audit takes 3-8 hours of engineering time for most projects. Expect to pay ₹15,000 – ₹40,000 for it. Anyone offering "free audit" is going to give you a sales pitch, not an honest assessment.
+
+## The rebuild-vs-fix decision
+
+After the audit, you will have a recommendation. Here is how to interpret it.
+
+### Signs the codebase is worth saving
+
+- Uses standard mainstream tech (React, Next.js, Node.js, Python, PostgreSQL)
+- Structure is understandable in one afternoon
+- No red-flag security issues
+- Core features work, the missing ones are additions not fundamentals
+- No dependence on obscure or abandoned libraries
+- Database schema makes sense
+
+**If most of these apply:** fix it. Budget for 40-60% of the original scope's cost to finish and stabilise.
+
+### Signs the codebase should be rebuilt
+
+- Custom framework nobody has heard of
+- No structure, single massive files
+- Multiple critical security holes
+- Core features do not work reliably even when demoed
+- Depends on abandoned or paid-license libraries with no source access
+- Database schema is a mess and would need to be redone anyway
+
+**If most of these apply:** rebuild. Budget for 70-90% of the original scope's cost, but with a proper engineer who knows what they are doing.
+
+### The middle path
+
+Sometimes the answer is "salvage the database and rewrite the code." Your user data, payment records, and business logic values are the valuable parts. Rebuilding the UI and business logic on top of preserved data is often the fastest path.
+
+## Common patterns in failed projects
+
+I see the same failures over and over. If you recognise any of these, you know why your project failed:
+
+### Pattern 1: Solo developer took on too much
+
+One person building a full product with no code review, no oversight, no accountability. Six months in, they realise they underestimated by 3x and either quit or ghost.
+
+**Prevention:** for any project over ₹1.5L, either work with an established team or insist on weekly demos and a fixed milestone schedule.
+
+### Pattern 2: Offshore team with no real senior
+
+A cheap offshore team quoted ₹80,000 for what should have been a ₹2L project. They assigned juniors who copied code from Stack Overflow. Six weeks in, nothing actually worked.
+
+**Prevention:** if a quote is 40% below the market rate, the vendor is either losing money (they will quit) or cutting quality (you will get garbage).
+
+### Pattern 3: Freelancer with no contract
+
+You paid via Google Pay or bank transfer. Never signed a scope document. No milestones. No IP transfer. When the freelancer disappeared, you had no recourse and no clarity on what was owed.
+
+**Prevention:** always have a written scope, a milestone schedule, and an IP clause that says the code belongs to you once payment is complete.
+
+### Pattern 4: Kept adding scope
+
+The original scope was 4 weeks. Then you added 5 features. Then you asked for a redesign. Then you changed the payment provider. The developer never pushed back, kept saying yes, ran out of budget and time, and eventually gave up.
+
+**Prevention:** any scope change gets a written amendment with an updated cost and timeline. If the developer will not do this, they are setting themselves up to fail.
+
+## What to look for in the next developer
+
+If your first developer failed, do not just hire someone cheaper the second time. Look for:
+
+- **Track record of shipped work.** Real URLs, real products, not just a portfolio site.
+- **Willingness to do a paid audit first.** A serious engineer will insist on this before quoting a rescue.
+- **Written contracts.** Not vibes. Not WhatsApp promises. Contract, milestones, IP clause.
+- **Weekly demos.** Not "trust me, it is going well." Weekly video showing what shipped this week.
+- **Honesty about limits.** A serious engineer will say "this scope is not 4 weeks, it is 8." You want that engineer.
+
+Red flags:
+
+- Refuses to sign a contract
+- Wants full payment upfront
+- Cannot show real production work
+- Says "yes" to every scope change without adjusting price or timeline
+- Vague about how the code will be structured or who will maintain it
+
+## If you want honest triage
+
+I do [codebase rescue](/services/codebase-rescue) work exactly for these situations. The first conversation is always the same:
+
+1. What do you have? (URLs, credentials, docs)
+2. What was promised?
+3. What is broken right now?
+4. What is your budget for finishing this?
+
+Based on that, I can usually tell you within 2 hours whether it is a fix job or a rebuild job. Then I quote fixed price to complete it, or I tell you honestly that I am the wrong fit and point you at someone better.
+
+[Message me on WhatsApp](https://wa.me/919373238164?text=Hi%20Aditya%2C%20my%20developer%20disappeared%20and%20I%20need%20help.%20Here%27s%20what%20happened%3A%20) with what happened and what you have. I will not sell you anything you do not need.
+
+## FAQs
+
+**How do I evaluate if an abandoned codebase can be saved or needs a rewrite?**
+
+Have a real engineer do a paid audit. Signs of "save" — standard tech, understandable structure, working core features. Signs of "rewrite" — custom framework, security holes, core features that do not work.
+
+**How can I regain control of my AWS, GitHub, or server credentials if the developer is unresponsive?**
+
+Contact the platforms directly with proof of ownership (payment history, domain records). AWS, GitHub, and most cloud providers have account recovery processes for this exact situation. It takes 3-15 days.
+
+**How long does a technical rescue audit take?**
+
+3-8 hours of engineering time for most small-to-medium projects. You should have a written audit and recommendation within 1 week of hiring an engineer.
+
+**What are the most common fatal flaws found in abandoned offshore builds?**
+
+Missing authentication (anyone can access anyone's data), payment logic errors (users can be charged wrong amounts), database schema without foreign key constraints (data drifts silently), no error monitoring (things break and nobody knows).
+
+**How do we ensure future developers do not repeat the same mistakes?**
+
+Written contracts. Milestone-based payment. Weekly demos. Code reviews for any project over ₹1.5L. Insist that the code goes to YOUR GitHub, not the developer's. IP transfer clause in the contract.
+
+## Where to go next
+
+- [/services/codebase-rescue](/services/codebase-rescue) — how I fix abandoned projects
+- [/services/build-scoping-sprint](/services/build-scoping-sprint) — how to avoid this on your next project
+- [How Long Does an MVP Really Take to Build?](/blog/mvp-timeline-real-week-by-week) — set realistic expectations for the next attempt
+
+Or [message me](https://wa.me/919373238164?text=Hi%20Aditya%2C%20my%20developer%20disappeared%20and%20I%20need%20help%20triaging%20what%27s%20left.%20Here%27s%20the%20situation%3A%20) with what you have. I will give you a straight answer.

@@ -1,0 +1,186 @@
+---
+title: "I Built Two Products Using Only Claude Code. Here Is What It Actually Cost and How Long It Took"
+description: "First-person breakdown of building GoSolarIndex and MSMEVault with Claude Code. Real hours, real API bills, and what the AI still cannot do without a human."
+publishedAt: "2026-08-22"
+tags: ["Claude Code", "Indie Hacking", "AI Tools"]
+cover: "/images/blog/claude-code-build.jpg"
+---
+
+Everyone is telling you that AI coding tools have changed everything. Claude Code, Cursor, Windsurf, Copilot. That a solo founder can now ship a full SaaS in a weekend.
+
+Some of that is true. Some of it is marketing. I built [GoSolarIndex](https://gosolarindex.in) and [MSMEVault](https://msmevault.in) mostly with Claude Code, and I use it every single day for both indie projects and my day job. This post is the honest breakdown — how many hours I actually spent, what the API cost, and what the AI still cannot do without a human who knows what they are doing.
+
+If you are a non-technical founder wondering if you can now ship your own product, keep reading. The answer is "maybe, and here is exactly what you need to know first."
+
+## What I built
+
+**GoSolarIndex.in** — a directory of solar installers across Indian cities. Search by location, filter by services, see verified installer profiles. Live at gosolarindex.in.
+
+- Built in 3 days
+- Next.js app, PostgreSQL database, technical SEO from day one
+- 17x growth in Google-indexed pages in the first 6 days
+- Now pulling steady organic traffic
+
+**MSMEVault.in** — a directory of Indian government schemes for MSMEs (small businesses). Search by scheme type, industry, or state. Monetized via NBFC lead generation.
+
+- Built in 5 days
+- Similar tech stack
+- Live at msmevault.in
+
+Both were shipped solo. Both use Claude Code for the majority of the code.
+
+## The honest hours breakdown for GoSolarIndex
+
+Everyone quotes the "3 days" figure. Let me break down what that actually looked like.
+
+### Friday night (2 hours)
+
+- Registered the domain
+- Set up a fresh Next.js project
+- Told Claude Code the vision — what the directory should do, what data structure I wanted
+- Reviewed and pushed back on Claude's initial architecture suggestions
+
+### Saturday (10 hours actual work over 14 elapsed hours)
+
+- 3 hours: data pipeline. Scraped public government solar installer registrations, cleaned the data, loaded it into PostgreSQL. Claude wrote most of the scraping code but I had to guide it on the edge cases in the source data.
+- 2 hours: core pages. Home, installer list, individual installer profile, city pages. Claude wrote first drafts, I refined the UI and fixed the layout issues.
+- 2 hours: search and filtering. Fuse.js integration, filter logic, URL state management. Claude ships good first versions but the interaction feel needed real polish.
+- 2 hours: SEO setup. Sitemap, meta tags, structured data schema. Claude knew what to write, I knew what to verify.
+- 1 hour: deploy to Vercel, DNS setup, first live check.
+
+### Sunday (8 hours actual work)
+
+- 3 hours: content. Adding real installer descriptions, city context, credibility signals. This was mostly me writing, Claude helping with tone consistency.
+- 2 hours: analytics, error monitoring, uptime checks.
+- 2 hours: fixing the 10 things that were subtly wrong on live traffic (mobile layout on small screens, weirdly formatted phone numbers, missing city entries).
+- 1 hour: submitted to Google Search Console, Bing, and a few Indian directories for backlinks.
+
+**Total actual work: ~20 hours across 3 elapsed days.**
+
+Not 72 straight hours. Not vibes-based rapid prototyping. Focused work in sessions, with breaks to think and eat.
+
+## The API cost
+
+Claude Code bills per token used. Here is what I actually paid for GoSolarIndex:
+
+- Building phase (2 days): ~$45 in API calls (₹3,800)
+- First month of ongoing edits and fixes: ~$28 (₹2,400)
+
+So the total build cost me about **₹6,200 in AI usage** plus my time. Compare that to hiring an agency to build the same thing for ₹1.5-3 lakh with a 6-week timeline.
+
+For MSMEVault, similar numbers — about $60 in API costs during the build, another $35 in ongoing edits.
+
+## What Claude Code is actually good at
+
+After a year of daily use, here is my honest assessment.
+
+### It is very good at:
+
+- **Writing boilerplate.** CRUD endpoints, database schemas, form validation, standard React components. All the stuff that used to take hours now takes minutes.
+- **Explaining unfamiliar code.** Drop a random Python library into the chat and it explains what does what.
+- **Debugging deterministic problems.** "This function returns undefined when the input has more than 100 items." Claude will find it faster than I will.
+- **Refactoring for clarity.** Rename variables, extract functions, restructure files. Careful and reliable.
+- **First-draft copy.** Marketing pages, README files, error messages. Solid enough to ship after a light edit.
+- **SQL queries.** Give it the schema and describe what you want, it writes correct queries most of the time.
+
+### It is decent at:
+
+- **Non-standard integrations.** Talking to weird third-party APIs works but usually needs 2-3 iterations to get right.
+- **CSS and layout.** Ships working code but the aesthetic sensibility is average. You still need taste.
+- **Suggesting architecture.** Good starting points but sometimes over-engineers. You have to push back.
+
+### It is still bad at:
+
+- **Product decisions.** Should this feature exist? What is the right onboarding flow? Claude cannot tell you.
+- **Judging code quality.** It writes code but does not always know when its own code is worse than an alternative.
+- **Long-context reasoning.** For codebases over 30-40 files, it starts losing track and making changes that break things elsewhere.
+- **Debugging non-deterministic bugs.** Race conditions, weird production-only failures, memory leaks. You still need real engineering.
+- **Knowing when to stop.** Left to itself, it will keep suggesting improvements to code that is already fine. You have to say "this is done."
+
+## What I still do myself
+
+Even with Claude Code, these are still 100% my job:
+
+- **Deciding what to build.** The product decisions.
+- **Reading every line of code before it merges.** Yes, every line. Even the boilerplate.
+- **Testing on real data.** Claude's code passes its own tests but real data has edge cases nobody planned for.
+- **Deployment and infrastructure choices.** Where to host, how to structure the database, what to monitor.
+- **Security review.** Claude writes fine code but does not always think adversarially. Real security review is a human job.
+- **Talking to users.** All feedback conversations, all sales conversations, all support conversations.
+
+## Can a non-coder build a real product with Claude Code?
+
+Here is the honest answer.
+
+**If you know the basics of:**
+- What a database is
+- What an API endpoint is
+- What deploying means
+- How to read code even if you cannot write it
+
+Then yes, you can build a small real product with Claude Code. It will take you longer than an experienced engineer (2-4x longer), you will make more mistakes, and you will need help when things go wrong — but you can ship.
+
+**If you do not know these basics**, you will get stuck in ways that AI cannot help you unstick. Claude will confidently generate code that does not work with your setup, and you will not know why. Debugging becomes impossible because you cannot read the error messages.
+
+The realistic path for total non-coders in 2026 is:
+1. Spend 40-60 hours learning the absolute basics of web development. Not to write code — to understand the words.
+2. Then use Claude Code to build with real speed.
+3. Or: hire an engineer for the first version, then use Claude Code to make edits yourself once you understand the codebase.
+
+## The tools I actually use
+
+Not sponsored. Just what I use daily:
+
+- **Claude Code** — for anything requiring real engineering thought (my main tool)
+- **Cursor** — for quick edits when I want a lighter interface
+- **Windsurf** — occasionally, when I want to try Windsurf's specific features
+- **Copilot** — mostly turned off, gets in the way for me personally
+
+Claude Code has been the most impactful for shipping real products. Cursor is excellent for day-to-day. Both are worth the subscription.
+
+## If you want to hire me
+
+Yes, I still use Claude Code when clients hire me. This is a common question — "if AI does the code, what am I paying you for?"
+
+You are paying for:
+- The 20% of the work Claude cannot do
+- Knowing when Claude is wrong
+- The architecture decisions
+- The security review
+- The infrastructure choices
+- The user experience judgment
+- The maintenance and reliability
+
+Think of it this way: contractors use power tools. You do not stop hiring contractors because power tools exist. You hire them because they know which tool to use, when to stop, and how to do the parts the tool cannot.
+
+If you want to build something real, [message me on WhatsApp](https://wa.me/919373238164?text=Hi%20Aditya%2C%20I%20want%20to%20build%20something%20and%20want%20to%20know%20if%20I%20should%20DIY%20with%20Claude%20Code%20or%20hire%20you%3A%20) and I will tell you honestly whether you should hire me or try Claude Code yourself.
+
+## FAQs
+
+**Can I build a full SaaS with Claude Code and no coding background?**
+
+If you learn the basics (40-60 hours of study), yes. Without those basics, you will get stuck. There is no shortcut around understanding what your code actually does.
+
+**How much did the API cost to build GoSolarIndex?**
+
+About $45 during the 3-day build, another $28 in the first month of edits. Total under ₹8,000.
+
+**What are the parts Claude Code cannot do yet?**
+
+Product decisions, security review, complex architectural choices, non-deterministic bug debugging, and knowing when a piece of code is good enough to ship.
+
+**Should I use Claude Code, Cursor, or Windsurf?**
+
+For beginners: Cursor is the friendliest. For serious engineering: Claude Code is the most capable. For most people: try both and pick what feels right.
+
+**If I hire you, do you still use Claude Code, or is it all you?**
+
+I use Claude Code for the parts it does well. I do the parts it cannot. You pay for the judgment and the engineering discipline, not for typing speed. The AI tools make me ~3x faster than I was two years ago.
+
+## Where to go next
+
+- [What an AI Agent Actually Costs to Build in India](/blog/what-ai-agent-costs-india-2026) — real pricing for AI-based products
+- [How Long Does It Take to Add AI to an Existing Product?](/blog/add-ai-to-existing-product-timeline) — realistic timelines
+- [/services/web-app-mvp-development](/services/web-app-mvp-development) — how I build MVPs (with AI assist)
+
+Or [WhatsApp me](https://wa.me/919373238164?text=Hi%20Aditya%2C%20I%20want%20to%20build%20a%20product%20and%20need%20advice%20on%20DIY%20vs%20hire%3A%20) with your idea and I will tell you honestly whether you should DIY with Claude Code or hire someone.

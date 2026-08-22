@@ -78,10 +78,32 @@ export default async function BlogPostPage({
     description: post.description,
     datePublished: post.publishedAt,
     dateModified: post.updatedAt || post.publishedAt,
+    articleSection: post.tags?.[0] || "Engineering",
+    keywords: post.tags?.join(", ") || undefined,
     author: {
       "@type": "Person",
       name: siteConfig.name,
       url: siteConfig.url,
+      jobTitle: "Lead Software Engineer & Independent Delivery Partner",
+      description:
+        "Lead engineer on production systems managing 3,400+ MW of live plant data across 40+ sites. Ships AI agents, reporting automation, internal dashboards, and realtime monitoring in production. Independent delivery partner for founders and operations leads.",
+      knowsAbout: [
+        "AI agents",
+        "AI workflow automation",
+        "reporting automation",
+        "internal dashboards",
+        "realtime monitoring",
+        "SCADA integration",
+        "Next.js",
+        "TypeScript",
+        "PostgreSQL",
+        "Claude Code",
+        "operational software",
+      ],
+      sameAs: [
+        "https://github.com/aadityapatil350",
+        "https://x.com/aadityapatil350",
+      ],
     },
     publisher: {
       "@type": "Person",
@@ -93,6 +115,8 @@ export default async function BlogPostPage({
       "@type": "WebPage",
       "@id": `${siteConfig.url}/blog/${slug}`,
     },
+    image: `${siteConfig.url}/og?title=${encodeURIComponent(post.title)}&type=blog`,
+    inLanguage: "en-IN",
   };
 
   return (

@@ -1,0 +1,213 @@
+---
+title: "How Long Does an MVP Really Take to Build? A Realistic Week-by-Week Breakdown"
+description: "Real timelines for Indian founders. Why traditional agencies quote 6 months for what an independent engineer ships in 5 weeks, and what to cut."
+publishedAt: "2026-08-22"
+tags: ["MVP", "Timeline", "Startups"]
+cover: "/images/blog/mvp-timeline.jpg"
+---
+
+You have a validated business idea. You have got a small budget. You need a working product in front of customers before that budget runs out. And every developer you talk to gives you a different number — 4 weeks, 3 months, 6 months, "let us discuss."
+
+Here is the honest answer from someone who has shipped MVPs for himself and for others: a production-grade MVP using modern web tech should take **3 to 8 weeks** for most business ideas. Not 6 months. This post walks you through the realistic week-by-week timeline, what has to be in scope, and what should be cut ruthlessly.
+
+## Why traditional agencies quote 6 months
+
+Before we get to the week-by-week, let me address the elephant.
+
+Agencies quote long timelines for four reasons:
+
+1. **Padding.** Every agency adds 30-50% to protect their margins against clients who change scope.
+2. **Waterfall process.** Traditional agencies do a design phase, then a build phase, then a QA phase — each a month long, each with client review cycles.
+3. **Team switching cost.** Agencies rotate engineers between clients. Each rotation costs weeks of context transfer.
+4. **Overspecification.** Agency proposals include "features" the customer will never use because bigger scope means bigger invoice.
+
+An independent engineer with modern AI-assisted tooling can ship the same MVP in 30-40% of the agency timeline. Not because the engineer is better than the agency's engineers. Because the process is not padded.
+
+## The three MVP archetypes and their real timelines
+
+Not all MVPs are the same. Here are the three most common shapes I build:
+
+### Archetype 1: Simple SaaS (3-5 weeks)
+
+You have a specific narrow tool. Users sign up, do the thing, pay a subscription.
+
+Examples: a niche scheduling tool, a specialised calculator, a directory site with paid listings, a personal finance tracker for a niche audience.
+
+**Realistic scope:**
+- Auth (login, signup, password reset)
+- One core feature that solves the problem
+- Billing (Stripe or Razorpay)
+- Basic admin panel for you
+- Basic user profile
+
+**Realistic price:** ₹1,50,000 – ₹3,50,000
+
+### Archetype 2: Marketplace / two-sided platform (5-8 weeks)
+
+Users on both sides — buyers and sellers, patients and doctors, students and tutors.
+
+Examples: a niche service marketplace, a booking platform, a mentor matching site.
+
+**Realistic scope:**
+- Two user types with different flows
+- Search / discovery
+- Communication (chat or email routing)
+- Booking / transaction
+- Basic ratings or verification
+- Admin panel for you
+
+**Realistic price:** ₹3,00,000 – ₹6,00,000
+
+### Archetype 3: AI-powered product (4-7 weeks)
+
+Any product where the AI is the core value proposition.
+
+Examples: an AI writing assistant, an AI-powered analytics tool, an AI chat interface for a specific niche.
+
+**Realistic scope:**
+- Auth
+- The AI feature (with proper cost caps and error handling)
+- History / saved outputs
+- Billing that accounts for usage
+- Basic admin
+
+**Realistic price:** ₹2,50,000 – ₹5,50,000
+
+These are floors. Bigger scope = bigger price. If a vendor is quoting you 3-4x these numbers for what sounds like an MVP, ask why.
+
+## Week-by-week for a simple SaaS (3-5 week timeline)
+
+Let me walk through the realistic timeline for the most common shape. This is what I actually do.
+
+### Week 1: Foundation and auth
+
+- Day 1-2: Set up the project (framework, database, hosting, CI)
+- Day 3-4: Auth — signup, login, password reset, sessions
+- Day 5: Basic user profile page and account settings
+
+Nothing user-facing looks impressive yet. This is scaffolding.
+
+### Week 2: The core feature
+
+- Day 1-3: Build the one thing your product does. If your MVP has more than "one thing," you have not narrowed enough.
+- Day 4-5: Wire it into the user flow (from signup to first successful use)
+
+End of week 2: a user can sign up, log in, use the core feature. It looks rough. It works.
+
+### Week 3: Payments and admin
+
+- Day 1-2: Payment integration (Stripe for global, Razorpay for India-only)
+- Day 3-4: Subscription management (start, cancel, change plan)
+- Day 5: Basic admin panel (see users, see payments, override things when they break)
+
+### Week 4: Polish and reliability
+
+- Day 1-2: UI polish — spacing, mobile responsiveness, error states, empty states
+- Day 3: Error monitoring, uptime tracking, basic analytics
+- Day 4: End-to-end testing of every core flow
+- Day 5: Deploy to production, do a final live check
+
+### Week 5 (buffer)
+
+- The 30-40% overrun that always happens
+- The 5 things you noticed the day you almost launched
+- Actually go live
+
+**Total realistic time: 4-5 weeks for a simple SaaS.**
+
+Anyone quoting 12 weeks for this exact scope is padded. Anyone quoting 2 weeks is skipping something (usually payments, testing, or reliability).
+
+## What to include and what to cut
+
+### Must include, do not cut
+
+- Auth done properly (secure passwords, session management, HTTPS)
+- Payments that actually work end-to-end
+- Basic monitoring so you know when things break
+- Mobile responsiveness (>60% of your Indian users will be on mobile)
+- One clean flow from signup to first "aha" moment
+
+### Cut without regret
+
+- **Advanced admin features.** You will build these when you actually have users complaining. Not now.
+- **Multi-language support.** Ship in one language. Add languages after 100 paying users.
+- **Multi-currency.** Same. Ship in one currency.
+- **Team accounts and permissions.** Only add if 5+ prospects have asked for it. Otherwise, individual accounts.
+- **Reporting dashboards.** Only if it is your core value. Otherwise, cut.
+- **Mobile apps (iOS/Android).** Ship a mobile-responsive web app first. Native apps are month 6+.
+- **Integrations with 20 tools.** Ship with the one integration your core value needs. Add more when users ask.
+- **Onboarding tours.** A good UI does not need one. Fix the UI, not add a tour.
+
+## The specific things founders get wrong
+
+### Wrong 1: The "just add" trap
+
+Every week during the build, you will think of a new feature that "would be so easy to add." Every one of those additions extends your timeline by more days than you think. Ship without them. Add them after launch based on real user feedback.
+
+### Wrong 2: Not talking to users during the build
+
+Best MVPs are shown to 5-10 real potential users during week 2-3, not the day of launch. Every week you delay showing it, you build more things nobody wants.
+
+### Wrong 3: Payments as an afterthought
+
+"We can add payments later." No. Payments are 3-4 days of work and need to be tested end-to-end. If your MVP charges money and does not have payments on day 1 of launch, you shipped a demo, not a product.
+
+### Wrong 4: Skipping monitoring
+
+"We will add monitoring once we have users." No. Monitoring on day 1 catches the bug that would have made your first 20 users churn silently. Add it before launch, not after.
+
+### Wrong 5: Fancy tech choices
+
+Do not ship your MVP on the shiniest new database or framework. Use boring, well-supported tech that works. Save the exotic choices for version 2.
+
+## Costs and cloud running
+
+For a shipped MVP running on modern serverless infrastructure:
+
+- **Vercel / Netlify hosting:** free tier covers 10,000+ users
+- **PostgreSQL (via Neon or Supabase):** free tier covers early usage
+- **Email (Resend, Postmark):** ~₹800/month for 10,000 emails
+- **Payment processor:** free to set up, ~2.5% of revenue
+- **Analytics / error monitoring:** free tier from PostHog and Sentry
+
+**Total monthly running cost for a launched MVP:** ₹0 – ₹3,000/month for the first 500 users. Do not over-plan infrastructure.
+
+## What I recommend for founders reading this
+
+1. **Write down your MVP scope in one page.** If you cannot fit it on one page, it is not an MVP.
+2. **Cut half the features from that page.** No, more than that. Cut half of what remains.
+3. **Get a fixed quote from someone with a track record.** Not hourly. Not "we will see how it goes." Fixed scope, fixed price, fixed delivery date.
+4. **Budget 20% extra time for launch.** The 5 things you notice the day of go-live take a real week to fix.
+
+If you want a fixed quote for your specific MVP, [message me on WhatsApp](https://wa.me/919373238164?text=Hi%20Aditya%2C%20I%27m%20building%20an%20MVP%20and%20want%20a%20realistic%20quote.%20Here%27s%20what%20I%27m%20building%3A%20) with a one-page description. I will tell you honestly whether it fits the 3-8 week window and what a fair price is.
+
+## FAQs
+
+**Why do traditional agencies quote 6 months for what an independent engineer builds in 5 weeks?**
+
+Padding, waterfall process, team switching costs, and overspecification. An independent engineer with modern tools does the same work with 30-40% of the elapsed time.
+
+**What features should be omitted from an initial MVP to hit a 4-week launch deadline?**
+
+Multi-language, multi-currency, team accounts, advanced admin, integrations beyond the essential one, native mobile apps, onboarding tours, reporting dashboards. Ship the core value plus payments plus monitoring. That is it.
+
+**Is no-code (Bubble/WordPress) faster than a custom Next.js build for an MVP?**
+
+For the first 1,000 users, sometimes yes. For scale, cost, and flexibility beyond that, no-code becomes a liability. If your MVP is a business idea you plan to grow, custom code from day 1 is usually cheaper over 2 years.
+
+**What are the typical monthly cloud running costs for a newly launched web app?**
+
+₹0-₹3,000/month for the first 500 users on modern serverless stack. Costs scale with usage, roughly linearly. A profitable SaaS at 5,000 paying users typically runs at ₹15,000-₹40,000/month total infrastructure.
+
+**How do we transition from an MVP to a scaling production system?**
+
+Usually not by rewriting. Add tests, add monitoring, refactor the specific parts that hurt as you grow, hire your first engineer. Full rewrites are almost always a mistake.
+
+## Where to go next
+
+- [I Built Two Products Using Only Claude Code](/blog/built-product-with-only-claude-code) — real hours, real bills
+- [What an AI Agent Actually Costs to Build in India](/blog/what-ai-agent-costs-india-2026) — for AI-powered MVPs
+- [/services/web-app-mvp-development](/services/web-app-mvp-development) — how I build MVPs
+- [/services/build-scoping-sprint](/services/build-scoping-sprint) — 3-day paid diagnostic before you commit to a build
+
+Or [WhatsApp me with your MVP idea](https://wa.me/919373238164?text=Hi%20Aditya%2C%20I%20want%20a%20realistic%20quote%20for%20my%20MVP%3A%20) for a straight quote.

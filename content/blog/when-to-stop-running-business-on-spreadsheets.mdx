@@ -1,0 +1,219 @@
+---
+title: "When to Stop Running Your Business on Spreadsheets (And What to Do Next)"
+description: "Five clear warning signs your Excel workflow is costing you money. What to migrate first, what to keep, and how much a proper internal tool actually costs."
+publishedAt: "2026-08-22"
+tags: ["Automation", "Internal Tools", "Operations"]
+cover: "/images/blog/spreadsheets.jpg"
+---
+
+Excel is the most successful piece of business software ever built. It runs more of the Indian economy than SAP, Oracle, and every enterprise SaaS combined. If your business is running on spreadsheets, you are in good company.
+
+But there is a point at which spreadsheets start costing you money instead of saving you money. This post walks you through the five clear warning signs, what to migrate first, what to keep as spreadsheets forever, and what a proper internal tool actually costs.
+
+I have spent years building automation to replace spreadsheet workflows in production. What follows is the honest guide from someone who does this for a living.
+
+## The five warning signs
+
+If any of these apply to your business, spreadsheets are actively costing you money. If three or more apply, you needed to migrate 6 months ago.
+
+### Sign 1: Someone spends more than 3 hours a day on data movement between sheets
+
+Your team is copy-pasting numbers from one workbook to another. From a vendor's Excel to your master file. From your master file into a report. From the report into an email.
+
+Each individual paste takes 2 minutes. There are 100 of them a day. That is 3+ hours. Every day. Every week. Every year.
+
+The cost: ~₹4 lakh per year of one person's time. And that is before accounting for the errors.
+
+### Sign 2: A single wrong cell brings your operations to a halt
+
+Someone accidentally overwrites a formula. Someone deletes a row that another sheet references. Someone opens the workbook on a different machine and the linked file paths break.
+
+Your team spends the next 4 hours debugging what changed instead of doing actual work.
+
+If this has happened more than twice in the last year, you have real key-person risk.
+
+### Sign 3: Nobody can tell you why yesterday's number was wrong
+
+Your daily report showed a number that turned out to be wrong. You want to trace back where the wrong data came in.
+
+You can't. There is no audit trail. Nobody logged what changed. The vendor sheet from yesterday was overwritten by today's.
+
+If you cannot answer "why was this number wrong 3 weeks ago" within 15 minutes, you have no audit trail. And you cannot defend your numbers to regulators, auditors, or your own board.
+
+### Sign 4: Only one person understands the macros
+
+There is one person in your team who built the Excel workflow years ago. They know all the shortcuts, the workarounds, the "if this breaks, click here" quirks.
+
+They are also the only person who can fix it when it breaks. And they are the only person who can update it when the business changes.
+
+When they take leave, work stops. When they quit, work stops for a month. When they retire, the whole workflow needs to be rebuilt from scratch.
+
+You have a key-person dependency. That is a business risk you would not tolerate in any other part of your operation.
+
+### Sign 5: You cannot see current state without asking someone
+
+You want to know "what is the current status of our production today?" You cannot look it up. You have to ask someone to open the workbook, refresh the data, and get back to you.
+
+By the time you get an answer, the number has moved.
+
+If you cannot answer basic questions about your own business in under 60 seconds, you have an operational visibility problem.
+
+## What to migrate first
+
+If any of the above applies, you do not have to migrate everything at once. In fact, do not. Start with the one workflow that hurts most.
+
+### The right first thing to migrate
+
+- **High-frequency** (daily or multiple times a day)
+- **High-volume** (many rows, many entries)
+- **High-pain** (someone hates doing this manually)
+- **Well-understood** (the rules are known and stable)
+
+Common first migrations:
+
+- Daily sales / operations reporting
+- Inventory reconciliation across locations
+- Invoice / payment matching
+- Attendance and overtime calculation
+- Multi-vendor data consolidation
+
+### What NOT to migrate first
+
+- **Ad-hoc analysis** that changes every week
+- **One-off calculations** you do once a quarter
+- **Executive summary sheets** where the format matters more than the automation
+- **Anything used by only one person** (probably not worth the build cost)
+
+Ad-hoc and one-off work is what spreadsheets were designed for. Keep it there.
+
+## What replaces the spreadsheet
+
+There are three real options in 2026, from least to most expensive.
+
+### Option 1: Better spreadsheets (₹500 – ₹3,000/month)
+
+Google Sheets with Apps Script, or Excel with Power Query. Still spreadsheets, but with automation, live data connections, and a bit of audit trail.
+
+**When it fits:**
+- Small operation (fewer than 10 users of the sheet)
+- Straightforward automation (nothing exotic)
+- Willing to keep the "one person understands it" problem, at least for now
+
+**When it does not:**
+- More than 20 people touch the same data
+- You need real user permissions
+- Your workflow depends on external systems the spreadsheet cannot talk to easily
+
+### Option 2: Airtable, Notion, or a no-code database (₹5,000 – ₹25,000/month at scale)
+
+Structured data with a nicer interface. Views, filters, forms, basic automation.
+
+**When it fits:**
+- 10-50 people using it
+- Structured data (things fit into rows and columns)
+- Workflow can be expressed as "when X happens, do Y"
+
+**When it does not:**
+- Large data (100,000+ rows) — gets slow and expensive
+- Complex business logic (multi-step rules with branching)
+- Integration with legacy systems that do not have modern APIs
+- Real-time requirements
+
+### Option 3: Custom internal dashboard (₹1.5L – ₹6L build, ₹5,000-₹15,000/month running)
+
+A proper application built around your specific workflow. You define the screens, the roles, the rules. The developer builds it.
+
+**When it fits:**
+- 20+ people using it, or thousands of records
+- Complex business logic that no template captures
+- Real audit trail requirement
+- Integration with your other systems
+- Multi-user real-time collaboration
+
+**When it does not:**
+- You have not proven the workflow yet (build a spreadsheet version first)
+- Your team is under 5 people and volume is low
+- You are unwilling to name a specific owner for the new tool
+
+## Real example: a distributor at 45 people
+
+A distributor with 45 employees was running daily operations on 15+ interconnected Excel files. Every morning, someone spent 4 hours consolidating orders across 8 sales branches, checking inventory, and building the day's dispatch schedule.
+
+They had all five warning signs.
+
+We built them a [custom internal dashboard](/services/internal-dashboards) that:
+
+- Connected directly to their existing order data (no more Excel imports)
+- Consolidated across branches automatically
+- Showed live inventory across warehouses
+- Generated the dispatch schedule with one click
+- Kept a full audit trail
+
+**Build cost:** ₹3,80,000. **Timeline:** 6 weeks. **Ongoing cost:** ₹8,000/month.
+
+**Result after 3 months:**
+- Morning consolidation went from 4 hours to 15 minutes
+- Wrong-inventory errors dropped by 80% (the system caught the mismatches instead of humans)
+- Two people who spent full mornings on the workbook were re-deployed to higher-value work
+- Total annual savings on people time alone: ~₹9 lakh
+
+**Payback: month 6.**
+
+The distributor now runs on the dashboard. The original Excel workflow was retired. When the person who understood the macros retired, nothing broke because the process now lives in the software.
+
+## What to keep as spreadsheets
+
+Even after migrating your operational workflows, keep spreadsheets for:
+
+- **Executive analysis.** Board meetings, investor updates, quarterly reviews.
+- **One-off calculations.** Modelling a scenario, estimating a new market.
+- **Individual work.** Someone's personal task list, budget tracking, or notes.
+- **Anything you use less than once a month.**
+
+Spreadsheets are the right tool for these. Do not migrate everything just because.
+
+## What I recommend
+
+Do this exercise before you commit to any migration:
+
+1. **List every workflow in your business that involves a spreadsheet.**
+2. **For each, note: hours per week spent on it, number of people involved, cost of a wrong result.**
+3. **Circle the top 3 by combined pain.**
+4. **Ask: does anyone in the team have a specific frustration about that workflow that you agree with?**
+
+The workflow that has the most pain AND has a frustrated internal champion is your first migration. Build a proper tool for that one. Prove the ROI. Then decide whether to migrate the next one.
+
+Do not start with a "migrate everything to a new system" project. Those fail. Every time. Migrate one workflow at a time.
+
+Want me to help you decide which spreadsheet workflow is worth migrating first? [Message me on WhatsApp](https://wa.me/919373238164?text=Hi%20Aditya%2C%20we%27re%20drowning%20in%20spreadsheets%20and%20want%20advice%20on%20what%20to%20migrate%20first.%20Here%27s%20our%20situation%3A%20) with a description of your top 2-3 workflows and I will give you an honest opinion.
+
+## FAQs
+
+**How many hours a week does a manual Excel workflow typically waste before custom automation pays for itself?**
+
+Roughly 15-25 hours per week of one person's time is the break-even for a ₹2-3L custom build. Below that, keep the spreadsheet. Above that, migrate.
+
+**What happens if our source Excel format changes unexpectedly?**
+
+Good automation alerts you when the format changes instead of silently producing wrong output. Ask your vendor how they handle upstream format changes before agreeing to a build.
+
+**Can automated reporting send daily summary PDFs directly to WhatsApp groups?**
+
+Yes. Common integration. Cost is minimal on top of the base automation.
+
+**How do we ensure numbers match our legacy spreadsheets during cutover?**
+
+Standard practice: run both the old spreadsheet and the new automation in parallel for 2-4 weeks. Compare outputs daily. Only cut over the spreadsheet when the new version has matched for a full billing cycle.
+
+**What is the typical ROI timeline for automating daily reporting?**
+
+For a 3-6 hour/day manual workflow, custom automation typically pays back in 4-8 months on saved time alone. Add error reduction and business decision speed and the effective payback is faster.
+
+## Where to go next
+
+- [Case study: reporting automation for a 33-plant operator](/work/dgr-automation) — real numbers
+- [Custom AI Agent vs Zapier or Make.com](/blog/custom-ai-vs-zapier) — when to use no-code vs custom
+- [/services/internal-dashboards](/services/internal-dashboards) — custom internal tools
+- [/services/reporting-automation](/services/reporting-automation) — daily/weekly report automation
+
+Or [message me directly](https://wa.me/919373238164?text=Hi%20Aditya%2C%20I%20want%20to%20migrate%20a%20spreadsheet%20workflow.%20Here%27s%20what%20it%20does%3A%20) for a straight answer on what to do with your specific spreadsheet mess.
