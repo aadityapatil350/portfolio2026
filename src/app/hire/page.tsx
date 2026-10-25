@@ -17,6 +17,9 @@ export const metadata: Metadata = {
   title: "Hire me — websites, web apps, and AI automation built in days",
   description:
     "Senior engineer for hire. I build websites, web apps, and AI workflow automation for founders, small businesses, and ops teams. Starting at ₹15k. Pune, India.",
+  alternates: {
+    canonical: "https://adityapatil.work/hire",
+  },
   openGraph: {
     title: "Hire Aditya — websites, web apps, AI automation",
     description:

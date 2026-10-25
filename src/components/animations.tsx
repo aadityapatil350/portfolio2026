@@ -149,7 +149,7 @@ export function CountUp({
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-20px" });
   const shouldReduce = useReducedMotion();
-  const [count, setCount] = useState(target);
+  const [count, setCount] = useState(() => (shouldReduce ? target : 0));
   const hasAnimatedRef = useRef(false);
 
   useEffect(() => {
@@ -158,7 +158,6 @@ export function CountUp({
 
     let startTime: number;
     let animationFrame: number;
-    setCount(0);
 
     const animate = (timestamp: number) => {
       if (!startTime) startTime = timestamp;

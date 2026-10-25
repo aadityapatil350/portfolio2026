@@ -20,6 +20,9 @@ export const metadata: Metadata = {
   title: "White-Label Engineering Delivery Partner for Agencies | Aditya Patil",
   description:
     "White-label senior engineering capacity for design, marketing, and SEO agencies in India. Fixed project rates, strict NDA, zero client contact, and reliable delivery.",
+  alternates: {
+    canonical: "https://adityapatil.work/partners",
+  },
   openGraph: {
     title: "Agency Delivery Partner (White Label) | Aditya Patil",
     description:

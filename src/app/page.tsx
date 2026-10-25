@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
-import { HomeContent } from "@/components/home-content";
+import { WorldHome } from "@/components/world-home";
 import { caseStudies } from "@/data/site-config";
 
 export const metadata: Metadata = {
   title: "Aditya Patil — Operational Software, Reporting Automation & AI Workflows",
   description:
     "Aditya Patil builds operational software that survives real use — automated reporting pipelines, internal dashboards, realtime telemetry, and AI automation. Pune, India.",
+  alternates: {
+    canonical: "https://adityapatil.work",
+  },
   openGraph: {
     title: "Aditya Patil — Operational Software & Delivery Partner",
     description:
@@ -77,7 +80,7 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(professionalServiceSchema) }}
       />
-      <HomeContent caseStudies={caseStudies} />
+      <WorldHome caseStudies={caseStudies} />
     </>
   );
 }

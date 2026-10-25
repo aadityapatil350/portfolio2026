@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono, Syne, Plus_Jakarta_Sans } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
 import { PageTransition } from "@/components/page-transition";
 import { StickyMobileCTA } from "@/components/sticky-mobile-cta";
+import { EngineerMascot } from "@/components/sebg/engineer-mascot";
+import { SoundToggle } from "@/components/sebg/sound-toggle";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 
@@ -16,6 +18,18 @@ const inter = Inter({
 
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const syne = Syne({
+  variable: "--font-syne",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const plusJakarta = Plus_Jakarta_Sans({
+  variable: "--font-plus-jakarta",
   subsets: ["latin"],
   display: "swap",
 });
@@ -138,7 +152,7 @@ export default function RootLayout({
         )}
       </head>
       <body
-        className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased bg-background text-foreground`}
+        className={`${inter.variable} ${jetbrainsMono.variable} ${syne.variable} ${plusJakarta.variable} font-sans antialiased bg-background text-foreground`}
       >
         <ThemeProvider>
           <div className="flex min-h-screen flex-col">
@@ -148,6 +162,8 @@ export default function RootLayout({
             </main>
             <Footer />
             <StickyMobileCTA />
+            <EngineerMascot />
+            <SoundToggle />
           </div>
         </ThemeProvider>
         {gaId && <GoogleAnalytics gaId={gaId} />}

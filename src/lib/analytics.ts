@@ -6,6 +6,9 @@ type AnalyticsEventMap = {
     cta_variant: "primary" | "inline" | "sticky" | "outline" | "button";
     context: string;
   };
+  instagram_click: {
+    location: string;
+  };
   phone_click: {
     page_path: string;
   };

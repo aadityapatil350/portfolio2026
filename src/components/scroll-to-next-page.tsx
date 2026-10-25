@@ -10,6 +10,9 @@ const ROUTE_ORDER = ["/", "/about", "/projects", "/blog", "/contact"] as const;
 function neighborsFor(pathname: string): { prev: string | null; next: string | null } {
   const top = "/" + (pathname.split("/")[1] ?? "");
   const normalized = top === "/" ? "/" : top;
+  // The home page is a full-featured single-page experience (hero, about, 3d tour, work, contact)
+  // so scroll-wheel hijacking to /about is disabled on /
+  if (normalized === "/") return { prev: null, next: null };
   const idx = ROUTE_ORDER.indexOf(normalized as (typeof ROUTE_ORDER)[number]);
   if (idx === -1) return { prev: null, next: null };
   return {

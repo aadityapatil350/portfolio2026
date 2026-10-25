@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "Uses",
   description:
     "The tools, software, and hardware I use to build and ship products.",
+  alternates: {
+    canonical: "https://adityapatil.work/uses",
+  },
   openGraph: {
     title: "Uses | Aditya",
     description:

@@ -14,6 +14,43 @@ Every word on public-facing pages must pass the test:
 
 ---
 
+## Visual direction (2026 redesign)
+
+The whole site runs one warm, light visual system now, after two rejected detours: a dark
+WebGL "HUD" concept (illegible, choppy) and a hand-illustrated cartoon avatar (rejected outright —
+"the character is shit"). Do not reintroduce either.
+
+- **Warm palette, site-wide, via CSS tokens** — `src/app/globals.css` `:root`/`.dark` now define a
+  cream/coral/teal warm palette (was cool gray/blue). Because inner pages already consumed
+  semantic Tailwind tokens (`bg-background`, `text-accent-blue`, etc.) rather than hardcoded
+  colors, this one file change cascades the new look across every route. **Keep using semantic
+  tokens, not hardcoded hex/stone/orange Tailwind classes**, so future palette tweaks stay
+  one-file changes. A few literal `blue-*`/status-badge colors remain intentionally (semantic
+  status indicators, e.g. `Production` badges) — leave those as-is, they're not brand accent.
+- **No character, no mascot, no illustrated avatar anywhere.** Replaced with small animated
+  "mockup" widgets built in code: `src/components/mockups/dashboard-mockup.tsx` (animated bar
+  chart + count-up stats) and `alert-stack-mockup.tsx` (sliding notification cards). Extend this
+  set in the same style if a section needs more visual weight — don't add a character.
+- **Homepage has a scroll-driven 2D "parallax world" background** (`src/components/game/
+  parallax-world.tsx`): a renewable-energy-themed illustrated journey (solar farm →
+  rooftop-at-night → wind turbines/grid → open road) tied to the 4 homepage sections via
+  `IntersectionObserver` on each section's `id` (`hero-section`, `lab`, `work`, `packages` — don't
+  rename these ids without updating `ZONE_IDS` in that file). Pure SVG/CSS, no Three.js/WebGL —
+  that was tried and explicitly rejected for being heavy and illegible. Because the background can
+  be dark in places, any loose heading/paragraph text (not already inside an opaque `bg-card`) must
+  be wrapped in a `bg-background/85 backdrop-blur-md` panel — see `hero-act.tsx`/`lab-act.tsx` for
+  the pattern. Don't remove those panels without another contrast solution.
+- Fonts: `Syne` for display headings (applied globally via `@layer base` in `globals.css`),
+  `Plus Jakarta Sans` for body (`--font-sans`), `JetBrains Mono` for technical/stat labels —
+  loaded in `src/app/layout.tsx`.
+- The homepage uses the **same global `Nav`/`Footer`/`StickyMobileCTA`** as every other page —
+  don't reintroduce a homepage-only nav or suppress these again; site-wide consistency was an
+  explicit requirement.
+- `@aditya.ships.it` (Instagram, build-in-public) is a co-primary CTA alongside WhatsApp,
+  currently wired on the homepage; inner pages keep the original WhatsApp-only CTA rules below.
+
+---
+
 ## Positioning
 
 Aditya Patil builds operational software that has to survive real use — reporting that runs itself, dashboards ops teams actually open, realtime systems that page someone at 3 AM, AI workflows that replace manual processes.

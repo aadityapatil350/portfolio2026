@@ -15,6 +15,9 @@ export const metadata: Metadata = {
   title: "Resume, Aditya Patil",
   description:
     "Resume of Aditya Patil, Lead Software Engineer specializing in full-stack development, realtime systems, and AI workflow automation for renewable energy.",
+  alternates: {
+    canonical: "https://adityapatil.work/resume",
+  },
   openGraph: {
     title: "Resume, Aditya Patil",
     description:

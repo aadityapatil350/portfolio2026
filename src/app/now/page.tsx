@@ -4,6 +4,9 @@ import { FadeIn } from "@/components/fade-in";
 export const metadata: Metadata = {
   title: "Now",
   description: "What I'm working on right now.",
+  alternates: {
+    canonical: "https://adityapatil.work/now",
+  },
   openGraph: {
     title: "Now | Aditya",
     description: "What I'm working on right now.",

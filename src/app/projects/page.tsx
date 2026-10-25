@@ -8,10 +8,14 @@ export const metadata: Metadata = {
   title: "Projects",
   description:
     "Two tracks: production systems I lead at the day job, and indie products I ship on the side. Everything I've built, killed, or kept alive.",
+  alternates: {
+    canonical: "https://adityapatil.work/projects",
+  },
   openGraph: {
     title: "Projects | Aditya",
     description:
       "Production systems from the day job + indie products from the night shift.",
+    url: "https://adityapatil.work/projects",
   },
 };
 
