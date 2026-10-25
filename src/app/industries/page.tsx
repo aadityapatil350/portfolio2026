@@ -41,14 +41,7 @@ export default function IndustriesIndexPage() {
 
   return (
     <div
-      className="min-h-screen bg-[#fbfbf8] text-[#0b0b0c] py-16 sm:py-24 selection:bg-[#2261e9] selection:text-white dark:bg-[#0b0b0c] dark:text-[#fbfbf8]"
-      style={{
-        backgroundImage: `
-          linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
-          linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px)
-        `,
-        backgroundSize: "40px 40px",
-      }}
+      className="min-h-screen bg-[#fbfbf8] text-[#0b0b0c] py-16 sm:py-24 selection:bg-[#2261e9] selection:text-white dark:bg-[#0b0b0c] dark:text-[#fbfbf8] swiss-grid"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}

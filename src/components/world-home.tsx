@@ -51,7 +51,7 @@ export function WorldHome({ caseStudies }: { caseStudies: CaseStudy[] }) {
 
   return (
     <LenisProvider>
-      <div className="relative bg-[#fbfbf8] text-[#0b0b0c] selection:bg-[#2261e9] selection:text-white">
+      <div className="relative bg-[#fbfbf8] text-[#0b0b0c] selection:bg-[#2261e9] selection:text-white dark:bg-[#0b0b0c] dark:text-[#fbfbf8]">
         {/* Hero Section (Swiss Blue) */}
         <SebgHero />
 

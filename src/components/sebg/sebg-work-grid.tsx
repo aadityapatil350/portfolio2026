@@ -199,14 +199,7 @@ export function SebgWorkGrid() {
   return (
     <section
       id="work"
-      className="relative bg-[#f4f3ef] text-[#0b0b0c] py-20 lg:py-32 selection:bg-[#2261e9] selection:text-white dark:bg-[#0b0b0c] dark:text-[#fbfbf8]"
-      style={{
-        backgroundImage: `
-          linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
-          linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px)
-        `,
-        backgroundSize: "40px 40px",
-      }}
+      className="relative bg-[#f4f3ef] text-[#0b0b0c] py-20 lg:py-32 selection:bg-[#2261e9] selection:text-white dark:bg-[#0b0b0c] dark:text-[#fbfbf8] swiss-grid border-b border-neutral-200 dark:border-neutral-800"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header (sebg style: "All work / N projects") */}

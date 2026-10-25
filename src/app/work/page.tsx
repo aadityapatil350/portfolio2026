@@ -24,7 +24,7 @@ export default function WorkPage() {
   const posts = getPosts("work");
 
   return (
-    <div className="bg-[#fbfbf8] text-[#0b0b0c] selection:bg-[#2261e9] selection:text-white dark:bg-[#0b0b0c] dark:text-[#fbfbf8] min-h-screen py-16 sm:py-24">
+    <div className="bg-[#fbfbf8] text-[#0b0b0c] selection:bg-[#2261e9] selection:text-white dark:bg-[#0b0b0c] dark:text-[#fbfbf8] min-h-screen py-16 sm:py-24 swiss-grid">
       <div className="content-width px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="max-w-3xl border-b border-neutral-300 pb-8 dark:border-neutral-800">

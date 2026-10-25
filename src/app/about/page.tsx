@@ -175,14 +175,7 @@ export default function AboutPage() {
 
       {/* ── Origin Story & Timeline ── */}
       <section
-        className="relative py-20 lg:py-28 border-b border-neutral-200 dark:border-neutral-800"
-        style={{
-          backgroundImage: `
-            linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px)
-          `,
-          backgroundSize: "40px 40px",
-        }}
+        className="relative py-20 lg:py-28 border-b border-neutral-200 dark:border-neutral-800 swiss-grid"
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-neutral-500 mb-2">
@@ -232,14 +225,7 @@ export default function AboutPage() {
 
       {/* ── How I Work (Swiss 3D Cards) ── */}
       <section
-        className="py-20 lg:py-28 border-b border-neutral-200 dark:border-neutral-800 bg-[#f4f3ef] dark:bg-[#0e0e12]"
-        style={{
-          backgroundImage: `
-            linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px)
-          `,
-          backgroundSize: "40px 40px",
-        }}
+        className="py-20 lg:py-28 border-b border-neutral-200 dark:border-neutral-800 bg-[#f4f3ef] dark:bg-[#0e0e12] swiss-grid"
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-neutral-500 mb-2">
